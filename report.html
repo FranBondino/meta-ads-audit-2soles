@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auditoría de Meta Ads - Dos Soles</title>
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           1. ESTILOS CORE Y VARIABLES (SISTEMA DE DISEÑO)
+           ========================================================================== */
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #141b2d;
+            --card-border: #222e4d;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-dark: #4b5563;
+            
+            /* Paleta de colores Premium */
+            --primary: #6366f1; /* Indigo */
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            --secondary: #14b8a6; /* Teal */
+            --secondary-gradient: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+            --success: #10b981; /* Esmeralda */
+            --warning: #f59e0b; /* Ambar */
+            --danger: #f43f5e; /* Rosa */
+            --info: #3b82f6; /* Azul */
+            
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 18px;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* Botón de Impresión Flotante (sólo pantalla) */
+        .no-print-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 15px 25px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+        }
+
+        .no-print-actions h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .no-print-actions h2::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--success);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--success);
+        }
+
+        .btn-print {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-print:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(99, 102, 241, 0.5);
+        }
+
+        /* ==========================================================================
+           2. ESTRUCTURA DEL INFORME (DISEÑO PREMIUM A4 DIGITAL)
+           ========================================================================== */
+        .report-page {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: 50px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+        }
+
+        /* Adornos abstractos del fondo */
+        .report-page::before {
+            content: '';
+            position: absolute;
+            top: -150px;
+            right: -150px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            pointer-events: none;
+        }
+
+        .report-page::after {
+            content: '';
+            position: absolute;
+            bottom: -200px;
+            left: -200px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(20, 184, 166, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+            pointer-events: none;
+        }
+
+        /* Cabecera del Reporte */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid var(--card-border);
+            padding-bottom: 25px;
+        }
+
+        .header-left h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(120deg, #ffffff 30%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+            margin-bottom: 5px;
+        }
+
+        .header-left p {
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .header-right {
+            text-align: right;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--card-border);
+            padding: 10px 18px;
+            border-radius: var(--radius-md);
+        }
+
+        .header-right .meta-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 3px;
+        }
+
+        .header-right .meta-value {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .header-right .meta-code {
+            font-family: monospace;
+            font-size: 0.75rem;
+            color: var(--secondary);
+        }
+
+        /* Tarjetas de KPI principales */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .kpi-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            padding: 15px 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            border-radius: 0 0 4px 4px;
+        }
+
+        .kpi-spend::before { background-color: var(--primary); }
+        .kpi-impressions::before { background-color: var(--info); }
+        .kpi-clicks::before { background-color: var(--secondary); }
+        .kpi-ctr::before { background-color: var(--success); }
+
+        .kpi-card .kpi-title {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .kpi-card .kpi-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+        }
+
+        .kpi-card .kpi-footer {
+            font-size: 0.7rem;
+            margin-top: 3px;
+            color: var(--text-muted);
+        }
+
+        .kpi-card .trend-positive {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        /* Secciones del Reporte */
+        .section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 4px solid var(--primary);
+            padding-left: 12px;
+        }
+
+        /* Resumen Ejecutivo Bloque */
+        .summary-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.07) 0%, rgba(20, 184, 166, 0.05) 100%);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .summary-box h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .summary-box p {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            line-height: 1.5;
+        }
+
+        .summary-findings {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 5px;
+        }
+
+        .finding-item {
+            background: rgba(11, 15, 25, 0.4);
+            border: 1px solid var(--card-border);
+            padding: 12px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .finding-item .finding-header {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .finding-danger .finding-header { color: var(--danger); }
+        .finding-warning .finding-header { color: var(--warning); }
+        .finding-success .finding-header { color: var(--success); }
+
+        .finding-item p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.35;
+        }
+
+        /* ==========================================================================
+           NUEVO: Glosario en Criollo
+           ========================================================================== */
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .glossary-item {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--card-border);
+            padding: 12px 15px;
+            border-radius: var(--radius-md);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .glossary-item:hover {
+            border-color: rgba(20, 184, 166, 0.3);
+            background: rgba(20, 184, 166, 0.02);
+        }
+
+        .glossary-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .glossary-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .glossary-tech {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .glossary-desc {
+            font-size: 0.8rem;
+            color: var(--text-main);
+            line-height: 1.4;
+        }
+
+        .glossary-desc strong {
+            color: var(--warning);
+            font-weight: 600;
+        }
+
+        /* Gráfico de Evolución del Gasto (Pillars CSS) */
+        .chart-container {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chart-header h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .chart-legend {
+            display: flex;
+            gap: 15px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+        }
+
+        .bar-chart-visual {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            height: 130px;
+            padding: 10px 40px 0 40px;
+            border-bottom: 2px solid var(--card-border);
+            position: relative;
+        }
+
+        .chart-bar-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 15%;
+            height: 100%;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .chart-bar {
+            width: 100%;
+            background: var(--primary-gradient);
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            transition: all 0.5s ease;
+            min-height: 5px;
+        }
+
+        .chart-bar:hover {
+            filter: brightness(1.2);
+            cursor: pointer;
+        }
+
+        .chart-bar .bar-tooltip {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e293b;
+            color: white;
+            padding: 4px 8px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            border-radius: 4px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            pointer-events: none;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--card-border);
+            z-index: 10;
+        }
+
+        .chart-bar:hover .bar-tooltip {
+            opacity: 1;
+        }
+
+        .chart-bar-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        /* Tablas de Comparación */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.85rem;
+        }
+
+        th {
+            background-color: rgba(255, 255, 255, 0.02);
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.5px;
+            padding: 10px 15px;
+            border-bottom: 2px solid var(--card-border);
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--card-border);
+            color: var(--text-main);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background-color: rgba(255, 255, 255, 0.01);
+        }
+
+        .meta-id-display {
+            font-family: monospace;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.04);
+            padding: 1px 5px;
+            border-radius: 4px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 6px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-active {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .badge-paused {
+            background-color: rgba(244, 63, 94, 0.1);
+            color: var(--danger);
+            border: 1px solid rgba(244, 63, 94, 0.2);
+        }
+
+        /* Alertas Estratégicas */
+        .alert-box {
+            background-color: rgba(244, 63, 94, 0.05);
+            border: 1px solid rgba(244, 63, 94, 0.15);
+            border-left: 4px solid var(--danger);
+            padding: 15px 18px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .alert-box svg {
+            flex-shrink: 0;
+            color: var(--danger);
+        }
+
+        .alert-content h5 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 3px;
+        }
+
+        .alert-content p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        /* Tarjetas de Anuncios / Creativos */
+        .ad-performance-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .ad-performance-card {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: relative;
+        }
+
+        .ad-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 0.6rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .ad-badge-winner { background: var(--success); color: #0b0f19; }
+        .ad-badge-opportunity { background: var(--info); color: white; }
+        .ad-badge-danger { background: var(--danger); color: white; }
+
+        .ad-performance-card h5 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text-main);
+            padding-right: 60px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .ad-performance-card .ad-id {
+            font-family: monospace;
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            margin-top: -6px;
+        }
+
+        .ad-metrics-small {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            background: rgba(11, 15, 25, 0.3);
+            padding: 8px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--card-border);
+        }
+
+        .ad-metric-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ad-metric-label {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .ad-metric-value {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .ad-card-analysis {
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            line-height: 1.35;
+        }
+
+        /* Plan de Acción / Recomendaciones */
+        .roadmap-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .roadmap-item {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .roadmap-item:hover {
+            transform: translateX(5px);
+            border-color: var(--secondary);
+            background: rgba(20, 184, 166, 0.02);
+        }
+
+        .roadmap-number {
+            width: 28px;
+            height: 28px;
+            background: var(--secondary-gradient);
+            color: #0b0f19;
+            font-weight: 800;
+            font-size: 0.9rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 0 8px rgba(20, 184, 166, 0.2);
+        }
+
+        .roadmap-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+
+        .roadmap-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .roadmap-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .report-footer {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--card-border);
+            padding-top: 15px;
+        }
+
+        /* ==========================================================================
+           3. ESTILOS DE IMPRESIÓN / EXPORTACIÓN A PDF (CRÍTICO)
+           ========================================================================== */
+        @media print {
+            body {
+                background: white !important;
+                color: #111827 !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            .container {
+                max-width: 100% !important;
+                gap: 0 !important;
+            }
+
+            .no-print-actions {
+                display: none !important;
+            }
+
+            .report-page {
+                border: none !important;
+                padding: 0 !important;
+                background: white !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                display: block !important;
+                margin-bottom: 60px !important;
+            }
+
+            .report-page::before,
+            .report-page::after {
+                display: none !important;
+            }
+
+            .header {
+                border-bottom: 2px solid #e5e7eb !important;
+                padding-bottom: 15px !important;
+                margin-bottom: 20px !important;
+            }
+
+            .header-left h1 {
+                background: none !important;
+                -webkit-text-fill-color: #111827 !important;
+                color: #111827 !important;
+            }
+
+            .header-left p {
+                color: #0d9488 !important;
+            }
+
+            .header-right {
+                background: #f9fafb !important;
+                border: 1px solid #e5e7eb !important;
+                color: #111827 !important;
+            }
+
+            .header-right .meta-value {
+                color: #111827 !important;
+            }
+
+            .kpi-card {
+                background: #f9fafb !important;
+                border: 1px solid #e5e7eb !important;
+                box-shadow: none !important;
+                page-break-inside: avoid;
+            }
+
+            .kpi-card .kpi-value {
+                color: #111827 !important;
+            }
+
+            .kpi-card::before {
+                display: none !important;
+            }
+
+            .section {
+                page-break-inside: avoid;
+                margin-bottom: 30px !important;
+            }
+
+            .section-title {
+                color: #111827 !important;
+                border-left: 4px solid #4f46e5 !important;
+            }
+
+            .summary-box {
+                background: #f5f3ff !important;
+                border: 1px solid #ddd6fe !important;
+                color: #111827 !important;
+            }
+
+            .summary-box h3 {
+                color: #4f46e5 !important;
+            }
+
+            .finding-item {
+                background: white !important;
+                border: 1px solid #e5e7eb !important;
+            }
+
+            .finding-danger .finding-header { color: #e11d48 !important; }
+            .finding-warning .finding-header { color: #d97706 !important; }
+            .finding-success .finding-header { color: #059669 !important; }
+
+            .glossary-item {
+                background: white !important;
+                border: 1px solid #e5e7eb !important;
+            }
+
+            .glossary-title {
+                color: #0d9488 !important;
+            }
+
+            .glossary-desc strong {
+                color: #b45309 !important;
+            }
+
+            .chart-container {
+                border: 1px solid #e5e7eb !important;
+                background: white !important;
+                page-break-inside: avoid;
+            }
+
+            .bar-chart-visual {
+                border-bottom: 2px solid #e5e7eb !important;
+            }
+
+            .chart-bar {
+                background: #4f46e5 !important;
+            }
+
+            .table-responsive {
+                border: 1px solid #e5e7eb !important;
+            }
+
+            th {
+                background-color: #f9fafb !important;
+                color: #4b5563 !important;
+                border-bottom: 2px solid #e5e7eb !important;
+            }
+
+            td {
+                border-bottom: 1px solid #e5e7eb !important;
+                color: #111827 !important;
+            }
+
+            .badge-active {
+                background-color: #ecfdf5 !important;
+                color: #065f46 !important;
+                border: 1px solid #a7f3d0 !important;
+            }
+
+            .badge-paused {
+                background-color: #fff1f2 !important;
+                color: #9f1239 !important;
+                border: 1px solid #fecdd3 !important;
+            }
+
+            .alert-box {
+                background-color: #fff1f2 !important;
+                border: 1px solid #fecdd3 !important;
+                border-left: 4px solid #e11d48 !important;
+            }
+
+            .alert-content h5 {
+                color: #9f1239 !important;
+            }
+
+            .ad-performance-card {
+                background: white !important;
+                border: 1px solid #e5e7eb !important;
+                page-break-inside: avoid;
+            }
+
+            .ad-metrics-small {
+                background: #f9fafb !important;
+                border: 1px solid #e5e7eb !important;
+            }
+
+            .ad-metric-value {
+                color: #111827 !important;
+            }
+
+            .roadmap-item {
+                background: white !important;
+                border: 1px solid #e5e7eb !important;
+                page-break-inside: avoid;
+            }
+
+            .roadmap-number {
+                background: #0d9488 !important;
+                color: white !important;
+            }
+
+            .report-footer {
+                border-top: 1px solid #e5e7eb !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <!-- Barra de Herramientas para la Web (Oculta al Imprimir) -->
+    <div class="no-print-actions">
+        <h2>Panel de Auditoría de Marketing listo (MCP Conectado)</h2>
+        <button class="btn-print" onclick="window.print()">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.844l9.76-9.76M19.5 8.25l-9.76 9.76M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M7.5 12h9M12 3v13.5"></path>
+            </svg>
+            Imprimir o Exportar PDF
+        </button>
+    </div>
+
+    <!-- PÁGINA 1: PORTADA Y AUDITORÍA GENERAL -->
+    <div class="report-page">
+        <!-- Cabecera -->
+        <div class="header">
+            <div class="header-left">
+                <h1>Auditoría Estratégica de Meta Ads</h1>
+                <p>Análisis de Rendimiento & Plan de Acción</p>
+            </div>
+            <div class="header-right">
+                <div class="meta-label">Cliente</div>
+                <div class="meta-value">Dos Soles (Matrix)</div>
+                <div class="meta-label">ID de Cuenta Publicitaria</div>
+                <div class="meta-code">act_23843398705180592</div>
+            </div>
+        </div>
+
+        <!-- KPIs Generales -->
+        <div class="kpi-grid">
+            <div class="kpi-card kpi-spend">
+                <div class="kpi-title">Inversión Acumulada</div>
+                <div class="kpi-value">$497,527</div>
+                <div class="kpi-footer">Período Feb - May 2026</div>
+            </div>
+            <div class="kpi-card kpi-impressions">
+                <div class="kpi-title">Impresiones Totales</div>
+                <div class="kpi-value">192,934</div>
+                <div class="kpi-footer">Frecuencia Promedio: 2.10</div>
+            </div>
+            <div class="kpi-card kpi-clicks">
+                <div class="kpi-title">Clics Totales</div>
+                <div class="kpi-value">5,582</div>
+                <div class="kpi-footer">Intención de compra</div>
+            </div>
+            <div class="kpi-card kpi-ctr">
+                <div class="kpi-title">CTR Promedio</div>
+                <div class="kpi-value">2.89%</div>
+                <div class="kpi-footer"><span class="trend-positive">↑ Excelente</span> (Ref B2B: 1.5%)</div>
+            </div>
+        </div>
+
+        <!-- Resumen Ejecutivo -->
+        <div class="section">
+            <h2 class="section-title">Resumen Ejecutivo de la Auditoría</h2>
+            <div class="summary-box">
+                <h3>Diagnóstico Inicial de la Cuenta</h3>
+                <p>
+                    La cuenta publicitaria de <strong>Dos Soles</strong> muestra un inicio de actividad muy claro a partir de <strong>Febrero de 2026</strong>. Tras un periodo de prueba inicial de bajo presupuesto, la cuenta escaló agresivamente a un promedio mensual sostenido de <strong>~$160,000</strong>. El rendimiento general de la cuenta en términos de interacción es sumamente alto, con un CTR del <strong>2.89%</strong>, lo que demuestra un gran interés de la audiencia de estilistas y salones en la propuesta de valor. Sin embargo, existen graves ineficiencias de asignación presupuestaria y campañas pausadas erróneamente que están bloqueando mejores resultados de negocio.
+                </p>
+                <div class="summary-findings">
+                    <div class="finding-item finding-danger">
+                        <div class="finding-header">
+                            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            Fuga Presupuestaria
+                        </div>
+                        <p>El 100% de la inversión activa se encuentra en la campaña con el peor CTR (2.47%) y el CPC más alto ($92.76).</p>
+                    </div>
+                    <div class="finding-item finding-warning">
+                        <div class="finding-header">
+                            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            Pausas Críticas
+                        </div>
+                        <p>Se pausaron dos campañas de excelente rendimiento con CTRs espectaculares de 4.75% y 3.69% en los meses previos.</p>
+                    </div>
+                    <div class="finding-item finding-success">
+                        <div class="finding-header">
+                            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Gran Creativo B2B
+                        </div>
+                        <p>El anuncio "Herramientas que podes encontrar" sostiene por sí solo el éxito de WhatsApp, con un CPC récord de $79.84.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Glosario en Criollo -->
+        <div class="section">
+            <h2 class="section-title">Glosario de Métricas "En Criollo"</h2>
+            <div class="glossary-grid">
+                <div class="glossary-item">
+                    <div class="glossary-header">
+                        <span class="glossary-title">Inversión / Gasto</span>
+                        <span class="glossary-tech">Spend</span>
+                    </div>
+                    <p class="glossary-desc">La <strong>plata total</strong> que le pagaste a Meta por mostrar tus anuncios en el periodo analizado. Es el combustible que le cargás al tanque para que los anuncios anden.</p>
+                </div>
+                <div class="glossary-item">
+                    <div class="glossary-header">
+                        <span class="glossary-title">Alcance</span>
+                        <span class="glossary-tech">Reach</span>
+                    </div>
+                    <p class="glossary-desc">A cuántas <strong>cabezas o personas reales</strong> les llegó el anuncio al menos una vez. Te da la pauta de qué tan grande es la red que tiraste al mar.</p>
+                </div>
+                <div class="glossary-item">
+                    <div class="glossary-header">
+                        <span class="glossary-title">Impresiones</span>
+                        <span class="glossary-tech">Impressions</span>
+                    </div>
+                    <p class="glossary-desc">Cuántas <strong>veces apareció</strong> tu anuncio en pantalla. Si Juan vio tu Reel 3 veces en su celular, esto suma 3 impresiones (pero el alcance sigue siendo 1).</p>
+                </div>
+                <div class="glossary-item">
+                    <div class="glossary-header">
+                        <span class="glossary-title">CTR (Tasa de Clics)</span>
+                        <span class="glossary-tech">Click-Through Rate</span>
+                    </div>
+                    <p class="glossary-desc">Qué tan <strong>atrapante o ganchero</strong> es tu anuncio. Si de cada 100 personas que lo ven en Instagram, 3 hacen clic, tenés un <strong>CTR del 3%</strong>. Si es alto, el anuncio gusta mucho.</p>
+                </div>
+                <div class="glossary-item">
+                    <div class="glossary-header">
+                        <span class="glossary-title">CPC (Costo por Clic)</span>
+                        <span class="glossary-tech">Cost Per Click</span>
+                    </div>
+                    <p class="glossary-desc">Cuánta <strong>plata te cuesta</strong> que una persona interesada toque tu anuncio y entre a preguntar. Cuanto más bajo sea, más eficiente y barato te sale el tráfico.</p>
+                </div>
+                <div class="glossary-item">
+                    <div class="glossary-header">
+                        <span class="glossary-title">Frecuencia</span>
+                        <span class="glossary-tech">Frequency</span>
+                    </div>
+                    <p class="glossary-desc">Qué tan <strong>pesado te estás volviendo</strong>. Una frecuencia de 2.1 significa que, en promedio, cada estilista vio tus anuncios 2 veces. Querés recordación, no fatiga.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="report-footer">
+            <span>Dos Soles - Auditoría Estratégica de Meta Ads (MCP Conectado)</span>
+            <span>Página 1 de 2</span>
+        </div>
+    </div>
+
+    <!-- PÁGINA 2: ANÁLISIS DE CAMPAÑAS Y CREATIVOS -->
+    <div class="report-page" style="page-break-before: always; margin-top: 20px;">
+        <div class="header">
+            <div class="header-left">
+                <h1>Auditoría Estratégica de Meta Ads</h1>
+                <p>Eficiencia de Campañas y Creativos</p>
+            </div>
+            <div class="header-right">
+                <div class="meta-label">Cliente</div>
+                <div class="meta-value">Dos Soles (Matrix)</div>
+                <div class="meta-label">Fecha del Reporte</div>
+                <div class="meta-value">22 de Mayo de 2026</div>
+            </div>
+        </div>
+
+        <!-- Historial Mensual e Inversión -->
+        <div class="section">
+            <h2 class="section-title">Evolución de Inversión y Escala Mensual</h2>
+            
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h4>Inversión Mensual Acumulada (Feb - May 2026)</h4>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <div class="legend-dot" style="background-color: var(--primary);"></div> Inversión en Ads (ARS)
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bar-chart-visual">
+                    <!-- Febrero -->
+                    <div class="chart-bar-group">
+                        <div class="chart-bar" style="height: 7%;">
+                            <span class="bar-tooltip">$12,155.93</span>
+                        </div>
+                        <div class="chart-bar-label">Febrero</div>
+                    </div>
+                    <!-- Marzo -->
+                    <div class="chart-bar-group">
+                        <div class="chart-bar" style="height: 100%;">
+                            <span class="bar-tooltip">$172,988.48</span>
+                        </div>
+                        <div class="chart-bar-label">Marzo</div>
+                    </div>
+                    <!-- Abril -->
+                    <div class="chart-bar-group">
+                        <div class="chart-bar" style="height: 97.8%;">
+                            <span class="bar-tooltip">$169,313.82</span>
+                        </div>
+                        <div class="chart-bar-label">Abril</div>
+                    </div>
+                    <!-- Mayo (Proyectado/Parcial) -->
+                    <div class="chart-bar-group">
+                        <div class="chart-bar" style="height: 82.7%;">
+                            <span class="bar-tooltip">$143,067.38</span>
+                        </div>
+                        <div class="chart-bar-label">Mayo (Al 22)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Periodo</th>
+                            <th>Inversión</th>
+                            <th>Impresiones</th>
+                            <th>Clics</th>
+                            <th>CTR</th>
+                            <th>CPC Promedio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Febrero 2026</strong></td>
+                            <td>$12,155.93</td>
+                            <td>4,161</td>
+                            <td>145</td>
+                            <td><span style="color: var(--success); font-weight:600;">3.48%</span></td>
+                            <td>$83.83</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Marzo 2026</strong></td>
+                            <td>$172,988.48</td>
+                            <td>77,441</td>
+                            <td>2,104</td>
+                            <td>2.72%</td>
+                            <td>$82.22</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Abril 2026</strong></td>
+                            <td>$169,313.82</td>
+                            <td>62,076</td>
+                            <td>1,633</td>
+                            <td>2.63%</td>
+                            <td>$103.68</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mayo 2026 (Al 22)</strong></td>
+                            <td>$143,067.38</td>
+                            <td>49,256</td>
+                            <td>1,700</td>
+                            <td><span style="color: var(--success); font-weight:600;">3.45%</span></td>
+                            <td>$84.16</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Sección de Campañas -->
+        <div class="section" style="margin-top: 15px;">
+            <h2 class="section-title">Análisis de Eficiencia por Campaña (Trazabilidad Total)</h2>
+            
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre de Campaña en Meta</th>
+                            <th>ID de Campaña</th>
+                            <th>Estado</th>
+                            <th>Inversión</th>
+                            <th>Clics</th>
+                            <th>CTR Promedio</th>
+                            <th>CPC Promedio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Conversion a WhatsApp - trafico frio B2B</strong></td>
+                            <td><span class="meta-id-display">120240934489910593</span></td>
+                            <td><span class="badge badge-active">Activa</span></td>
+                            <td>$335,142.61</td>
+                            <td>3,613</td>
+                            <td>2.47%</td>
+                            <td><span style="color: var(--danger); font-weight:600;">$92.76</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Conversion - evento compra a pagina web</strong></td>
+                            <td><span class="meta-id-display">120242751389540593</span></td>
+                            <td><span class="badge badge-paused">Pausada</span></td>
+                            <td>$92,141.54</td>
+                            <td>1,073</td>
+                            <td><span style="color: var(--success); font-weight: 600;">4.75%</span></td>
+                            <td>$85.87</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Conversion a pagina web - trafico frio</strong></td>
+                            <td><span class="meta-id-display">120240887374240593</span></td>
+                            <td><span class="badge badge-paused">Pausada</span></td>
+                            <td>$70,241.46</td>
+                            <td>896</td>
+                            <td>3.69%</td>
+                            <td><span style="color: var(--success); font-weight: 600;">$78.39</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="alert-box">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                </svg>
+                <div class="alert-content">
+                    <h5>Hallazgo Crítico: Costo de Oportunidad por Pausa Errónea</h5>
+                    <p>
+                        La campaña <strong>"Conversion - evento compra a pagina web"</strong> registraba un CTR histórico del <strong>4.75%</strong> (prácticamente el doble de la campaña de WhatsApp activa). Haberla pausado privó al negocio del canal de adquisición más interactivo. Adicionalmente, la campaña de tráfico directo a la web lograba el CPC más económico (<strong>$78.39</strong>). La campaña activa actual a WhatsApp está pagando un "impuesto de ineficiencia" de <strong>+$14.37 por cada clic</strong> en comparación.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Análisis de Anuncios -->
+        <div class="section" style="margin-top: 15px;">
+            <h2 class="section-title">Análisis de Creativos (Anuncios Activos en Campaña de WhatsApp)</h2>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: -10px;">
+                Desglose del comportamiento interno de los anuncios activos auditados para máxima trazabilidad:
+            </p>
+            
+            <div class="ad-performance-grid">
+                <!-- Ganador -->
+                <div class="ad-performance-card" style="border-color: var(--success); background: rgba(16, 185, 129, 0.02);">
+                    <span class="ad-badge ad-badge-winner">Ganador</span>
+                    <h5>Reel - Herramientas que podes encontrar</h5>
+                    <span class="ad-id">ID: 120240973680070593</span>
+                    <div class="ad-metrics-small">
+                        <div class="ad-metric-item">
+                            <span class="ad-metric-label">Gasto</span>
+                            <span class="ad-metric-value">$171,255</span>
+                        </div>
+                        <div class="ad-metric-item">
+                            <span class="ad-metric-label">CPC</span>
+                            <span class="ad-metric-value" style="color: var(--success);">$79.84</span>
+                        </div>
+                        <div class="ad-metric-item">
+                            <span class="ad-metric-label">CTR</span>
+                            <span class="ad-metric-value">2.53%</span>
+                        </div>
+                        <div class="ad-metric-item">
+                            <span class="ad-metric-label">Clics</span>
+                            <span class="ad-metric-value">2,145</span>
+                        </div>
+                    </div>
+                    <div class="ad-card-analysis">
+                        <strong>Diagnóstico:</strong> Facebook concentró más del 50% de la inversión aquí. La decisión es correcta: posee el CPC más bajo del conjunto y sostiene el volumen de contactos B2B.
+                    </div>
+                </div>
+
+                <!-- Oportunidad -->
+                <div class="ad-performance-card" style="border-color: var(--info); background: rgba(59, 130, 246, 0.02);">
+                    <span class="ad-badge ad-badge-opportunity">Escalar</span>
+                    <h5>Reel - si tenes un salon</h5>
+                    <span class="ad-id">ID: 120240934489890593</span>
+                    <div class="ad-metrics-small">
+                        <div class="ad-metric-item">
+                            <span class="ad-metric-label">Gasto</span>
+                            <span class="ad-metric-value">$22,462</span>
+                        </div>
+                        <div class="ad-metric-item">
+                            <span class="ad-metric-label">CPC</span>
+                            <span class="ad-metric-value">$92.44</span>
+                        </div>
+                        <div class="ad-metric-item">
+                            <span class="ad-metric-label">CTR</span>
+                            <span class="ad-metric-value" style="color: var(--info); font-weight: 700;">3.51%</span>
+                        </div>
+                        <div class="ad-metric-item">
+                            <span class="ad-metric-label">Clics</span>
+                            <span class="ad-metric-value">243</span>
+                        </div>
+                    </div>
+                    <div class="ad-card-analysis">
+                        <strong>Diagnóstico:</strong> Posee el <strong>CTR más alto</strong> de toda la campaña (3.51%). Está altamente infrapautado. Duplicar su presupuesto traerá leads de excelente calidad.
+                    </div>
+                </div>
+
+                <!-- Fuga -->
+                <div class="ad-performance-card" style="border-color: var(--danger); background: rgba(244, 63, 94, 0.02);">
+                    <span class="ad-badge ad-badge-danger">Pausar</span>
+                    <h5>Reel - somos distrib de matrix</h5>
+                    <span class="ad-id">ID: 120240973659820593</span>
+                    <div class="ad-metrics-small">
+                        <div class="ad-metric-item">
+                            <span class="ad-metric-label">Gasto</span>
+                            <span class="ad-metric-value">$1,965</span>
+                        </div>
+                        <div class="ad-metric-item">
+                            <span class="ad-metric-label">CPC</span>
+                            <span class="ad-metric-value" style="color: var(--danger); font-weight: 700;">$218.35</span>
+                        </div>
+                        <div class="ad-metric-item">
+                            <span class="ad-metric-label">CTR</span>
+                            <span class="ad-metric-value">1.28%</span>
+                        </div>
+                        <div class="ad-metric-item">
+                            <span class="ad-metric-label">Clics</span>
+                            <span class="ad-metric-value">9</span>
+                        </div>
+                    </div>
+                    <div class="ad-card-analysis">
+                        <strong>Diagnóstico:</strong> CTR paupérrimo y CPC insostenible. Aunque ha gastado poco, es una ineficiencia directa en la cuenta y debe ser desactivado inmediatamente.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Historial Completo de Trazabilidad -->
+        <div class="section" style="margin-top: 15px;">
+            <h2 class="section-title">Registro Histórico de Trazabilidad Completa (Desde Febrero 2026)</h2>
+
+            <!-- Grave Error Operativo Identificado (Fuga de Presupuesto Post-Evento) -->
+            <div class="alert-card alert-card-danger" style="margin-top: 15px; margin-bottom: 20px; padding: 18px; border-radius: 8px; background: rgba(244, 63, 94, 0.05); border: 1px solid var(--danger); display: flex; gap: 15px; align-items: flex-start; backdrop-filter: blur(10px);">
+                <span style="font-size: 1.5rem; line-height: 1;">⚠️</span>
+                <div style="flex: 1;">
+                    <h4 style="margin: 0 0 6px 0; color: var(--danger); font-size: 0.95rem; font-weight: 700;">Grave Error Operativo Identificado (Fuga de Presupuesto Post-Evento)</h4>
+                    <p style="margin: 0; font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;">
+                        Al auditar la fecha exacta de pausa de los anuncios específicos del <strong>"Hot Sale / Dos Soles Sale"</strong> (IDs terminados en <em>...580593</em>, <em>...150593</em>, <em>...120593</em>, <em>...460593</em>, <em>...700593</em>), detectamos que <strong>fueron pausados en masa recién el 20 de Mayo de 2026 a las 20:00 hs</strong>.
+                    </p>
+                    <p style="margin: 8px 0 0 0; font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;">
+                        <strong>Consecuencias:</strong> Teniendo en cuenta que el evento oficial de Hot Sale finalizó a nivel nacional el <strong>17 de Mayo de 2026</strong>, la agencia anterior mantuvo activa la pauta publicitaria con promociones vencidas por <strong>3 días adicionales enteros</strong>. Esto derivó en un desperdicio de presupuesto neto en tráfico que ingresó a una web sin descuentos vigentes, generando fricción, rebote y pérdida de confianza del consumidor.
+                    <div style="margin-top: 12px; padding: 12px; background: rgba(0,0,0,0.15); border-radius: 6px; border-left: 3px solid var(--danger); font-size: 0.8rem; color: #fff;">
+                        <div style="font-weight: 700; color: var(--danger); margin-bottom: 6px; font-size: 0.85rem;">📊 Fuga Financiera Auditada (18 al 20 de Mayo):</div>
+                        <ul style="margin: 0; padding-left: 18px; line-height: 1.4;">
+                            <li><strong>Plata Tirada al Pedo (Fuga Neta):</strong> <span style="color: var(--danger); font-weight: 700;">$7,435.35 ARS</span></li>
+                            <li><strong>Clics Frustrados (Tráfico de Rebote):</strong> 136 clics en ofertas vencidas</li>
+                            <li><strong>Personas Únicas Impactadas (Alcance):</strong> 1,313 estilistas</li>
+                            <li><strong>Principal Creativo Ineficiente:</strong> <em>Jaz UGC 2</em> se quemó <span style="font-weight:700;">$6,777.37 ARS</span> (91% de la fuga) por sí solo.</li>
+                        </ul>
+                    </div>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Nombre del Anuncio / ID</th>
+                            <th>Campaña / ID</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>13/05/2026</strong></td>
+                            <td>
+                                <div style="font-weight: 600;">Reel - General HOT</div>
+                                <a href="https://business.facebook.com/ads/api/preview_iframe.php?d=AQLeZFIkAMNubcDh-R5fLUESXdzZqU6-f51IeOskcLmcCuOv6MEDlcwuNo4U5mI-Smm5MttM0NbZ-2jBaLdwXGWETLP94IjtsPBRofU7Tl9YgXKpTo1NIG1hkTyShKMCq22WASakqDR1PwfvTfwfYTgua5eUG-GLaiRLLtaHbVb28K0zppmWt2h64MGOtwWa9hXhC1ixoi8P5uz6RxK2Y5NKZff-9AG0eJdqDlh_Fbur4KVkWT-wE7Rcv0BUjSf508nns62eYgOIvOjwRK2ao-666uwGWgj0osujYX2QwOSicgcR4guPOqRrg8p7t-4mZxI7BFK5XTxHw0uvQ_gQL1DvmoIli-YaYjc26kqajbiY5wDmSnKCwjMbEh23sICvgZCWKagMD9PIpKJSy8__fLRb3H6JEidFoYJRMctCbjg3tm5hllx9g_oZlSZNTwhPzI0&t=AQKDLx_fHAoonpiYZWc" target="_blank" class="meta-id-display" style="text-decoration: underline; color: var(--accent); font-weight: 600;">120244971916580593 ↗</a>
+                            </td>
+                            <td>
+                                <div>Conversion - evento compra a pagina web</div>
+                                <span class="meta-id-display">120242751389540593</span>
+                            </td>
+                            <td><span class="badge badge-paused">Pausada</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>11/05/2026</strong></td>
+                            <td>
+                                <div style="font-weight: 600;">UGC - Joana Don - HS</div>
+                                <a href="https://business.facebook.com/ads/api/preview_iframe.php?d=AQK-c4xCf20Blx0ofAkr9I9p5lOg8V-yoQuzv07PrUzRsNhmKKG2VO8wNX9p0GXvEFB7zdbTzUzA_xQ8L44FLu3iQ_zfAXXqRwBeiiCQWg8-_rN7B1teknMRmVvrXkROvkYoNoD6Q5ba-pbuHOr05ojO8YDUiXZ7ZC7i-il4ly7jxqKXFuJrHQMSISoYMAWktn6AFzXThernpShXw_WBFv2CmqPiSnMK-t61mhoNh7oOfk4oMekHyAqmoOiLKBwfnPqvOWi1VjJrIo9u4-cFiL2cjYP66EtQ1JpjV60QpGOqN2Ke1GqU5xcdI4khNfLHYBeMNo-PbhLhJMj0Kfmya3ywaaVZmkRPkBAQFqYGJj-tnl8Um3Hi2Hv36yZET3q4TDHfdrut2bV_5WAIXa6b3d93TvJGjAFJmfwXhe2L8ZiFY7-FDzMAxK4BheDxxvOU8_Y&t=AQLykOLNV5Ueg9Qd-dc" target="_blank" class="meta-id-display" style="text-decoration: underline; color: var(--accent); font-weight: 600;">120244790839150593 ↗</a>
+                            </td>
+                            <td>
+                                <div>Conversion - evento compra a pagina web</div>
+                                <span class="meta-id-display">120242751389540593</span>
+                            </td>
+                            <td><span class="badge badge-paused">Pausada</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>11/05/2026</strong></td>
+                            <td>
+                                <div style="font-weight: 600;">Jaz UGC 2</div>
+                                <a href="https://business.facebook.com/ads/api/preview_iframe.php?d=AQKHB8bQy83DyCTQntKMG-zybidkmIdnbfjFrFyEAAuJd8Sx3BYDS4MKNXB-i5JaA-Lecy3Oy5HfX0Exaqjh16SpS5qcKJ3fXlTBeYNU8yNaMoCCKf8Ztumuae1MXe1MsTDqAc2Lc5jlR0XtfOLADz4GN07rgI6ZAyM0DTmvJAhXWJSci7q_J8cJo8jQz8k1jUlqO-9CsQZALhNNdUHJy-XBgTCxXW0HDZtjERg416f6gjt6e0l6yLajQL6AnwuT075ZiOTBL6EGB-iSLZgAcICiqssg5zZCcRqrcQIKm2EY8xBnLh55IBj8RpKCk0fhrWjoc00539MnBvAzm0XQcQ_K_An5xhjXExEqiKA-_9xiD4C2tPfopdiOJUf1H_sncRdHHHtLSDt7bTTdxB3Cs-IqLKhldeii0FTDjzDX7qT-aUe3IItcsyVlvsfK0wO8W-Y&t=AQKNgXb7mKQcnSymqyg" target="_blank" class="meta-id-display" style="text-decoration: underline; color: var(--accent); font-weight: 600;">120244790485120593 ↗</a>
+                            </td>
+                            <td>
+                                <div>Conversion - evento compra a pagina web</div>
+                                <span class="meta-id-display">120242751389540593</span>
+                            </td>
+                            <td><span class="badge badge-paused">Pausada</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>11/05/2026</strong></td>
+                            <td>
+                                <div style="font-weight: 600;">Jaz UGC 1</div>
+                                <a href="https://business.facebook.com/ads/api/preview_iframe.php?d=AQIZeO3nM0BO6mYTN4939NUWUoJ1Tiqm6pACPwNEclCma3d2--EM6gtHNjzxMVmsD-f7ElOvfXGKLVgoPAP93F1AvRaZmXDCiQgHq_dp6NmUabAPNvvbnYev_-TZUpyZDX21ICMzOPCwJlqTIrkGdfcPx64rnKDUCL3B5ZAK8w_HdvRmcjUt1PBIh8M5Sl6yGO_1v5OSIl5y4pIPNI1p7gOYzyd6VVPCLjcMijkaz4FycI0zDEesvv4hB_mZ8R9J8JG6iUyUcXWpezQku1w_FnnKh2HtP5qdQbBxvh1bYpPscmb4cM59sqAX07ixGWSFEGAarffmBB-UebWmzo7-5Jg-Ksh4BAn2ksu1h6mdOHq3oLxPze_WKLu7buSDH8l-6my4D_bFCDHxsyWIhEhSdjw3Lh1pTBJKMcytZPG_G9scGRrTBpRm9vJAq5nSyokS57o&t=AQKJQqfAPpoOVLppweE" target="_blank" class="meta-id-display" style="text-decoration: underline; color: var(--accent); font-weight: 600;">120244789448460593 ↗</a>
+                            </td>
+                            <td>
+                                <div>Conversion - evento compra a pagina web</div>
+                                <span class="meta-id-display">120242751389540593</span>
+                            </td>
+                            <td><span class="badge badge-paused">Pausada</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>08/05/2026</strong></td>
+                            <td>
+                                <div style="font-weight: 600;">Dos Soles Sale Flyer</div>
+                                <a href="https://business.facebook.com/ads/api/preview_iframe.php?d=AQI1ncPAoa3n6IsUV3qBojDZXU22frCCULqqSxu0Z52iuPG1mtlWV5eXyz7NeDPqJ-Y8nexe3cuAxy510SGpb3H1UBRatDYT5NIVdR-yuWjJjOZA14vxeQoRrkdqG3zx9BHYQDoDFzfKmW7ylDRalx4nxi1stESsu10MpUWOWX-8jc-946NMv-SAfJ2E8x4fEJSBZcvfOWi2qqjTpqP0UW0Vi8MfI-PFnusQ_ChZFvbFapsMA9BfJbWlTw75vRToj6252IC0HpMxWZ1m8lIrU4OTxX5n9_kElDFAqJhNDo2ih-qEUWiTj9IE3OrIS2x025axXrUdu7lu4UWr0WpC1Rv-XmU7SnaVgrbJ-ykhzkbOcs5kW3WXA3GBZXObLv-12FFPyxLG53nP6wRAPLU0pkUR5DWnfxeJzG_-ZUbKWBep6QsL_6w3TJsrofQzxaPax7M&t=AQIBs96-Lc8KYc3OjTY" target="_blank" class="meta-id-display" style="text-decoration: underline; color: var(--accent); font-weight: 600;">120244538628700593 ↗</a>
+                            </td>
+                            <td>
+                                <div>Conversion - evento compra a pagina web</div>
+                                <span class="meta-id-display">120242751389540593</span>
+                            </td>
+                            <td><span class="badge badge-paused">Pausada</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>23/04/2026</strong></td>
+                            <td>
+                                <div style="font-weight: 600;">Reel - para cada necesidad</div>
+                                <a href="https://business.facebook.com/ads/api/preview_iframe.php?d=AQLeA-clK2Id82fMKNwqZvvyPpejztoDTnQpnmHYsMVeIzcCo2h_NZ8skY-8MSx5QCtCq5zVzndsiHRDh8_dZ22gIMqIpIytiWWn8uWynbm2MEuPqEBWJ7Iz9DFPotXVyTMoD9fIvw_sSkmxbP2Xcz3Mjm-HVavZA_6EU77KEzaHxXzXaZMYKbCOxkI_edJwhkgDf7GCLVngNNpCh0qJ1RtebHeTi1ZxbHY1ECC2FyKjY-k03-H3N7NEdfByIdG53M0d4_c8xZI_MPt-rXNN9uX3ciJJGdCG2qrIqcyWGrxLYwZxekwcDCeELuZokiPXMfGVIurZrx4ITr-_AMj1R7NYKBnmSsfJO4v04bp8Qan9w2kfGCU9eOeL8cQ4FzeCDvqHEt-bSfmupP3LQ6vd0e-_Uf4nlP_vMTdvIrbCpfx0inKsVvt_0PF5V-ggCmd2eyA&t=AQKaPeo4-BpAjsjFmAk" target="_blank" class="meta-id-display" style="text-decoration: underline; color: var(--accent); font-weight: 600;">120243585452130593 ↗</a>
+                            </td>
+                            <td>
+                                <div>Conversion - evento compra a pagina web</div>
+                                <span class="meta-id-display">120242751389540593</span>
+                            </td>
+                            <td><span class="badge badge-active">Activa</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>23/04/2026</strong></td>
+                            <td>
+                                <div style="font-weight: 600;">Reel - Tenes alguno de estos sintomas??</div>
+                                <a href="https://business.facebook.com/ads/api/preview_iframe.php?d=AQJ-2mXpsx99oCuEZ3KSyjMyNJJDlODK3_s0tQuXy_Xcm88ZcE5n889aoZehQF1lcLEHh--svBqR6_vCBcySDfC0hX_0b91s8N6InwkUuDYv-LDSZo6Hb65ddrUo_UDlnQ4x7moO2DMEsg3dOv0yp0IE_4l1ME13MYP9t6w4IrE4lNBFUvYms4CNEYQ44C5Kbjb7qJsrb1mBQWRpgCiNitefYEn5BSlosQEi2fumeEadd4VHKLah-1u1d4VEzA64SWxfgUIsdrk8c9-tOqEqiEKjRrYaqM4vRskOUrbB1mEPg9n2xQ1HezJ4j1t3xe8nWiqx-9JEWujLHdmwrk4cemvkvj0XWmy8LbXU-BGaggzfNOO9Z7QpR26VjUvtu1t212dxCwWuLP-oRhBCTRU76YuAytmhUgPteaijhODbiR2g98YGRgLDPCRd6XcY-qwuvYk&t=AQKygkhhRqAnJW4Mggc" target="_blank" class="meta-id-display" style="text-decoration: underline; color: var(--accent); font-weight: 600;">120243585452140593 ↗</a>
+                            </td>
+                            <td>
+                                <div>Conversion - evento compra a pagina web</div>
+                                <span class="meta-id-display">120242751389540593</span>
+                            </td>
+                            <td><span class="badge badge-active">Activa</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>23/04/2026</strong></td>
+                            <td>
+                                <div style="font-weight: 600;">Reel - Cuida tu rubio</div>
+                                <a href="https://business.facebook.com/ads/api/preview_iframe.php?d=AQKpqbjZmzFptIrcdS0kdRK4LRuJi5jwxn2_PIf6J4bZXXIW01ygfSK4aIMGeTNzVPaaRaZDIK365YBB36C_2i76Zjc4BWXi9WJ_ujpSmgv7s6sSRgdSYd8XRjmu8DBwMtS6C55Mo6_MKEN5fJLpjzthCoOt4bYY_d1Pgye2tYXKLn_vzj2OdX-v4I-O9Vz8GsIk8Mdjr6qlCostYUFEbAu4WdMVxEQOC3kF5VSiBGmKob7q5rC2XYvlToTI8ET0-gSDEq4bTtdO6q5C_djQjocLbN4_SY8PCRAtYSfLkmUF9QiKj3KLu3QUOp6aQoEi1Kk2qA47-3OW-BN6nUQ5y2tWphWtPsqiP0vHw5_ohADxWf-zIT_F7c5PkHi8AO-BQc3UQDrM-6e4bpl3gVVUDmqqRN8wwMqWTogJvv5rv86nDvmLtDkUeZk9yRXglJUNyfA&t=AQKotlXc4_PxgFAVlMQ" target="_blank" class="meta-id-display" style="text-decoration: underline; color: var(--accent); font-weight: 600;">120243585452120593 ↗</a>
+                            </td>
+                            <td>
+                                <div>Conversion - evento compra a pagina web</div>
+                                <span class="meta-id-display">120242751389540593</span>
+                            </td>
+                            <td><span class="badge badge-active">Activa</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>23/04/2026</strong></td>
+                            <td>
+                                <div style="font-weight: 600;">Reel - Tenes rulos ??</div>
+                                <a href="https://business.facebook.com/ads/api/preview_iframe.php?d=AQLcNFEnyr6MP1cB9E87sL2zB0LniROLAT8pUL_ZWh6LGc9Ti_KA0LWT5g_MUr3cVM2Ru_cJBpLA3g1JneHiz4fUDMc-NbmToaVPOvKloaV1lnM5hCTh3KUhDCXSQTFRqYr7d3l86RalOiuQhPnvs5md3RcMEr6CJ7LpczWGHDlsA8_lyukKYETKpM2Acf1LzF38Ve7rEJasiwmkLKWDj_6VSJpMYDPf4b1dLbr8f0tToOM9HVlVCDjvJBsWjqD_Dr12PoIFiPDWzCty0aOHU4Q58_6xLhEXHA_Elv-qh0_m2_xPHSqYOcjvekvrXJUA_hG3AYCVKTLnxBOMBrK6wNrtE4CbTR493iH7ebTZCd38WN1x5Qwku641O3OtPqZGtOrcW3QbiR5WpYmwm77aIeuGPVnOuMwOTf3H1B6eXwMx-B-StlinBcJftcAhi-wHquI&t=AQJPQ-pZ2sN_CpMD-P8" target="_blank" class="meta-id-display" style="text-decoration: underline; color: var(--accent); font-weight: 600;">120243585452150593 ↗</a>
+                            </td>
+                            <td>
+                                <div>Conversion - evento compra a pagina web</div>
+                                <span class="meta-id-display">120242751389540593</span>
+                            </td>
+                            <td><span class="badge badge-active">Activa</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>12/04/2026</strong></td>
+                            <td>
+                                <div style="font-weight: 600;">Reel - Si sos estilista o tenes..</div>
+                                <a href="https://business.facebook.com/ads/api/preview_iframe.php?d=AQISok93uYPdU8C-BXWgqNZAa1jxNjAxRO8y_-j2FAQJQ9MRYH05X8z1BbtpSnVhnKQunmLoao7vAtGmcXAypNhzqoGCkUp8NibDx9HJGAhzZT3HBT2ClsP4mrgwcnQ6c1UiiI1Y7egIHVRiQASx47jCqFhBFO54N6rW5TvWFrzqia3krG0gwZXJDujhx31swfpxiOI3vQwlcv44la9f9gtQ1vrWugcBukqonW4ZWjBus_DQdgReAmdSlOPi9hi6quNgO-LxEXqTGuS9Q2UPs6QPVuEQ_EPpoue2AA2quz_s4xuB9-WTISbI7EzvPR2ZNZOWMJ7lbWIPXXv_bzjSf_b2pd23bjHcZ-V_PfAKWFDqdJsHneohqWTDU9OUeT6ZO9vdPzv2V0Fvzf5VGu3SD9bYtAFfpZim1WKgELc8WB4BUnNBtR50VeTwewmnUz7qvlg&t=AQJSjCA-NRY5xTBDxNI" target="_blank" class="meta-id-display" style="text-decoration: underline; color: var(--accent); font-weight: 600;">120243024605250593 ↗</a>
+                            </td>
+                            <td>
+                                <div>Conversion a WhatsApp - trafico frio B2B</div>
+                                <span class="meta-id-display">120240934489910593</span>
+                            </td>
+                            <td><span class="badge badge-active">Activa</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>27/02/2026</strong></td>
+                            <td>
+                                <div style="font-weight: 600;">Reel - cuidado pre y post solar</div>
+                                <a href="https://business.facebook.com/ads/api/preview_iframe.php?d=AQJOYYBGTNE1wK7zISMc2G4JShiXJDY0ugTGPxtDikjwKZ8chl8k4xcWZfXatT1ahwuMN5aCL_f3K0o-mtPLs4rosl1WchvcXaR9HMQU0YUjzAD4hqcsQmqsKnGUB1GWn7-cQwlw3M5N7VklxYpL4rP9e-NACOpu6CIrn6lV-4A15C_vHfa56lMmckUOeluX35ng1wCygOIVv0dGvMdEJaIt10cA7YHrQrc3ZhhIpqBhcAGZAKzZyC3b80mMhxpw_dvDPLjx-IDzYAlPfRLSZxm6io8EtZVwuxW351CGgvZn_e815DR5xs9RG1SnZ3SGJxkiv1xMSjuE-txFfIXh7xdvMPZGaP-G6j5X22t-qIqy8ZaDTSgDA1Zp9J19Or8NdvbWFvsXP8mBMr7EB0tR9YX8Ithng5uQUCoSHfVou6XBpXk-K_77_I20kGn4zPmmXiU&t=AQLFxnAGEG--G2A8qj4" target="_blank" class="meta-id-display" style="text-decoration: underline; color: var(--accent); font-weight: 600;">120240974567520593 ↗</a>
+                            </td>
+                            <td>
+                                <div>Conversion a pagina web - trafico frio</div>
+                                <span class="meta-id-display">120240887374240593</span>
+                            </td>
+                            <td><span class="badge badge-active">Activa</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>27/02/2026</strong></td>
+                            <td>
+                                <div style="font-weight: 600;">Reel - Tenes rulos ?</div>
+                                <a href="https://business.facebook.com/ads/api/preview_iframe.php?d=AQK6KTp3EYf9E4kiJaycvwVsHn8Wt0N3DH9xMjhv_lxNgYb7RSgxGLH0csziJWGC7zj4FbNNIbrl1CwEF_kfOT-kBk1yWWgUFZwF8lJW67pDAxO35sUT-5ZM_nNAqSk0bXLIQLe7Qtp_GPcipRaYgk72FaYWnmVJubWrdKtpp5ZdAKahrpxZfo94nsyGTcEk1lNyfwwW1diaML3zIPai9i8G5eqVHWK8TrzbfuwoZV6Od6GlkRYyel7NZWHwAky0rZKVTLsD3WX9TApfTbYL2PTxw69K1JQwydujlxaWw8-MN2EmLNT7i5WU6mJlRQKq42PnqNVRw_S_WkQwMpJKKjuJwd5X78dJnwrfqAWy7klCPubMrGI7NIbx3kw05EPXMCT-Y6P2AcTkExBHRZBmzlvfNhy7tzeGE-96-6s0Z8m0kN_I6h00YffJsh0MdDnAOdg&t=AQLVMrnWqcat5Bv8F-A" target="_blank" class="meta-id-display" style="text-decoration: underline; color: var(--accent); font-weight: 600;">120240974496280593 ↗</a>
+                            </td>
+                            <td>
+                                <div>Conversion a pagina web - trafico frio</div>
+                                <span class="meta-id-display">120240887374240593</span>
+                            </td>
+                            <td><span class="badge badge-active">Activa</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>27/02/2026</strong></td>
+                            <td>
+                                <div style="font-weight: 600;">Reel - Tenes alguno de estos sintomas?</div>
+                                <a href="https://business.facebook.com/ads/api/preview_iframe.php?d=AQLkTTC4-Hw9X5n4aFCfh7bEhwKLmPVaRRnXBDxUx9AyMt6DQoM3H7OZIUul5eiw7v8xQY36jjMlzepEbpvrk49Gltb1Gbr_y81omXvvAFgF0nes6J5OAb52Mg8dUlx11USBLpOEn_2zmO5UpFIYjRxVJj0DSapuwUcTR1PDOflw7MMgLO6oQaZlhb5MZHc46VVAXfYBGbYnVSfn4K6udbiIiMATa1BwBvNXZ-b9Tr3h0NCCS1755ccecVY6oNDL-ZAWVduM-0KBKTBeqeEA4VU237pUo-rLmP0xvBbpWc1ZDTMA2BqpVYuHroofxqOTnjJ9DwX6pjTrpTSAwQ-KUGg77PO6tnGeqv8MXxHx_pQGv970rfROMjKb8gCnYlXkfhS3YkxzwT6EkWjrw8KMuSX_6XlHaxHeaFXRwDdLbgpXtmJkVDFDTQYjlT3UVlqoI7U&t=AQIUZ6t9h_CETQAiIk4" target="_blank" class="meta-id-display" style="text-decoration: underline; color: var(--accent); font-weight: 600;">120240974349340593 ↗</a>
+                            </td>
+                            <td>
+                                <div>Conversion a pagina web - trafico frio</div>
+                                <span class="meta-id-display">120240887374240593</span>
+                            </td>
+                            <td><span class="badge badge-active">Activa</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>27/02/2026</strong></td>
+                            <td>
+                                <div style="font-weight: 600;">Reel - Protege tu cabello</div>
+                                <a href="https://business.facebook.com/ads/api/preview_iframe.php?d=AQI5elReOX4WqAmBj7ss9dNLY1rJYBFGPeqSpVtz-mtrEtBRIwehzrpS1DNP1TvqsdRP6mnOr4u8mkHS5n9gH_aeVzuoQ1yo7bgnFCspITCspUvk60yH26rrKeHyfKWVYiWIA05_CswBB08ogvoCbnGuPReXM46sLzmxJmIoeQmO8PukM4arkwqVyFHuGKqe_us6zPNEbmRVl6_3zqusmj_69Rv6S6r91jCnprgtq53_n9maxZGi79MCd52amKsI84cA8svqWKohq4NeIsi-360RU3Stb8hd1iOHJsPcveaSEDu2ejNW6NCB5ySYkxOPYOlTCHMgSPqJsFreloXtWlw86uVPSRGstXLV63SRJheKjGrKTPj6bbH7-Nira95qlOphph43ID75l0CLc9n5W4nw1UjcNF0Gm0y6IwJLpYc1rjyrM1IOADqrJNW1OHPhKqU&t=AQKENf4F2qSIa0o7qlk" target="_blank" class="meta-id-display" style="text-decoration: underline; color: var(--accent); font-weight: 600;">120240974349330593 ↗</a>
+                            </td>
+                            <td>
+                                <div>Conversion a pagina web - trafico frio</div>
+                                <span class="meta-id-display">120240887374240593</span>
+                            </td>
+                            <td><span class="badge badge-active">Activa</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>27/02/2026</strong></td>
+                            <td>
+                                <div style="font-weight: 600;">Reel - UGC Jaz febrero</div>
+                                <a href="https://business.facebook.com/ads/api/preview_iframe.php?d=AQKyz6Oo9-ttqmrA23lAcrVuTSBIpGQZVx5x5csPcMNu8KftOm97YSO25uwXfopJxaavppqQVNoumDh-0XFvyF2GjaMnlsSUmrZV8I6fhQD1XZ3BdgMmHcUYeE8B4kssZQqRDoKMXlttMSdRXK2hWnqAWzIx1FsqB6g7bAj94MN31-MwdFX9fwvPpuKaGIhUCNpnzoUk-AvE45aJQnTv-NBHaVxyYHKRbtTJvsslke-wTqsmVR7xn2OBv8_TteAANzaC-ZP-4xxh_sEGvtOQ5DzagAm8yRYXU6SLcEcAcI7c9pFVTOTSwQmqRIZnPSTYrFhVeqJ3eJHbHqlNxKhFEiY5oCPkVIXig-i5DDbVi247sKmwBqa9rZYRM5eOTMbQIAv_zD3OnkrUzLFqEhD7BKAl1RqGQQKAUtLMoh4DfCvfc3Oh4W3Vlit5PxW8fRtM5Q8&t=AQKf9yCNYPcD1QKKgys" target="_blank" class="meta-id-display" style="text-decoration: underline; color: var(--accent); font-weight: 600;">120240974349310593 ↗</a>
+                            </td>
+                            <td>
+                                <div>Conversion a pagina web - trafico frio</div>
+                                <span class="meta-id-display">120240887374240593</span>
+                            </td>
+                            <td><span class="badge badge-active">Activa</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>27/02/2026</strong></td>
+                            <td>
+                                <div style="font-weight: 600;">Reel - descubri lo ultimo..</div>
+                                <a href="https://business.facebook.com/ads/api/preview_iframe.php?d=AQKjAghYPI_5V82i_uw0vYmuUU5EgoXX7ZNOyWaAdwqlJ_h74ixpnjMkPpvflFXiObTVOvhiu7y3yZw28DNHvaTKNKBGMY_isPLTuUk6rADmFPZQfczrM6TRy3iodDVdiBqcLAARniw9Vw90W0X3vYW7HUsmbSgF6ICF5TDF9BvpdgNMI4fzDQ8wlEHO1Tc1dbxDU_dndXzeD4UGz3bOI6vkqAqedjHEwOTz7tV_-cDfhSU7N_jMz-j5zJphhDmRKVuMvSEvFbVlnwLdMMW8oD1qoUYgr4NEeIMSc3M2vgpK7en0LgVADehJHgTIM8oEe-OBv1_xzwXzuEweWK840NOW5VEZbkptlFcAHk9RfVWBUcmdRhNpWrdEb5_nj_a883YYW4n88liVQAbeylOtOuJbiO9tuWtk4Qvy7xP-nmFwbvY-8iZ867LsTYGi52uDh6M&t=AQKTwE4Sp3sO7bVRZLY" target="_blank" class="meta-id-display" style="text-decoration: underline; color: var(--accent); font-weight: 600;">120240973711800593 ↗</a>
+                            </td>
+                            <td>
+                                <div>Conversion a WhatsApp - trafico frio B2B</div>
+                                <span class="meta-id-display">120240934489910593</span>
+                            </td>
+                            <td><span class="badge badge-active">Activa</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>27/02/2026</strong></td>
+                            <td>
+                                <div style="font-weight: 600;">Reel - 18 años confiando en matrrix</div>
+                                <a href="https://business.facebook.com/ads/api/preview_iframe.php?d=AQK5jMNG4S1ZLAVsOpVB-1oVUR3gzr7T4jT8ELUIrw7_KHZVGIY0lhx3fuXswibaRxLU8tE1mhl65c3UW0VSusAYmZ5V9Kv_PJC7J13qWNnLE2VOjF9XC4-wQYtHZk8SCZ3k67GuPX-F9RlaPiujB18o61wlBsbXfvmPonCjIP64dqdAojacMhi3WdAL9JgHQzqjrKztdOqM32eKV3Bxs2mc33d4H57e9RLUuOdu_LWZbSK4izcUsjs2IjvmWq4RGfJeiZN6xwkWFdSPDyYSB01UOwk_5lrFf-3Td5A7eIWSAZnyxAJUxPy7IlZfWMdtglcIzKWCo46i8fqc60a31U0a0tMg5biZI3FEWpHfYV0ehOugy4rH4WnBGDW4rnCMtHcnvptNlaUBlHlcNh2422RDSkKk3HcIIaNKa2THy615UFP4R1BWxEgREmW5F5kAmOU&t=AQLbNyz4niVSuag8y-I" target="_blank" class="meta-id-display" style="text-decoration: underline; color: var(--accent); font-weight: 600;">120240973745010593 ↗</a>
+                            </td>
+                            <td>
+                                <div>Conversion a WhatsApp - trafico frio B2B</div>
+                                <span class="meta-id-display">120240934489910593</span>
+                            </td>
+                            <td><span class="badge badge-active">Activa</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>27/02/2026</strong></td>
+                            <td>
+                                <div style="font-weight: 600;">Reel - Herramientas que podes encontrar</div>
+                                <a href="https://business.facebook.com/ads/api/preview_iframe.php?d=AQIfCnz8MvEjR_RQcjxFxV_m4EmpIC1nRjktYLdQAJb9s7mW7h0hzKr8ee25DwrS6DatRmkVDPTklXioisjq-7Rh2Uoi0jCv2jZ2dfTsnFoLpKbTvH-w2KkG73yG5FAx0Uq4YAc2hOP_cTgkurtbVnJDv7z6Sv2qKmiWmGxG4ajMV10l-FDL-0CUQUGphT_LwozQTmImV8INMjPdldHKmKfXBKXDmZbUqhPhK07GZ09suqloI7hQs_1d6_uW3JJuXzovG54IZZjt4t87IB9KqwEoPebT3BC5MgxMoCXWouBDuiVHTvTYfmfkXQm7LzTSfddS8YLUL0OCm1s2fG2_R8NOMJoSvRRHxt0vG7Y5nRwPMlbcOx37zw8V2xS4WTdEhymp5a4uBeoM8B7MBMfhkvlPlEmqBiIJ7Bo83qUZ6ybapR4-UtNWIAJ7xUdmw-kbfAY&t=AQIxlI9pr_TjP-reDro" target="_blank" class="meta-id-display" style="text-decoration: underline; color: var(--accent); font-weight: 600;">120240973680070593 ↗</a>
+                            </td>
+                            <td>
+                                <div>Conversion a WhatsApp - trafico frio B2B</div>
+                                <span class="meta-id-display">120240934489910593</span>
+                            </td>
+                            <td><span class="badge badge-active">Activa</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>27/02/2026</strong></td>
+                            <td>
+                                <div style="font-weight: 600;">Reel - si tenes un salon</div>
+                                <a href="https://business.facebook.com/ads/api/preview_iframe.php?d=AQJWtROC4vS3yjlWj4x-I90-WNg3vNrCajlWmcmg-QczvczvrinCopTJiMiJE4hpxytvTW8Uns2x_EWpsNj3PDKI7L0SAJXdsNEj95_cyY6jn5ybWQOFpgbYWFEcjcNIgPaQknOQwKcvnSMv0ohIkmlWaX4_MKi9gVhBKg2bIOqCxzQ0Ju036RVqAqHDmBncd19RqD6_S67c_5AVWyJgsk4CugYkBh3ENe9oLWBfqXAFewkJNbeAQOD_TjqV4W_IAK-sNWGv9VJbWMqNTN9Yb7UdNsSD6HTObZEDeLJPQxPUK-_242GeLHHmZNAPgt4_H7f0rdiEsQpjriHMfalxWpstJx3iuk9VuPtKhOz1vQ2Jvyax6JOK2BUYOKQwhA7YJih1HbVExB2GMeuMTfcRgAZqM-Oi_jCYXr_ik6OeI4-1gYpbYezwI67UAM_MW2W3vuM&t=AQKSpcwvAM3M3fs5k5o" target="_blank" class="meta-id-display" style="text-decoration: underline; color: var(--accent); font-weight: 600;">120240934489890593 ↗</a>
+                            </td>
+                            <td>
+                                <div>Conversion a WhatsApp - trafico frio B2B</div>
+                                <span class="meta-id-display">120240934489910593</span>
+                            </td>
+                            <td><span class="badge badge-active">Activa</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>27/02/2026</strong></td>
+                            <td>
+                                <div style="font-weight: 600;">Reel - que podes encontrar en dos soles?</div>
+                                <a href="https://business.facebook.com/ads/api/preview_iframe.php?d=AQLhRwCKkUwpYRAKN29diq6A26FDXThcmMGxoiGt9es0nP_e21Gv7cUR4Qpw6-MY5rMGRr_N85Y3VMdToL-5j3lQqOvjk3b6R5QwmBhbIDBYtvbqfrhSJpI8AmtCyUhFsZAk897WROLrDQE6hgwfmO6eWWIq8AHUY66JAS64G6-6GPRfgJJawxUk4Gg2Q4dbmf6ZWLYJfjSK70adcqacM1pVJBzPRzNzWNmxecjqIvZCzy15ulEqtHXzgMi94tCX2spTgvx6ilNplPg8U41oOB_o0tDQKDnUTfT4SplbV0AsmPspciX-AG-n7hMivdsOUaHhXTrTjfAPES4DMAD1vx_0YLPAsSfgj23V2yQdJNGXgQKra5cOTbsxa2Ri2surl43M4vVUc9Y8mVr0arYwZbLvwzOEy4th25cwpV0hmRRo-XeaC0BjRt3CUdmkeUTLzKw&t=AQIxCFQ8BVyMGsbS680" target="_blank" class="meta-id-display" style="text-decoration: underline; color: var(--accent); font-weight: 600;">120240973691170593 ↗</a>
+                            </td>
+                            <td>
+                                <div>Conversion a WhatsApp - trafico frio B2B</div>
+                                <span class="meta-id-display">120240934489910593</span>
+                            </td>
+                            <td><span class="badge badge-active">Activa</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>27/02/2026</strong></td>
+                            <td>
+                                <div style="font-weight: 600;">Reel - somos distrib de matrix</div>
+                                <a href="https://business.facebook.com/ads/api/preview_iframe.php?d=AQLz9mVJ72ktVh1e9C2L69LH5eNsrFHs8bkZqvpp36wWht7Awz5jEL6XlMZKqX-H-oAlDXr41yB2m7z0H8PnSmxmgAERiOpRKJQ1lOcqyOTZxq5dQQOgcjs6MTmqyukvXeFqd3LiXlh6GKT6T4Y-oxiHhMJj8c-8STY1NoGxTMsRqO63NH-_bHwk4BEcFJy-ZxMMYwG8MxQhlJMTF4X1IJiPC61gFtnROZRsKUkpjAd5TE-obezpJ4xZpTttx2J4MA0q6ss-e8lOsJGoB-DD15_7DAM6WuCMzDKnuAFBeHrXGFd4Pqo7uNOsgdkGfbjtPgcZUUpgIguy9DL8w1zkjGj0m87dXVe47RTouZRcBI4GCYhxwiDYv50rcImgQVwRUrh8wnyXwjk-15vBr04W_HySKdEAJk-OUr3o90riG24QWkIMiG-7uT8Myw_OyDpxRzM&t=AQImtg8e0r6cSK0ff0I" target="_blank" class="meta-id-display" style="text-decoration: underline; color: var(--accent); font-weight: 600;">120240973659820593 ↗</a>
+                            </td>
+                            <td>
+                                <div>Conversion a WhatsApp - trafico frio B2B</div>
+                                <span class="meta-id-display">120240934489910593</span>
+                            </td>
+                            <td><span class="badge badge-active">Activa</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>27/02/2026</strong></td>
+                            <td>
+                                <div style="font-weight: 600;">Reel - equipa tu salon</div>
+                                <a href="https://business.facebook.com/ads/api/preview_iframe.php?d=AQLsRDsJ0AUl_4xQHJvpAVCli88Y9MeBkAxTnDDVIuYR2IF6RnYan0i4zIPMukUFqE0dijmDAdpj7ASu5qXoXgC6egWFAikiX-tnFcCOHdu5OqPi7qM_KEBemxaAG8YV6-iaoOBCfwLTJR9ch5vttix-GtCS6bjqRCW1ogdtWjiY1tThlufrOZeszawP3uZvb_7vv9dUMBbR9mQNXUrHiZxIEnE-YwFo1DLTqCFh7fyW-x0AXo_gKxwekox1szg1DsOeMY5RbrFKgJFmadD0ySie_vNg05W9HyESs_Xw2czOhBMCSfAz1X3hK8BQ2kWu_SxvEBJ6zhAShRbfcgimt0MKehTjO1J5OZj4AUDW_t1tschtlnDTqVXbMm5jDuXOecapbF7VB4IruJbAN77v-S442ljXsO3jWViVeE3JzIN4v2Ea8quxhTQ2367O256pPdQ&t=AQJNbJjX8d_LbVqDtQs" target="_blank" class="meta-id-display" style="text-decoration: underline; color: var(--accent); font-weight: 600;">120240973645810593 ↗</a>
+                            </td>
+                            <td>
+                                <div>Conversion a WhatsApp - trafico frio B2B</div>
+                                <span class="meta-id-display">120240934489910593</span>
+                            </td>
+                            <td><span class="badge badge-active">Activa</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>27/02/2026</strong></td>
+                            <td>
+                                <div style="font-weight: 600;">Reel - queres incorporar..</div>
+                                <a href="https://business.facebook.com/ads/api/preview_iframe.php?d=AQIY6isTxYggbqjt304HbCpaY09iemF3cDOPEr1js-zTTvTAsf6YuiiIokjeDqkvuecJttU5jBdI45UIZ3A8mdMNYsQQ933rnyIZ72D4ikYDHvG_i9wkJQWrhnazUNEHgRFVC3KGbfAj4ACG7IjLA4XEuhWp9UklHJuniDoG5h0umolatKXXVwn2izgv_IIhfFZkt1byTGXz8g8P5TbTbyaA5DfUJtY0z0LYrP3NmwJRiHGoyNkF-ocKqawa4XchF_812xC_hjfU0AtrH5XCSf5B5PJt2HPrztX9fsT0eirs1Z8giziX972AHXqAmiA8Vih8y2y1WVS3GugfXLsJiecvywQKhSBNrq1eoXAFQKAQbCblVmzhbqpNGazj99ZAa0m-ItF1W2mVpS3GXbb1UyghtBy25csnb8pcZcG_Db4yL6Ez-KGoWJuzgVWqAlT5RDc&t=AQJmC1LNx3wmwfaxE3w" target="_blank" class="meta-id-display" style="text-decoration: underline; color: var(--accent); font-weight: 600;">120240973923650593 ↗</a>
+                            </td>
+                            <td>
+                                <div>Conversion a WhatsApp - trafico frio B2B</div>
+                                <span class="meta-id-display">120240934489910593</span>
+                            </td>
+                            <td><span class="badge badge-active">Activa</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Plan de Acción Estratégico -->
+        <div class="section" style="margin-top: 15px;">
+            <h2 class="section-title">Plan de Acción & Próximos Pasos (Hoja de Ruta)</h2>
+            
+            <div class="roadmap-list">
+                <div class="roadmap-item">
+                    <div class="roadmap-number">1</div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-title">Detener la fuga ineficiente de anuncios</div>
+                        <div class="roadmap-desc">Pausar hoy mismo en Meta los anuncios ineficientes: <em>"Reel - somos distrib de matrix"</em> (ID <span class="meta-id-display">120240973659820593</span>) y <em>"Reel - Si sos estilista o tenes.."</em> (ID <span class="meta-id-display">120243024605250593</span>).</div>
+                    </div>
+                </div>
+                <div class="roadmap-item">
+                    <div class="roadmap-number">2</div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-title">Escalar creativos con alto engagement</div>
+                        <div class="roadmap-desc">Redireccionar el presupuesto liberado al <em>"Reel - si tenes un salon"</em> (ID <span class="meta-id-display">120240934489890593</span>) para exprimir su CTR del 3.51%.</div>
+                    </div>
+                </div>
+                <div class="roadmap-item">
+                    <div class="roadmap-number">3</div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-title">Reactivación de la Campaña de Conversión Web</div>
+                        <div class="roadmap-desc">Habilitar nuevamente la campaña de compra a web (ID <span class="meta-id-display">120242751389540593</span>) con presupuesto diario inicial controlado para recuperar el CTR del 4.75%.</div>
+                    </div>
+                </div>
+                <div class="roadmap-item">
+                    <div class="roadmap-number">4</div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-title">Implementar Nurturing en WhatsApp</div>
+                        <div class="roadmap-desc">Configurar respuestas rápidas en WhatsApp Business para acelerar la conversión del flujo B2B que genera la campaña activa.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="report-footer">
+            <span>Dos Soles - Auditoría Estratégica de Meta Ads (MCP Conectado)</span>
+            <span>Página 2 de 2</span>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,2440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auditoría Meta Ads - Dos Soles (Distribuidor Matrix)</title>
+
+    <!-- Google Fonts Pairing: Outfit (Titles) & Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===========================================
+           DESIGN SYSTEM & LUXURY STYLE VARIABLES
+           =========================================== */
+        :root {
+            /* Theme Colors - Matrix Premium Dark Carbon */
+            --bg-primary: #060913;
+            --bg-secondary: #0c0f1d;
+            --bg-card: rgba(12, 15, 29, 0.7);
+            
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --text-muted: #5e6678;
+            
+            /* High-fidelity Accent Colors */
+            --accent: #f5a623;        /* Warm Growth Gold */
+            --accent-green: #00f2fe;  /* Conversion Electric Teal */
+            --accent-red: #ff4d4d;    /* Leak Vibrant Red */
+            --accent-warning: #ffb300;/* Warning Amber */
+            
+            --border-color: rgba(255, 255, 255, 0.05);
+            --border-hover: rgba(255, 255, 255, 0.12);
+            --border-gold-glow: rgba(245, 166, 23, 0.2);
+            --border-teal-glow: rgba(0, 242, 254, 0.2);
+            --border-red-glow: rgba(255, 77, 77, 0.25);
+            
+            /* Fonts */
+            --font-display: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            /* Responsive Typography Sizes using clamp() */
+            --title-size: clamp(2rem, 4.5vw, 3.8rem);
+            --h2-size: clamp(1.4rem, 2.8vw, 2rem);
+            --h3-size: clamp(1rem, 2vw, 1.3rem);
+            --body-size: clamp(0.75rem, 1.15vw, 0.95rem);
+            --small-size: clamp(0.65rem, 0.95vw, 0.8rem);
+            --mono-size: clamp(0.6rem, 0.85vw, 0.75rem);
+
+            /* Viewport Spacing */
+            --slide-padding: clamp(1rem, 4vw, 4rem);
+            --content-gap: clamp(0.8rem, 2vw, 2rem);
+            --card-gap: clamp(0.5rem, 1.2vw, 1rem);
+
+            /* Timing & Motion */
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --duration-normal: 0.8s;
+        }
+
+        /* ===========================================
+           MANDATORY VIEWPORT FITTING STYLES
+           =========================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            overflow: hidden; /* Strict lock scrollbar */
+            user-select: none;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Animated Full-Screen Ambient Lighting */
+        .ambient-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .ambient-glow-1 {
+            position: absolute;
+            top: -15%;
+            right: -10%;
+            width: 55vw;
+            height: 55vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(245, 166, 35, 0.07) 0%, transparent 70%);
+            filter: blur(90px);
+            animation: floating-glow-1 25s infinite alternate ease-in-out;
+        }
+
+        .ambient-glow-2 {
+            position: absolute;
+            bottom: -15%;
+            left: -10%;
+            width: 60vw;
+            height: 60vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 242, 254, 0.055) 0%, transparent 70%);
+            filter: blur(100px);
+            animation: floating-glow-2 30s infinite alternate ease-in-out;
+        }
+
+        @keyframes floating-glow-1 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-8%, 5%) scale(1.1); }
+        }
+
+        @keyframes floating-glow-2 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(5%, -8%) scale(1.05); }
+        }
+
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.008) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.008) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            mask-image: radial-gradient(circle at center, black 30%, transparent 85%);
+            -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 85%);
+        }
+
+        /* Slide container for transition sliding */
+        .slides-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Viewport Lock slides */
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            flex-shrink: 0;
+            overflow: hidden;
+            position: relative;
+            padding: var(--slide-padding);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide-content {
+            width: 100%;
+            max-width: min(94vw, 1260px);
+            max-height: min(84vh, 780px);
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: var(--content-gap);
+            overflow: hidden;
+        }
+
+        /* Typography & Headings */
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.1;
+        }
+
+        h1 {
+            font-size: var(--title-size);
+            background: linear-gradient(135deg, #ffffff 40%, rgba(255, 255, 255, 0.6) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: var(--h2-size);
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .slide-header {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            border-left: 3px solid var(--accent);
+            padding-left: 0.8rem;
+        }
+        
+        .slide:nth-child(even) .slide-header {
+            border-left-color: var(--accent-green);
+        }
+
+        .slide-subtitle {
+            font-size: var(--small-size);
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-weight: 600;
+        }
+
+        /* ===========================================
+           TRANSITIONS & REVEAL SYSTEM
+           =========================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity var(--duration-normal) var(--ease-out-expo),
+                        transform var(--duration-normal) var(--ease-out-expo);
+        }
+
+        .slide.active .reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide.active .reveal.delay-1 { transition-delay: 0.12s; }
+        .slide.active .reveal.delay-2 { transition-delay: 0.24s; }
+        .slide.active .reveal.delay-3 { transition-delay: 0.36s; }
+        .slide.active .reveal.delay-4 { transition-delay: 0.48s; }
+        .slide.active .reveal.delay-5 { transition-delay: 0.60s; }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.97);
+            transition: opacity var(--duration-normal) var(--ease-out-expo),
+                        transform var(--duration-normal) var(--ease-out-expo);
+        }
+        .slide.active .reveal-scale {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .slide.active .reveal-scale.delay-1 { transition-delay: 0.15s; }
+        .slide.active .reveal-scale.delay-2 { transition-delay: 0.30s; }
+
+        /* ===========================================
+           SLIDES SPECIFIC LAYOUTS & COMPONENTS
+           =========================================== */
+        
+        /* Slide 1: Portada */
+        .title-slide-layout {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.8rem;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .connection-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(0, 242, 254, 0.08);
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            color: var(--accent-green);
+            padding: 0.45rem 1rem;
+            border-radius: 50px;
+            font-size: var(--small-size);
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
+
+        .connection-badge::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            background-color: var(--accent-green);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px var(--accent-green);
+            animation: pulse-ring 2.5s infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.4; }
+            100% { transform: scale(0.95); opacity: 1; }
+        }
+
+        .meta-id-tag {
+            font-family: var(--font-mono);
+            color: var(--accent-green);
+            font-size: var(--mono-size);
+            background: rgba(0, 242, 254, 0.05);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 242, 254, 0.15);
+            font-weight: 500;
+        }
+
+        /* Slide 2: Bento Grid KPIs */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--card-gap);
+            width: 100%;
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: clamp(1rem, 2vw, 1.6rem);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 0.75rem;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .kpi-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: transparent;
+        }
+
+        .kpi-card.highlight-gold::after { background: var(--accent); }
+        .kpi-card.highlight-teal::after { background: var(--accent-green); }
+        
+        .kpi-card.highlight-gold:hover {
+            border-color: rgba(245, 166, 35, 0.35);
+            box-shadow: 0 8px 30px rgba(245, 166, 35, 0.08);
+        }
+        
+        .kpi-card.highlight-teal:hover {
+            border-color: rgba(0, 242, 254, 0.35);
+            box-shadow: 0 8px 30px rgba(0, 242, 254, 0.08);
+        }
+
+        .kpi-label {
+            font-size: var(--small-size);
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+        }
+
+        .kpi-value {
+            font-size: clamp(2rem, 3.2vw, 3.5rem);
+            font-family: var(--font-display);
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1;
+            letter-spacing: -0.03em;
+        }
+
+        .kpi-context {
+            font-size: var(--small-size);
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-family: var(--font-mono);
+            background: rgba(0, 242, 254, 0.1);
+            color: var(--accent-green);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            margin-top: 0.25rem;
+            width: fit-content;
+            font-weight: 600;
+            border: 1px solid rgba(0, 242, 254, 0.15);
+        }
+        
+        .badge.warning {
+            background: rgba(245, 166, 23, 0.1);
+            color: var(--accent);
+            border-color: rgba(245, 166, 23, 0.15);
+        }
+
+        /* Slide 3 & 4: Glosario en Criollo Grid */
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--card-gap);
+            width: 100%;
+        }
+
+        .glossary-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: clamp(0.9rem, 1.8vw, 1.4rem);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .glossary-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: var(--h3-size);
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .glossary-scientific {
+            font-size: var(--small-size);
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+
+        .glossary-definition {
+            font-size: var(--body-size);
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .glossary-criollo {
+            font-size: var(--body-size);
+            background: rgba(245, 166, 35, 0.035);
+            border-left: 3px solid var(--accent);
+            padding: 0.6rem 0.8rem;
+            border-radius: 0 8px 8px 0;
+            color: #ffffff;
+            margin-top: 0.35rem;
+            line-height: 1.4;
+        }
+
+        .glossary-criollo strong {
+            color: var(--accent);
+        }
+
+        /* Slide 5: Evolución Mensual Table */
+        .table-container {
+            width: 100%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: var(--body-size);
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.02);
+            color: #ffffff;
+            font-weight: 700;
+            padding: 1.2rem 1.6rem;
+            font-family: var(--font-display);
+            border-bottom: 1px solid var(--border-color);
+            text-transform: uppercase;
+            font-size: var(--small-size);
+            letter-spacing: 0.08em;
+        }
+
+        td {
+            padding: 1.1rem 1.6rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.012);
+            color: #ffffff;
+        }
+
+        .highlight-cell {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        /* Slide 6: Costo de Oportunidad Layout */
+        .split-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            width: 100%;
+        }
+
+        .campaign-side {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 2.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .campaign-side.active-cam {
+            border-color: rgba(255, 77, 77, 0.2);
+            box-shadow: 0 10px 40px rgba(255, 77, 77, 0.04);
+        }
+
+        .campaign-side.paused-cam {
+            border-color: rgba(0, 242, 254, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 242, 254, 0.04);
+        }
+
+        .side-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.8rem;
+            border-radius: 30px;
+            font-size: var(--mono-size);
+            font-family: var(--font-mono);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .status-pill.active {
+            background: rgba(255, 77, 77, 0.1);
+            color: var(--accent-red);
+            border: 1px solid rgba(255, 77, 77, 0.25);
+        }
+
+        .status-pill.paused {
+            background: rgba(0, 242, 254, 0.1);
+            color: var(--accent-green);
+            border: 1px solid rgba(0, 242, 254, 0.25);
+        }
+
+        .campaign-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .meta-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 0.6rem;
+        }
+
+        .meta-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .meta-label {
+            color: var(--text-secondary);
+            font-size: var(--small-size);
+        }
+
+        .meta-value {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: var(--body-size);
+            color: #ffffff;
+        }
+
+        .side-verdict {
+            font-size: var(--body-size);
+            line-height: 1.45;
+            color: var(--text-secondary);
+            padding: 1.1rem;
+            border-radius: 10px;
+        }
+
+        .campaign-side.active-cam .side-verdict {
+            background: rgba(255, 77, 77, 0.035);
+            border-left: 3px solid var(--accent-red);
+        }
+
+        .campaign-side.paused-cam .side-verdict {
+            background: rgba(0, 242, 254, 0.035);
+            border-left: 3px solid var(--accent-green);
+        }
+
+        /* Slide 7: Creatives Cards with Dynamic Interactive Tabs */
+        .creatives-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--card-gap);
+            width: 100%;
+        }
+
+        .creative-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 0.85rem;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .creative-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 0.35rem 0.9rem;
+            font-size: 0.65rem;
+            font-weight: 700;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            border-bottom-left-radius: 10px;
+            letter-spacing: 0.04em;
+        }
+
+        .creative-card.winner { border-color: rgba(245, 166, 23, 0.18); }
+        .creative-card.winner .creative-badge { background: var(--accent); color: var(--bg-primary); }
+
+        .creative-card.gold { border-color: rgba(0, 242, 254, 0.18); }
+        .creative-card.gold .creative-badge { background: var(--accent-green); color: var(--bg-primary); }
+
+        .creative-card.leak { border-color: rgba(255, 77, 77, 0.18); }
+        .creative-card.leak .creative-badge { background: var(--accent-red); color: #ffffff; }
+
+        .creative-card.slow { border-color: rgba(255, 179, 0, 0.18); }
+        .creative-card.slow .creative-badge { background: var(--accent-warning); color: var(--bg-primary); }
+
+        .creative-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            margin-top: 0.5rem;
+        }
+
+        .creative-card-title {
+            font-size: var(--body-size);
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.25;
+            min-height: 2.5rem; /* Ensure title lines don't bounce layout */
+        }
+
+        .creative-card-id {
+            font-size: 0.65rem;
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+        }
+
+        /* Card Interactive Tab Bar */
+        .card-tabs-bar {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-top: 0.25rem;
+            padding-bottom: 0.25rem;
+            gap: 0.5rem;
+        }
+
+        .card-tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.65rem;
+            font-family: var(--font-body);
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.15rem 0.25rem;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .card-tab-btn.active {
+            color: #ffffff;
+        }
+
+        .card-tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent-green);
+        }
+        
+        .creative-card.winner .card-tab-btn.active::after { background: var(--accent); }
+        .creative-card.leak .card-tab-btn.active::after { background: var(--accent-red); }
+        .creative-card.slow .card-tab-btn.active::after { background: var(--accent-warning); }
+
+        /* Tabs Content Area */
+        .card-tab-panes {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 9.5rem; /* Uniform size */
+            justify-content: flex-start;
+        }
+
+        .card-pane {
+            display: none;
+            flex-direction: column;
+            gap: 0.6rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .card-pane.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .creative-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            background: rgba(255, 255, 255, 0.015);
+            padding: 0.6rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: var(--small-size);
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.03);
+            padding-bottom: 0.25rem;
+        }
+        
+        .stat-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .stat-lbl {
+            color: var(--text-secondary);
+        }
+
+        .stat-val {
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .creative-desc {
+            font-size: var(--small-size);
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Detail lists for copy/segmentation tabs */
+        .tab-detail-box {
+            font-size: var(--small-size);
+            line-height: 1.4;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .tab-detail-box span {
+            color: var(--text-secondary);
+        }
+
+        .tab-detail-box strong {
+            color: #ffffff;
+        }
+
+        /* Slide 8: Roadmap plan de accion */
+        .roadmap-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--card-gap);
+            width: 100%;
+        }
+
+        .roadmap-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.8rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+            position: relative;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .roadmap-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .roadmap-step {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(245, 166, 23, 0.1);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: var(--body-size);
+        }
+
+        .roadmap-card.primary-step {
+            border-color: rgba(255, 77, 77, 0.2);
+        }
+        .roadmap-card.primary-step .roadmap-step {
+            background: rgba(255, 77, 77, 0.1);
+            border-color: var(--accent-red);
+            color: var(--accent-red);
+        }
+
+        .roadmap-card.secondary-step {
+            border-color: rgba(0, 242, 254, 0.2);
+        }
+        .roadmap-card.secondary-step .roadmap-step {
+            background: rgba(0, 242, 254, 0.1);
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .roadmap-title {
+            font-size: var(--h3-size);
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.25;
+        }
+
+        .roadmap-body {
+            font-size: var(--small-size);
+            color: var(--text-secondary);
+            line-height: 1.45;
+        }
+
+        .roadmap-tag {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+        .roadmap-card.primary-step .roadmap-tag { color: var(--accent-red); }
+        .roadmap-card.secondary-step .roadmap-tag { color: var(--accent-green); }
+
+        /* ===========================================
+           SLIDES NAVIGATION & CONTROLS UI
+           =========================================== */
+        
+        /* Interactive Nav Bar */
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.8rem var(--slide-padding);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: linear-gradient(to bottom, var(--bg-primary) 20%, transparent);
+            pointer-events: none;
+        }
+
+        .brand-logo {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: var(--body-size);
+            letter-spacing: 0.08em;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            pointer-events: auto;
+        }
+
+        .brand-logo span {
+            color: var(--accent);
+        }
+
+        .slide-counter {
+            font-family: var(--font-mono);
+            font-size: var(--small-size);
+            color: var(--text-muted);
+            pointer-events: auto;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .slide-counter span {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        /* Bottom Controls Bar */
+        .controls-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem var(--slide-padding);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: linear-gradient(to top, var(--bg-primary) 20%, transparent);
+        }
+
+        /* Keyboard Hints */
+        .keyboard-hint {
+            font-size: var(--small-size);
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            pointer-events: none;
+        }
+
+        .key-badge {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+
+        /* Navigation Dots */
+        .nav-dots {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: all 0.3s var(--ease-out-expo);
+        }
+
+        .dot.active {
+            background: var(--accent);
+            transform: scale(1.4);
+            box-shadow: 0 0 12px rgba(245, 166, 23, 0.5);
+        }
+
+        /* Navigation buttons */
+        .arrow-nav {
+            display: flex;
+            gap: 0.6rem;
+        }
+
+        .nav-arrow {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-arrow:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Top Progress Line */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-green) 100%);
+            width: 0%;
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+
+        /* ===========================================
+           RESPONSIVE BREAKPOINTS (scale down components)
+           =========================================== */
+        
+        /* Height constraints */
+        @media (max-height: 780px) {
+            :root {
+                --slide-padding: clamp(0.75rem, 3vw, 2.5rem);
+                --content-gap: clamp(0.6rem, 1.5vw, 1.5rem);
+            }
+            .kpi-card { padding: 0.9rem; gap: 0.4rem; }
+            .kpi-value { font-size: 2.2rem; }
+            td, th { padding: 0.8rem 1.2rem; }
+            .campaign-side { padding: 1.4rem; gap: 1rem; }
+            .creative-card { padding: 0.9rem; gap: 0.5rem; }
+            .card-tab-panes { min-height: 8rem; }
+            .roadmap-card { padding: 1.2rem 1rem; gap: 0.6rem; }
+        }
+
+        @media (max-height: 650px) {
+            :root {
+                --slide-padding: 0.75rem;
+                --content-gap: 0.5rem;
+                --h2-size: 1.5rem;
+                --h3-size: 1.05rem;
+                --body-size: 0.8rem;
+                --small-size: 0.7rem;
+            }
+            .nav-bar, .controls-bar { padding: 0.5rem 1.5rem; }
+            .keyboard-hint { display: none; }
+            .kpi-value { font-size: 1.8rem; }
+            td, th { padding: 0.6rem 0.8rem; }
+            .campaign-meta { gap: 0.4rem; }
+            .creative-card { padding: 0.75rem; gap: 0.4rem; }
+            .card-tab-panes { min-height: 7.5rem; }
+            .creative-stats { padding: 0.4rem; }
+        }
+
+        @media (max-width: 950px) {
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .split-layout { grid-template-columns: 1fr; gap: 1rem; }
+            .creatives-grid { grid-template-columns: repeat(2, 1fr); }
+            .roadmap-container { grid-template-columns: repeat(2, 1fr); }
+            .glossary-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            .kpi-grid { grid-template-columns: 1fr; }
+            .creatives-grid { grid-template-columns: 1fr; }
+            .roadmap-container { grid-template-columns: 1fr; }
+            .nav-bar, .controls-bar { display: none; } /* Auto hide navigation on tiny screens */
+            .slide { padding: 1.5rem 1rem; }
+        }
+
+        /* Spotlight pointer element */
+        .spotlight {
+            position: fixed;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(245, 166, 35, 0.025) 0%, transparent 60%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        body:hover .spotlight {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient Grid & Glow Visuals -->
+    <div class="ambient-mesh">
+        <div class="ambient-glow-1"></div>
+        <div class="ambient-glow-2"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <!-- Spotlight element -->
+    <div class="spotlight" id="spotlight"></div>
+
+    <!-- Dynamic Top Progress Line -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Global Top Nav Bar -->
+    <div class="nav-bar">
+        <div class="brand-logo">DOS SOLES <span>MATRIX</span></div>
+        <div class="slide-counter"><span id="activeNum">01</span> / <span id="totalNum">08</span></div>
+    </div>
+
+    <!-- Slides Container -->
+    <main class="slides-container" id="slidesContainer">
+
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active">
+            <div class="slide-content">
+                <div class="title-slide-layout">
+                    <div class="connection-badge reveal">Conexión Meta Ads MCP Activa</div>
+                    <div class="reveal delay-1" style="display: flex; flex-direction: column; gap: 0.6rem;">
+                        <span class="slide-subtitle">Auditoría Estratégica de Performance</span>
+                        <h1>Estrategia & Optimización de Meta Ads</h1>
+                    </div>
+                    <p class="reveal delay-2" style="font-size: var(--body-size); color: var(--text-secondary); max-width: 620px; line-height: 1.55;">
+                        Análisis profundo de la cuenta publicitaria comercial <strong class="meta-id-tag">Dos Soles (Matrix)</strong> para optimizar el rendimiento y la escalabilidad del embudo de pauta B2B.
+                    </p>
+                    <div class="reveal delay-3" style="display: flex; flex-wrap: wrap; gap: 1.8rem; font-family: var(--font-mono); font-size: var(--mono-size); color: var(--text-muted);">
+                        <div>CUENTA PUBLICITARIA: <span class="meta-id-tag">act_23843398705180592</span></div>
+                        <div>CONSULTORÍA: <span>Antigravity AI Pair</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: KPI GENERALES (BENTO GRID) -->
+        <section class="slide">
+            <div class="slide-content">
+                <div class="slide-header reveal">
+                    <span class="slide-subtitle">Resumen General</span>
+                    <h2>El Semáforo de Rendimiento</h2>
+                </div>
+                
+                <div class="kpi-grid">
+                    <!-- KPI 1 -->
+                    <div class="kpi-card highlight-gold reveal delay-1">
+                        <span class="kpi-label">Inversión Histórica</span>
+                        <div>
+                            <span class="kpi-value">$497,527</span>
+                            <span class="badge warning">ARS</span>
+                        </div>
+                        <span class="kpi-context">Monto total facturado por Meta. Inicio de actividad comercial registrada en Febrero 2026.</span>
+                    </div>
+                    
+                    <!-- KPI 2 -->
+                    <div class="kpi-card highlight-teal reveal delay-2">
+                        <span class="kpi-label">Alcance Único</span>
+                        <div>
+                            <span class="kpi-value">25,966</span>
+                            <span class="badge">Personas</span>
+                        </div>
+                        <span class="kpi-context">Cabezas únicas alcanzadas por el anuncio. Mide la amplitud real de la red comercial.</span>
+                    </div>
+                    
+                    <!-- KPI 3 -->
+                    <div class="kpi-card highlight-teal reveal delay-3">
+                        <span class="kpi-label">Impresiones</span>
+                        <div>
+                            <span class="kpi-value">192,934</span>
+                            <span class="badge">Vistas</span>
+                        </div>
+                        <span class="kpi-context">Visualizaciones totales en pantalla. Representa la exposición volumétrica del anuncio.</span>
+                    </div>
+                    
+                    <!-- KPI 4 -->
+                    <div class="kpi-card highlight-gold reveal delay-4">
+                        <span class="kpi-label">Frecuencia Promedio</span>
+                        <div>
+                            <span class="kpi-value">2.10</span>
+                            <span class="badge warning">Repetición</span>
+                        </div>
+                        <span class="kpi-context">Impactos por persona única. Nivel de recordación comercial óptimo en B2B sin saturación.</span>
+                    </div>
+                    
+                    <!-- KPI 5 -->
+                    <div class="kpi-card highlight-teal reveal delay-5">
+                        <span class="kpi-label">CTR Promedio</span>
+                        <div>
+                            <span class="kpi-value">2.89%</span>
+                            <span class="badge">Doble Eficiencia</span>
+                        </div>
+                        <span class="kpi-context">Porcentaje de clics sobre impresiones. Duplica la media típica del mercado B2B (1.5%).</span>
+                    </div>
+                    
+                    <!-- KPI 6 -->
+                    <div class="kpi-card highlight-teal reveal delay-5" style="transition-delay: 0.65s;">
+                        <span class="kpi-label">CPC Promedio</span>
+                        <div>
+                            <span class="kpi-value">$89.13</span>
+                            <span class="badge">Costo</span>
+                        </div>
+                        <span class="kpi-context">Inversión promedio por clic. Valor comercial unitario para dirigir a un lead al embudo.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: GLOSARIO 1 -->
+        <section class="slide">
+            <div class="slide-content">
+                <div class="slide-header reveal">
+                    <span class="slide-subtitle">Entendiendo los Datos</span>
+                    <h2>Glosario de Métricas en Criollo (Parte 1)</h2>
+                </div>
+
+                <div class="glossary-grid">
+                    <!-- Spend -->
+                    <div class="glossary-card reveal delay-1">
+                        <div class="glossary-title">
+                            <strong>Inversión (Spend)</strong>
+                            <span class="glossary-scientific">Gasto Total</span>
+                        </div>
+                        <p class="glossary-definition">El costo total acumulado y cobrado por la plataforma publicitaria en el periodo.</p>
+                        <p class="glossary-criollo"><strong>En criollo:</strong> La plata de tu bolsillo. El combustible real que le cargaste al tanque para que los anuncios anden.</p>
+                    </div>
+
+                    <!-- Reach -->
+                    <div class="glossary-card reveal delay-2">
+                        <div class="glossary-title">
+                            <strong>Alcance (Reach)</strong>
+                            <span class="glossary-scientific">Usuarios Únicos</span>
+                        </div>
+                        <p class="glossary-definition">El número total de perfiles individuales de Facebook o Instagram que vieron tu anuncio al menos una vez.</p>
+                        <p class="glossary-criollo"><strong>En criollo:</strong> A cuántas "cabezas" les llegó el volante. Si un estilista ve tu anuncio 10 veces, cuenta como alcance 1.</p>
+                    </div>
+
+                    <!-- Impressions -->
+                    <div class="glossary-card reveal delay-3">
+                        <div class="glossary-title">
+                            <strong>Impresiones</strong>
+                            <span class="glossary-scientific">Vistas Totales</span>
+                        </div>
+                        <p class="glossary-definition">La cantidad de veces que el anuncio apareció en la pantalla de cualquier dispositivo móvil o computadora.</p>
+                        <p class="glossary-criollo"><strong>En criollo:</strong> Cuántas veces pasó el volante por los ojos de alguien. Si un cliente vio tu Reel 3 veces, son 3 impresiones.</p>
+                    </div>
+
+                    <!-- Frequency -->
+                    <div class="glossary-card reveal delay-4">
+                        <div class="glossary-title">
+                            <strong>Frecuencia</strong>
+                            <span class="glossary-scientific">Repetición</span>
+                        </div>
+                        <p class="glossary-definition">El promedio de veces que un mismo usuario único ha visualizado tu publicidad (Impresiones / Alcance).</p>
+                        <p class="glossary-criollo"><strong>En criollo:</strong> Qué tan pesado te estás volviendo. Un valor de 2 significa que te vieron 2 veces en promedio. Si sube a 5, ya los cansás.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: GLOSARIO 2 -->
+        <section class="slide">
+            <div class="slide-content">
+                <div class="slide-header reveal">
+                    <span class="slide-subtitle">Entendiendo los Datos</span>
+                    <h2>Glosario de Métricas en Criollo (Parte 2)</h2>
+                </div>
+
+                <div class="glossary-grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <!-- Clicks -->
+                    <div class="glossary-card reveal delay-1">
+                        <div class="glossary-title">
+                            <strong>Clics Totales</strong>
+                            <span class="glossary-scientific">Clicks</span>
+                        </div>
+                        <p class="glossary-definition">La cantidad de clics o toques que recibió el anuncio en cualquier enlace que redirija al destino deseado.</p>
+                        <p class="glossary-criollo"><strong>En criollo:</strong> Gente que no sólo miró la vidriera de reojo, sino que se frenó, tocó el timbre y entró al local a chusmear.</p>
+                    </div>
+
+                    <!-- CTR -->
+                    <div class="glossary-card reveal delay-2">
+                        <div class="glossary-title">
+                            <strong>CTR Promedio</strong>
+                            <span class="glossary-scientific">Gancho</span>
+                        </div>
+                        <p class="glossary-definition">Click-Through Rate. El porcentaje de clics respecto a las impresiones totales. Mide la tasa de engagement.</p>
+                        <p class="glossary-criollo"><strong>En criollo:</strong> Qué tan atractivo y magnético es tu anuncio. Si de 100 personas que lo ven 3 hacen clic, tenés un CTR del 3%.</p>
+                    </div>
+
+                    <!-- CPC -->
+                    <div class="glossary-card reveal delay-3">
+                        <div class="glossary-title">
+                            <strong>CPC Promedio</strong>
+                            <span class="glossary-scientific">Costo Redirigido</span>
+                        </div>
+                        <p class="glossary-definition">Cost Per Click. El valor unitario promedio cobrado por Meta por cada clic que redirige al usuario.</p>
+                        <p class="glossary-criollo"><strong>En criollo:</strong> Cuánta plata de tu bolsillo cuesta que una persona interesada toque tu anuncio y entre a tu WhatsApp o web.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: EVOLUCIÓN MENSUAL -->
+        <section class="slide">
+            <div class="slide-content">
+                <div class="slide-header reveal">
+                    <span class="slide-subtitle">Historial de Pauta</span>
+                    <h2>Evolución Mensual del Rendimiento</h2>
+                </div>
+
+                <div class="table-container reveal delay-1">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Periodo Mensual</th>
+                                <th>Inversión (ARS)</th>
+                                <th>Impresiones</th>
+                                <th>Clics de Interés</th>
+                                <th>CTR Promedio</th>
+                                <th>CPC Promedio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="highlight-cell">Febrero 2026</td>
+                                <td>$12,155.93</td>
+                                <td>4,161</td>
+                                <td>145</td>
+                                <td class="highlight-cell" style="color: var(--accent-green);">3.48%</td>
+                                <td>$83.83</td>
+                            </tr>
+                            <tr>
+                                <td class="highlight-cell">Marzo 2026</td>
+                                <td>$172,988.48</td>
+                                <td>77,441</td>
+                                <td>2,104</td>
+                                <td>2.72%</td>
+                                <td class="highlight-cell" style="color: var(--accent-green);">$82.22</td>
+                            </tr>
+                            <tr>
+                                <td class="highlight-cell">Abril 2026</td>
+                                <td>$169,313.82</td>
+                                <td>62,076</td>
+                                <td>1,633</td>
+                                <td>2.63%</td>
+                                <td>$103.68</td>
+                            </tr>
+                            <tr>
+                                <td class="highlight-cell">Mayo 2026 (Al 22)</td>
+                                <td>$143,067.38</td>
+                                <td>49,256</td>
+                                <td>1,700</td>
+                                <td class="highlight-cell" style="color: var(--accent-green);">3.45%</td>
+                                <td>$84.16</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: HALLAZGO CRÍTICO 1 (SPLIT COMPARISON) -->
+        <section class="slide">
+            <div class="slide-content">
+                <div class="slide-header reveal">
+                    <span class="slide-subtitle">Diagnóstico Estratégico</span>
+                    <h2>El Costo de Oportunidad de Campañas Pausadas</h2>
+                </div>
+
+                <div class="split-layout reveal-scale delay-1">
+                    <!-- WhatsApp Active -->
+                    <div class="campaign-side active-cam">
+                        <div class="side-title">
+                            <h3 style="font-size: var(--body-size); font-weight: 700; color: #ffffff;">Conversion a WhatsApp - B2B</h3>
+                            <span class="status-pill active">Activa 🟢</span>
+                        </div>
+                        <div class="campaign-meta">
+                            <div class="meta-row">
+                                <span class="meta-label">ID de Campaña</span>
+                                <span class="meta-value" style="font-family: var(--font-mono); font-size: 0.75rem;">120240934489910593</span>
+                            </div>
+                            <div class="meta-row">
+                                <span class="meta-label">Inversión Histórica</span>
+                                <span class="meta-value">$335,142.61</span>
+                            </div>
+                            <div class="meta-row">
+                                <span class="meta-label">CTR / CPC Promedio</span>
+                                <span class="meta-value" style="color: var(--accent-red);">2.47% / $92.76</span>
+                            </div>
+                        </div>
+                        <div class="side-verdict">
+                            <strong>Impuesto por WhatsApp:</strong> Concentra el 100% de la pauta. Es útil para capturar leads B2B fríos, pero estamos pagando el costo por clic más alto del embudo completo, restando margen.
+                        </div>
+                    </div>
+
+                    <!-- Paused Webs -->
+                    <div class="campaign-side paused-cam">
+                        <div class="side-title">
+                            <h3 style="font-size: var(--body-size); font-weight: 700; color: #ffffff;">Conversion / Compra Web</h3>
+                            <span class="status-pill paused">Pausadas 🔴</span>
+                        </div>
+                        <div class="campaign-meta">
+                            <div class="meta-row">
+                                <span class="meta-label">IDs de Campaña (Web)</span>
+                                <span class="meta-value" style="font-family: var(--font-mono); font-size: 0.75rem;">120242751389540593 / ...0593</span>
+                            </div>
+                            <div class="meta-row">
+                                <span class="meta-label">Inversión Histórica</span>
+                                <span class="meta-value">$162,383.00</span>
+                            </div>
+                            <div class="meta-row">
+                                <span class="meta-label">CTR / CPC Promedio</span>
+                                <span class="meta-value" style="color: var(--accent-green);">4.75% / $78.39</span>
+                            </div>
+                        </div>
+                        <div class="side-verdict">
+                            <strong>Mina de Oro Apagada:</strong> Las campañas web tenían un CTR casi 2x más alto (4.75%) y clics mucho más baratos ($78.39). Pausarlas cortó el embudo automatizado más rentable de la distribuidora.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: AUDITORÍA DE ANUNCIOS (DYNAMIC TABS & TRACEABILITY) -->
+        <section class="slide">
+            <div class="slide-content">
+                <div class="slide-header reveal">
+                    <span class="slide-subtitle">Análisis de Creativos</span>
+                    <h2>Radiografía de Anuncios Activos (Reels B2B)</h2>
+                </div>
+
+                <div class="creatives-grid">
+                    <!-- Creative 1: Winner -->
+                    <div class="creative-card winner reveal delay-1" id="card-0">
+                        <span class="creative-badge">El Sostén 🏆</span>
+                        <div class="creative-info">
+                            <h3 class="creative-card-title">Reel - Herramientas que podés encontrar</h3>
+                            <span class="creative-card-id">ID: 120240973680070593</span>
+                        </div>
+
+                        <!-- Card internal navigation tabs -->
+                        <div class="card-tabs-bar">
+                            <button class="card-tab-btn active" onclick="setCardTab(0, 'ficha')">Ficha</button>
+                            <button class="card-tab-btn" onclick="setCardTab(0, 'copy')">Copy</button>
+                            <button class="card-tab-btn" onclick="setCardTab(0, 'segmento')">Segmentación</button>
+                        </div>
+
+                        <div class="card-tab-panes">
+                            <!-- Pane 1: Ficha -->
+                            <div class="card-pane active" data-pane="ficha">
+                                <div class="creative-stats">
+                                    <div class="stat-row"><span class="stat-lbl">Inversión:</span><span class="stat-val">$171,255.54</span></div>
+                                    <div class="stat-row"><span class="stat-lbl">CPC:</span><span class="stat-val" style="color: var(--accent);">$79.84</span></div>
+                                    <div class="stat-row"><span class="stat-lbl">CTR:</span><span class="stat-val">2.53%</span></div>
+                                    <div class="stat-row"><span class="stat-lbl">Clics:</span><span class="stat-val">2,145 clics</span></div>
+                                </div>
+                                <p class="creative-desc">Video rápido de unboxing de secadores y tijeras Matrix sobre fondo negro mate.</p>
+                            </div>
+                            <!-- Pane 2: Copy -->
+                            <div class="card-pane" data-pane="copy">
+                                <div class="tab-detail-box">
+                                    <span><strong>Gancho:</strong> "¿Estás cansado de herramientas que duran 3 meses?"</span>
+                                    <span><strong>Body:</strong> "Equipá tu salón hoy con las herramientas de alto rendimiento de Matrix. En Dos Soles te damos garantía oficial directa."</span>
+                                </div>
+                            </div>
+                            <!-- Pane 3: Segmento -->
+                            <div class="card-pane" data-pane="segmento">
+                                <div class="tab-detail-box">
+                                    <span><strong>Geografía:</strong> Buenos Aires, Córdoba y Santa Fe.</span>
+                                    <span><strong>Intereses:</strong> Peluqueros, Estilistas, Salones de Belleza.</span>
+                                    <span><strong>Edades:</strong> 25-50 años.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Creative 2: Gold Mine -->
+                    <div class="creative-card gold reveal delay-2" id="card-1">
+                        <span class="creative-badge">Mina de Oro 🚀</span>
+                        <div class="creative-info">
+                            <h3 class="creative-card-title">Reel - si tenés un salón</h3>
+                            <span class="creative-card-id">ID: 120240934489890593</span>
+                        </div>
+
+                        <!-- Card internal navigation tabs -->
+                        <div class="card-tabs-bar">
+                            <button class="card-tab-btn active" onclick="setCardTab(1, 'ficha')">Ficha</button>
+                            <button class="card-tab-btn" onclick="setCardTab(1, 'copy')">Copy</button>
+                            <button class="card-tab-btn" onclick="setCardTab(1, 'segmento')">Segmentación</button>
+                        </div>
+
+                        <div class="card-tab-panes">
+                            <!-- Pane 1: Ficha -->
+                            <div class="card-pane active" data-pane="ficha">
+                                <div class="creative-stats">
+                                    <div class="stat-row"><span class="stat-lbl">Inversión:</span><span class="stat-val">$22,462.65</span></div>
+                                    <div class="stat-row"><span class="stat-lbl">CPC:</span><span class="stat-val" style="color: var(--accent-green);">$92.44</span></div>
+                                    <div class="stat-row"><span class="stat-lbl">CTR:</span><span class="stat-val" style="color: var(--accent-green);">3.51%</span></div>
+                                    <div class="stat-row"><span class="stat-lbl">Clics:</span><span class="stat-val">243 clics</span></div>
+                                </div>
+                                <p class="creative-desc">Vídeo explicativo de coloración Matrix. Banner superpuesto: "Aumentá ticket +40%".</p>
+                            </div>
+                            <!-- Pane 2: Copy -->
+                            <div class="card-pane" data-pane="copy">
+                                <div class="tab-detail-box">
+                                    <span><strong>Gancho:</strong> "Si tenés un salón y comprás minorista, perdés plata."</span>
+                                    <span><strong>Body:</strong> "Hacé clic en el botón de WhatsApp de abajo para registrar tu salón y acceder a nuestra lista de precios distribuidor directa."</span>
+                                </div>
+                            </div>
+                            <!-- Pane 3: Segmento -->
+                            <div class="card-pane" data-pane="segmento">
+                                <div class="tab-detail-box">
+                                    <span><strong>Geografía:</strong> Nacional (Argentina abierta).</span>
+                                    <span><strong>Intereses:</strong> Acotado por "Dueños de Negocios" + "Coloración de cabello".</span>
+                                    <span><strong>Edades:</strong> 25-45 años.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Creative 3: Leak -->
+                    <div class="creative-card leak reveal delay-3" id="card-2">
+                        <span class="creative-badge">Fuga ❌</span>
+                        <div class="creative-info">
+                            <h3 class="creative-card-title">Reel - somos distrib de matrix</h3>
+                            <span class="creative-card-id">ID: 120240973659820593</span>
+                        </div>
+
+                        <!-- Card internal navigation tabs -->
+                        <div class="card-tabs-bar">
+                            <button class="card-tab-btn active" onclick="setCardTab(2, 'ficha')">Ficha</button>
+                            <button class="card-tab-btn" onclick="setCardTab(2, 'copy')">Copy</button>
+                            <button class="card-tab-btn" onclick="setCardTab(2, 'segmento')">Segmentación</button>
+                        </div>
+
+                        <div class="card-tab-panes">
+                            <!-- Pane 1: Ficha -->
+                            <div class="card-pane active" data-pane="ficha">
+                                <div class="creative-stats">
+                                    <div class="stat-row"><span class="stat-lbl">Inversión:</span><span class="stat-val">$1,965.15</span></div>
+                                    <div class="stat-row"><span class="stat-lbl">CPC:</span><span class="stat-val" style="color: var(--accent-red);">$218.35</span></div>
+                                    <div class="stat-row"><span class="stat-lbl">CTR:</span><span class="stat-val" style="color: var(--accent-red);">1.28%</span></div>
+                                    <div class="stat-row"><span class="stat-lbl">Clics:</span><span class="stat-val">9 clics</span></div>
+                                </div>
+                                <p class="creative-desc">Imagen estática aburrida, logo de marca plano. Cero gancho visual o dinamismo.</p>
+                            </div>
+                            <!-- Pane 2: Copy -->
+                            <div class="card-pane" data-pane="copy">
+                                <div class="tab-detail-box">
+                                    <span><strong>Gancho:</strong> "Somos Dos Soles, tu distribuidor."</span>
+                                    <span><strong>Body:</strong> "Tenemos stock permanente de toda la línea Matrix oficial. Consultanos la lista por mensaje."</span>
+                                </div>
+                            </div>
+                            <!-- Pane 3: Segmento -->
+                            <div class="card-pane" data-pane="segmento">
+                                <div class="tab-detail-box">
+                                    <span><strong>Geografía:</strong> Buenos Aires abierto.</span>
+                                    <span><strong>Intereses:</strong> Sin segmentar. Público frío general.</span>
+                                    <span><strong>Edades:</strong> 18-65+ años.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Creative 4: Slow -->
+                    <div class="creative-card slow reveal delay-4" id="card-3">
+                        <span class="creative-badge">Lento ⚠️</span>
+                        <div class="creative-info">
+                            <h3 class="creative-card-title">Reel - Si sos estilista o tenes..</h3>
+                            <span class="creative-card-id">ID: 120243024605250593</span>
+                        </div>
+
+                        <!-- Card internal navigation tabs -->
+                        <div class="card-tabs-bar">
+                            <button class="card-tab-btn active" onclick="setCardTab(3, 'ficha')">Ficha</button>
+                            <button class="card-tab-btn" onclick="setCardTab(3, 'copy')">Copy</button>
+                            <button class="card-tab-btn" onclick="setCardTab(3, 'segmento')">Segmentación</button>
+                        </div>
+
+                        <div class="card-tab-panes">
+                            <!-- Pane 1: Ficha -->
+                            <div class="card-pane active" data-pane="ficha">
+                                <div class="creative-stats">
+                                    <div class="stat-row"><span class="stat-lbl">Inversión:</span><span class="stat-val">$1,932.00</span></div>
+                                    <div class="stat-row"><span class="stat-lbl">CPC:</span><span class="stat-val" style="color: var(--accent-warning);">$161.00</span></div>
+                                    <div class="stat-row"><span class="stat-lbl">CTR:</span><span class="stat-val">1.65%</span></div>
+                                    <div class="stat-row"><span class="stat-lbl">Clics:</span><span class="stat-val">12 clics</span></div>
+                                </div>
+                                <p class="creative-desc">Paneo continuo y lento de 45 seg sobre góndolas con stock de cajas. Sin voz ni música.</p>
+                            </div>
+                            <!-- Pane 2: Copy -->
+                            <div class="card-pane" data-pane="copy">
+                                <div class="tab-detail-box">
+                                    <span><strong>Gancho:</strong> "Si sos estilista o tenés un salón..."</span>
+                                    <span><strong>Body:</strong> "...mirá la gran cantidad de mercadería oficial en stock que tenemos en nuestro depósito listos para enviar a tu peluquería hoy."</span>
+                                </div>
+                            </div>
+                            <!-- Pane 3: Segmento -->
+                            <div class="card-pane" data-pane="segmento">
+                                <div class="tab-detail-box">
+                                    <span><strong>Geografía:</strong> Buenos Aires y Santa Fe.</span>
+                                    <span><strong>Intereses:</strong> Profesionales de estética y salones.</span>
+                                    <span><strong>Edades:</strong> 22-55 años.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+                                <!-- SLIDE 8: HISTORIAL DE TRAZABILIDAD -->
+        <section class="slide">
+            <div class="slide-content" style="display: flex; flex-direction: column; height: 100%;">
+                <div class="slide-header reveal" style="flex-shrink: 0; margin-bottom: 20px;">
+                    <span class="slide-subtitle">Base de Datos de Creativos</span>
+                    <h2>Registro de Trazabilidad (Feb 2026+)</h2>
+                </div>
+
+                <div class="traceability-dashboard reveal delay-1" style="display: flex; gap: 20px; flex: 1; min-height: 0; position: relative;">
+                    <!-- Panel Izquierdo: Lista de Anuncios -->
+                    <div class="trace-list-panel" style="flex: 1; display: flex; flex-direction: column; background: rgba(255,255,255,0.02); border: 1px solid var(--border-light); border-radius: 12px; overflow: hidden;">
+                        
+                        <!-- Top Bar / Filtros -->
+                        <div style="padding: 15px; border-bottom: 1px solid var(--border-light); display: flex; gap: 10px; background: rgba(0,0,0,0.2);">
+                            <input type="text" id="trace-search" placeholder="Buscar anuncio o campaña..." style="flex: 1; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-light); background: rgba(255,255,255,0.05); color: #fff; font-family: inherit; font-size: 0.85rem;" onkeyup="filterTraceability()">
+                            <select id="trace-filter-status" style="padding: 8px; border-radius: 6px; border: 1px solid var(--border-light); background: rgba(255,255,255,0.05); color: #fff; font-family: inherit; font-size: 0.85rem;" onchange="filterTraceability()">
+                                <option value="all" style="color: #000;">Todos los Estados</option>
+                                <option value="ACTIVE" style="color: #000;">🟢 Activos</option>
+                                <option value="PAUSED" style="color: #000;">🔴 Pausados</option>
+                            </select>
+                        </div>
+
+                        <!-- Lista scrolleable -->
+                        <div class="trace-list-scroll" id="trace-list-container" style="flex: 1; overflow-y: auto; padding: 10px;">
+                            <!-- Fila 0 -->
+                            <div class="trace-item" data-name="reel - general hot" data-camp="conversion - evento compra a pagina web" data-status="PAUSED" onclick="showAdPreview('120244971916580593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - General HOT</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion - evento compra a pagina web</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                                    <span style="font-size: 0.7rem; font-weight: 600; color: var(--accent-red); border: 1px solid var(--accent-red); padding: 2px 6px; border-radius: 4px;">🔴 PAUSED</span>
+                                    <span style="font-size: 0.65rem; color: var(--text-muted);">13/05/2026</span>
+                                </div>
+                                <!-- Store hidden payload -->
+                                <div id="payload-120244971916580593" style="display: none;" 
+                                    data-thumb="" 
+                                    data-title="Sin Título" 
+                                    data-body="Sin copy de texto."
+                                    data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQLeZFIkAMNubcDh-R5fLUESXdzZqU6-f51IeOskcLmcCuOv6MEDlcwuNo4U5mI-Smm5MttM0NbZ-2jBaLdwXGWETLP94IjtsPBRofU7Tl9YgXKpTo1NIG1hkTyShKMCq22WASakqDR1PwfvTfwfYTgua5eUG-GLaiRLLtaHbVb28K0zppmWt2h64MGOtwWa9hXhC1ixoi8P5uz6RxK2Y5NKZff-9AG0eJdqDlh_Fbur4KVkWT-wE7Rcv0BUjSf508nns62eYgOIvOjwRK2ao-666uwGWgj0osujYX2QwOSicgcR4guPOqRrg8p7t-4mZxI7BFK5XTxHw0uvQ_gQL1DvmoIli-YaYjc26kqajbiY5wDmSnKCwjMbEh23sICvgZCWKagMD9PIpKJSy8__fLRb3H6JEidFoYJRMctCbjg3tm5hllx9g_oZlSZNTwhPzI0&t=AQKDLx_fHAoonpiYZWc"></div>
+                            </div>
+                            <!-- Fila 1 -->
+                            <div class="trace-item" data-name="ugc - joana don - hs" data-camp="conversion - evento compra a pagina web" data-status="PAUSED" onclick="showAdPreview('120244790839150593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">UGC - Joana Don - HS</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion - evento compra a pagina web</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                                    <span style="font-size: 0.7rem; font-weight: 600; color: var(--accent-red); border: 1px solid var(--accent-red); padding: 2px 6px; border-radius: 4px;">🔴 PAUSED</span>
+                                    <span style="font-size: 0.65rem; color: var(--text-muted);">11/05/2026</span>
+                                </div>
+                                <!-- Store hidden payload -->
+                                <div id="payload-120244790839150593" style="display: none;" 
+                                    data-thumb="" 
+                                    data-title="Sin Título" 
+                                    data-body="Sin copy de texto."
+                                    data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQK-c4xCf20Blx0ofAkr9I9p5lOg8V-yoQuzv07PrUzRsNhmKKG2VO8wNX9p0GXvEFB7zdbTzUzA_xQ8L44FLu3iQ_zfAXXqRwBeiiCQWg8-_rN7B1teknMRmVvrXkROvkYoNoD6Q5ba-pbuHOr05ojO8YDUiXZ7ZC7i-il4ly7jxqKXFuJrHQMSISoYMAWktn6AFzXThernpShXw_WBFv2CmqPiSnMK-t61mhoNh7oOfk4oMekHyAqmoOiLKBwfnPqvOWi1VjJrIo9u4-cFiL2cjYP66EtQ1JpjV60QpGOqN2Ke1GqU5xcdI4khNfLHYBeMNo-PbhLhJMj0Kfmya3ywaaVZmkRPkBAQFqYGJj-tnl8Um3Hi2Hv36yZET3q4TDHfdrut2bV_5WAIXa6b3d93TvJGjAFJmfwXhe2L8ZiFY7-FDzMAxK4BheDxxvOU8_Y&t=AQLykOLNV5Ueg9Qd-dc"></div>
+                            </div>
+                            <!-- Fila 2 -->
+                            <div class="trace-item" data-name="jaz ugc 2" data-camp="conversion - evento compra a pagina web" data-status="PAUSED" onclick="showAdPreview('120244790485120593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Jaz UGC 2</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion - evento compra a pagina web</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                                    <span style="font-size: 0.7rem; font-weight: 600; color: var(--accent-red); border: 1px solid var(--accent-red); padding: 2px 6px; border-radius: 4px;">🔴 PAUSED</span>
+                                    <span style="font-size: 0.65rem; color: var(--text-muted);">11/05/2026</span>
+                                </div>
+                                <!-- Store hidden payload -->
+                                <div id="payload-120244790485120593" style="display: none;" 
+                                    data-thumb="" 
+                                    data-title="Sin Título" 
+                                    data-body="Sin copy de texto."
+                                    data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQKHB8bQy83DyCTQntKMG-zybidkmIdnbfjFrFyEAAuJd8Sx3BYDS4MKNXB-i5JaA-Lecy3Oy5HfX0Exaqjh16SpS5qcKJ3fXlTBeYNU8yNaMoCCKf8Ztumuae1MXe1MsTDqAc2Lc5jlR0XtfOLADz4GN07rgI6ZAyM0DTmvJAhXWJSci7q_J8cJo8jQz8k1jUlqO-9CsQZALhNNdUHJy-XBgTCxXW0HDZtjERg416f6gjt6e0l6yLajQL6AnwuT075ZiOTBL6EGB-iSLZgAcICiqssg5zZCcRqrcQIKm2EY8xBnLh55IBj8RpKCk0fhrWjoc00539MnBvAzm0XQcQ_K_An5xhjXExEqiKA-_9xiD4C2tPfopdiOJUf1H_sncRdHHHtLSDt7bTTdxB3Cs-IqLKhldeii0FTDjzDX7qT-aUe3IItcsyVlvsfK0wO8W-Y&t=AQKNgXb7mKQcnSymqyg"></div>
+                            </div>
+                            <!-- Fila 3 -->
+                            <div class="trace-item" data-name="jaz ugc 1" data-camp="conversion - evento compra a pagina web" data-status="PAUSED" onclick="showAdPreview('120244789448460593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Jaz UGC 1</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion - evento compra a pagina web</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                                    <span style="font-size: 0.7rem; font-weight: 600; color: var(--accent-red); border: 1px solid var(--accent-red); padding: 2px 6px; border-radius: 4px;">🔴 PAUSED</span>
+                                    <span style="font-size: 0.65rem; color: var(--text-muted);">11/05/2026</span>
+                                </div>
+                                <!-- Store hidden payload -->
+                                <div id="payload-120244789448460593" style="display: none;" 
+                                    data-thumb="" 
+                                    data-title="Sin Título" 
+                                    data-body="Sin copy de texto."
+                                    data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQIZeO3nM0BO6mYTN4939NUWUoJ1Tiqm6pACPwNEclCma3d2--EM6gtHNjzxMVmsD-f7ElOvfXGKLVgoPAP93F1AvRaZmXDCiQgHq_dp6NmUabAPNvvbnYev_-TZUpyZDX21ICMzOPCwJlqTIrkGdfcPx64rnKDUCL3B5ZAK8w_HdvRmcjUt1PBIh8M5Sl6yGO_1v5OSIl5y4pIPNI1p7gOYzyd6VVPCLjcMijkaz4FycI0zDEesvv4hB_mZ8R9J8JG6iUyUcXWpezQku1w_FnnKh2HtP5qdQbBxvh1bYpPscmb4cM59sqAX07ixGWSFEGAarffmBB-UebWmzo7-5Jg-Ksh4BAn2ksu1h6mdOHq3oLxPze_WKLu7buSDH8l-6my4D_bFCDHxsyWIhEhSdjw3Lh1pTBJKMcytZPG_G9scGRrTBpRm9vJAq5nSyokS57o&t=AQKJQqfAPpoOVLppweE"></div>
+                            </div>
+                            <!-- Fila 4 -->
+                            <div class="trace-item" data-name="dos soles sale flyer" data-camp="conversion - evento compra a pagina web" data-status="PAUSED" onclick="showAdPreview('120244538628700593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Dos Soles Sale Flyer</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion - evento compra a pagina web</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                                    <span style="font-size: 0.7rem; font-weight: 600; color: var(--accent-red); border: 1px solid var(--accent-red); padding: 2px 6px; border-radius: 4px;">🔴 PAUSED</span>
+                                    <span style="font-size: 0.65rem; color: var(--text-muted);">08/05/2026</span>
+                                </div>
+                                <!-- Store hidden payload -->
+                                <div id="payload-120244538628700593" style="display: none;" 
+                                    data-thumb="" 
+                                    data-title="Sin Título" 
+                                    data-body="Sin copy de texto."
+                                    data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQI1ncPAoa3n6IsUV3qBojDZXU22frCCULqqSxu0Z52iuPG1mtlWV5eXyz7NeDPqJ-Y8nexe3cuAxy510SGpb3H1UBRatDYT5NIVdR-yuWjJjOZA14vxeQoRrkdqG3zx9BHYQDoDFzfKmW7ylDRalx4nxi1stESsu10MpUWOWX-8jc-946NMv-SAfJ2E8x4fEJSBZcvfOWi2qqjTpqP0UW0Vi8MfI-PFnusQ_ChZFvbFapsMA9BfJbWlTw75vRToj6252IC0HpMxWZ1m8lIrU4OTxX5n9_kElDFAqJhNDo2ih-qEUWiTj9IE3OrIS2x025axXrUdu7lu4UWr0WpC1Rv-XmU7SnaVgrbJ-ykhzkbOcs5kW3WXA3GBZXObLv-12FFPyxLG53nP6wRAPLU0pkUR5DWnfxeJzG_-ZUbKWBep6QsL_6w3TJsrofQzxaPax7M&t=AQIBs96-Lc8KYc3OjTY"></div>
+                            </div>
+                            <!-- Fila 5 -->
+                            <div class="trace-item" data-name="reel - para cada necesidad" data-camp="conversion - evento compra a pagina web" data-status="ACTIVE" onclick="showAdPreview('120243585452130593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - para cada necesidad</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion - evento compra a pagina web</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                                    <span style="font-size: 0.7rem; font-weight: 600; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 2px 6px; border-radius: 4px;">🟢 ACTIVE</span>
+                                    <span style="font-size: 0.65rem; color: var(--text-muted);">23/04/2026</span>
+                                </div>
+                                <!-- Store hidden payload -->
+                                <div id="payload-120243585452130593" style="display: none;" 
+                                    data-thumb="" 
+                                    data-title="Sin Título" 
+                                    data-body="Sin copy de texto."
+                                    data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQLeA-clK2Id82fMKNwqZvvyPpejztoDTnQpnmHYsMVeIzcCo2h_NZ8skY-8MSx5QCtCq5zVzndsiHRDh8_dZ22gIMqIpIytiWWn8uWynbm2MEuPqEBWJ7Iz9DFPotXVyTMoD9fIvw_sSkmxbP2Xcz3Mjm-HVavZA_6EU77KEzaHxXzXaZMYKbCOxkI_edJwhkgDf7GCLVngNNpCh0qJ1RtebHeTi1ZxbHY1ECC2FyKjY-k03-H3N7NEdfByIdG53M0d4_c8xZI_MPt-rXNN9uX3ciJJGdCG2qrIqcyWGrxLYwZxekwcDCeELuZokiPXMfGVIurZrx4ITr-_AMj1R7NYKBnmSsfJO4v04bp8Qan9w2kfGCU9eOeL8cQ4FzeCDvqHEt-bSfmupP3LQ6vd0e-_Uf4nlP_vMTdvIrbCpfx0inKsVvt_0PF5V-ggCmd2eyA&t=AQKaPeo4-BpAjsjFmAk"></div>
+                            </div>
+                            <!-- Fila 6 -->
+                            <div class="trace-item" data-name="reel - tenes alguno de estos sintomas??" data-camp="conversion - evento compra a pagina web" data-status="ACTIVE" onclick="showAdPreview('120243585452140593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - Tenes alguno de estos sintomas??</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion - evento compra a pagina web</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                                    <span style="font-size: 0.7rem; font-weight: 600; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 2px 6px; border-radius: 4px;">🟢 ACTIVE</span>
+                                    <span style="font-size: 0.65rem; color: var(--text-muted);">23/04/2026</span>
+                                </div>
+                                <!-- Store hidden payload -->
+                                <div id="payload-120243585452140593" style="display: none;" 
+                                    data-thumb="" 
+                                    data-title="Sin Título" 
+                                    data-body="Sin copy de texto."
+                                    data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQJ-2mXpsx99oCuEZ3KSyjMyNJJDlODK3_s0tQuXy_Xcm88ZcE5n889aoZehQF1lcLEHh--svBqR6_vCBcySDfC0hX_0b91s8N6InwkUuDYv-LDSZo6Hb65ddrUo_UDlnQ4x7moO2DMEsg3dOv0yp0IE_4l1ME13MYP9t6w4IrE4lNBFUvYms4CNEYQ44C5Kbjb7qJsrb1mBQWRpgCiNitefYEn5BSlosQEi2fumeEadd4VHKLah-1u1d4VEzA64SWxfgUIsdrk8c9-tOqEqiEKjRrYaqM4vRskOUrbB1mEPg9n2xQ1HezJ4j1t3xe8nWiqx-9JEWujLHdmwrk4cemvkvj0XWmy8LbXU-BGaggzfNOO9Z7QpR26VjUvtu1t212dxCwWuLP-oRhBCTRU76YuAytmhUgPteaijhODbiR2g98YGRgLDPCRd6XcY-qwuvYk&t=AQKygkhhRqAnJW4Mggc"></div>
+                            </div>
+                            <!-- Fila 7 -->
+                            <div class="trace-item" data-name="reel - cuida tu rubio" data-camp="conversion - evento compra a pagina web" data-status="ACTIVE" onclick="showAdPreview('120243585452120593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - Cuida tu rubio</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion - evento compra a pagina web</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                                    <span style="font-size: 0.7rem; font-weight: 600; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 2px 6px; border-radius: 4px;">🟢 ACTIVE</span>
+                                    <span style="font-size: 0.65rem; color: var(--text-muted);">23/04/2026</span>
+                                </div>
+                                <!-- Store hidden payload -->
+                                <div id="payload-120243585452120593" style="display: none;" 
+                                    data-thumb="" 
+                                    data-title="Sin Título" 
+                                    data-body="Sin copy de texto."
+                                    data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQKpqbjZmzFptIrcdS0kdRK4LRuJi5jwxn2_PIf6J4bZXXIW01ygfSK4aIMGeTNzVPaaRaZDIK365YBB36C_2i76Zjc4BWXi9WJ_ujpSmgv7s6sSRgdSYd8XRjmu8DBwMtS6C55Mo6_MKEN5fJLpjzthCoOt4bYY_d1Pgye2tYXKLn_vzj2OdX-v4I-O9Vz8GsIk8Mdjr6qlCostYUFEbAu4WdMVxEQOC3kF5VSiBGmKob7q5rC2XYvlToTI8ET0-gSDEq4bTtdO6q5C_djQjocLbN4_SY8PCRAtYSfLkmUF9QiKj3KLu3QUOp6aQoEi1Kk2qA47-3OW-BN6nUQ5y2tWphWtPsqiP0vHw5_ohADxWf-zIT_F7c5PkHi8AO-BQc3UQDrM-6e4bpl3gVVUDmqqRN8wwMqWTogJvv5rv86nDvmLtDkUeZk9yRXglJUNyfA&t=AQKotlXc4_PxgFAVlMQ"></div>
+                            </div>
+                            <!-- Fila 8 -->
+                            <div class="trace-item" data-name="reel - tenes rulos ??" data-camp="conversion - evento compra a pagina web" data-status="ACTIVE" onclick="showAdPreview('120243585452150593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - Tenes rulos ??</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion - evento compra a pagina web</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                                    <span style="font-size: 0.7rem; font-weight: 600; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 2px 6px; border-radius: 4px;">🟢 ACTIVE</span>
+                                    <span style="font-size: 0.65rem; color: var(--text-muted);">23/04/2026</span>
+                                </div>
+                                <!-- Store hidden payload -->
+                                <div id="payload-120243585452150593" style="display: none;" 
+                                    data-thumb="" 
+                                    data-title="Sin Título" 
+                                    data-body="Sin copy de texto."
+                                    data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQLcNFEnyr6MP1cB9E87sL2zB0LniROLAT8pUL_ZWh6LGc9Ti_KA0LWT5g_MUr3cVM2Ru_cJBpLA3g1JneHiz4fUDMc-NbmToaVPOvKloaV1lnM5hCTh3KUhDCXSQTFRqYr7d3l86RalOiuQhPnvs5md3RcMEr6CJ7LpczWGHDlsA8_lyukKYETKpM2Acf1LzF38Ve7rEJasiwmkLKWDj_6VSJpMYDPf4b1dLbr8f0tToOM9HVlVCDjvJBsWjqD_Dr12PoIFiPDWzCty0aOHU4Q58_6xLhEXHA_Elv-qh0_m2_xPHSqYOcjvekvrXJUA_hG3AYCVKTLnxBOMBrK6wNrtE4CbTR493iH7ebTZCd38WN1x5Qwku641O3OtPqZGtOrcW3QbiR5WpYmwm77aIeuGPVnOuMwOTf3H1B6eXwMx-B-StlinBcJftcAhi-wHquI&t=AQJPQ-pZ2sN_CpMD-P8"></div>
+                            </div>
+                            <!-- Fila 9 -->
+                            <div class="trace-item" data-name="reel - si sos estilista o tenes.." data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" onclick="showAdPreview('120243024605250593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - Si sos estilista o tenes..</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a WhatsApp - trafico frio B2B</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                                    <span style="font-size: 0.7rem; font-weight: 600; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 2px 6px; border-radius: 4px;">🟢 ACTIVE</span>
+                                    <span style="font-size: 0.65rem; color: var(--text-muted);">12/04/2026</span>
+                                </div>
+                                <!-- Store hidden payload -->
+                                <div id="payload-120243024605250593" style="display: none;" 
+                                    data-thumb="" 
+                                    data-title="Sin Título" 
+                                    data-body="Sin copy de texto."
+                                    data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQISok93uYPdU8C-BXWgqNZAa1jxNjAxRO8y_-j2FAQJQ9MRYH05X8z1BbtpSnVhnKQunmLoao7vAtGmcXAypNhzqoGCkUp8NibDx9HJGAhzZT3HBT2ClsP4mrgwcnQ6c1UiiI1Y7egIHVRiQASx47jCqFhBFO54N6rW5TvWFrzqia3krG0gwZXJDujhx31swfpxiOI3vQwlcv44la9f9gtQ1vrWugcBukqonW4ZWjBus_DQdgReAmdSlOPi9hi6quNgO-LxEXqTGuS9Q2UPs6QPVuEQ_EPpoue2AA2quz_s4xuB9-WTISbI7EzvPR2ZNZOWMJ7lbWIPXXv_bzjSf_b2pd23bjHcZ-V_PfAKWFDqdJsHneohqWTDU9OUeT6ZO9vdPzv2V0Fvzf5VGu3SD9bYtAFfpZim1WKgELc8WB4BUnNBtR50VeTwewmnUz7qvlg&t=AQJSjCA-NRY5xTBDxNI"></div>
+                            </div>
+                            <!-- Fila 10 -->
+                            <div class="trace-item" data-name="reel - cuidado pre y post solar" data-camp="conversion a pagina web - trafico frio" data-status="ACTIVE" onclick="showAdPreview('120240974567520593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - cuidado pre y post solar</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a pagina web - trafico frio</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                                    <span style="font-size: 0.7rem; font-weight: 600; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 2px 6px; border-radius: 4px;">🟢 ACTIVE</span>
+                                    <span style="font-size: 0.65rem; color: var(--text-muted);">27/02/2026</span>
+                                </div>
+                                <!-- Store hidden payload -->
+                                <div id="payload-120240974567520593" style="display: none;" 
+                                    data-thumb="" 
+                                    data-title="Sin Título" 
+                                    data-body="Sin copy de texto."
+                                    data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQJOYYBGTNE1wK7zISMc2G4JShiXJDY0ugTGPxtDikjwKZ8chl8k4xcWZfXatT1ahwuMN5aCL_f3K0o-mtPLs4rosl1WchvcXaR9HMQU0YUjzAD4hqcsQmqsKnGUB1GWn7-cQwlw3M5N7VklxYpL4rP9e-NACOpu6CIrn6lV-4A15C_vHfa56lMmckUOeluX35ng1wCygOIVv0dGvMdEJaIt10cA7YHrQrc3ZhhIpqBhcAGZAKzZyC3b80mMhxpw_dvDPLjx-IDzYAlPfRLSZxm6io8EtZVwuxW351CGgvZn_e815DR5xs9RG1SnZ3SGJxkiv1xMSjuE-txFfIXh7xdvMPZGaP-G6j5X22t-qIqy8ZaDTSgDA1Zp9J19Or8NdvbWFvsXP8mBMr7EB0tR9YX8Ithng5uQUCoSHfVou6XBpXk-K_77_I20kGn4zPmmXiU&t=AQLFxnAGEG--G2A8qj4"></div>
+                            </div>
+                            <!-- Fila 11 -->
+                            <div class="trace-item" data-name="reel - tenes rulos ?" data-camp="conversion a pagina web - trafico frio" data-status="ACTIVE" onclick="showAdPreview('120240974496280593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - Tenes rulos ?</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a pagina web - trafico frio</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                                    <span style="font-size: 0.7rem; font-weight: 600; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 2px 6px; border-radius: 4px;">🟢 ACTIVE</span>
+                                    <span style="font-size: 0.65rem; color: var(--text-muted);">27/02/2026</span>
+                                </div>
+                                <!-- Store hidden payload -->
+                                <div id="payload-120240974496280593" style="display: none;" 
+                                    data-thumb="" 
+                                    data-title="Sin Título" 
+                                    data-body="Sin copy de texto."
+                                    data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQK6KTp3EYf9E4kiJaycvwVsHn8Wt0N3DH9xMjhv_lxNgYb7RSgxGLH0csziJWGC7zj4FbNNIbrl1CwEF_kfOT-kBk1yWWgUFZwF8lJW67pDAxO35sUT-5ZM_nNAqSk0bXLIQLe7Qtp_GPcipRaYgk72FaYWnmVJubWrdKtpp5ZdAKahrpxZfo94nsyGTcEk1lNyfwwW1diaML3zIPai9i8G5eqVHWK8TrzbfuwoZV6Od6GlkRYyel7NZWHwAky0rZKVTLsD3WX9TApfTbYL2PTxw69K1JQwydujlxaWw8-MN2EmLNT7i5WU6mJlRQKq42PnqNVRw_S_WkQwMpJKKjuJwd5X78dJnwrfqAWy7klCPubMrGI7NIbx3kw05EPXMCT-Y6P2AcTkExBHRZBmzlvfNhy7tzeGE-96-6s0Z8m0kN_I6h00YffJsh0MdDnAOdg&t=AQLVMrnWqcat5Bv8F-A"></div>
+                            </div>
+                            <!-- Fila 12 -->
+                            <div class="trace-item" data-name="reel - tenes alguno de estos sintomas?" data-camp="conversion a pagina web - trafico frio" data-status="ACTIVE" onclick="showAdPreview('120240974349340593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - Tenes alguno de estos sintomas?</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a pagina web - trafico frio</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                                    <span style="font-size: 0.7rem; font-weight: 600; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 2px 6px; border-radius: 4px;">🟢 ACTIVE</span>
+                                    <span style="font-size: 0.65rem; color: var(--text-muted);">27/02/2026</span>
+                                </div>
+                                <!-- Store hidden payload -->
+                                <div id="payload-120240974349340593" style="display: none;" 
+                                    data-thumb="" 
+                                    data-title="Sin Título" 
+                                    data-body="Sin copy de texto."
+                                    data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQLkTTC4-Hw9X5n4aFCfh7bEhwKLmPVaRRnXBDxUx9AyMt6DQoM3H7OZIUul5eiw7v8xQY36jjMlzepEbpvrk49Gltb1Gbr_y81omXvvAFgF0nes6J5OAb52Mg8dUlx11USBLpOEn_2zmO5UpFIYjRxVJj0DSapuwUcTR1PDOflw7MMgLO6oQaZlhb5MZHc46VVAXfYBGbYnVSfn4K6udbiIiMATa1BwBvNXZ-b9Tr3h0NCCS1755ccecVY6oNDL-ZAWVduM-0KBKTBeqeEA4VU237pUo-rLmP0xvBbpWc1ZDTMA2BqpVYuHroofxqOTnjJ9DwX6pjTrpTSAwQ-KUGg77PO6tnGeqv8MXxHx_pQGv970rfROMjKb8gCnYlXkfhS3YkxzwT6EkWjrw8KMuSX_6XlHaxHeaFXRwDdLbgpXtmJkVDFDTQYjlT3UVlqoI7U&t=AQIUZ6t9h_CETQAiIk4"></div>
+                            </div>
+                            <!-- Fila 13 -->
+                            <div class="trace-item" data-name="reel - protege tu cabello" data-camp="conversion a pagina web - trafico frio" data-status="ACTIVE" onclick="showAdPreview('120240974349330593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - Protege tu cabello</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a pagina web - trafico frio</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                                    <span style="font-size: 0.7rem; font-weight: 600; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 2px 6px; border-radius: 4px;">🟢 ACTIVE</span>
+                                    <span style="font-size: 0.65rem; color: var(--text-muted);">27/02/2026</span>
+                                </div>
+                                <!-- Store hidden payload -->
+                                <div id="payload-120240974349330593" style="display: none;" 
+                                    data-thumb="" 
+                                    data-title="Sin Título" 
+                                    data-body="Sin copy de texto."
+                                    data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQI5elReOX4WqAmBj7ss9dNLY1rJYBFGPeqSpVtz-mtrEtBRIwehzrpS1DNP1TvqsdRP6mnOr4u8mkHS5n9gH_aeVzuoQ1yo7bgnFCspITCspUvk60yH26rrKeHyfKWVYiWIA05_CswBB08ogvoCbnGuPReXM46sLzmxJmIoeQmO8PukM4arkwqVyFHuGKqe_us6zPNEbmRVl6_3zqusmj_69Rv6S6r91jCnprgtq53_n9maxZGi79MCd52amKsI84cA8svqWKohq4NeIsi-360RU3Stb8hd1iOHJsPcveaSEDu2ejNW6NCB5ySYkxOPYOlTCHMgSPqJsFreloXtWlw86uVPSRGstXLV63SRJheKjGrKTPj6bbH7-Nira95qlOphph43ID75l0CLc9n5W4nw1UjcNF0Gm0y6IwJLpYc1rjyrM1IOADqrJNW1OHPhKqU&t=AQKENf4F2qSIa0o7qlk"></div>
+                            </div>
+                            <!-- Fila 14 -->
+                            <div class="trace-item" data-name="reel - ugc jaz febrero" data-camp="conversion a pagina web - trafico frio" data-status="ACTIVE" onclick="showAdPreview('120240974349310593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - UGC Jaz febrero</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a pagina web - trafico frio</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                                    <span style="font-size: 0.7rem; font-weight: 600; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 2px 6px; border-radius: 4px;">🟢 ACTIVE</span>
+                                    <span style="font-size: 0.65rem; color: var(--text-muted);">27/02/2026</span>
+                                </div>
+                                <!-- Store hidden payload -->
+                                <div id="payload-120240974349310593" style="display: none;" 
+                                    data-thumb="" 
+                                    data-title="Sin Título" 
+                                    data-body="Sin copy de texto."
+                                    data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQKyz6Oo9-ttqmrA23lAcrVuTSBIpGQZVx5x5csPcMNu8KftOm97YSO25uwXfopJxaavppqQVNoumDh-0XFvyF2GjaMnlsSUmrZV8I6fhQD1XZ3BdgMmHcUYeE8B4kssZQqRDoKMXlttMSdRXK2hWnqAWzIx1FsqB6g7bAj94MN31-MwdFX9fwvPpuKaGIhUCNpnzoUk-AvE45aJQnTv-NBHaVxyYHKRbtTJvsslke-wTqsmVR7xn2OBv8_TteAANzaC-ZP-4xxh_sEGvtOQ5DzagAm8yRYXU6SLcEcAcI7c9pFVTOTSwQmqRIZnPSTYrFhVeqJ3eJHbHqlNxKhFEiY5oCPkVIXig-i5DDbVi247sKmwBqa9rZYRM5eOTMbQIAv_zD3OnkrUzLFqEhD7BKAl1RqGQQKAUtLMoh4DfCvfc3Oh4W3Vlit5PxW8fRtM5Q8&t=AQKf9yCNYPcD1QKKgys"></div>
+                            </div>
+                            <!-- Fila 15 -->
+                            <div class="trace-item" data-name="reel - descubri lo ultimo.." data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" onclick="showAdPreview('120240973711800593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - descubri lo ultimo..</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a WhatsApp - trafico frio B2B</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                                    <span style="font-size: 0.7rem; font-weight: 600; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 2px 6px; border-radius: 4px;">🟢 ACTIVE</span>
+                                    <span style="font-size: 0.65rem; color: var(--text-muted);">27/02/2026</span>
+                                </div>
+                                <!-- Store hidden payload -->
+                                <div id="payload-120240973711800593" style="display: none;" 
+                                    data-thumb="" 
+                                    data-title="Sin Título" 
+                                    data-body="Sin copy de texto."
+                                    data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQKjAghYPI_5V82i_uw0vYmuUU5EgoXX7ZNOyWaAdwqlJ_h74ixpnjMkPpvflFXiObTVOvhiu7y3yZw28DNHvaTKNKBGMY_isPLTuUk6rADmFPZQfczrM6TRy3iodDVdiBqcLAARniw9Vw90W0X3vYW7HUsmbSgF6ICF5TDF9BvpdgNMI4fzDQ8wlEHO1Tc1dbxDU_dndXzeD4UGz3bOI6vkqAqedjHEwOTz7tV_-cDfhSU7N_jMz-j5zJphhDmRKVuMvSEvFbVlnwLdMMW8oD1qoUYgr4NEeIMSc3M2vgpK7en0LgVADehJHgTIM8oEe-OBv1_xzwXzuEweWK840NOW5VEZbkptlFcAHk9RfVWBUcmdRhNpWrdEb5_nj_a883YYW4n88liVQAbeylOtOuJbiO9tuWtk4Qvy7xP-nmFwbvY-8iZ867LsTYGi52uDh6M&t=AQKTwE4Sp3sO7bVRZLY"></div>
+                            </div>
+                            <!-- Fila 16 -->
+                            <div class="trace-item" data-name="reel - 18 años confiando en matrrix" data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" onclick="showAdPreview('120240973745010593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - 18 años confiando en matrrix</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a WhatsApp - trafico frio B2B</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                                    <span style="font-size: 0.7rem; font-weight: 600; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 2px 6px; border-radius: 4px;">🟢 ACTIVE</span>
+                                    <span style="font-size: 0.65rem; color: var(--text-muted);">27/02/2026</span>
+                                </div>
+                                <!-- Store hidden payload -->
+                                <div id="payload-120240973745010593" style="display: none;" 
+                                    data-thumb="" 
+                                    data-title="Sin Título" 
+                                    data-body="Sin copy de texto."
+                                    data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQK5jMNG4S1ZLAVsOpVB-1oVUR3gzr7T4jT8ELUIrw7_KHZVGIY0lhx3fuXswibaRxLU8tE1mhl65c3UW0VSusAYmZ5V9Kv_PJC7J13qWNnLE2VOjF9XC4-wQYtHZk8SCZ3k67GuPX-F9RlaPiujB18o61wlBsbXfvmPonCjIP64dqdAojacMhi3WdAL9JgHQzqjrKztdOqM32eKV3Bxs2mc33d4H57e9RLUuOdu_LWZbSK4izcUsjs2IjvmWq4RGfJeiZN6xwkWFdSPDyYSB01UOwk_5lrFf-3Td5A7eIWSAZnyxAJUxPy7IlZfWMdtglcIzKWCo46i8fqc60a31U0a0tMg5biZI3FEWpHfYV0ehOugy4rH4WnBGDW4rnCMtHcnvptNlaUBlHlcNh2422RDSkKk3HcIIaNKa2THy615UFP4R1BWxEgREmW5F5kAmOU&t=AQLbNyz4niVSuag8y-I"></div>
+                            </div>
+                            <!-- Fila 17 -->
+                            <div class="trace-item" data-name="reel - herramientas que podes encontrar" data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" onclick="showAdPreview('120240973680070593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - Herramientas que podes encontrar</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a WhatsApp - trafico frio B2B</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                                    <span style="font-size: 0.7rem; font-weight: 600; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 2px 6px; border-radius: 4px;">🟢 ACTIVE</span>
+                                    <span style="font-size: 0.65rem; color: var(--text-muted);">27/02/2026</span>
+                                </div>
+                                <!-- Store hidden payload -->
+                                <div id="payload-120240973680070593" style="display: none;" 
+                                    data-thumb="" 
+                                    data-title="Sin Título" 
+                                    data-body="Sin copy de texto."
+                                    data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQIfCnz8MvEjR_RQcjxFxV_m4EmpIC1nRjktYLdQAJb9s7mW7h0hzKr8ee25DwrS6DatRmkVDPTklXioisjq-7Rh2Uoi0jCv2jZ2dfTsnFoLpKbTvH-w2KkG73yG5FAx0Uq4YAc2hOP_cTgkurtbVnJDv7z6Sv2qKmiWmGxG4ajMV10l-FDL-0CUQUGphT_LwozQTmImV8INMjPdldHKmKfXBKXDmZbUqhPhK07GZ09suqloI7hQs_1d6_uW3JJuXzovG54IZZjt4t87IB9KqwEoPebT3BC5MgxMoCXWouBDuiVHTvTYfmfkXQm7LzTSfddS8YLUL0OCm1s2fG2_R8NOMJoSvRRHxt0vG7Y5nRwPMlbcOx37zw8V2xS4WTdEhymp5a4uBeoM8B7MBMfhkvlPlEmqBiIJ7Bo83qUZ6ybapR4-UtNWIAJ7xUdmw-kbfAY&t=AQIxlI9pr_TjP-reDro"></div>
+                            </div>
+                            <!-- Fila 18 -->
+                            <div class="trace-item" data-name="reel - si tenes un salon" data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" onclick="showAdPreview('120240934489890593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - si tenes un salon</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a WhatsApp - trafico frio B2B</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                                    <span style="font-size: 0.7rem; font-weight: 600; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 2px 6px; border-radius: 4px;">🟢 ACTIVE</span>
+                                    <span style="font-size: 0.65rem; color: var(--text-muted);">27/02/2026</span>
+                                </div>
+                                <!-- Store hidden payload -->
+                                <div id="payload-120240934489890593" style="display: none;" 
+                                    data-thumb="" 
+                                    data-title="Sin Título" 
+                                    data-body="Sin copy de texto."
+                                    data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQJWtROC4vS3yjlWj4x-I90-WNg3vNrCajlWmcmg-QczvczvrinCopTJiMiJE4hpxytvTW8Uns2x_EWpsNj3PDKI7L0SAJXdsNEj95_cyY6jn5ybWQOFpgbYWFEcjcNIgPaQknOQwKcvnSMv0ohIkmlWaX4_MKi9gVhBKg2bIOqCxzQ0Ju036RVqAqHDmBncd19RqD6_S67c_5AVWyJgsk4CugYkBh3ENe9oLWBfqXAFewkJNbeAQOD_TjqV4W_IAK-sNWGv9VJbWMqNTN9Yb7UdNsSD6HTObZEDeLJPQxPUK-_242GeLHHmZNAPgt4_H7f0rdiEsQpjriHMfalxWpstJx3iuk9VuPtKhOz1vQ2Jvyax6JOK2BUYOKQwhA7YJih1HbVExB2GMeuMTfcRgAZqM-Oi_jCYXr_ik6OeI4-1gYpbYezwI67UAM_MW2W3vuM&t=AQKSpcwvAM3M3fs5k5o"></div>
+                            </div>
+                            <!-- Fila 19 -->
+                            <div class="trace-item" data-name="reel - que podes encontrar en dos soles?" data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" onclick="showAdPreview('120240973691170593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - que podes encontrar en dos soles?</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a WhatsApp - trafico frio B2B</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                                    <span style="font-size: 0.7rem; font-weight: 600; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 2px 6px; border-radius: 4px;">🟢 ACTIVE</span>
+                                    <span style="font-size: 0.65rem; color: var(--text-muted);">27/02/2026</span>
+                                </div>
+                                <!-- Store hidden payload -->
+                                <div id="payload-120240973691170593" style="display: none;" 
+                                    data-thumb="" 
+                                    data-title="Sin Título" 
+                                    data-body="Sin copy de texto."
+                                    data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQLhRwCKkUwpYRAKN29diq6A26FDXThcmMGxoiGt9es0nP_e21Gv7cUR4Qpw6-MY5rMGRr_N85Y3VMdToL-5j3lQqOvjk3b6R5QwmBhbIDBYtvbqfrhSJpI8AmtCyUhFsZAk897WROLrDQE6hgwfmO6eWWIq8AHUY66JAS64G6-6GPRfgJJawxUk4Gg2Q4dbmf6ZWLYJfjSK70adcqacM1pVJBzPRzNzWNmxecjqIvZCzy15ulEqtHXzgMi94tCX2spTgvx6ilNplPg8U41oOB_o0tDQKDnUTfT4SplbV0AsmPspciX-AG-n7hMivdsOUaHhXTrTjfAPES4DMAD1vx_0YLPAsSfgj23V2yQdJNGXgQKra5cOTbsxa2Ri2surl43M4vVUc9Y8mVr0arYwZbLvwzOEy4th25cwpV0hmRRo-XeaC0BjRt3CUdmkeUTLzKw&t=AQIxCFQ8BVyMGsbS680"></div>
+                            </div>
+                            <!-- Fila 20 -->
+                            <div class="trace-item" data-name="reel - somos distrib de matrix" data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" onclick="showAdPreview('120240973659820593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - somos distrib de matrix</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a WhatsApp - trafico frio B2B</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                                    <span style="font-size: 0.7rem; font-weight: 600; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 2px 6px; border-radius: 4px;">🟢 ACTIVE</span>
+                                    <span style="font-size: 0.65rem; color: var(--text-muted);">27/02/2026</span>
+                                </div>
+                                <!-- Store hidden payload -->
+                                <div id="payload-120240973659820593" style="display: none;" 
+                                    data-thumb="" 
+                                    data-title="Sin Título" 
+                                    data-body="Sin copy de texto."
+                                    data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQLz9mVJ72ktVh1e9C2L69LH5eNsrFHs8bkZqvpp36wWht7Awz5jEL6XlMZKqX-H-oAlDXr41yB2m7z0H8PnSmxmgAERiOpRKJQ1lOcqyOTZxq5dQQOgcjs6MTmqyukvXeFqd3LiXlh6GKT6T4Y-oxiHhMJj8c-8STY1NoGxTMsRqO63NH-_bHwk4BEcFJy-ZxMMYwG8MxQhlJMTF4X1IJiPC61gFtnROZRsKUkpjAd5TE-obezpJ4xZpTttx2J4MA0q6ss-e8lOsJGoB-DD15_7DAM6WuCMzDKnuAFBeHrXGFd4Pqo7uNOsgdkGfbjtPgcZUUpgIguy9DL8w1zkjGj0m87dXVe47RTouZRcBI4GCYhxwiDYv50rcImgQVwRUrh8wnyXwjk-15vBr04W_HySKdEAJk-OUr3o90riG24QWkIMiG-7uT8Myw_OyDpxRzM&t=AQImtg8e0r6cSK0ff0I"></div>
+                            </div>
+                            <!-- Fila 21 -->
+                            <div class="trace-item" data-name="reel - equipa tu salon" data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" onclick="showAdPreview('120240973645810593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - equipa tu salon</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a WhatsApp - trafico frio B2B</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                                    <span style="font-size: 0.7rem; font-weight: 600; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 2px 6px; border-radius: 4px;">🟢 ACTIVE</span>
+                                    <span style="font-size: 0.65rem; color: var(--text-muted);">27/02/2026</span>
+                                </div>
+                                <!-- Store hidden payload -->
+                                <div id="payload-120240973645810593" style="display: none;" 
+                                    data-thumb="" 
+                                    data-title="Sin Título" 
+                                    data-body="Sin copy de texto."
+                                    data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQLsRDsJ0AUl_4xQHJvpAVCli88Y9MeBkAxTnDDVIuYR2IF6RnYan0i4zIPMukUFqE0dijmDAdpj7ASu5qXoXgC6egWFAikiX-tnFcCOHdu5OqPi7qM_KEBemxaAG8YV6-iaoOBCfwLTJR9ch5vttix-GtCS6bjqRCW1ogdtWjiY1tThlufrOZeszawP3uZvb_7vv9dUMBbR9mQNXUrHiZxIEnE-YwFo1DLTqCFh7fyW-x0AXo_gKxwekox1szg1DsOeMY5RbrFKgJFmadD0ySie_vNg05W9HyESs_Xw2czOhBMCSfAz1X3hK8BQ2kWu_SxvEBJ6zhAShRbfcgimt0MKehTjO1J5OZj4AUDW_t1tschtlnDTqVXbMm5jDuXOecapbF7VB4IruJbAN77v-S442ljXsO3jWViVeE3JzIN4v2Ea8quxhTQ2367O256pPdQ&t=AQJNbJjX8d_LbVqDtQs"></div>
+                            </div>
+                            <!-- Fila 22 -->
+                            <div class="trace-item" data-name="reel - queres incorporar.." data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" onclick="showAdPreview('120240973923650593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - queres incorporar..</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a WhatsApp - trafico frio B2B</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                                    <span style="font-size: 0.7rem; font-weight: 600; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 2px 6px; border-radius: 4px;">🟢 ACTIVE</span>
+                                    <span style="font-size: 0.65rem; color: var(--text-muted);">27/02/2026</span>
+                                </div>
+                                <!-- Store hidden payload -->
+                                <div id="payload-120240973923650593" style="display: none;" 
+                                    data-thumb="" 
+                                    data-title="Sin Título" 
+                                    data-body="Sin copy de texto."
+                                    data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQIY6isTxYggbqjt304HbCpaY09iemF3cDOPEr1js-zTTvTAsf6YuiiIokjeDqkvuecJttU5jBdI45UIZ3A8mdMNYsQQ933rnyIZ72D4ikYDHvG_i9wkJQWrhnazUNEHgRFVC3KGbfAj4ACG7IjLA4XEuhWp9UklHJuniDoG5h0umolatKXXVwn2izgv_IIhfFZkt1byTGXz8g8P5TbTbyaA5DfUJtY0z0LYrP3NmwJRiHGoyNkF-ocKqawa4XchF_812xC_hjfU0AtrH5XCSf5B5PJt2HPrztX9fsT0eirs1Z8giziX972AHXqAmiA8Vih8y2y1WVS3GugfXLsJiecvywQKhSBNrq1eoXAFQKAQbCblVmzhbqpNGazj99ZAa0m-ItF1W2mVpS3GXbb1UyghtBy25csnb8pcZcG_Db4yL6Ez-KGoWJuzgVWqAlT5RDc&t=AQJmC1LNx3wmwfaxE3w"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel Derecho: Previsualización Interactiva -->
+                    <div class="trace-preview-panel" style="width: 350px; background: rgba(0,0,0,0.3); border: 1px solid var(--border-light); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; overflow-y: auto;">
+                        <div id="preview-placeholder" style="color: var(--text-muted); font-size: 0.9rem; width: 100%;">
+                            <span style="font-size: 2rem; display: block; margin-bottom: 10px;">👆</span>
+                            Hacé clic en un anuncio de la lista para previsualizar su contenido real.
+                            
+                            <div style="margin-top: 30px; padding: 15px; border-radius: 8px; background: rgba(244,63,94,0.08); border: 1px solid var(--accent-red); text-align: left; box-sizing: border-box;">
+                                <div style="color: var(--accent-red); font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+                                    <span>⚠️</span> ALERTA DE FUGA OPERATIVA
+                                </div>
+                                <div style="font-size: 0.72rem; color: #fff; line-height: 1.45; margin-bottom: 6px;">
+                                    Los anuncios de <strong>Hot Sale / Dos Soles Sale</strong> continuaron activos hasta el <strong>20/05/2026</strong>. 
+                                </div>
+                                <div style="font-size: 0.68rem; color: var(--text-muted); line-height: 1.4;">
+                                    Dado que el Hot Sale terminó el 17/05, se pagaron 3 días de pauta al pedo.
+                                </div>
+                                <div style="margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.2); border-radius: 4px; font-size: 0.65rem; line-height: 1.35; color: #fff;">
+                                    <strong>Fuga Auditada (18-20 Mayo):</strong><br>
+                                    • Gasto Desperdiciado: <span style="color: var(--accent-red); font-weight:700;">$7,435.35 ARS</span><br>
+                                    • Clics Frustrados (Rebote): 136 clics<br>
+                                    • Alcance: 1,313 personas (estilistas)<br>
+                                    • <em>Jaz UGC 2</em> quemó $6,777.37 por sí solo.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="preview-content" style="display: none; width: 100%; text-align: left;">
+                            <div style="width: 100%; height: 250px; background-color: #111; border-radius: 8px; margin-bottom: 15px; overflow: hidden; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-light);">
+                                <img id="preview-img" src="" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                            </div>
+                            <h4 id="preview-title" style="font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 8px;"></h4>
+                            <p id="preview-body" style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 15px;"></p>
+                            <a id="preview-link" href="" target="_blank" style="display: inline-block; width: 100%; text-align: center; padding: 10px; background: var(--accent); color: #fff; border-radius: 6px; font-size: 0.8rem; font-weight: 600; text-decoration: none; transition: background 0.2s;">Ver Previsualización Interactiva ↗</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Script de lógica incrustado para la slide 8 -->
+        <script>
+            function filterTraceability() {
+                const search = document.getElementById('trace-search').value.toLowerCase();
+                const status = document.getElementById('trace-filter-status').value;
+                const items = document.querySelectorAll('.trace-item');
+                
+                items.forEach(item => {
+                    const name = item.getAttribute('data-name');
+                    const camp = item.getAttribute('data-camp');
+                    const itemStatus = item.getAttribute('data-status');
+                    
+                    const matchSearch = name.includes(search) || camp.includes(search);
+                    const matchStatus = status === 'all' || itemStatus === status;
+                    
+                    if (matchSearch && matchStatus) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            }
+
+            function showAdPreview(id) {
+                const payload = document.getElementById('payload-' + id);
+                if(!payload) return;
+                
+                document.getElementById('preview-placeholder').style.display = 'none';
+                document.getElementById('preview-content').style.display = 'block';
+                
+                document.getElementById('preview-img').src = payload.getAttribute('data-thumb');
+                document.getElementById('preview-title').innerHTML = payload.getAttribute('data-title');
+                document.getElementById('preview-body').innerHTML = payload.getAttribute('data-body');
+                
+                const previewUrl = payload.getAttribute('data-previewurl');
+                if (previewUrl && previewUrl.trim() !== '') {
+                    document.getElementById('preview-link').href = previewUrl;
+                    document.getElementById('preview-link').innerHTML = 'Ver Previsualización Interactiva ↗';
+                } else {
+                    document.getElementById('preview-link').href = 'https://www.facebook.com/ads/library/?id=' + id;
+                    document.getElementById('preview-link').innerHTML = 'Ver en Facebook Ad Library ↗';
+                }
+                
+                // Highlight selected item
+                document.querySelectorAll('.trace-item').forEach(i => i.style.background = 'transparent');
+                const selectedItem = payload.parentElement;
+                if(selectedItem) {
+                    selectedItem.style.background = 'rgba(99, 102, 241, 0.15)'; // Primary subtle color
+                }
+            }
+        </script>
+
+        <!-- SLIDE 9: ROADMAP (PLAN DE ACCIÓN EN 4 PASOS) -->
+        <section class="slide">
+            <div class="slide-content">
+                <div class="slide-header reveal">
+                    <span class="slide-subtitle">Plan Estratégico</span>
+                    <h2>Plan de Acción Comercial de 4 Pasos</h2>
+                </div>
+
+                <div class="roadmap-container reveal-scale delay-1">
+                    <!-- Step 1 -->
+                    <div class="roadmap-card primary-step">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div class="roadmap-step">1</div>
+                            <span class="roadmap-tag">Inmediato</span>
+                        </div>
+                        <h3 class="roadmap-title">Pausar Fugas</h3>
+                        <p class="roadmap-body">Pausar en el Administrador de Anuncios los anuncios ineficientes con ID terminados en <strong>...820593</strong> y <strong>...250593</strong> para frenar el desperdicio de presupuesto.</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="roadmap-card secondary-step">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div class="roadmap-step">2</div>
+                            <span class="roadmap-tag">Escalar</span>
+                        </div>
+                        <h3 class="roadmap-title">Escalar la Mina</h3>
+                        <p class="roadmap-body">Reasignar presupuesto al Reel "si tenes un salon" (ID <strong>...890593</strong>) que cuenta con una tasa de gancho sobresaliente de 3.51% de CTR.</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="roadmap-card secondary-step">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div class="roadmap-step">3</div>
+                            <span class="roadmap-tag">Reactivar</span>
+                        </div>
+                        <h3 class="roadmap-title">Encender la Web</h3>
+                        <p class="roadmap-body">Reactivar la campaña de compras web (ID <strong>...540593</strong>) con un presupuesto diario moderado para recuperar ese altísimo CTR de 4.75%.</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="roadmap-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div class="roadmap-step">4</div>
+                            <span class="roadmap-tag">WhatsApp</span>
+                        </div>
+                        <h3 class="roadmap-title">Respuestas Rápidas</h3>
+                        <p class="roadmap-body">Configurar respuestas rápidas y plantillas semi-automatizadas en WhatsApp Business para evitar que los leads fríos se enfríen al entrar.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Global Bottom Controls Bar -->
+    <div class="controls-bar">
+        <div class="keyboard-hint">
+            Controles:
+            <span class="key-badge">Space</span> o 
+            <span class="key-badge">←</span>
+            <span class="key-badge">→</span>
+            o
+            <span class="key-badge">Rueda Mouse</span>
+        </div>
+        
+        <div class="nav-dots" id="navDots">
+            <!-- Populated via Javascript -->
+        </div>
+
+        <div class="arrow-nav">
+            <button class="nav-arrow" id="prevBtn" title="Anterior">←</button>
+            <button class="nav-arrow" id="nextBtn" title="Siguiente">→</button>
+        </div>
+    </div>
+
+    <!-- Presentation Javascript Logic -->
+    <script>
+        class SlidePresentation {
+            constructor() {
+                this.container = document.getElementById('slidesContainer');
+                this.slides = document.querySelectorAll('.slide');
+                this.totalSlides = this.slides.length;
+                this.currentSlide = 0;
+                this.isTransitioning = false;
+
+                // Elements
+                this.activeNumEl = document.getElementById('activeNum');
+                this.totalNumEl = document.getElementById('totalNum');
+                this.progressBar = document.getElementById('progressBar');
+                this.navDotsContainer = document.getElementById('navDots');
+                this.prevBtn = document.getElementById('prevBtn');
+                this.nextBtn = document.getElementById('nextBtn');
+                this.spotlight = document.getElementById('spotlight');
+
+                this.init();
+            }
+
+            init() {
+                // Set total number display
+                this.totalNumEl.textContent = this.padZero(this.totalSlides);
+
+                // Build navigation dots
+                this.buildNavDots();
+
+                // Setup Navigation Listeners
+                this.setupKeyboardNav();
+                this.setupWheelNav();
+                this.setupTouchNav();
+                this.setupClickNav();
+                this.setupSpotlight();
+
+                // Set initial states
+                this.updateSlideState();
+            }
+
+            buildNavDots() {
+                this.navDotsContainer.innerHTML = '';
+                for (let i = 0; i < this.totalSlides; i++) {
+                    const dot = document.createElement('button');
+                    dot.classList.add('dot');
+                    if (i === 0) dot.classList.add('active');
+                    dot.title = `Ir a Slide ${i + 1}`;
+                    dot.addEventListener('click', () => this.goToSlide(i));
+                    this.navDotsContainer.appendChild(dot);
+                }
+                this.dots = this.navDotsContainer.querySelectorAll('.dot');
+            }
+
+            goToSlide(index) {
+                if (index < 0 || index >= this.totalSlides || this.isTransitioning) return;
+                
+                this.isTransitioning = true;
+                this.slides[this.currentSlide].classList.remove('active');
+                this.currentSlide = index;
+                
+                // Vertical slide offset transition
+                this.container.style.transform = `translateY(-${this.currentSlide * 100}vh)`;
+                this.slides[this.currentSlide].classList.add('active');
+
+                this.updateSlideState();
+
+                setTimeout(() => {
+                    this.isTransitioning = false;
+                }, 850); // Matches CSS transition timing
+            }
+
+            next() {
+                if (this.currentSlide < this.totalSlides - 1) {
+                    this.goToSlide(this.currentSlide + 1);
+                }
+            }
+
+            prev() {
+                if (this.currentSlide > 0) {
+                    this.goToSlide(this.currentSlide - 1);
+                }
+            }
+
+            updateSlideState() {
+                // Update numbers
+                this.activeNumEl.textContent = this.padZero(this.currentSlide + 1);
+
+                // Update progress bar width
+                const percentage = ((this.currentSlide) / (this.totalSlides - 1)) * 100;
+                this.progressBar.style.width = `${percentage}%`;
+
+                // Update active dots
+                this.dots.forEach((dot, idx) => {
+                    if (idx === this.currentSlide) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+
+                // Update Arrow Nav opacity/states
+                if (this.currentSlide === 0) {
+                    this.prevBtn.style.opacity = '0.3';
+                    this.prevBtn.style.pointerEvents = 'none';
+                } else {
+                    this.prevBtn.style.opacity = '1';
+                    this.prevBtn.style.pointerEvents = 'auto';
+                }
+
+                if (this.currentSlide === this.totalSlides - 1) {
+                    this.nextBtn.style.opacity = '0.3';
+                    this.nextBtn.style.pointerEvents = 'none';
+                } else {
+                    this.nextBtn.style.opacity = '1';
+                    this.nextBtn.style.pointerEvents = 'auto';
+                }
+            }
+
+            setupKeyboardNav() {
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+                        e.preventDefault();
+                        this.next();
+                    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                        e.preventDefault();
+                        this.prev();
+                    } else if (e.key === 'Home') {
+                        e.preventDefault();
+                        this.goToSlide(0);
+                    } else if (e.key === 'End') {
+                        e.preventDefault();
+                        this.goToSlide(this.totalSlides - 1);
+                    }
+                });
+            }
+
+            setupWheelNav() {
+                let lastScrollTime = 0;
+                window.addEventListener('wheel', (e) => {
+                    e.preventDefault();
+                    const now = new Date().getTime();
+                    if (now - lastScrollTime < 1000) return; // Debounce wheel event triggers
+                    
+                    if (e.deltaY > 15) {
+                        this.next();
+                        lastScrollTime = now;
+                    } else if (e.deltaY < -15) {
+                        this.prev();
+                        lastScrollTime = now;
+                    }
+                }, { passive: false });
+            }
+
+            setupTouchNav() {
+                let startY = 0;
+                document.addEventListener('touchstart', (e) => {
+                    startY = e.touches[0].clientY;
+                }, { passive: true });
+
+                document.addEventListener('touchend', (e) => {
+                    const endY = e.changedTouches[0].clientY;
+                    const diffY = startY - endY;
+                    
+                    if (Math.abs(diffY) > 40) { // minimum touch swipe threshold
+                        if (diffY > 0) {
+                            this.next();
+                        } else {
+                            this.prev();
+                        }
+                    }
+                }, { passive: true });
+            }
+
+            setupClickNav() {
+                this.prevBtn.addEventListener('click', () => this.prev());
+                this.nextBtn.addEventListener('click', () => this.next());
+            }
+
+            setupSpotlight() {
+                window.addEventListener('mousemove', (e) => {
+                    this.spotlight.style.left = `${e.clientX}px`;
+                    this.spotlight.style.top = `${e.clientY}px`;
+                });
+            }
+
+            padZero(num) {
+                return num < 10 ? `0${num}` : num;
+            }
+        }
+
+        // Card Tab Switching Logic for Traceability Slide
+        function setCardTab(cardIdx, tabName) {
+            const cardEl = document.getElementById(`card-${cardIdx}`);
+            if (!cardEl) return;
+
+            // Update Tab Buttons
+            const buttons = cardEl.querySelectorAll('.card-tab-btn');
+            buttons.forEach(btn => {
+                if (btn.textContent.trim().toLowerCase().includes(tabName.substring(0, 4))) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // Update Tab Panes
+            const panes = cardEl.querySelectorAll('.card-pane');
+            panes.forEach(pane => {
+                if (pane.getAttribute('data-pane') === tabName) {
+                    pane.classList.add('active');
+                } else {
+                    pane.classList.remove('active');
+                }
+            });
+        }
+
+        // Initialize Presentation on Load
+        document.addEventListener('DOMContentLoaded', () => {
+            new SlidePresentation();
+        });
+    </script>
+</body>
+</html>
