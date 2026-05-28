@@ -6,6 +6,23 @@
 
 ---
 
+## 📸 Auditoría del Feed de Instagram & Redes Orgánicas (Comunidad de Estilistas)
+Además de las campañas de Meta Ads, analizamos de manera integral el **Feed Orgánico de Instagram** de Dos Soles, el cual actúa como el primer punto de contacto para profesionales y consumidores finales. Identificamos los siguientes pilares de contenido:
+
+### 1. El Imán Técnico Profesional B2B (Mayor Fortaleza) 🎓
+El contenido orgánico de Dos Soles posee una calidad técnica sobresaliente. Las demostraciones de técnicas profesionales en salones reales (como la cobertura de canas Metal Detox con iNOA, detallando las fórmulas reales de color como *30gs de 7 natural*) y los Reels colaborativos de balayage con micro-influencers del rubro tienen un rendimiento orgánico fantástico. 
+*   **Impacto B2B:** Este contenido de alto valor técnico posiciona a Dos Soles no solo como un proveedor transaccional de cajas, sino como un **partner técnico y educativo** de los salones. Los estilistas profesionales se asocian con distribuidores que dominen la colorimetría y las últimas tendencias.
+
+### 2. El Ruido B2C de los Súper Sorteos 🎁
+Históricamente, la cuenta ha corrido "Súper Sorteos" masivos (Día del Peluquero con set de tijeras profesionales JAY 2, kits de tratamiento Re-Bond, aniversario, etc.). Si bien estas publicaciones explotan las métricas de alcance e interacciones orgánicas sumamente baratas, también atraen a una gran masa de consumidores finales minoristas ("cazadores de sorteos") y ensucian la segmentación orgánica con público de bajo ticket que no califica para el embudo profesional.
+
+### 3. Estrategia Híbrida de Canales
+Para maximizar el retorno orgánico y pago de Dos Soles, proponemos estructurar la comunicación en dos capas claras:
+*   **Orgánico B2B (Feed de Instagram):** Mantener el feed orgánico como una **vidriera técnica pulida e inspiracional** enfocada 100% en el peluquero y salón profesional (educación, lanzamientos técnicos, testimonios B2B). Evitar saturar el perfil con flyers de ofertas minoristas estacionales "pesadas".
+*   **Pautado B2C (Meta Ads directos a Web):** Capturar las ventas minoristas masivas de consumidores finales mediante campañas pautadas específicas (como el *Dos Soles Sale* con hasta 45% OFF) que redirijan al e-commerce autogestionado en WooCommerce. De esta forma, el consumidor final compra de manera 100% automatizada sin interferir en el posicionamiento técnico del feed ni saturar a los asesores comerciales de WhatsApp.
+
+---
+
 ## 📖 Glosario de Métricas "En Criollo"
 Para que estemos todos en la misma página y hablemos el mismo idioma, acá te explicamos qué significa cada métrica clave de esta auditoría, sin tecnicismos raros:
 
@@ -33,14 +50,48 @@ Para que estemos todos en la misma página y hablemos el mismo idioma, acá te e
 
 ---
 
+## 📸 Auditoría del Feed de Instagram & Redes Orgánicas (Comunidad de Estilistas)
+Además de las campañas de Meta Ads, analizamos de manera integral el **Feed Orgánico de Instagram** de Dos Soles, el cual actúa como el primer punto de contacto para profesionales y consumidores finales. Identificamos los siguientes pilares de contenido:
+
+### 1. El Imán Técnico Profesional B2B (Mayor Fortaleza) 🎓
+El contenido orgánico de Dos Soles posee una calidad técnica sobresaliente. Las demostraciones de técnicas profesionales en salones reales (como la cobertura de canas Metal Detox con iNOA, detallando las fórmulas reales de color como *30gs de 7 natural*) y los Reels colaborativos de balayage con micro-influencers del rubro tienen un rendimiento orgánico fantástico. 
+*   **Impacto B2B:** Este contenido de alto valor técnico posiciona a Dos Soles no solo como un proveedor transaccional de cajas, sino como un **partner técnico y educativo** de los salones. Los estilistas profesionales se asocian con distribuidores que dominen la colorimetría y las últimas tendencias.
+
+### 2. El Ruido B2C de los Súper Sorteos 🎁
+Históricamente, la cuenta ha corrido "Súper Sorteos" masivos (Día del Peluquero con set de tijeras profesionales JAY 2, kits de tratamiento Re-Bond, aniversario, etc.). Si bien estas publicaciones explotan las métricas de alcance e interacciones orgánicas sumamente baratas, también atraen a una gran masa de consumidores finales minoristas ("cazadores de sorteos") y ensucian la segmentación orgánica con público de bajo ticket que no califica para el embudo profesional.
+
+### 3. Estrategia Híbrida de Canales
+Para maximizar el retorno orgánico y pago de Dos Soles, proponemos estructurar la comunicación en dos capas claras:
+*   **Orgánico B2B (Feed de Instagram):** Mantener el feed orgánico como una **vidriera técnica pulida e inspiracional** enfocada 100% en el peluquero y salón profesional (educación, lanzamientos técnicos, testimonios B2B). Evitar saturar el perfil con flyers de ofertas minoristas estacionales "pesadas".
+*   **Pautado B2C (Meta Ads directos a Web):** Capturar las ventas minoristas masivas de consumidores finales mediante campañas pautadas específicas (como el *Dos Soles Sale* con hasta 45% OFF) que redirijan al e-commerce autogestionado en WooCommerce. De esta forma, el consumidor final compra de manera 100% automatizada sin interferir en el posicionamiento técnico del feed ni saturar a los asesores comerciales de WhatsApp.
+
+---
+
 ## 📈 Resumen General del Rendimiento (KPIs)
 *   **Inversión Total:** `$497,527` (La cuenta publicitaria inició actividad real en febrero de 2026)
 *   **Alcance Promedio:** `25,966` personas únicas
 *   **Impresiones:** `192,934` veces en pantalla
 *   **Frecuencia Promedio:** **`2.10`** (Nivel óptimo de recordación sin saturar a la audiencia)
 *   **Clics Totales:** `5,582` clics de alta intención
-*   **CTR Promedio:** **`2.89%`** (Excelente, la media de mercado B2B suele rondar del 1.20% al 1.50%. ¡Estamos duplicando la eficiencia!)
+*   **CTR Promedio:** **`2.89%`** (Excelente. Supera ampliamente las medias de mercado B2B del 1.50% y B2C del 2.00%, impulsado por el alto rendimiento de las campañas de e-commerce B2C)
 *   **CPC Promedio:** **`$89.13`** (Costo por clic promedio general)
+
+---
+
+## 📸 Auditoría del Feed de Instagram & Redes Orgánicas (Comunidad de Estilistas)
+Además de las campañas de Meta Ads, analizamos de manera integral el **Feed Orgánico de Instagram** de Dos Soles, el cual actúa como el primer punto de contacto para profesionales y consumidores finales. Identificamos los siguientes pilares de contenido:
+
+### 1. El Imán Técnico Profesional B2B (Mayor Fortaleza) 🎓
+El contenido orgánico de Dos Soles posee una calidad técnica sobresaliente. Las demostraciones de técnicas profesionales en salones reales (como la cobertura de canas Metal Detox con iNOA, detallando las fórmulas reales de color como *30gs de 7 natural*) y los Reels colaborativos de balayage con micro-influencers del rubro tienen un rendimiento orgánico fantástico. 
+*   **Impacto B2B:** Este contenido de alto valor técnico posiciona a Dos Soles no solo como un proveedor transaccional de cajas, sino como un **partner técnico y educativo** de los salones. Los estilistas profesionales se asocian con distribuidores que dominen la colorimetría y las últimas tendencias.
+
+### 2. El Ruido B2C de los Súper Sorteos 🎁
+Históricamente, la cuenta ha corrido "Súper Sorteos" masivos (Día del Peluquero con set de tijeras profesionales JAY 2, kits de tratamiento Re-Bond, aniversario, etc.). Si bien estas publicaciones explotan las métricas de alcance e interacciones orgánicas sumamente baratas, también atraen a una gran masa de consumidores finales minoristas ("cazadores de sorteos") y ensucian la segmentación orgánica con público de bajo ticket que no califica para el embudo profesional.
+
+### 3. Estrategia Híbrida de Canales
+Para maximizar el retorno orgánico y pago de Dos Soles, proponemos estructurar la comunicación en dos capas claras:
+*   **Orgánico B2B (Feed de Instagram):** Mantener el feed orgánico como una **vidriera técnica pulida e inspiracional** enfocada 100% en el peluquero y salón profesional (educación, lanzamientos técnicos, testimonios B2B). Evitar saturar el perfil con flyers de ofertas minoristas estacionales "pesadas".
+*   **Pautado B2C (Meta Ads directos a Web):** Capturar las ventas minoristas masivas de consumidores finales mediante campañas pautadas específicas (como el *Dos Soles Sale* con hasta 45% OFF) que redirijan al e-commerce autogestionado en WooCommerce. De esta forma, el consumidor final compra de manera 100% automatizada sin interferir en el posicionamiento técnico del feed ni saturar a los asesores comerciales de WhatsApp.
 
 ---
 
@@ -54,17 +105,53 @@ Para que estemos todos en la misma página y hablemos el mismo idioma, acá te e
 
 ---
 
+## 📸 Auditoría del Feed de Instagram & Redes Orgánicas (Comunidad de Estilistas)
+Además de las campañas de Meta Ads, analizamos de manera integral el **Feed Orgánico de Instagram** de Dos Soles, el cual actúa como el primer punto de contacto para profesionales y consumidores finales. Identificamos los siguientes pilares de contenido:
+
+### 1. El Imán Técnico Profesional B2B (Mayor Fortaleza) 🎓
+El contenido orgánico de Dos Soles posee una calidad técnica sobresaliente. Las demostraciones de técnicas profesionales en salones reales (como la cobertura de canas Metal Detox con iNOA, detallando las fórmulas reales de color como *30gs de 7 natural*) y los Reels colaborativos de balayage con micro-influencers del rubro tienen un rendimiento orgánico fantástico. 
+*   **Impacto B2B:** Este contenido de alto valor técnico posiciona a Dos Soles no solo como un proveedor transaccional de cajas, sino como un **partner técnico y educativo** de los salones. Los estilistas profesionales se asocian con distribuidores que dominen la colorimetría y las últimas tendencias.
+
+### 2. El Ruido B2C de los Súper Sorteos 🎁
+Históricamente, la cuenta ha corrido "Súper Sorteos" masivos (Día del Peluquero con set de tijeras profesionales JAY 2, kits de tratamiento Re-Bond, aniversario, etc.). Si bien estas publicaciones explotan las métricas de alcance e interacciones orgánicas sumamente baratas, también atraen a una gran masa de consumidores finales minoristas ("cazadores de sorteos") y ensucian la segmentación orgánica con público de bajo ticket que no califica para el embudo profesional.
+
+### 3. Estrategia Híbrida de Canales
+Para maximizar el retorno orgánico y pago de Dos Soles, proponemos estructurar la comunicación en dos capas claras:
+*   **Orgánico B2B (Feed de Instagram):** Mantener el feed orgánico como una **vidriera técnica pulida e inspiracional** enfocada 100% en el peluquero y salón profesional (educación, lanzamientos técnicos, testimonios B2B). Evitar saturar el perfil con flyers de ofertas minoristas estacionales "pesadas".
+*   **Pautado B2C (Meta Ads directos a Web):** Capturar las ventas minoristas masivas de consumidores finales mediante campañas pautadas específicas (como el *Dos Soles Sale* con hasta 45% OFF) que redirijan al e-commerce autogestionado en WooCommerce. De esta forma, el consumidor final compra de manera 100% automatizada sin interferir en el posicionamiento técnico del feed ni saturar a los asesores comerciales de WhatsApp.
+
+---
+
 ## 🔍 Hallazgo Crítico 1: El Gran Costo de Oportunidad de Campañas Pausadas
 Actualmente la cuenta concentra el **100%** de su presupuesto activo en una sola campaña que envía gente a WhatsApp. Sin embargo, al cruzar los datos históricos mediante la API de Meta Ads, descubrimos que se tomaron decisiones de pausa sumamente ineficientes:
 
 | Campaña | ID de Campaña (Trazabilidad Meta) | Estado | Inversión Histórica | Clics | CTR Promedio | CPC Promedio |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Conversion a WhatsApp - trafico frio B2B** | [`120240934489910593`](https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=AR&view_all_page_id=406051269418159&q=estilista) | 🟢 **Activa** | `$335,142.61` | 3,613 | 2.47% | **`$92.76`** (El costo más alto) |
-| **Conversion - evento compra a pagina web** | [`120242751389540593`](https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=AR&view_all_page_id=406051269418159&q=sale) | 🔴 **Pausada** | `$92,141.54` | 1,073 | **`4.75%`** (El mejor CTR) | **`$85.87`** |
-| **Conversion a pagina web - trafico frio** | [`120240887374240593`](https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=AR&view_all_page_id=406051269418159&q=cabello) | 🔴 **Pausada** | `$70,241.46` | 896 | **`3.69%`** | **`$78.39`** (El clic más barato) |
+| **Conversion a WhatsApp (Canal B2B - Salones)** | [`120240934489910593`](https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=AR&view_all_page_id=406051269418159&q=estilista) | 🟢 **Activa** | `$335,142.61` | 3,613 | 2.47% | **`$92.76`** (El costo más alto) |
+| **Conversion - Compra Web (Canal B2C - E-commerce)** | [`120242751389540593`](https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=AR&view_all_page_id=406051269418159&q=sale) | 🔴 **Pausada** | `$92,141.54` | 1,073 | **`4.75%`** (El mejor CTR) | **`$85.87`** |
+| **Conversion a pagina web - Tráfico Frío (Canal B2C)** | [`120240887374240593`](https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=AR&view_all_page_id=406051269418159&q=cabello) | 🔴 **Pausada** | `$70,241.46` | 896 | **`3.69%`** | **`$78.39`** (El clic más barato) |
 
 > [!WARNING]
-> **Costo de Oportunidad:** La campaña de compras web (`120242751389540593`) tenía un **CTR del 4.75%** (prácticamente el doble que WhatsApp) y un CPC más económico. Pausarla privó al negocio del embudo digital más automatizado. La campaña actual activa está pagando un **"impuesto de ineficiencia" de +$14.37 por cada clic** en comparación con el tráfico frío directo a la web.
+> **Costo de Oportunidad & Confusión de Modelos (B2B vs B2C):**
+> La cuenta venía operando bajo una **Estrategia Híbrida** implícita. Por un lado, la campaña de WhatsApp captaba clientes profesionales **B2B** (salones y estilistas) para compras mayoristas de alto ticket. Por el otro, las campañas de e-commerce web captaban consumidores finales **B2C** minoristas comprando tratamientos profesionales para uso personal al 100% del margen minorista.
+> Al pausar las campañas de e-commerce web B2C, no solo se perdió un CTR extraordinario del **4.75%**, sino que se obligó al negocio a depender exclusivamente de asesores humanos en WhatsApp. Esto generó un cuello de botella ineficiente atendiendo consultas minoristas de bajo ticket de consumidores finales, en lugar de automatizar las ventas minoristas vía WooCommerce y enfocar al equipo de ventas de WhatsApp 100% en captar y fidelizar cuentas profesionales B2B de alto ticket.
+
+---
+
+## 📸 Auditoría del Feed de Instagram & Redes Orgánicas (Comunidad de Estilistas)
+Además de las campañas de Meta Ads, analizamos de manera integral el **Feed Orgánico de Instagram** de Dos Soles, el cual actúa como el primer punto de contacto para profesionales y consumidores finales. Identificamos los siguientes pilares de contenido:
+
+### 1. El Imán Técnico Profesional B2B (Mayor Fortaleza) 🎓
+El contenido orgánico de Dos Soles posee una calidad técnica sobresaliente. Las demostraciones de técnicas profesionales en salones reales (como la cobertura de canas Metal Detox con iNOA, detallando las fórmulas reales de color como *30gs de 7 natural*) y los Reels colaborativos de balayage con micro-influencers del rubro tienen un rendimiento orgánico fantástico. 
+*   **Impacto B2B:** Este contenido de alto valor técnico posiciona a Dos Soles no solo como un proveedor transaccional de cajas, sino como un **partner técnico y educativo** de los salones. Los estilistas profesionales se asocian con distribuidores que dominen la colorimetría y las últimas tendencias.
+
+### 2. El Ruido B2C de los Súper Sorteos 🎁
+Históricamente, la cuenta ha corrido "Súper Sorteos" masivos (Día del Peluquero con set de tijeras profesionales JAY 2, kits de tratamiento Re-Bond, aniversario, etc.). Si bien estas publicaciones explotan las métricas de alcance e interacciones orgánicas sumamente baratas, también atraen a una gran masa de consumidores finales minoristas ("cazadores de sorteos") y ensucian la segmentación orgánica con público de bajo ticket que no califica para el embudo profesional.
+
+### 3. Estrategia Híbrida de Canales
+Para maximizar el retorno orgánico y pago de Dos Soles, proponemos estructurar la comunicación en dos capas claras:
+*   **Orgánico B2B (Feed de Instagram):** Mantener el feed orgánico como una **vidriera técnica pulida e inspiracional** enfocada 100% en el peluquero y salón profesional (educación, lanzamientos técnicos, testimonios B2B). Evitar saturar el perfil con flyers de ofertas minoristas estacionales "pesadas".
+*   **Pautado B2C (Meta Ads directos a Web):** Capturar las ventas minoristas masivas de consumidores finales mediante campañas pautadas específicas (como el *Dos Soles Sale* con hasta 45% OFF) que redirijan al e-commerce autogestionado en WooCommerce. De esta forma, el consumidor final compra de manera 100% automatizada sin interferir en el posicionamiento técnico del feed ni saturar a los asesores comerciales de WhatsApp.
 
 ---
 
@@ -90,6 +177,23 @@ Analizamos el comportamiento de los anuncios **activos con inversión estadísti
 ### 3. Ads Activos con Datos Insuficientes (Sin Diagnóstico Definitivo) 📊
 *   **Anuncios:** *`Reel - somos distrib de matrix`* (ID `120240973659820593`) y *`Reel - Si sos estilista o tenes..`* (ID `120243024605250593`)
 *   *Diagnóstico:* Ambos anuncios están **activos** pero con inversión muy baja hasta la fecha — por debajo del umbral estadístico necesario para sacar conclusiones sólidas sobre su rendimiento real. Muestran métricas de CPC elevado, pero con tan poco volumen de datos, esas cifras no son representativas. **La recomendación es monitorearlos** con un presupuesto controlado durante las próximas 2-3 semanas antes de tomar cualquier decisión de pausa.
+
+---
+
+## 📸 Auditoría del Feed de Instagram & Redes Orgánicas (Comunidad de Estilistas)
+Además de las campañas de Meta Ads, analizamos de manera integral el **Feed Orgánico de Instagram** de Dos Soles, el cual actúa como el primer punto de contacto para profesionales y consumidores finales. Identificamos los siguientes pilares de contenido:
+
+### 1. El Imán Técnico Profesional B2B (Mayor Fortaleza) 🎓
+El contenido orgánico de Dos Soles posee una calidad técnica sobresaliente. Las demostraciones de técnicas profesionales en salones reales (como la cobertura de canas Metal Detox con iNOA, detallando las fórmulas reales de color como *30gs de 7 natural*) y los Reels colaborativos de balayage con micro-influencers del rubro tienen un rendimiento orgánico fantástico. 
+*   **Impacto B2B:** Este contenido de alto valor técnico posiciona a Dos Soles no solo como un proveedor transaccional de cajas, sino como un **partner técnico y educativo** de los salones. Los estilistas profesionales se asocian con distribuidores que dominen la colorimetría y las últimas tendencias.
+
+### 2. El Ruido B2C de los Súper Sorteos 🎁
+Históricamente, la cuenta ha corrido "Súper Sorteos" masivos (Día del Peluquero con set de tijeras profesionales JAY 2, kits de tratamiento Re-Bond, aniversario, etc.). Si bien estas publicaciones explotan las métricas de alcance e interacciones orgánicas sumamente baratas, también atraen a una gran masa de consumidores finales minoristas ("cazadores de sorteos") y ensucian la segmentación orgánica con público de bajo ticket que no califica para el embudo profesional.
+
+### 3. Estrategia Híbrida de Canales
+Para maximizar el retorno orgánico y pago de Dos Soles, proponemos estructurar la comunicación en dos capas claras:
+*   **Orgánico B2B (Feed de Instagram):** Mantener el feed orgánico como una **vidriera técnica pulida e inspiracional** enfocada 100% en el peluquero y salón profesional (educación, lanzamientos técnicos, testimonios B2B). Evitar saturar el perfil con flyers de ofertas minoristas estacionales "pesadas".
+*   **Pautado B2C (Meta Ads directos a Web):** Capturar las ventas minoristas masivas de consumidores finales mediante campañas pautadas específicas (como el *Dos Soles Sale* con hasta 45% OFF) que redirijan al e-commerce autogestionado en WooCommerce. De esta forma, el consumidor final compra de manera 100% automatizada sin interferir en el posicionamiento técnico del feed ni saturar a los asesores comerciales de WhatsApp.
 
 ---
 
@@ -138,11 +242,45 @@ Analizamos el comportamiento de los anuncios **activos con inversión estadísti
 
 ---
 
+## 📸 Auditoría del Feed de Instagram & Redes Orgánicas (Comunidad de Estilistas)
+Además de las campañas de Meta Ads, analizamos de manera integral el **Feed Orgánico de Instagram** de Dos Soles, el cual actúa como el primer punto de contacto para profesionales y consumidores finales. Identificamos los siguientes pilares de contenido:
+
+### 1. El Imán Técnico Profesional B2B (Mayor Fortaleza) 🎓
+El contenido orgánico de Dos Soles posee una calidad técnica sobresaliente. Las demostraciones de técnicas profesionales en salones reales (como la cobertura de canas Metal Detox con iNOA, detallando las fórmulas reales de color como *30gs de 7 natural*) y los Reels colaborativos de balayage con micro-influencers del rubro tienen un rendimiento orgánico fantástico. 
+*   **Impacto B2B:** Este contenido de alto valor técnico posiciona a Dos Soles no solo como un proveedor transaccional de cajas, sino como un **partner técnico y educativo** de los salones. Los estilistas profesionales se asocian con distribuidores que dominen la colorimetría y las últimas tendencias.
+
+### 2. El Ruido B2C de los Súper Sorteos 🎁
+Históricamente, la cuenta ha corrido "Súper Sorteos" masivos (Día del Peluquero con set de tijeras profesionales JAY 2, kits de tratamiento Re-Bond, aniversario, etc.). Si bien estas publicaciones explotan las métricas de alcance e interacciones orgánicas sumamente baratas, también atraen a una gran masa de consumidores finales minoristas ("cazadores de sorteos") y ensucian la segmentación orgánica con público de bajo ticket que no califica para el embudo profesional.
+
+### 3. Estrategia Híbrida de Canales
+Para maximizar el retorno orgánico y pago de Dos Soles, proponemos estructurar la comunicación en dos capas claras:
+*   **Orgánico B2B (Feed de Instagram):** Mantener el feed orgánico como una **vidriera técnica pulida e inspiracional** enfocada 100% en el peluquero y salón profesional (educación, lanzamientos técnicos, testimonios B2B). Evitar saturar el perfil con flyers de ofertas minoristas estacionales "pesadas".
+*   **Pautado B2C (Meta Ads directos a Web):** Capturar las ventas minoristas masivas de consumidores finales mediante campañas pautadas específicas (como el *Dos Soles Sale* con hasta 45% OFF) que redirijan al e-commerce autogestionado en WooCommerce. De esta forma, el consumidor final compra de manera 100% automatizada sin interferir en el posicionamiento técnico del feed ni saturar a los asesores comerciales de WhatsApp.
+
+---
+
 ## 🛠️ Plan de Acción Estratégico (Roadmap de 4 Pasos)
 1. **Escalar el ganador oculto (Prioridad #1):** Aumentar el presupuesto del creativo estrella *`Reel - si tenes un salon`* (ID `120240934489890593`). Con un CTR de 3.51% y solo el 6% del presupuesto asignado, escalar este anuncio es la oportunidad más obvia de la cuenta.
 2. **Monitorear los activos con datos insuficientes:** Los Reels *`somos distrib de matrix`* (ID `120240973659820593`) y *`Si sos estilista o tenes..`* (ID `120243024605250593`) tienen muy poca inversión acumulada para diagnosticarlos. Darles 2-3 semanas de rodaje con volumen real antes de tomar decisiones de pausa.
-3. **Reactivar la Campaña de Conversión Web:** Volver a encender la campaña *`Conversion - evento compra a pagina web`* (ID `120242751389540593`) con un presupuesto diario inicial moderado para recuperar ese altísimo CTR del 4.75% y el embudo digital automatizado.
-4. **Optimizar el Cierre en WhatsApp:** Configurar plantillas semi-automatizadas y respuestas rápidas en WhatsApp Business para atender el volumen frío que genera la campaña activa (`120240934489910593`) y que no se enfríen las ventas.
+3. **Reactivar E-commerce Web B2C (Minorista):** Volver a encender la campaña *`Conversion - evento compra a pagina web`* (ID `120242751389540593`) con un presupuesto diario inicial moderado para recuperar ese altísimo CTR del 4.75% y el embudo digital B2C automatizado, que vende solo a consumidores finales con el máximo margen minorista y sin costo operativo humano.
+4. **Optimizar el Cierre de WhatsApp B2B (Mayorista):** Configurar plantillas semi-automatizadas y respuestas rápidas en WhatsApp Business para atender el volumen frío que genera la campaña activa (`120240934489910593`) enfocadas 100% en calificar al estilista y salón mayorista, asegurando que los asesores solo dediquen tiempo humano a cerrar cuentas profesionales de alto ticket.
+
+---
+
+## 📸 Auditoría del Feed de Instagram & Redes Orgánicas (Comunidad de Estilistas)
+Además de las campañas de Meta Ads, analizamos de manera integral el **Feed Orgánico de Instagram** de Dos Soles, el cual actúa como el primer punto de contacto para profesionales y consumidores finales. Identificamos los siguientes pilares de contenido:
+
+### 1. El Imán Técnico Profesional B2B (Mayor Fortaleza) 🎓
+El contenido orgánico de Dos Soles posee una calidad técnica sobresaliente. Las demostraciones de técnicas profesionales en salones reales (como la cobertura de canas Metal Detox con iNOA, detallando las fórmulas reales de color como *30gs de 7 natural*) y los Reels colaborativos de balayage con micro-influencers del rubro tienen un rendimiento orgánico fantástico. 
+*   **Impacto B2B:** Este contenido de alto valor técnico posiciona a Dos Soles no solo como un proveedor transaccional de cajas, sino como un **partner técnico y educativo** de los salones. Los estilistas profesionales se asocian con distribuidores que dominen la colorimetría y las últimas tendencias.
+
+### 2. El Ruido B2C de los Súper Sorteos 🎁
+Históricamente, la cuenta ha corrido "Súper Sorteos" masivos (Día del Peluquero con set de tijeras profesionales JAY 2, kits de tratamiento Re-Bond, aniversario, etc.). Si bien estas publicaciones explotan las métricas de alcance e interacciones orgánicas sumamente baratas, también atraen a una gran masa de consumidores finales minoristas ("cazadores de sorteos") y ensucian la segmentación orgánica con público de bajo ticket que no califica para el embudo profesional.
+
+### 3. Estrategia Híbrida de Canales
+Para maximizar el retorno orgánico y pago de Dos Soles, proponemos estructurar la comunicación en dos capas claras:
+*   **Orgánico B2B (Feed de Instagram):** Mantener el feed orgánico como una **vidriera técnica pulida e inspiracional** enfocada 100% en el peluquero y salón profesional (educación, lanzamientos técnicos, testimonios B2B). Evitar saturar el perfil con flyers de ofertas minoristas estacionales "pesadas".
+*   **Pautado B2C (Meta Ads directos a Web):** Capturar las ventas minoristas masivas de consumidores finales mediante campañas pautadas específicas (como el *Dos Soles Sale* con hasta 45% OFF) que redirijan al e-commerce autogestionado en WooCommerce. De esta forma, el consumidor final compra de manera 100% automatizada sin interferir en el posicionamiento técnico del feed ni saturar a los asesores comerciales de WhatsApp.
 
 ---
 
