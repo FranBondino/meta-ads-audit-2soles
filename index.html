@@ -1666,6 +1666,13 @@
                                 <option value="compra" style="color: #000;">🛒 Compra Web ($5k/d)</option>
                                 <option value="trafico" style="color: #000;">🌐 Tráfico Frío ($3.5k/d)</option>
                             </select>
+                            <select id="trace-filter-performance" style="padding: 8px; border-radius: 6px; border: 1px solid var(--border-light); background: rgba(255,255,255,0.05); color: #fff; font-family: inherit; font-size: 0.85rem;" onchange="filterTraceability()">
+                                <option value="all" style="color: #000;">Todos los Rendimientos</option>
+                                <option value="high" style="color: #000;">🏆 Alto / Ganadores</option>
+                                <option value="medium" style="color: #000;">📈 Medio / Sostén</option>
+                                <option value="insufficient" style="color: #000;">📊 Datos Insuficientes</option>
+                                <option value="leakage" style="color: #000;">⚠️ Fuga / Fuera de Época</option>
+                            </select>
                             <select id="trace-sort-by" style="padding: 8px; border-radius: 6px; border: 1px solid var(--border-light); background: rgba(255,255,255,0.05); color: #fff; font-family: inherit; font-size: 0.85rem;" onchange="sortTraceability()">
                                 <option value="date-desc" style="color: #000;">📅 Recientes primero</option>
                                 <option value="date-asc" style="color: #000;">📅 Antiguos primero</option>
@@ -1678,7 +1685,7 @@
                         <!-- Lista scrolleable -->
                         <div class="trace-list-scroll" id="trace-list-container" style="flex: 1; overflow-y: auto; padding: 10px;">
                             <!-- Fila 0 -->
-                            <div class="trace-item" data-name="reel - general hot" data-camp="conversion - evento compra a pagina web" data-status="PAUSED" data-date="2026-05-13" data-budget="5000" onclick="showAdPreview('120244971916580593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="reel - general hot" data-camp="conversion - evento compra a pagina web" data-status="PAUSED" data-date="2026-05-13" data-budget="5000" data-performance="leakage" onclick="showAdPreview('120244971916580593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - General HOT</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion - evento compra a pagina web</div>
@@ -1695,7 +1702,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQLeZFIkAMNubcDh-R5fLUESXdzZqU6-f51IeOskcLmcCuOv6MEDlcwuNo4U5mI-Smm5MttM0NbZ-2jBaLdwXGWETLP94IjtsPBRofU7Tl9YgXKpTo1NIG1hkTyShKMCq22WASakqDR1PwfvTfwfYTgua5eUG-GLaiRLLtaHbVb28K0zppmWt2h64MGOtwWa9hXhC1ixoi8P5uz6RxK2Y5NKZff-9AG0eJdqDlh_Fbur4KVkWT-wE7Rcv0BUjSf508nns62eYgOIvOjwRK2ao-666uwGWgj0osujYX2QwOSicgcR4guPOqRrg8p7t-4mZxI7BFK5XTxHw0uvQ_gQL1DvmoIli-YaYjc26kqajbiY5wDmSnKCwjMbEh23sICvgZCWKagMD9PIpKJSy8__fLRb3H6JEidFoYJRMctCbjg3tm5hllx9g_oZlSZNTwhPzI0&t=AQKDLx_fHAoonpiYZWc"></div>
                             </div>
                             <!-- Fila 1 -->
-                            <div class="trace-item" data-name="ugc - joana don - hs" data-camp="conversion - evento compra a pagina web" data-status="PAUSED" data-date="2026-05-11" data-budget="5000" onclick="showAdPreview('120244790839150593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="ugc - joana don - hs" data-camp="conversion - evento compra a pagina web" data-status="PAUSED" data-date="2026-05-11" data-budget="5000" data-performance="leakage" onclick="showAdPreview('120244790839150593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">UGC - Joana Don - HS</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion - evento compra a pagina web</div>
@@ -1712,7 +1719,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQK-c4xCf20Blx0ofAkr9I9p5lOg8V-yoQuzv07PrUzRsNhmKKG2VO8wNX9p0GXvEFB7zdbTzUzA_xQ8L44FLu3iQ_zfAXXqRwBeiiCQWg8-_rN7B1teknMRmVvrXkROvkYoNoD6Q5ba-pbuHOr05ojO8YDUiXZ7ZC7i-il4ly7jxqKXFuJrHQMSISoYMAWktn6AFzXThernpShXw_WBFv2CmqPiSnMK-t61mhoNh7oOfk4oMekHyAqmoOiLKBwfnPqvOWi1VjJrIo9u4-cFiL2cjYP66EtQ1JpjV60QpGOqN2Ke1GqU5xcdI4khNfLHYBeMNo-PbhLhJMj0Kfmya3ywaaVZmkRPkBAQFqYGJj-tnl8Um3Hi2Hv36yZET3q4TDHfdrut2bV_5WAIXa6b3d93TvJGjAFJmfwXhe2L8ZiFY7-FDzMAxK4BheDxxvOU8_Y&t=AQLykOLNV5Ueg9Qd-dc"></div>
                             </div>
                             <!-- Fila 2 -->
-                            <div class="trace-item" data-name="jaz ugc 2" data-camp="conversion - evento compra a pagina web" data-status="PAUSED" data-date="2026-05-11" data-budget="5000" onclick="showAdPreview('120244790485120593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="jaz ugc 2" data-camp="conversion - evento compra a pagina web" data-status="PAUSED" data-date="2026-05-11" data-budget="5000" data-performance="leakage" onclick="showAdPreview('120244790485120593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Jaz UGC 2</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion - evento compra a pagina web</div>
@@ -1729,7 +1736,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQKHB8bQy83DyCTQntKMG-zybidkmIdnbfjFrFyEAAuJd8Sx3BYDS4MKNXB-i5JaA-Lecy3Oy5HfX0Exaqjh16SpS5qcKJ3fXlTBeYNU8yNaMoCCKf8Ztumuae1MXe1MsTDqAc2Lc5jlR0XtfOLADz4GN07rgI6ZAyM0DTmvJAhXWJSci7q_J8cJo8jQz8k1jUlqO-9CsQZALhNNdUHJy-XBgTCxXW0HDZtjERg416f6gjt6e0l6yLajQL6AnwuT075ZiOTBL6EGB-iSLZgAcICiqssg5zZCcRqrcQIKm2EY8xBnLh55IBj8RpKCk0fhrWjoc00539MnBvAzm0XQcQ_K_An5xhjXExEqiKA-_9xiD4C2tPfopdiOJUf1H_sncRdHHHtLSDt7bTTdxB3Cs-IqLKhldeii0FTDjzDX7qT-aUe3IItcsyVlvsfK0wO8W-Y&t=AQKNgXb7mKQcnSymqyg"></div>
                             </div>
                             <!-- Fila 3 -->
-                            <div class="trace-item" data-name="jaz ugc 1" data-camp="conversion - evento compra a pagina web" data-status="PAUSED" data-date="2026-05-11" data-budget="5000" onclick="showAdPreview('120244789448460593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="jaz ugc 1" data-camp="conversion - evento compra a pagina web" data-status="PAUSED" data-date="2026-05-11" data-budget="5000" data-performance="leakage" onclick="showAdPreview('120244789448460593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Jaz UGC 1</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion - evento compra a pagina web</div>
@@ -1746,7 +1753,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQIZeO3nM0BO6mYTN4939NUWUoJ1Tiqm6pACPwNEclCma3d2--EM6gtHNjzxMVmsD-f7ElOvfXGKLVgoPAP93F1AvRaZmXDCiQgHq_dp6NmUabAPNvvbnYev_-TZUpyZDX21ICMzOPCwJlqTIrkGdfcPx64rnKDUCL3B5ZAK8w_HdvRmcjUt1PBIh8M5Sl6yGO_1v5OSIl5y4pIPNI1p7gOYzyd6VVPCLjcMijkaz4FycI0zDEesvv4hB_mZ8R9J8JG6iUyUcXWpezQku1w_FnnKh2HtP5qdQbBxvh1bYpPscmb4cM59sqAX07ixGWSFEGAarffmBB-UebWmzo7-5Jg-Ksh4BAn2ksu1h6mdOHq3oLxPze_WKLu7buSDH8l-6my4D_bFCDHxsyWIhEhSdjw3Lh1pTBJKMcytZPG_G9scGRrTBpRm9vJAq5nSyokS57o&t=AQKJQqfAPpoOVLppweE"></div>
                             </div>
                             <!-- Fila 4 -->
-                            <div class="trace-item" data-name="dos soles sale flyer" data-camp="conversion - evento compra a pagina web" data-status="PAUSED" data-date="2026-05-08" data-budget="5000" onclick="showAdPreview('120244538628700593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="dos soles sale flyer" data-camp="conversion - evento compra a pagina web" data-status="PAUSED" data-date="2026-05-08" data-budget="5000" data-performance="leakage" onclick="showAdPreview('120244538628700593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Dos Soles Sale Flyer</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion - evento compra a pagina web</div>
@@ -1763,7 +1770,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQI1ncPAoa3n6IsUV3qBojDZXU22frCCULqqSxu0Z52iuPG1mtlWV5eXyz7NeDPqJ-Y8nexe3cuAxy510SGpb3H1UBRatDYT5NIVdR-yuWjJjOZA14vxeQoRrkdqG3zx9BHYQDoDFzfKmW7ylDRalx4nxi1stESsu10MpUWOWX-8jc-946NMv-SAfJ2E8x4fEJSBZcvfOWi2qqjTpqP0UW0Vi8MfI-PFnusQ_ChZFvbFapsMA9BfJbWlTw75vRToj6252IC0HpMxWZ1m8lIrU4OTxX5n9_kElDFAqJhNDo2ih-qEUWiTj9IE3OrIS2x025axXrUdu7lu4UWr0WpC1Rv-XmU7SnaVgrbJ-ykhzkbOcs5kW3WXA3GBZXObLv-12FFPyxLG53nP6wRAPLU0pkUR5DWnfxeJzG_-ZUbKWBep6QsL_6w3TJsrofQzxaPax7M&t=AQIBs96-Lc8KYc3OjTY"></div>
                             </div>
                             <!-- Fila 5 -->
-                            <div class="trace-item" data-name="reel - para cada necesidad" data-camp="conversion - evento compra a pagina web" data-status="ACTIVE" data-date="2026-04-23" data-budget="5000" onclick="showAdPreview('120243585452130593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="reel - para cada necesidad" data-camp="conversion - evento compra a pagina web" data-status="ACTIVE" data-date="2026-04-23" data-budget="5000" data-performance="medium" onclick="showAdPreview('120243585452130593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - para cada necesidad</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion - evento compra a pagina web</div>
@@ -1780,7 +1787,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQLeA-clK2Id82fMKNwqZvvyPpejztoDTnQpnmHYsMVeIzcCo2h_NZ8skY-8MSx5QCtCq5zVzndsiHRDh8_dZ22gIMqIpIytiWWn8uWynbm2MEuPqEBWJ7Iz9DFPotXVyTMoD9fIvw_sSkmxbP2Xcz3Mjm-HVavZA_6EU77KEzaHxXzXaZMYKbCOxkI_edJwhkgDf7GCLVngNNpCh0qJ1RtebHeTi1ZxbHY1ECC2FyKjY-k03-H3N7NEdfByIdG53M0d4_c8xZI_MPt-rXNN9uX3ciJJGdCG2qrIqcyWGrxLYwZxekwcDCeELuZokiPXMfGVIurZrx4ITr-_AMj1R7NYKBnmSsfJO4v04bp8Qan9w2kfGCU9eOeL8cQ4FzeCDvqHEt-bSfmupP3LQ6vd0e-_Uf4nlP_vMTdvIrbCpfx0inKsVvt_0PF5V-ggCmd2eyA&t=AQKaPeo4-BpAjsjFmAk"></div>
                             </div>
                             <!-- Fila 6 -->
-                            <div class="trace-item" data-name="reel - tenes alguno de estos sintomas??" data-camp="conversion - evento compra a pagina web" data-status="ACTIVE" data-date="2026-04-23" data-budget="5000" onclick="showAdPreview('120243585452140593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="reel - tenes alguno de estos sintomas??" data-camp="conversion - evento compra a pagina web" data-status="ACTIVE" data-date="2026-04-23" data-budget="5000" data-performance="medium" onclick="showAdPreview('120243585452140593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - Tenes alguno de estos sintomas??</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion - evento compra a pagina web</div>
@@ -1797,7 +1804,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQJ-2mXpsx99oCuEZ3KSyjMyNJJDlODK3_s0tQuXy_Xcm88ZcE5n889aoZehQF1lcLEHh--svBqR6_vCBcySDfC0hX_0b91s8N6InwkUuDYv-LDSZo6Hb65ddrUo_UDlnQ4x7moO2DMEsg3dOv0yp0IE_4l1ME13MYP9t6w4IrE4lNBFUvYms4CNEYQ44C5Kbjb7qJsrb1mBQWRpgCiNitefYEn5BSlosQEi2fumeEadd4VHKLah-1u1d4VEzA64SWxfgUIsdrk8c9-tOqEqiEKjRrYaqM4vRskOUrbB1mEPg9n2xQ1HezJ4j1t3xe8nWiqx-9JEWujLHdmwrk4cemvkvj0XWmy8LbXU-BGaggzfNOO9Z7QpR26VjUvtu1t212dxCwWuLP-oRhBCTRU76YuAytmhUgPteaijhODbiR2g98YGRgLDPCRd6XcY-qwuvYk&t=AQKygkhhRqAnJW4Mggc"></div>
                             </div>
                             <!-- Fila 7 -->
-                            <div class="trace-item" data-name="reel - cuida tu rubio" data-camp="conversion - evento compra a pagina web" data-status="ACTIVE" data-date="2026-04-23" data-budget="5000" onclick="showAdPreview('120243585452120593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="reel - cuida tu rubio" data-camp="conversion - evento compra a pagina web" data-status="ACTIVE" data-date="2026-04-23" data-budget="5000" data-performance="medium" onclick="showAdPreview('120243585452120593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - Cuida tu rubio</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion - evento compra a pagina web</div>
@@ -1814,7 +1821,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQKpqbjZmzFptIrcdS0kdRK4LRuJi5jwxn2_PIf6J4bZXXIW01ygfSK4aIMGeTNzVPaaRaZDIK365YBB36C_2i76Zjc4BWXi9WJ_ujpSmgv7s6sSRgdSYd8XRjmu8DBwMtS6C55Mo6_MKEN5fJLpjzthCoOt4bYY_d1Pgye2tYXKLn_vzj2OdX-v4I-O9Vz8GsIk8Mdjr6qlCostYUFEbAu4WdMVxEQOC3kF5VSiBGmKob7q5rC2XYvlToTI8ET0-gSDEq4bTtdO6q5C_djQjocLbN4_SY8PCRAtYSfLkmUF9QiKj3KLu3QUOp6aQoEi1Kk2qA47-3OW-BN6nUQ5y2tWphWtPsqiP0vHw5_ohADxWf-zIT_F7c5PkHi8AO-BQc3UQDrM-6e4bpl3gVVUDmqqRN8wwMqWTogJvv5rv86nDvmLtDkUeZk9yRXglJUNyfA&t=AQKotlXc4_PxgFAVlMQ"></div>
                             </div>
                             <!-- Fila 8 -->
-                            <div class="trace-item" data-name="reel - tenes rulos ??" data-camp="conversion - evento compra a pagina web" data-status="ACTIVE" data-date="2026-04-23" data-budget="5000" onclick="showAdPreview('120243585452150593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="reel - tenes rulos ??" data-camp="conversion - evento compra a pagina web" data-status="ACTIVE" data-date="2026-04-23" data-budget="5000" data-performance="medium" onclick="showAdPreview('120243585452150593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - Tenes rulos ??</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion - evento compra a pagina web</div>
@@ -1831,7 +1838,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQLcNFEnyr6MP1cB9E87sL2zB0LniROLAT8pUL_ZWh6LGc9Ti_KA0LWT5g_MUr3cVM2Ru_cJBpLA3g1JneHiz4fUDMc-NbmToaVPOvKloaV1lnM5hCTh3KUhDCXSQTFRqYr7d3l86RalOiuQhPnvs5md3RcMEr6CJ7LpczWGHDlsA8_lyukKYETKpM2Acf1LzF38Ve7rEJasiwmkLKWDj_6VSJpMYDPf4b1dLbr8f0tToOM9HVlVCDjvJBsWjqD_Dr12PoIFiPDWzCty0aOHU4Q58_6xLhEXHA_Elv-qh0_m2_xPHSqYOcjvekvrXJUA_hG3AYCVKTLnxBOMBrK6wNrtE4CbTR493iH7ebTZCd38WN1x5Qwku641O3OtPqZGtOrcW3QbiR5WpYmwm77aIeuGPVnOuMwOTf3H1B6eXwMx-B-StlinBcJftcAhi-wHquI&t=AQJPQ-pZ2sN_CpMD-P8"></div>
                             </div>
                             <!-- Fila 9 -->
-                            <div class="trace-item" data-name="reel - si sos estilista o tenes.." data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" data-date="2026-04-12" data-budget="8000" onclick="showAdPreview('120243024605250593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="reel - si sos estilista o tenes.." data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" data-date="2026-04-12" data-budget="8000" data-performance="insufficient" onclick="showAdPreview('120243024605250593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - Si sos estilista o tenes..</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a WhatsApp - trafico frio B2B</div>
@@ -1848,7 +1855,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQISok93uYPdU8C-BXWgqNZAa1jxNjAxRO8y_-j2FAQJQ9MRYH05X8z1BbtpSnVhnKQunmLoao7vAtGmcXAypNhzqoGCkUp8NibDx9HJGAhzZT3HBT2ClsP4mrgwcnQ6c1UiiI1Y7egIHVRiQASx47jCqFhBFO54N6rW5TvWFrzqia3krG0gwZXJDujhx31swfpxiOI3vQwlcv44la9f9gtQ1vrWugcBukqonW4ZWjBus_DQdgReAmdSlOPi9hi6quNgO-LxEXqTGuS9Q2UPs6QPVuEQ_EPpoue2AA2quz_s4xuB9-WTISbI7EzvPR2ZNZOWMJ7lbWIPXXv_bzjSf_b2pd23bjHcZ-V_PfAKWFDqdJsHneohqWTDU9OUeT6ZO9vdPzv2V0Fvzf5VGu3SD9bYtAFfpZim1WKgELc8WB4BUnNBtR50VeTwewmnUz7qvlg&t=AQJSjCA-NRY5xTBDxNI"></div>
                             </div>
                             <!-- Fila 10 -->
-                            <div class="trace-item" data-name="reel - cuidado pre y post solar" data-camp="conversion a pagina web - trafico frio" data-status="ACTIVE" data-date="2026-02-27" data-budget="3500" onclick="showAdPreview('120240974567520593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="reel - cuidado pre y post solar" data-camp="conversion a pagina web - trafico frio" data-status="ACTIVE" data-date="2026-02-27" data-budget="3500" data-performance="medium" onclick="showAdPreview('120240974567520593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - cuidado pre y post solar</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a pagina web - trafico frio</div>
@@ -1865,7 +1872,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQJOYYBGTNE1wK7zISMc2G4JShiXJDY0ugTGPxtDikjwKZ8chl8k4xcWZfXatT1ahwuMN5aCL_f3K0o-mtPLs4rosl1WchvcXaR9HMQU0YUjzAD4hqcsQmqsKnGUB1GWn7-cQwlw3M5N7VklxYpL4rP9e-NACOpu6CIrn6lV-4A15C_vHfa56lMmckUOeluX35ng1wCygOIVv0dGvMdEJaIt10cA7YHrQrc3ZhhIpqBhcAGZAKzZyC3b80mMhxpw_dvDPLjx-IDzYAlPfRLSZxm6io8EtZVwuxW351CGgvZn_e815DR5xs9RG1SnZ3SGJxkiv1xMSjuE-txFfIXh7xdvMPZGaP-G6j5X22t-qIqy8ZaDTSgDA1Zp9J19Or8NdvbWFvsXP8mBMr7EB0tR9YX8Ithng5uQUCoSHfVou6XBpXk-K_77_I20kGn4zPmmXiU&t=AQLFxnAGEG--G2A8qj4"></div>
                             </div>
                             <!-- Fila 11 -->
-                            <div class="trace-item" data-name="reel - tenes rulos ?" data-camp="conversion a pagina web - trafico frio" data-status="ACTIVE" data-date="2026-02-27" data-budget="3500" onclick="showAdPreview('120240974496280593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="reel - tenes rulos ?" data-camp="conversion a pagina web - trafico frio" data-status="ACTIVE" data-date="2026-02-27" data-budget="3500" data-performance="medium" onclick="showAdPreview('120240974496280593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - Tenes rulos ?</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a pagina web - trafico frio</div>
@@ -1882,7 +1889,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQK6KTp3EYf9E4kiJaycvwVsHn8Wt0N3DH9xMjhv_lxNgYb7RSgxGLH0csziJWGC7zj4FbNNIbrl1CwEF_kfOT-kBk1yWWgUFZwF8lJW67pDAxO35sUT-5ZM_nNAqSk0bXLIQLe7Qtp_GPcipRaYgk72FaYWnmVJubWrdKtpp5ZdAKahrpxZfo94nsyGTcEk1lNyfwwW1diaML3zIPai9i8G5eqVHWK8TrzbfuwoZV6Od6GlkRYyel7NZWHwAky0rZKVTLsD3WX9TApfTbYL2PTxw69K1JQwydujlxaWw8-MN2EmLNT7i5WU6mJlRQKq42PnqNVRw_S_WkQwMpJKKjuJwd5X78dJnwrfqAWy7klCPubMrGI7NIbx3kw05EPXMCT-Y6P2AcTkExBHRZBmzlvfNhy7tzeGE-96-6s0Z8m0kN_I6h00YffJsh0MdDnAOdg&t=AQLVMrnWqcat5Bv8F-A"></div>
                             </div>
                             <!-- Fila 12 -->
-                            <div class="trace-item" data-name="reel - tenes alguno de estos sintomas?" data-camp="conversion a pagina web - trafico frio" data-status="ACTIVE" data-date="2026-02-27" data-budget="3500" onclick="showAdPreview('120240974349340593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="reel - tenes alguno de estos sintomas?" data-camp="conversion a pagina web - trafico frio" data-status="ACTIVE" data-date="2026-02-27" data-budget="3500" data-performance="medium" onclick="showAdPreview('120240974349340593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - Tenes alguno de estos sintomas?</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a pagina web - trafico frio</div>
@@ -1899,7 +1906,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQLkTTC4-Hw9X5n4aFCfh7bEhwKLmPVaRRnXBDxUx9AyMt6DQoM3H7OZIUul5eiw7v8xQY36jjMlzepEbpvrk49Gltb1Gbr_y81omXvvAFgF0nes6J5OAb52Mg8dUlx11USBLpOEn_2zmO5UpFIYjRxVJj0DSapuwUcTR1PDOflw7MMgLO6oQaZlhb5MZHc46VVAXfYBGbYnVSfn4K6udbiIiMATa1BwBvNXZ-b9Tr3h0NCCS1755ccecVY6oNDL-ZAWVduM-0KBKTBeqeEA4VU237pUo-rLmP0xvBbpWc1ZDTMA2BqpVYuHroofxqOTnjJ9DwX6pjTrpTSAwQ-KUGg77PO6tnGeqv8MXxHx_pQGv970rfROMjKb8gCnYlXkfhS3YkxzwT6EkWjrw8KMuSX_6XlHaxHeaFXRwDdLbgpXtmJkVDFDTQYjlT3UVlqoI7U&t=AQIUZ6t9h_CETQAiIk4"></div>
                             </div>
                             <!-- Fila 13 -->
-                            <div class="trace-item" data-name="reel - protege tu cabello" data-camp="conversion a pagina web - trafico frio" data-status="ACTIVE" data-date="2026-02-27" data-budget="3500" onclick="showAdPreview('120240974349330593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="reel - protege tu cabello" data-camp="conversion a pagina web - trafico frio" data-status="ACTIVE" data-date="2026-02-27" data-budget="3500" data-performance="medium" onclick="showAdPreview('120240974349330593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - Protege tu cabello</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a pagina web - trafico frio</div>
@@ -1916,7 +1923,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQI5elReOX4WqAmBj7ss9dNLY1rJYBFGPeqSpVtz-mtrEtBRIwehzrpS1DNP1TvqsdRP6mnOr4u8mkHS5n9gH_aeVzuoQ1yo7bgnFCspITCspUvk60yH26rrKeHyfKWVYiWIA05_CswBB08ogvoCbnGuPReXM46sLzmxJmIoeQmO8PukM4arkwqVyFHuGKqe_us6zPNEbmRVl6_3zqusmj_69Rv6S6r91jCnprgtq53_n9maxZGi79MCd52amKsI84cA8svqWKohq4NeIsi-360RU3Stb8hd1iOHJsPcveaSEDu2ejNW6NCB5ySYkxOPYOlTCHMgSPqJsFreloXtWlw86uVPSRGstXLV63SRJheKjGrKTPj6bbH7-Nira95qlOphph43ID75l0CLc9n5W4nw1UjcNF0Gm0y6IwJLpYc1rjyrM1IOADqrJNW1OHPhKqU&t=AQKENf4F2qSIa0o7qlk"></div>
                             </div>
                             <!-- Fila 14 -->
-                            <div class="trace-item" data-name="reel - ugc jaz febrero" data-camp="conversion a pagina web - trafico frio" data-status="ACTIVE" data-date="2026-02-27" data-budget="3500" onclick="showAdPreview('120240974349310593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="reel - ugc jaz febrero" data-camp="conversion a pagina web - trafico frio" data-status="ACTIVE" data-date="2026-02-27" data-budget="3500" data-performance="medium" onclick="showAdPreview('120240974349310593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - UGC Jaz febrero</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a pagina web - trafico frio</div>
@@ -1933,7 +1940,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQKyz6Oo9-ttqmrA23lAcrVuTSBIpGQZVx5x5csPcMNu8KftOm97YSO25uwXfopJxaavppqQVNoumDh-0XFvyF2GjaMnlsSUmrZV8I6fhQD1XZ3BdgMmHcUYeE8B4kssZQqRDoKMXlttMSdRXK2hWnqAWzIx1FsqB6g7bAj94MN31-MwdFX9fwvPpuKaGIhUCNpnzoUk-AvE45aJQnTv-NBHaVxyYHKRbtTJvsslke-wTqsmVR7xn2OBv8_TteAANzaC-ZP-4xxh_sEGvtOQ5DzagAm8yRYXU6SLcEcAcI7c9pFVTOTSwQmqRIZnPSTYrFhVeqJ3eJHbHqlNxKhFEiY5oCPkVIXig-i5DDbVi247sKmwBqa9rZYRM5eOTMbQIAv_zD3OnkrUzLFqEhD7BKAl1RqGQQKAUtLMoh4DfCvfc3Oh4W3Vlit5PxW8fRtM5Q8&t=AQKf9yCNYPcD1QKKgys"></div>
                             </div>
                             <!-- Fila 15 -->
-                            <div class="trace-item" data-name="reel - descubri lo ultimo.." data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" data-date="2026-02-27" data-budget="8000" onclick="showAdPreview('120240973711800593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="reel - descubri lo ultimo.." data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" data-date="2026-02-27" data-budget="8000" data-performance="medium" onclick="showAdPreview('120240973711800593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - descubri lo ultimo..</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a WhatsApp - trafico frio B2B</div>
@@ -1950,7 +1957,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQKjAghYPI_5V82i_uw0vYmuUU5EgoXX7ZNOyWaAdwqlJ_h74ixpnjMkPpvflFXiObTVOvhiu7y3yZw28DNHvaTKNKBGMY_isPLTuUk6rADmFPZQfczrM6TRy3iodDVdiBqcLAARniw9Vw90W0X3vYW7HUsmbSgF6ICF5TDF9BvpdgNMI4fzDQ8wlEHO1Tc1dbxDU_dndXzeD4UGz3bOI6vkqAqedjHEwOTz7tV_-cDfhSU7N_jMz-j5zJphhDmRKVuMvSEvFbVlnwLdMMW8oD1qoUYgr4NEeIMSc3M2vgpK7en0LgVADehJHgTIM8oEe-OBv1_xzwXzuEweWK840NOW5VEZbkptlFcAHk9RfVWBUcmdRhNpWrdEb5_nj_a883YYW4n88liVQAbeylOtOuJbiO9tuWtk4Qvy7xP-nmFwbvY-8iZ867LsTYGi52uDh6M&t=AQKTwE4Sp3sO7bVRZLY"></div>
                             </div>
                             <!-- Fila 16 -->
-                            <div class="trace-item" data-name="reel - 18 años confiando en matrrix" data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" data-date="2026-02-27" data-budget="8000" onclick="showAdPreview('120240973745010593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="reel - 18 años confiando en matrrix" data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" data-date="2026-02-27" data-budget="8000" data-performance="medium" onclick="showAdPreview('120240973745010593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - 18 años confiando en matrrix</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a WhatsApp - trafico frio B2B</div>
@@ -1967,7 +1974,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQK5jMNG4S1ZLAVsOpVB-1oVUR3gzr7T4jT8ELUIrw7_KHZVGIY0lhx3fuXswibaRxLU8tE1mhl65c3UW0VSusAYmZ5V9Kv_PJC7J13qWNnLE2VOjF9XC4-wQYtHZk8SCZ3k67GuPX-F9RlaPiujB18o61wlBsbXfvmPonCjIP64dqdAojacMhi3WdAL9JgHQzqjrKztdOqM32eKV3Bxs2mc33d4H57e9RLUuOdu_LWZbSK4izcUsjs2IjvmWq4RGfJeiZN6xwkWFdSPDyYSB01UOwk_5lrFf-3Td5A7eIWSAZnyxAJUxPy7IlZfWMdtglcIzKWCo46i8fqc60a31U0a0tMg5biZI3FEWpHfYV0ehOugy4rH4WnBGDW4rnCMtHcnvptNlaUBlHlcNh2422RDSkKk3HcIIaNKa2THy615UFP4R1BWxEgREmW5F5kAmOU&t=AQLbNyz4niVSuag8y-I"></div>
                             </div>
                             <!-- Fila 17 -->
-                            <div class="trace-item" data-name="reel - herramientas que podes encontrar" data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" data-date="2026-02-27" data-budget="8000" onclick="showAdPreview('120240973680070593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="reel - herramientas que podes encontrar" data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" data-date="2026-02-27" data-budget="8000" data-performance="high" onclick="showAdPreview('120240973680070593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - Herramientas que podes encontrar</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a WhatsApp - trafico frio B2B</div>
@@ -1984,7 +1991,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQIfCnz8MvEjR_RQcjxFxV_m4EmpIC1nRjktYLdQAJb9s7mW7h0hzKr8ee25DwrS6DatRmkVDPTklXioisjq-7Rh2Uoi0jCv2jZ2dfTsnFoLpKbTvH-w2KkG73yG5FAx0Uq4YAc2hOP_cTgkurtbVnJDv7z6Sv2qKmiWmGxG4ajMV10l-FDL-0CUQUGphT_LwozQTmImV8INMjPdldHKmKfXBKXDmZbUqhPhK07GZ09suqloI7hQs_1d6_uW3JJuXzovG54IZZjt4t87IB9KqwEoPebT3BC5MgxMoCXWouBDuiVHTvTYfmfkXQm7LzTSfddS8YLUL0OCm1s2fG2_R8NOMJoSvRRHxt0vG7Y5nRwPMlbcOx37zw8V2xS4WTdEhymp5a4uBeoM8B7MBMfhkvlPlEmqBiIJ7Bo83qUZ6ybapR4-UtNWIAJ7xUdmw-kbfAY&t=AQIxlI9pr_TjP-reDro"></div>
                             </div>
                             <!-- Fila 18 -->
-                            <div class="trace-item" data-name="reel - si tenes un salon" data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" data-date="2026-02-27" data-budget="8000" onclick="showAdPreview('120240934489890593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="reel - si tenes un salon" data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" data-date="2026-02-27" data-budget="8000" data-performance="high" onclick="showAdPreview('120240934489890593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - si tenes un salon</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a WhatsApp - trafico frio B2B</div>
@@ -2001,7 +2008,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQJWtROC4vS3yjlWj4x-I90-WNg3vNrCajlWmcmg-QczvczvrinCopTJiMiJE4hpxytvTW8Uns2x_EWpsNj3PDKI7L0SAJXdsNEj95_cyY6jn5ybWQOFpgbYWFEcjcNIgPaQknOQwKcvnSMv0ohIkmlWaX4_MKi9gVhBKg2bIOqCxzQ0Ju036RVqAqHDmBncd19RqD6_S67c_5AVWyJgsk4CugYkBh3ENe9oLWBfqXAFewkJNbeAQOD_TjqV4W_IAK-sNWGv9VJbWMqNTN9Yb7UdNsSD6HTObZEDeLJPQxPUK-_242GeLHHmZNAPgt4_H7f0rdiEsQpjriHMfalxWpstJx3iuk9VuPtKhOz1vQ2Jvyax6JOK2BUYOKQwhA7YJih1HbVExB2GMeuMTfcRgAZqM-Oi_jCYXr_ik6OeI4-1gYpbYezwI67UAM_MW2W3vuM&t=AQKSpcwvAM3M3fs5k5o"></div>
                             </div>
                             <!-- Fila 19 -->
-                            <div class="trace-item" data-name="reel - que podes encontrar en dos soles?" data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" data-date="2026-02-27" data-budget="8000" onclick="showAdPreview('120240973691170593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="reel - que podes encontrar en dos soles?" data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" data-date="2026-02-27" data-budget="8000" data-performance="medium" onclick="showAdPreview('120240973691170593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - que podes encontrar en dos soles?</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a WhatsApp - trafico frio B2B</div>
@@ -2018,7 +2025,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQLhRwCKkUwpYRAKN29diq6A26FDXThcmMGxoiGt9es0nP_e21Gv7cUR4Qpw6-MY5rMGRr_N85Y3VMdToL-5j3lQqOvjk3b6R5QwmBhbIDBYtvbqfrhSJpI8AmtCyUhFsZAk897WROLrDQE6hgwfmO6eWWIq8AHUY66JAS64G6-6GPRfgJJawxUk4Gg2Q4dbmf6ZWLYJfjSK70adcqacM1pVJBzPRzNzWNmxecjqIvZCzy15ulEqtHXzgMi94tCX2spTgvx6ilNplPg8U41oOB_o0tDQKDnUTfT4SplbV0AsmPspciX-AG-n7hMivdsOUaHhXTrTjfAPES4DMAD1vx_0YLPAsSfgj23V2yQdJNGXgQKra5cOTbsxa2Ri2surl43M4vVUc9Y8mVr0arYwZbLvwzOEy4th25cwpV0hmRRo-XeaC0BjRt3CUdmkeUTLzKw&t=AQIxCFQ8BVyMGsbS680"></div>
                             </div>
                             <!-- Fila 20 -->
-                            <div class="trace-item" data-name="reel - somos distrib de matrix" data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" data-date="2026-02-27" data-budget="8000" onclick="showAdPreview('120240973659820593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="reel - somos distrib de matrix" data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" data-date="2026-02-27" data-budget="8000" data-performance="insufficient" onclick="showAdPreview('120240973659820593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - somos distrib de matrix</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a WhatsApp - trafico frio B2B</div>
@@ -2035,7 +2042,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQLz9mVJ72ktVh1e9C2L69LH5eNsrFHs8bkZqvpp36wWht7Awz5jEL6XlMZKqX-H-oAlDXr41yB2m7z0H8PnSmxmgAERiOpRKJQ1lOcqyOTZxq5dQQOgcjs6MTmqyukvXeFqd3LiXlh6GKT6T4Y-oxiHhMJj8c-8STY1NoGxTMsRqO63NH-_bHwk4BEcFJy-ZxMMYwG8MxQhlJMTF4X1IJiPC61gFtnROZRsKUkpjAd5TE-obezpJ4xZpTttx2J4MA0q6ss-e8lOsJGoB-DD15_7DAM6WuCMzDKnuAFBeHrXGFd4Pqo7uNOsgdkGfbjtPgcZUUpgIguy9DL8w1zkjGj0m87dXVe47RTouZRcBI4GCYhxwiDYv50rcImgQVwRUrh8wnyXwjk-15vBr04W_HySKdEAJk-OUr3o90riG24QWkIMiG-7uT8Myw_OyDpxRzM&t=AQImtg8e0r6cSK0ff0I"></div>
                             </div>
                             <!-- Fila 21 -->
-                            <div class="trace-item" data-name="reel - equipa tu salon" data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" data-date="2026-02-27" data-budget="8000" onclick="showAdPreview('120240973645810593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="reel - equipa tu salon" data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" data-date="2026-02-27" data-budget="8000" data-performance="medium" onclick="showAdPreview('120240973645810593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - equipa tu salon</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a WhatsApp - trafico frio B2B</div>
@@ -2052,7 +2059,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQLsRDsJ0AUl_4xQHJvpAVCli88Y9MeBkAxTnDDVIuYR2IF6RnYan0i4zIPMukUFqE0dijmDAdpj7ASu5qXoXgC6egWFAikiX-tnFcCOHdu5OqPi7qM_KEBemxaAG8YV6-iaoOBCfwLTJR9ch5vttix-GtCS6bjqRCW1ogdtWjiY1tThlufrOZeszawP3uZvb_7vv9dUMBbR9mQNXUrHiZxIEnE-YwFo1DLTqCFh7fyW-x0AXo_gKxwekox1szg1DsOeMY5RbrFKgJFmadD0ySie_vNg05W9HyESs_Xw2czOhBMCSfAz1X3hK8BQ2kWu_SxvEBJ6zhAShRbfcgimt0MKehTjO1J5OZj4AUDW_t1tschtlnDTqVXbMm5jDuXOecapbF7VB4IruJbAN77v-S442ljXsO3jWViVeE3JzIN4v2Ea8quxhTQ2367O256pPdQ&t=AQJNbJjX8d_LbVqDtQs"></div>
                             </div>
                             <!-- Fila 22 -->
-                            <div class="trace-item" data-name="reel - queres incorporar.." data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" data-date="2026-02-27" data-budget="8000" onclick="showAdPreview('120240973923650593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="reel - queres incorporar.." data-camp="conversion a whatsapp - trafico frio b2b" data-status="ACTIVE" data-date="2026-02-27" data-budget="8000" data-performance="medium" onclick="showAdPreview('120240973923650593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - queres incorporar..</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion a WhatsApp - trafico frio B2B</div>
@@ -2077,7 +2084,7 @@
                             <span style="font-size: 2rem; display: block; margin-bottom: 10px;">👆</span>
                             Hacé clic en un anuncio de la lista para previsualizar su contenido real.
                             
-                            <div style="margin-top: 30px; padding: 15px; border-radius: 8px; background: rgba(244,63,94,0.08); border: 1px solid var(--accent-red); text-align: left; box-sizing: border-box;">
+                            <div style="margin-top: 15px; padding: 15px; border-radius: 8px; background: rgba(244,63,94,0.08); border: 1px solid var(--accent-red); text-align: left; box-sizing: border-box;">
                                 <div style="color: var(--accent-red); font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
                                     <span>⚠️</span> ALERTA DE FUGA OPERATIVA
                                 </div>
@@ -2093,6 +2100,32 @@
                                     • Clics Frustrados (Rebote): 136 clics<br>
                                     • Alcance: 1,313 personas (estilistas)<br>
                                     • <em>Jaz UGC 2</em> quemó $6,777.37 por sí solo.
+                                </div>
+                            </div>
+                            
+                            <div style="margin-top: 15px; padding: 15px; border-radius: 8px; background: rgba(0, 242, 254, 0.035); border: 1px solid rgba(0, 242, 254, 0.15); text-align: left; box-sizing: border-box; font-family: var(--font-display);">
+                                <div style="color: var(--accent-green); font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; gap: 6px; margin-bottom: 8px;">
+                                    <span>💡</span> GLOSARIO DE CAMPAÑAS
+                                </div>
+                                <div style="font-size: 0.68rem; color: #fff; line-height: 1.45; display: flex; flex-direction: column; gap: 10px;">
+                                    <div>
+                                        <strong style="color: var(--accent-green); display: block; margin-bottom: 2px;">💬 WhatsApp B2B (Conversión chat):</strong>
+                                        <span style="color: var(--text-secondary); display: block; font-size: 0.65rem; line-height: 1.35;">
+                                            Busca el contacto uno a uno. Un bot califica y deriva al asesor comercial para cerrar ventas de grandes cuentas. Más personalizado, pero registra el mayor costo por clic ($92.76).
+                                        </span>
+                                    </div>
+                                    <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px;">
+                                        <strong style="color: var(--accent); display: block; margin-bottom: 2px;">🛒 Compra Web (Conversión Web):</strong>
+                                        <span style="color: var(--text-secondary); display: block; font-size: 0.65rem; line-height: 1.35;">
+                                            Busca la compra automatizada en WooCommerce. Ideal para reposición recurrente de stock 24/7 sin costo de atención. Registró la mejor tasa de clics o CTR (4.75%).
+                                        </span>
+                                    </div>
+                                    <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px;">
+                                        <strong style="color: #00f2fe; display: block; margin-bottom: 2px;">🌐 Tráfico Frío (Visitas Web):</strong>
+                                        <span style="color: var(--text-secondary); display: block; font-size: 0.65rem; line-height: 1.35;">
+                                            Atrae nuevos estilistas que no conocen la marca. Envía volumen a la web al menor costo promedio por clic ($78.39) para nutrir el Pixel y generar reconocimiento.
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -2119,12 +2152,14 @@
                 const search = document.getElementById('trace-search').value.toLowerCase();
                 const status = document.getElementById('trace-filter-status').value;
                 const campaign = document.getElementById('trace-filter-campaign').value;
+                const performance = document.getElementById('trace-filter-performance').value;
                 const items = document.querySelectorAll('.trace-item');
                 
                 items.forEach(item => {
                     const name = item.getAttribute('data-name').toLowerCase();
                     const camp = item.getAttribute('data-camp').toLowerCase();
                     const itemStatus = item.getAttribute('data-status');
+                    const itemPerformance = item.getAttribute('data-performance');
                     
                     const matchSearch = name.includes(search) || camp.includes(search);
                     const matchStatus = status === 'all' || itemStatus === status;
@@ -2138,7 +2173,9 @@
                         matchCampaign = camp.includes('pagina web - trafico') || (camp.includes('trafico frio') && !camp.includes('whatsapp'));
                     }
                     
-                    if (matchSearch && matchStatus && matchCampaign) {
+                    const matchPerformance = performance === 'all' || itemPerformance === performance;
+                    
+                    if (matchSearch && matchStatus && matchCampaign && matchPerformance) {
                         item.style.display = 'flex';
                     } else {
                         item.style.display = 'none';
