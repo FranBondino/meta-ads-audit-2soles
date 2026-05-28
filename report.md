@@ -262,8 +262,9 @@ Para maximizar el retorno orgánico y pago de Dos Soles, proponemos estructurar 
 ## 🛠️ Plan de Acción Estratégico (Roadmap de 4 Pasos)
 1. **Escalar el ganador oculto (Prioridad #1):** Aumentar el presupuesto del creativo estrella *`Reel - si tenes un salon`* (ID `120240934489890593`). Con un CTR de 3.51% y solo el 6% del presupuesto asignado, escalar este anuncio es la oportunidad más obvia de la cuenta.
 2. **Monitorear los activos con datos insuficientes:** Los Reels *`somos distrib de matrix`* (ID `120240973659820593`) y *`Si sos estilista o tenes..`* (ID `120243024605250593`) tienen muy poca inversión acumulada para diagnosticarlos. Darles 2-3 semanas de rodaje con volumen real antes de tomar decisiones de pausa.
-3. **Reactivar E-commerce Web B2C (Minorista):** Volver a encender la campaña *`Conversion - evento compra a pagina web`* (ID `120242751389540593`) con un presupuesto diario inicial moderado para recuperar ese altísimo CTR del 4.75% y el embudo digital B2C automatizado, que vende solo a consumidores finales con el máximo margen minorista y sin costo operativo humano.
-4. **Optimizar el Cierre de WhatsApp B2B (Mayorista):** Configurar plantillas semi-automatizadas y respuestas rápidas en WhatsApp Business para atender el volumen frío que genera la campaña activa (`120240934489910593`) enfocadas 100% en calificar al estilista y salón mayorista, asegurando que los asesores solo dediquen tiempo humano a cerrar cuentas profesionales de alto ticket.
+3. **Reactivar & Evolucionar a Portal Web Híbrido (B2C + B2B Profesional):** 
+     *   **Fase B2C Inmediata:** Reactivar la campaña de compras web minoristas (ID `120242751389540593`) para capturar la autogestión de alto margen de consumidores finales.
+     *   **Evolución Portal B2B:** Desarrollar en WooCommerce un **Portal Profesional Protegido por Login**. Al iniciar sesión y validar su cuenta, el estilista accederá a precios mayoristas especiales, preventas exclusivas de lanzamientos técnicos (como Matrix o Truss) antes de que lleguen al público general, y un panel de **Métricas para el Salón** (historial de consumo, alertas de stock recomendado de tinturas y sugerencias de recompra automatizada).
 
 ---
 
