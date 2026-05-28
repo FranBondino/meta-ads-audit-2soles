@@ -2246,7 +2246,71 @@
                 const previewLink = document.getElementById('preview-link');
                 if (previewLink) {
                     previewLink.style.display = 'inline-block';
-                    previewLink.href = 'https://www.facebook.com/ads/library/?id=' + id;
+                    
+                    const adBody = payload.getAttribute('data-body') || '';
+                    const adTitle = payload.getAttribute('data-title') || '';
+                    
+                    let query = '';
+                    if (adBody && adBody !== 'Sin copy de texto.') {
+                        const cleanBody = adBody.replace(/[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF]/g, '')
+                                                .replace(/[.,\/#!$%\^&\*;:{}=\-_\u0060~()?"¡!¿]/g, '')
+                                                .replace(/\s+/g, ' ')
+                                                .trim();
+                        const words = cleanBody.split(' ');
+                        const meaningfulWords = words.filter(w => w.length > 3).slice(0, 3);
+                        if (meaningfulWords.length > 0) {
+                            query = meaningfulWords.join(' ');
+                        } else {
+                            query = words.slice(0, 3).join(' ');
+                        }
+                    }
+                    
+                    if (!query && adTitle && adTitle !== 'Sin Título' && adTitle !== 'Dos Soles Distribuidora') {
+                        query = adTitle;
+                    }
+                    
+                    if (!query) {
+                        const item = document.querySelector('.trace-item[onclick*="' + id + '"]');
+                        if (item) {
+                            const name = item.getAttribute('data-name') || '';
+                            if (name) {
+                                query = name.replace(/^(reel|ugc|post|video)\s*-\s*/i, '').trim();
+                            }
+                        }
+                    }
+                    
+                    if (query) {
+                        previewLink.href = 'https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=AR&view_all_page_id=406051269418159&q=' + encodeURIComponent(query);
+                    } else {
+                        previewLink.href = 'https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=AR&view_all_page_id=406051269418159';
+                    }
+                }
+            } else if (previewUrl && previewUrl.trim() !== '') {
+                    iframe.src = previewUrl;
+                    iframe.style.display = 'block';
+                } else {
+                    noMedia.style.display = 'flex';
+                }
+                
+                const previewLink = document.getElementById('preview-link');
+                if (previewLink) {
+                    previewLink.style.display = 'inline-block';
+                    
+                    // Construct a search query instead of ID to avoid broken "Vincular a anuncio" modal for internal API IDs,
+                    // and use active_status=all so that paused/inactive ads also show up.
+                    const adTitle = payload.getAttribute('data-title') || '';
+                    let query = "Dos Soles";
+                    if (adTitle && adTitle !== 'Sin Título') {
+                        query += " " + adTitle;
+                    } else {
+                        const item = document.querySelector('.trace-item[onclick*="' + id + '"]');
+                        if (item) {
+                            const name = item.getAttribute('data-name') || '';
+                            if (name) query += " " + name;
+                        }
+                    }
+                    
+                    previewLink.href = 'https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=AR&media_type=all&q=' + encodeURIComponent(query);
                 }
             }
         </script>
