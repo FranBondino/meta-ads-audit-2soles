@@ -2123,14 +2123,10 @@
                 document.getElementById('preview-title').innerHTML = payload.getAttribute('data-title');
                 document.getElementById('preview-body').innerHTML = payload.getAttribute('data-body');
                 
-                const previewUrl = payload.getAttribute('data-previewurl');
-                if (previewUrl && previewUrl.trim() !== '') {
-                    document.getElementById('preview-link').href = previewUrl;
-                    document.getElementById('preview-link').innerHTML = 'Ver Previsualización Interactiva ↗';
-                } else {
-                    document.getElementById('preview-link').href = 'https://www.facebook.com/ads/library/?id=' + id;
-                    document.getElementById('preview-link').innerHTML = 'Ver en Facebook Ad Library ↗';
-                }
+                // Meta API dynamic iframe previews expire within 24 hours.
+                // We always prioritize standard stable Facebook Ad Library search URLs which never expire.
+                document.getElementById('preview-link').href = 'https://www.facebook.com/ads/library/?id=' + id;
+                document.getElementById('preview-link').innerHTML = 'Ver en Facebook Ad Library ↗';
                 
                 // Highlight selected item
                 document.querySelectorAll('.trace-item').forEach(i => i.style.background = 'transparent');
@@ -2141,7 +2137,168 @@
             }
         </script>
 
-        <!-- SLIDE 9: ROADMAP (PLAN DE ACCIÓN EN 4 PASOS) -->
+        <!-- SLIDE 9: EL ALGORITMO DE META (ANDRÓMEDA) & VENTAJAS CRM -->
+        <section class="slide">
+            <div class="slide-content">
+                <div class="slide-header reveal">
+                    <span class="slide-subtitle">Optimización del Algoritmo</span>
+                    <h2>El Algoritmo de Meta (Andrómeda) & Ventajas de la Integración</h2>
+                </div>
+
+                <div class="split-layout reveal-scale delay-1" style="gap: 1.2rem;">
+                    <!-- Left Side: El Algoritmo -->
+                    <div class="campaign-side paused-cam" style="border-color: rgba(0, 242, 254, 0.2); box-shadow: 0 10px 40px rgba(0, 242, 254, 0.04); padding: 1.4rem;">
+                        <div class="side-title" style="margin-bottom: 0.4rem;">
+                            <span class="status-pill paused" style="background: rgba(0, 242, 254, 0.1); color: var(--accent-green); border-color: rgba(0, 242, 254, 0.25);">Algoritmo Andrómeda</span>
+                            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-green);">Meta ML Layer</span>
+                        </div>
+                        <p class="creative-desc" style="font-size: var(--body-size); line-height: 1.45; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                            El motor de aprendizaje de Meta (Andrómeda) optimiza la pauta según la calidad del dato que recibe. Al integrar el <strong>Bot de WhatsApp</strong> y registrar las conversaciones en el <strong>CRM</strong>, cerramos el feedback loop:
+                        </p>
+                        
+                        <!-- Flowchart diagram -->
+                        <div class="flowchart-container" style="display: flex; align-items: center; justify-content: space-between; gap: 0.3rem; margin: 0.8rem 0; background: rgba(255, 255, 255, 0.015); border: 1px solid var(--border-color); border-radius: 10px; padding: 0.8rem; box-shadow: inset 0 0 20px rgba(0,0,0,0.2);">
+                            <!-- Step 1 -->
+                            <div style="display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1;">
+                                <div style="font-size: 1.1rem; margin-bottom: 0.2rem;">📱</div>
+                                <span style="font-weight: 700; font-size: 0.62rem; color: #fff; text-transform: uppercase; font-family: var(--font-mono);">1. Anuncio</span>
+                                <span style="font-size: 0.55rem; color: var(--text-muted);">IG/FB Click</span>
+                            </div>
+                            
+                            <span style="color: var(--accent-green); font-size: 0.9rem; font-weight: bold; opacity: 0.8; animation: pulse-arrow 1.5s infinite;">➔</span>
+                            
+                            <!-- Step 2 -->
+                            <div style="display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1;">
+                                <div style="font-size: 1.1rem; margin-bottom: 0.2rem;">💬</div>
+                                <span style="font-weight: 700; font-size: 0.62rem; color: var(--accent-green); text-transform: uppercase; font-family: var(--font-mono);">2. Bot</span>
+                                <span style="font-size: 0.55rem; color: var(--text-muted);">Calificación</span>
+                            </div>
+
+                            <span style="color: var(--accent); font-size: 0.9rem; font-weight: bold; opacity: 0.8; animation: pulse-arrow 1.5s infinite; animation-delay: 0.3s;">➔</span>
+
+                            <!-- Step 3 -->
+                            <div style="display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1;">
+                                <div style="font-size: 1.1rem; margin-bottom: 0.2rem;">📊</div>
+                                <span style="font-weight: 700; font-size: 0.62rem; color: var(--accent); text-transform: uppercase; font-family: var(--font-mono);">3. CRM</span>
+                                <span style="font-size: 0.55rem; color: var(--text-muted);">&lt; 5s Sync</span>
+                            </div>
+
+                            <span style="color: var(--accent-green); font-size: 0.9rem; font-weight: bold; opacity: 0.8; animation: pulse-arrow 1.5s infinite; animation-delay: 0.6s;">➔</span>
+
+                            <!-- Step 4 -->
+                            <div style="display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1;">
+                                <div style="font-size: 1.1rem; margin-bottom: 0.2rem;">🧠</div>
+                                <span style="font-weight: 700; font-size: 0.62rem; color: #fff; text-transform: uppercase; font-family: var(--font-mono);">4. ML IA</span>
+                                <span style="font-size: 0.55rem; color: var(--accent-green); font-weight: 600;">Optimización</span>
+                            </div>
+                        </div>
+
+                        <div class="creative-stats" style="margin-top: auto; padding: 0.5rem; background: rgba(0, 242, 254, 0.02);">
+                            <div style="font-size: 0.76rem; line-height: 1.4; color: var(--text-secondary);">
+                                🎯 <strong>Foco en Compras:</strong> En lugar de buscar clics accidentales de curiosos, la IA busca estilistas con alta intención que realmente interactúan y califican para compras mayoristas.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: Ventajas Brutales -->
+                    <div class="campaign-side active-cam" style="border-color: rgba(245, 166, 23, 0.2); box-shadow: 0 10px 40px rgba(245, 166, 23, 0.04); padding: 1.4rem;">
+                        <div class="side-title" style="margin-bottom: 0.4rem;">
+                            <span class="status-pill active" style="background: rgba(245, 166, 23, 0.1); color: var(--accent); border-color: rgba(245, 166, 23, 0.25);">Ventajas Comerciales</span>
+                            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent);">Ecosistema B2B</span>
+                        </div>
+                        <div class="campaign-meta" style="gap: 0.6rem;">
+                            <!-- Ventaja 1 -->
+                            <div style="display: flex; flex-direction: column; gap: 0.05rem;">
+                                <div style="font-weight: 700; color: #ffffff; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem;">
+                                    ⚡ Campañas "Click-to-WhatsApp"
+                                </div>
+                                <p style="font-size: 0.72rem; color: var(--text-secondary); line-height: 1.35;">
+                                    El bot atiende al instante, califica al salón y asigna el lead en Airtable en menos de 5 segundos de forma automática.
+                                </p>
+                            </div>
+                            <!-- Ventaja 2 -->
+                            <div style="display: flex; flex-direction: column; gap: 0.05rem;">
+                                <div style="font-weight: 700; color: #ffffff; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem;">
+                                    🎯 Medición de Conversiones
+                                </div>
+                                <p style="font-size: 0.72rem; color: var(--text-secondary); line-height: 1.35;">
+                                    Meta registra a quién derivamos al asesor comercial. Esto permite optimizar presupuestos buscando perfiles similares.
+                                </p>
+                            </div>
+                            <!-- Ventaja 3 -->
+                            <div style="display: flex; flex-direction: column; gap: 0.05rem;">
+                                <div style="font-weight: 700; color: #ffffff; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem;">
+                                    🔄 Retargeting B2B
+                                </div>
+                                <p style="font-size: 0.72rem; color: var(--text-secondary); line-height: 1.35;">
+                                    Públicos basados en "Personas que chatearon en los últimos 30 días" para mostrar ofertas específicas de WooCommerce.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: SINERGIA DE CRECIMIENTO: WEB + BOT DE VENTAS -->
+        <section class="slide">
+            <div class="slide-content">
+                <div class="slide-header reveal">
+                    <span class="slide-subtitle">Escalar las Ventas</span>
+                    <h2>Sinergia Comercial: Optimización Web + Bot de Ventas</h2>
+                </div>
+
+                <div class="glossary-grid reveal-scale delay-1" style="grid-template-columns: repeat(2, 1fr); gap: var(--card-gap);">
+                    <!-- Columna 1: Web + Bot Sinergia -->
+                    <div class="kpi-card highlight-teal" style="grid-column: span 1; justify-content: flex-start; gap: 1rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: clamp(1rem, 2vw, 1.4rem); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);">
+                        <span class="kpi-label" style="color: var(--accent-green);">La Oportunidad de Escalamiento</span>
+                        <h3 style="font-size: var(--h2-size); font-weight: 800; color: #ffffff; font-family: var(--font-display); line-height: 1.15;">El Gran Canal Comercial Unificado</h3>
+                        <p class="creative-desc" style="font-size: var(--body-size); color: var(--text-secondary); line-height: 1.5;">
+                            El verdadero crecimiento ocurre eliminando la fricción de compra. Con la <strong>Optimización Web</strong> y el <strong>Bot de WhatsApp</strong>, abrimos un abanico inmenso de oportunidades de venta automatizada:
+                        </p>
+                        <div class="glossary-criollo" style="background: rgba(0, 242, 254, 0.035); border-left-color: var(--accent-green); margin-top: auto; padding: 0.6rem 0.8rem; font-size: 0.8rem;">
+                            <strong>Sinergia Comprobada:</strong> Atraemos tráfico de alta intención con CTR de **4.75%** y lo recibimos con atención automatizada 24/7 sin fricciones.
+                        </div>
+                    </div>
+
+                    <!-- Columna 2: Los Tres Pilares de Escalabilidad -->
+                    <div style="display: flex; flex-direction: column; gap: var(--card-gap);">
+                        <!-- Pilar 1 -->
+                        <div class="glossary-card" style="padding: 0.9rem; gap: 0.3rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 14px;">
+                            <div class="glossary-title" style="font-size: 0.95rem; color: #ffffff; display: flex; align-items: center; justify-content: space-between; font-weight: 700; font-family: var(--font-display);">
+                                🌐 Captación Web
+                                <span class="glossary-scientific" style="font-size: 0.6rem; font-family: var(--font-mono); color: var(--accent-green); background: rgba(0, 242, 254, 0.08); padding: 0.1rem 0.3rem; border-radius: 4px; border: 1px solid rgba(0, 242, 254, 0.15);">CTR 4.75%</span>
+                            </div>
+                            <p class="glossary-definition" style="font-size: 0.72rem; line-height: 1.35; color: var(--text-secondary);">
+                                Captura de demanda directa en WooCommerce, reduciendo drásticamente el rebote del tráfico calificado.
+                            </p>
+                        </div>
+                        <!-- Pilar 2 -->
+                        <div class="glossary-card" style="padding: 0.9rem; gap: 0.3rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 14px;">
+                            <div class="glossary-title" style="font-size: 0.95rem; color: #ffffff; display: flex; align-items: center; justify-content: space-between; font-weight: 700; font-family: var(--font-display);">
+                                💬 Cierre Comercial 24/7
+                                <span class="glossary-scientific" style="font-size: 0.6rem; font-family: var(--font-mono); color: var(--accent-green); background: rgba(0, 242, 254, 0.08); padding: 0.1rem 0.3rem; border-radius: 4px; border: 1px solid rgba(0, 242, 254, 0.15);">WhatsApp Bot</span>
+                            </div>
+                            <p class="glossary-definition" style="font-size: 0.72rem; line-height: 1.35; color: var(--text-secondary);">
+                                El bot califica leads, extrae datos (teléfono, nombre) y deriva de forma no bloqueante a los asesores correctos.
+                            </p>
+                        </div>
+                        <!-- Pilar 3 -->
+                        <div class="glossary-card" style="padding: 0.9rem; gap: 0.3rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 14px;">
+                            <div class="glossary-title" style="font-size: 0.95rem; color: #ffffff; display: flex; align-items: center; justify-content: space-between; font-weight: 700; font-family: var(--font-display);">
+                                📈 Escalabilidad 10x
+                                <span class="glossary-scientific" style="font-size: 0.6rem; font-family: var(--font-mono); color: var(--accent); background: rgba(245, 166, 23, 0.08); padding: 0.1rem 0.3rem; border-radius: 4px; border: 1px solid rgba(245, 166, 23, 0.15);">Oportunidades</span>
+                            </div>
+                            <p class="glossary-definition" style="font-size: 0.72rem; line-height: 1.35; color: var(--text-secondary);">
+                                La estructura unificada prepara al negocio para absorber 10x más volumen de leads y pedidos con control total.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: ROADMAP (PLAN DE ACCIÓN EN 4 PASOS) -->
         <section class="slide">
             <div class="slide-content">
                 <div class="slide-header reveal">
