@@ -69,7 +69,7 @@ Actualmente la cuenta concentra el **100%** de su presupuesto activo en una sola
 ---
 
 ## 🎥 Hallazgo Crítico 2: Auditoría Interna de Creativos (WhatsApp B2B)
-Analizamos el comportamiento de los anuncios activos dentro de la campaña de WhatsApp B2B (`120240934489910593`). Esto nos permite ver qué anuncios específicos están ganando o perdiendo plata con total trazabilidad:
+Analizamos el comportamiento de los anuncios **activos con inversión estadísticamente significativa** dentro de la campaña de WhatsApp B2B (`120240934489910593`). Solo consideramos como dato concluyente anuncios con gasto relevante — ads con inversión mínima (~$1,000-2,000 ARS) no tienen volumen suficiente para diagnosticar rendimiento real.
 
 ### 1. El Gran Sostén (Ganador Absoluto) 🏆
 *   **Anuncio:** *`Reel - Herramientas que podes encontrar`*
@@ -77,27 +77,19 @@ Analizamos el comportamiento de los anuncios activos dentro de la campaña de Wh
 *   **Gasto:** `$171,255.54` (Se llevó más del 50% de todo el presupuesto)
 *   **CPC:** **`$79.84`** (El costo por clic más bajo de toda la campaña activa)
 *   **CTR:** `2.53%` | **Clics:** 2,145
-*   *Diagnóstico:* El algoritmo de Meta actuó correctamente acá. Detectó la excelente respuesta de la gente y le asignó presupuesto de forma masiva porque rinde muy bien.
+*   *Diagnóstico:* El algoritmo de Meta actuó correctamente acá. Detectó la excelente respuesta de la gente y le asignó presupuesto de forma masiva porque rinde muy bien. Es el pilar de la cuenta.
 
 ### 2. La Mina de Oro Desaprovechada 🚀
 *   **Anuncio:** *`Reel - si tenes un salon`*
 *   **ID de Anuncio (Meta):** `120240934489890593`
 *   **Gasto:** `$22,462.65` (Apenas el 6% de la inversión)
-*   **CTR:** **`3.51%`** (¡El CTR más alto entre todos los Reels activos!)
+*   **CTR:** **`3.51%`** (¡El CTR más alto entre todos los Reels activos con inversión relevante!)
 *   **CPC:** `$92.44` | **Clics:** 243
-*   *Diagnóstico:* Esta pieza es un misil. Llama muchísimo la atención de los dueños de salones. Como Meta le dio poco presupuesto (está infrapautada), nos estamos perdiendo de escalar un creativo estrella.
+*   *Diagnóstico:* Esta pieza es un misil. Llama muchísimo la atención de los dueños de salones. Como Meta le dio poco presupuesto (está infrapautada), nos estamos perdiendo de escalar un creativo estrella. La oportunidad es clara: darle más nafta.
 
-### 3. La Fuga de Dinero Directa ❌
-*   **Anuncio:** *`Reel - somos distrib de matrix`*
-*   **ID de Anuncio (Meta):** `120240973659820593`
-*   **CPC:** **`$218.35`** (¡Más del doble del costo promedio de la cuenta!)
-*   **CTR:** **`1.28%`** (El peor CTR y más ineficiente de toda la cuenta)
-*   *Diagnóstico:* Aunque gastó poco ($1,965), mantener activo este anuncio es tirar la plata. Baja el promedio de la cuenta y desaprovecha recursos que deberían ir a las piezas ganadoras.
-
-### 4. El Creativo Lento (Para Pausar) ⚠️
-*   **Anuncio:** *`Reel - Si sos estilista o tenes..`*
-*   **ID de Anuncio (Meta):** `120243024605250593`
-*   *Diagnóstico:* Muestra un CPC elevado de **`$161`** y un rendimiento muy por debajo del promedio. Debe desactivarse para concentrar el dinero en lo que funciona.
+### 3. Ads Activos con Datos Insuficientes (Sin Diagnóstico Definitivo) 📊
+*   **Anuncios:** *`Reel - somos distrib de matrix`* (ID `120240973659820593`) y *`Reel - Si sos estilista o tenes..`* (ID `120243024605250593`)
+*   *Diagnóstico:* Ambos anuncios están **activos** pero con inversión muy baja hasta la fecha — por debajo del umbral estadístico necesario para sacar conclusiones sólidas sobre su rendimiento real. Muestran métricas de CPC elevado, pero con tan poco volumen de datos, esas cifras no son representativas. **La recomendación es monitorearlos** con un presupuesto controlado durante las próximas 2-3 semanas antes de tomar cualquier decisión de pausa.
 
 ---
 
@@ -147,9 +139,9 @@ Analizamos el comportamiento de los anuncios activos dentro de la campaña de Wh
 ---
 
 ## 🛠️ Plan de Acción Estratégico (Roadmap de 4 Pasos)
-1. **Detener la fuga (Hoy mismo):** Pausar en el Administrador de Anuncios los Reels ineficientes: *`Reel - somos distrib de matrix`* (ID `120240973659820593`) y *`Reel - Si sos estilista o tenes..`* (ID `120243024605250593`).
-2. **Escalar el ganador oculto:** Tomar el presupuesto de esos anuncios pausados e inyectárselo a la mina de oro: *`Reel - si tenes un salon`* (ID `120240934489890593`), aprovechando su increíble CTR de 3.51%.
-3. **Reactivar la Campaña de Conversión Web:** Volver a encender la campaña *`Conversion - evento compra a pagina web`* (ID `120242751389540593`) con un presupuesto diario inicial moderado para recuperar ese altísimo CTR del 4.75%.
+1. **Escalar el ganador oculto (Prioridad #1):** Aumentar el presupuesto del creativo estrella *`Reel - si tenes un salon`* (ID `120240934489890593`). Con un CTR de 3.51% y solo el 6% del presupuesto asignado, escalar este anuncio es la oportunidad más obvia de la cuenta.
+2. **Monitorear los activos con datos insuficientes:** Los Reels *`somos distrib de matrix`* (ID `120240973659820593`) y *`Si sos estilista o tenes..`* (ID `120243024605250593`) tienen muy poca inversión acumulada para diagnosticarlos. Darles 2-3 semanas de rodaje con volumen real antes de tomar decisiones de pausa.
+3. **Reactivar la Campaña de Conversión Web:** Volver a encender la campaña *`Conversion - evento compra a pagina web`* (ID `120242751389540593`) con un presupuesto diario inicial moderado para recuperar ese altísimo CTR del 4.75% y el embudo digital automatizado.
 4. **Optimizar el Cierre en WhatsApp:** Configurar plantillas semi-automatizadas y respuestas rápidas en WhatsApp Business para atender el volumen frío que genera la campaña activa (`120240934489910593`) y que no se enfríen las ventas.
 
 ---
