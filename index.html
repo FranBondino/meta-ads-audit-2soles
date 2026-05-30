@@ -2285,33 +2285,6 @@
                         previewLink.href = 'https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=AR&view_all_page_id=406051269418159';
                     }
                 }
-            } else if (previewUrl && previewUrl.trim() !== '') {
-                    iframe.src = previewUrl;
-                    iframe.style.display = 'block';
-                } else {
-                    noMedia.style.display = 'flex';
-                }
-                
-                const previewLink = document.getElementById('preview-link');
-                if (previewLink) {
-                    previewLink.style.display = 'inline-block';
-                    
-                    // Construct a search query instead of ID to avoid broken "Vincular a anuncio" modal for internal API IDs,
-                    // and use active_status=all so that paused/inactive ads also show up.
-                    const adTitle = payload.getAttribute('data-title') || '';
-                    let query = "Dos Soles";
-                    if (adTitle && adTitle !== 'Sin Título') {
-                        query += " " + adTitle;
-                    } else {
-                        const item = document.querySelector('.trace-item[onclick*="' + id + '"]');
-                        if (item) {
-                            const name = item.getAttribute('data-name') || '';
-                            if (name) query += " " + name;
-                        }
-                    }
-                    
-                    previewLink.href = 'https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=AR&media_type=all&q=' + encodeURIComponent(query);
-                }
             }
         </script>
         <!-- SLIDE 9: AUDITORÍA DE INSTAGRAM ORGÁNICO -->
