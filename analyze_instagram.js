@@ -764,6 +764,38 @@ function generateHTMLReport(data) {
     .tag-b2b { background: rgba(245, 158, 11, 0.12); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.2); }
     .tag-b2c { background: rgba(16, 185, 129, 0.12); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); }
     
+    /* Table Filters */
+    .table-filters {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-card);
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .filter-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+    }
+    
+    .filter-btn.active {
+      background: var(--gradient-neon);
+      border-color: transparent;
+      color: var(--bg-dark);
+      font-weight: 700;
+    }
+    
   </style>
 </head>
 <body>
@@ -901,7 +933,20 @@ function generateHTMLReport(data) {
     
     <!-- Table: Recent Posts -->
     <div class="table-section">
-      <h2><i class="fa-solid fa-list"></i> Todas las Publicaciones Analizadas (${data.posts.length})</h2>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+        <h2><i class="fa-solid fa-list"></i> Todas las Publicaciones Analizadas (${data.posts.length})</h2>
+        
+        <!-- Table Filters -->
+        <div class="table-filters">
+          <button class="filter-btn active" data-filter="all">Todos</button>
+          <button class="filter-btn" data-filter="b2b">Enfoque B2B</button>
+          <button class="filter-btn" data-filter="b2c">Enfoque B2C</button>
+          <button class="filter-btn" data-filter="link-web">Enlace: Web</button>
+          <button class="filter-btn" data-filter="link-wa">Enlace: WhatsApp</button>
+          <button class="filter-btn" data-filter="link-none">Sin Enlaces</button>
+        </div>
+      </div>
+
       <div class="table-wrapper" style="max-height: 600px; overflow-y: auto;">
         <table>
           <thead>
@@ -917,8 +962,17 @@ function generateHTMLReport(data) {
             </tr>
           </thead>
           <tbody>
-            ${data.posts.map(post => `
-              <tr>
+            ${data.posts.map(post => {
+              const text = post.caption.toLowerCase();
+              const hasWeb = text.includes('web') || text.includes('.com') || text.includes('tienda') || text.includes('link');
+              const hasWa = text.includes('whatsapp') || text.includes('wa.me') || text.includes('escribinos') || text.includes('contacto') || text.includes('📲') || text.includes('celular');
+              let linkType = 'none';
+              if (hasWeb && hasWa) linkType = 'both';
+              else if (hasWeb) linkType = 'web';
+              else if (hasWa) linkType = 'wa';
+
+              return `
+              <tr data-classification="${post.classification.toLowerCase()}" data-linktype="${linkType}">
                 <td>
                   <div class="post-cell">
                     <img class="post-thumb" src="${post.media_url}" onerror="this.src='https://placehold.co/100x100/18181b/ffffff?text=IG';" alt="Post">
@@ -950,7 +1004,8 @@ function generateHTMLReport(data) {
                   <a href="${post.permalink}" target="_blank" class="btn-link">Ver <i class="fa-solid fa-up-right-from-square"></i></a>
                 </td>
               </tr>
-            `).join('')}
+              `;
+            }).join('')}
           </tbody>
         </table>
       </div>
@@ -1055,6 +1110,42 @@ function generateHTMLReport(data) {
           y: { ticks: { color: '#9f9fad' }, grid: { color: 'rgba(255,255,255,0.05)' } }
         }
       }
+    });
+
+    // 4. Lógica de Filtrado de la Tabla
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const tableRows = document.querySelectorAll('tbody tr');
+    
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Cambiar botón activo
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        const filter = btn.getAttribute('data-filter');
+        
+        tableRows.forEach(row => {
+          const classification = row.getAttribute('data-classification');
+          const linkType = row.getAttribute('data-linktype');
+          
+          let visible = false;
+          if (filter === 'all') {
+            visible = true;
+          } else if (filter === 'b2b') {
+            visible = classification === 'b2b';
+          } else if (filter === 'b2c') {
+            visible = classification === 'b2c';
+          } else if (filter === 'link-web') {
+            visible = linkType === 'web' || linkType === 'both';
+          } else if (filter === 'link-wa') {
+            visible = linkType === 'wa' || linkType === 'both';
+          } else if (filter === 'link-none') {
+            visible = linkType === 'none';
+          }
+          
+          row.style.display = visible ? '' : 'none';
+        });
+      });
     });
   </script>
 </body>
