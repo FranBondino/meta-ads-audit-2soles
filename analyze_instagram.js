@@ -788,9 +788,13 @@ function generateHTMLReport(data) {
     <div class="section-row" style="grid-template-columns: 1fr 1fr;">
       <div class="chart-box">
         <h2><i class="fa-solid fa-chart-simple"></i> Rendimiento por Día de la Semana (Promedio)</h2>
-        <div style="height: 320px; position: relative;">
+        <div style="height: 300px; position: relative;">
           <canvas id="chartDayPerformance"></canvas>
         </div>
+        <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 15px; line-height: 1.4;">
+          <i class="fa-solid fa-circle-info" style="color: var(--accent-violet);"></i>
+          <strong>Nota de análisis (Muestra):</strong> Sábados (80.0) y Domingos (82.3) tienen promedios altos por muestra reducida (6 y 7 posts) con un outlier de 271 interacc. en cada día. Excluyendo ese post, el promedio baja a <strong>41.8 (Sáb)</strong> y <strong>50.8 (Dom)</strong>, y la mediana es de <strong>51.0 (Sáb)</strong> y <strong>54.0 (Dom)</strong>.
+        </p>
       </div>
       
       <div class="chart-box">
@@ -828,11 +832,11 @@ function generateHTMLReport(data) {
     
     <!-- Table: Recent Posts -->
     <div class="table-section">
-      <h2><i class="fa-solid fa-list"></i> Últimas 20 Publicaciones Analizadas</h2>
-      <div class="table-wrapper">
+      <h2><i class="fa-solid fa-list"></i> Todas las Publicaciones Analizadas (${data.posts.length})</h2>
+      <div class="table-wrapper" style="max-height: 600px; overflow-y: auto;">
         <table>
           <thead>
-            <tr>
+            <tr style="position: sticky; top: 0; background: #121217; z-index: 10;">
               <th>Publicación</th>
               <th>Tipo</th>
               <th>Fecha y Hora (ARG)</th>
@@ -843,7 +847,7 @@ function generateHTMLReport(data) {
             </tr>
           </thead>
           <tbody>
-            ${data.posts.slice(0, 20).map(post => `
+            ${data.posts.map(post => `
               <tr>
                 <td>
                   <div class="post-cell">
@@ -958,7 +962,7 @@ function generateHTMLReport(data) {
     new Chart(ctxHourFreq, {
       type: 'bar',
       data: {
-        labels: hourLabels,
+        labels: hourlyLabels,
         datasets: [{
           label: 'Posts Publicados',
           data: postCountsByHour,
