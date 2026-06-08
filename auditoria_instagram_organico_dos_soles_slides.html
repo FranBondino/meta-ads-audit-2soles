@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auditoría Instagram Orgánico - Dos Soles</title>
+
+    <!-- Google Fonts: Outfit (Titles) & Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ===========================================
+           DESIGN SYSTEM & LUXURY STYLE VARIABLES
+           =========================================== */
+        :root {
+            /* Instagram-themed Premium Dark Colors */
+            --bg-primary: #07050d;
+            --bg-secondary: #0e0a19;
+            --bg-card: rgba(22, 16, 38, 0.7);
+            
+            --text-primary: #f3f4f6;
+            --text-secondary: #a3a3c2;
+            --text-muted: #64648c;
+            
+            /* High-fidelity Accent Colors */
+            --ig-pink: #d62976;
+            --ig-orange: #f77737;
+            --accent: #8b5cf6;        /* Electric Violet */
+            --accent-cyan: #06b6d4;   /* Cyan Metric */
+            --accent-emerald: #10b981;/* Active Green */
+            
+            --border-color: rgba(255, 255, 255, 0.05);
+            --border-hover: rgba(255, 255, 255, 0.12);
+            --border-glow: rgba(139, 92, 246, 0.2);
+            
+            /* Fonts */
+            --font-display: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            /* Responsive Typography Sizes */
+            --title-size: clamp(2rem, 4.2vw, 3.5rem);
+            --h2-size: clamp(1.4rem, 2.5vw, 1.9rem);
+            --h3-size: clamp(1rem, 1.8vw, 1.25rem);
+            --body-size: clamp(0.75rem, 1.1vw, 0.95rem);
+            --small-size: clamp(0.65rem, 0.9vw, 0.8rem);
+            --mono-size: clamp(0.6rem, 0.8vw, 0.75rem);
+
+            /* Spacing */
+            --slide-padding: clamp(1.5rem, 4.5vw, 4rem);
+            --content-gap: clamp(1rem, 2.2vw, 2.5rem);
+            --card-gap: clamp(0.5rem, 1.2vw, 1rem);
+
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --duration-normal: 0.8s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            overflow: hidden; /* Lock scrollbars */
+            user-select: none;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Ambient Lighting (IG Theme) */
+        .ambient-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .ambient-glow-1 {
+            position: absolute;
+            top: -15%;
+            right: -10%;
+            width: 55vw;
+            height: 55vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(214, 41, 118, 0.12) 0%, transparent 70%);
+            filter: blur(90px);
+            animation: floating-glow-1 25s infinite alternate ease-in-out;
+        }
+
+        .ambient-glow-2 {
+            position: absolute;
+            bottom: -15%;
+            left: -10%;
+            width: 60vw;
+            height: 60vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+            filter: blur(100px);
+            animation: floating-glow-2 30s infinite alternate ease-in-out;
+        }
+
+        @keyframes floating-glow-1 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-5%, 8%) scale(1.15); }
+        }
+
+        @keyframes floating-glow-2 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(8%, -5%) scale(1.05); }
+        }
+
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.005) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.005) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+        }
+
+        /* Slide Container for vertical scroll transitions */
+        .slides-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .slide {
+            height: 100vh;
+            width: 100vw;
+            flex-shrink: 0;
+            padding: var(--slide-padding);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Typography & Layout Elements */
+        .header-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            font-size: var(--small-size);
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 10px;
+        }
+
+        .header-meta .logo {
+            font-weight: 900;
+            background: linear-gradient(to right, #ffffff, var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .slide-title {
+            font-family: var(--font-display);
+            font-size: var(--h2-size);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: var(--content-gap);
+            background: linear-gradient(135deg, #ffffff 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .slide-title i {
+            font-size: 1.25rem;
+            background: var(--gradient-neon);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .slide-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 24px;
+            transition: all 0.4s var(--ease-out-expo);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card:hover {
+            border-color: var(--border-hover);
+            background: rgba(26, 20, 44, 0.85);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.05);
+        }
+
+        /* Navigation controls */
+        .nav-controls {
+            position: fixed;
+            right: 40px;
+            bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .nav-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(18, 14, 28, 0.8);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-out-expo);
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+        }
+
+        .dots-container {
+            position: fixed;
+            left: 40px;
+            bottom: 40px;
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+            align-items: center;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s var(--ease-out-expo);
+        }
+
+        .dot.active {
+            width: 24px;
+            border-radius: 4px;
+            background: var(--gradient-neon);
+        }
+
+        /* Specific Slides Layouts */
+        /* Slide 1: Cover */
+        .cover-layout {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .cover-text {
+            max-width: 60%;
+        }
+
+        .cover-subtitle {
+            font-family: var(--font-display);
+            font-size: var(--title-size);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 30%, #d8b4fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cover-desc {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 35px;
+            max-width: 80%;
+        }
+
+        .badge-active {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: var(--accent-emerald);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-active::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-emerald);
+            animation: pulse-dot 1.5s infinite alternate;
+        }
+
+        @keyframes pulse-dot {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            100% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 8px var(--accent-emerald); }
+        }
+
+        .cover-graphic {
+            width: 35%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .cover-circle {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: var(--gradient-ig);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 50px rgba(214, 41, 118, 0.3);
+            animation: rotate-circle 20s linear infinite;
+        }
+
+        .cover-circle-inner {
+            width: 236px;
+            height: 236px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cover-circle-inner i {
+            font-size: 6.5rem;
+            background: var(--gradient-ig);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @keyframes rotate-circle {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Slide 2: Bento KPIs */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .bento-grid .glass-card:nth-child(1) {
+            grid-column: span 2;
+        }
+
+        .kpi-num {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.8vw, 3.2rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffffff 0%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+
+        .kpi-title {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .kpi-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* Slide 3: El Dia de Oro */
+        .weekly-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .ocean-card {
+            background: linear-gradient(135deg, rgba(214, 41, 118, 0.08) 0%, rgba(139, 92, 246, 0.04) 100%);
+            border: 1px solid rgba(214, 41, 118, 0.2);
+            padding: 30px;
+            border-radius: 24px;
+        }
+
+        .ocean-title {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ocean-title i {
+            color: var(--ig-pink);
+        }
+
+        .day-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .day-bar-row {
+            display: grid;
+            grid-template-columns: 90px 1fr 60px;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .day-name {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .bar-outer {
+            height: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .bar-inner {
+            height: 100%;
+            background: var(--gradient-neon);
+            border-radius: 6px;
+            transition: width 1s var(--ease-out-expo);
+        }
+
+        .day-val {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-align: right;
+        }
+
+        /* Slide 4: Horarios Pico */
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .hour-box {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 20px 24px;
+        }
+
+        .hour-badge {
+            background: var(--gradient-cyan);
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: 1.3rem;
+            color: #ffffff;
+            box-shadow: 0 10px 20px rgba(6, 182, 212, 0.2);
+            flex-shrink: 0;
+        }
+
+        .hour-badge.pink {
+            background: var(--gradient-neon);
+            box-shadow: 0 10px 20px rgba(214, 41, 118, 0.25);
+        }
+
+        .hour-info h4 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .hour-info p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .advice-box {
+            grid-column: span 2;
+            background: rgba(139, 92, 246, 0.08);
+            border: 1px dashed rgba(139, 92, 246, 0.3);
+            border-radius: 20px;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .advice-box i {
+            font-size: 2.2rem;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .advice-box h4 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 3px;
+        }
+
+        .advice-box p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Slide 5: Radiografía de Formatos */
+        .format-columns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .format-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .format-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .format-title {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.3rem;
+        }
+
+        .format-badge {
+            padding: 5px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .format-badge.reels { background: rgba(139, 92, 246, 0.15); color: var(--accent); border: 1px solid rgba(139, 92, 246, 0.3); }
+        .format-badge.carousels { background: rgba(236, 72, 153, 0.15); color: #ec4899; border: 1px solid rgba(236, 72, 153, 0.3); }
+        .format-badge.images { background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan); border: 1px solid rgba(6, 182, 212, 0.3); }
+
+        .format-metric {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .format-metric span {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .format-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+
+        .format-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .format-footer.winner { color: var(--accent-emerald); }
+        .format-footer.danger { color: #f43f5e; }
+
+        /* Slide 6: Roadmap */
+        .roadmap-timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+            margin-top: 30px;
+        }
+
+        .roadmap-timeline::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 5%;
+            width: 90%;
+            height: 2px;
+            background: linear-gradient(to right, var(--ig-orange), var(--ig-pink), var(--accent));
+            z-index: 1;
+        }
+
+        .roadmap-step {
+            width: 22%;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .step-node {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            border: 3px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+            color: #ffffff;
+        }
+
+        .roadmap-step:nth-child(1) .step-node { border-color: var(--ig-orange); box-shadow: 0 0 15px rgba(247, 119, 55, 0.3); }
+        .roadmap-step:nth-child(2) .step-node { border-color: var(--ig-pink); box-shadow: 0 0 15px rgba(214, 41, 118, 0.3); }
+        .roadmap-step:nth-child(3) .step-node { border-color: var(--accent); box-shadow: 0 0 15px rgba(139, 92, 246, 0.3); }
+        .roadmap-step:nth-child(4) .step-node { border-color: var(--accent-cyan); box-shadow: 0 0 15px rgba(6, 182, 212, 0.3); }
+
+        .step-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .step-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.45;
+        }
+
+        /* Cursor Spotlight */
+        .spotlight {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.035) 0%, transparent 60%);
+            z-index: 100;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Ambient Grid and Glowing Mesh -->
+    <div class="ambient-mesh">
+        <div class="ambient-glow-1"></div>
+        <div class="ambient-glow-2"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <!-- Spotlight cursor glow -->
+    <div class="spotlight" id="spotlight"></div>
+
+    <!-- Main Slides Container -->
+    <div class="slides-container" id="slidesContainer">
+
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide">
+            <div class="header-meta">
+                <span class="logo">Dos Soles</span>
+                <span>Auditoría de Canales</span>
+            </div>
+            
+            <div class="slide-content">
+                <div class="cover-layout">
+                    <div class="cover-text">
+                        <div style="margin-bottom: 20px;">
+                            <span class="badge-active">Instagram Graph API Activa</span>
+                        </div>
+                        <h1 class="cover-subtitle">Auditoría de<br>Instagram Orgánico</h1>
+                        <p class="cover-desc">
+                            Análisis basado en tus últimas 200 publicaciones reales para determinar franjas horarias óptimas, cuellos de botella en formatos y plan de contenidos.
+                        </p>
+                    </div>
+                    
+                    <div class="cover-graphic">
+                        <div class="cover-circle">
+                            <div class="cover-circle-inner">
+                                <i class="fa-brands fa-instagram"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: KPIS BENTO -->
+        <section class="slide">
+            <div class="header-meta">
+                <span class="logo">Dos Soles</span>
+                <span>Slide 2 / 6</span>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title"><i class="fa-solid fa-chart-simple"></i> Radiografía General de la Cuenta</h2>
+                
+                <div class="bento-grid">
+                    <div class="glass-card">
+                        <div class="kpi-num">7,431</div>
+                        <div class="kpi-title">Seguidores Orgánicos</div>
+                        <div class="kpi-desc">Base de clientes y estilistas profesionales consolidada que recibe tus novedades.</div>
+                    </div>
+                    
+                    <div class="glass-card">
+                        <div class="kpi-num">200</div>
+                        <div class="kpi-title">Posts Analizados</div>
+                        <div class="kpi-desc">Muestra total del feed descargada para el cruzamiento de horas e interacciones.</div>
+                    </div>
+                    
+                    <div class="glass-card">
+                        <div class="kpi-num">51.7</div>
+                        <div class="kpi-title">Engagement Medio</div>
+                        <div class="kpi-desc"><strong>42.6 Likes</strong> + <strong>9.1 Comentarios</strong> en promedio por publicación.</div>
+                    </div>
+                    
+                    <div class="glass-card">
+                        <div class="kpi-num">10.3k</div>
+                        <div class="kpi-title">Interacciones Totales</div>
+                        <div class="kpi-desc">Volumen total de actividad que ha generado tu cuenta en el período auditado.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: EL DIA DE ORO -->
+        <section class="slide">
+            <div class="header-meta">
+                <span class="logo">Dos Soles</span>
+                <span>Slide 3 / 6</span>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title"><i class="fa-solid fa-calendar-week"></i> El "Día de Oro": Océano Azul de Fin de Semana</h2>
+                
+                <div class="weekly-grid">
+                    <div class="ocean-card">
+                        <div class="ocean-title">
+                            <i class="fa-solid fa-compass"></i>
+                            Oportunidad Estratégica Detectada
+                        </div>
+                        <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 20px;">
+                            Tu cuenta publica de forma masiva los **Viernes (52 posts)** y días de semana (promedio 35 posts). Sin embargo, los **Domingos** y **Sábados** es cuando tu audiencia está relajada y tiene tiempo de interactuar:
+                        </p>
+                        <ul style="list-style: none; display: flex; flex-direction: column; gap: 15px;">
+                            <li style="display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: var(--text-secondary);">
+                                <i class="fa-solid fa-arrow-trend-up" style="color: var(--accent-emerald); font-size: 1.1rem; margin-top: 2px;"></i>
+                                <span><strong>El Domingo es el día de mayor engagement:</strong> Promedia **82.3 interacciones** por post (frente a las 54.5 del viernes).</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: var(--text-secondary);">
+                                <i class="fa-solid fa-circle-exclamation" style="color: var(--ig-orange); font-size: 1.1rem; margin-top: 2px;"></i>
+                                <span><strong>Posteo mínimo los fines de semana:</strong> Solo has subido 7 posts un domingo y 6 un sábado en toda la muestra.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card">
+                        <div class="kpi-title" style="margin-bottom: 20px;">Engagement Promedio por Día</div>
+                        <div class="day-bars">
+                            <div class="day-bar-row">
+                                <span class="day-name">Domingo</span>
+                                <div class="bar-outer"><div class="bar-inner" style="width: 100%; background: var(--gradient-neon);"></div></div>
+                                <span class="day-val">82.3</span>
+                            </div>
+                            <div class="day-bar-row">
+                                <span class="day-name">Sábado</span>
+                                <div class="bar-outer"><div class="bar-inner" style="width: 97%;"></div></div>
+                                <span class="day-val">80.0</span>
+                            </div>
+                            <div class="day-bar-row">
+                                <span class="day-name">Miércoles</span>
+                                <div class="bar-outer"><div class="bar-inner" style="width: 69%; background: var(--gradient-cyan);"></div></div>
+                                <span class="day-val">57.2</span>
+                            </div>
+                            <div class="day-bar-row">
+                                <span class="day-name">Viernes</span>
+                                <div class="bar-outer"><div class="bar-inner" style="width: 66%; background: var(--gradient-cyan);"></div></div>
+                                <span class="day-val">54.5</span>
+                            </div>
+                            <div class="day-bar-row">
+                                <span class="day-name">Martes</span>
+                                <div class="bar-outer"><div class="bar-inner" style="width: 60%; background: var(--gradient-cyan);"></div></div>
+                                <span class="day-val">49.9</span>
+                            </div>
+                            <div class="day-bar-row">
+                                <span class="day-name">Jueves</span>
+                                <div class="bar-outer"><div class="bar-inner" style="width: 52%; background: rgba(255,255,255,0.15);"></div></div>
+                                <span class="day-val">43.3</span>
+                            </div>
+                            <div class="day-bar-row">
+                                <span class="day-name">Lunes</span>
+                                <div class="bar-outer"><div class="bar-inner" style="width: 51%; background: rgba(255,255,255,0.15);"></div></div>
+                                <span class="day-val">42.3</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: HORARIOS PICO -->
+        <section class="slide">
+            <div class="header-meta">
+                <span class="logo">Dos Soles</span>
+                <span>Slide 4 / 6</span>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title"><i class="fa-solid fa-clock"></i> Horarios Pico de Interacción</h2>
+                
+                <div class="hours-grid">
+                    <div class="hour-box">
+                        <div class="hour-badge pink">21h</div>
+                        <div class="hour-info">
+                            <h4>Pico Nocturno: 20:00 a 21:00 hs</h4>
+                            <p>El engagement promedio histórico sube a **83.3 interacciones** por publicación. Momento de descanso de los estilistas profesionales.</p>
+                        </div>
+                    </div>
+
+                    <div class="hour-box">
+                        <div class="hour-badge">12h</div>
+                        <div class="hour-info">
+                            <h4>Pico del Mediodía: 12:00 a 13:00 hs</h4>
+                            <p>El promedio escala a **71.2 interacciones** (con una frecuencia alta de posts a la 13:00 hs). Coincide con la pausa del almuerzo.</p>
+                        </div>
+                    </div>
+
+                    <div class="advice-box">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        <div>
+                            <h4>Estrategia de Programación Horaria</h4>
+                            <p>
+                                Nunca publiques exactamente en la hora pico. Se recomienda programar los contenidos **30 a 60 minutos antes** de que la audiencia llegue al pico (ej: publicar a las **19:30 hs** o a las **11:30 hs**). Esto da tiempo a que el algoritmo procese la publicación y empiece a mostrarla cuando tu comunidad abra la app.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: RADIOGRAFIA DE FORMATOS -->
+        <section class="slide">
+            <div class="header-meta">
+                <span class="logo">Dos Soles</span>
+                <span>Slide 5 / 6</span>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title"><i class="fa-solid fa-photo-film"></i> Reels vs. Carruseles: El Motor de Crecimiento</h2>
+                
+                <div class="format-columns">
+                    <!-- Reels -->
+                    <div class="glass-card format-card" style="border-color: rgba(139, 92, 246, 0.25);">
+                        <div>
+                            <div class="format-header">
+                                <h3 class="format-title">Reels (Videos)</h3>
+                                <span class="format-badge reels">Foco Principal</span>
+                            </div>
+                            <div class="format-metric">73 <span>avg int</span></div>
+                            <p class="format-desc">
+                                Representa la mayor parte de tu contenido (105 posts) y es el formato más exitoso de la distribuidora.
+                            </p>
+                        </div>
+                        <div class="format-footer winner">
+                            <i class="fa-solid fa-circle-check"></i> El motor del engagement
+                        </div>
+                    </div>
+
+                    <!-- Carruseles -->
+                    <div class="glass-card format-card" style="border-color: rgba(244, 63, 94, 0.2);">
+                        <div>
+                            <div class="format-header">
+                                <h3 class="format-title">Carruseles</h3>
+                                <span class="format-badge carousels" style="color: #ec4899;">Bajo Rendimiento</span>
+                            </div>
+                            <div class="format-metric" style="color: #ec4899;">25 <span>avg int</span></div>
+                            <p class="format-desc">
+                                A pesar de tener 91 publicaciones, el engagement promedio es un **65% menor** que el de los Reels.
+                            </p>
+                        </div>
+                        <div class="format-footer danger">
+                            <i class="fa-solid fa-circle-xmark"></i> Requiere re-estructurar
+                        </div>
+                    </div>
+
+                    <!-- Imagen Simple -->
+                    <div class="glass-card format-card">
+                        <div>
+                            <div class="format-header">
+                                <h3 class="format-title">Imagen Estática</h3>
+                                <span class="format-badge images">Poco Usado</span>
+                            </div>
+                            <div class="format-metric">87 <span>avg int</span></div>
+                            <p class="format-desc">
+                                Muestra muy reducida (4 posts). Alta efectividad para mensajes institucionales, anuncios o saludos.
+                            </p>
+                        </div>
+                        <div class="format-footer">
+                            <i class="fa-solid fa-circle-info"></i> Usar para hitos puntuales
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: PLAN DE ACCION -->
+        <section class="slide">
+            <div class="header-meta">
+                <span class="logo">Dos Soles</span>
+                <span>Slide 6 / 6</span>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title"><i class="fa-solid fa-route"></i> Roadmap de Optimización Orgánica</h2>
+                
+                <div class="roadmap-timeline">
+                    <div class="roadmap-step">
+                        <div class="step-node">1</div>
+                        <h4 class="step-title">Fines de Semana</h4>
+                        <p class="step-desc">Programar 1 publicación obligatoria los Sábados o Domingos a las 19:30 hs.</p>
+                    </div>
+
+                    <div class="roadmap-step">
+                        <div class="step-node">2</div>
+                        <h4 class="step-title">Ajuste Horario</h4>
+                        <p class="step-desc">Evitar publicar en horario de salones abiertos. Priorizar las 11:30 hs y las 19:30 hs.</p>
+                    </div>
+
+                    <div class="roadmap-step">
+                        <div class="step-node">3</div>
+                        <h4 class="step-title">Re-diseño Carrusel</h4>
+                        <p class="step-desc">Menos texto plano. Utilizar plantillas B2B educativas (ej: "5 tips para tu salón").</p>
+                    </div>
+
+                    <div class="roadmap-step">
+                        <div class="step-node">4</div>
+                        <h4 class="step-title">Consolidar Reels</h4>
+                        <p class="step-desc">Mantener frecuencia de 2-3 Reels semanales. Son el imán para atraer nuevos seguidores.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Navigation Dots and Arrows -->
+    <div class="dots-container" id="dotsContainer">
+        <div class="dot active" onclick="goToSlide(0)"></div>
+        <div class="dot" onclick="goToSlide(1)"></div>
+        <div class="dot" onclick="goToSlide(2)"></div>
+        <div class="dot" onclick="goToSlide(3)"></div>
+        <div class="dot" onclick="goToSlide(4)"></div>
+        <div class="dot" onclick="goToSlide(5)"></div>
+    </div>
+
+    <div class="nav-controls">
+        <button class="nav-btn" onclick="prevSlide()" aria-label="Anterior"><i class="fa-solid fa-chevron-up"></i></button>
+        <button class="nav-btn" onclick="nextSlide()" aria-label="Siguiente"><i class="fa-solid fa-chevron-down"></i></button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 6;
+        const container = document.getElementById('slidesContainer');
+        const dots = document.querySelectorAll('.dot');
+        const spotlight = document.getElementById('spotlight');
+        let isTransitioning = false;
+
+        // Slide navigation function
+        function goToSlide(slideIndex) {
+            if (slideIndex < 0 || slideIndex >= totalSlides || isTransitioning) return;
+            isTransitioning = true;
+            currentSlide = slideIndex;
+            
+            // Apply vertical translation
+            container.style.transform = `translateY(-${currentSlide * 100}vh)`;
+            
+            // Update active dot
+            dots.forEach((dot, idx) => {
+                if (idx === currentSlide) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+
+            // Lock transition for duration of CSS transition
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 800);
+        }
+
+        function nextSlide() {
+            goToSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            goToSlide(currentSlide - 1);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        // Mouse wheel navigation
+        let lastWheelTime = 0;
+        document.addEventListener('wheel', (e) => {
+            const now = Date.now();
+            if (now - lastWheelTime < 1000) return; // Debounce wheel
+            lastWheelTime = now;
+            
+            if (e.deltaY > 0) {
+                nextSlide();
+            } else if (e.deltaY < 0) {
+                prevSlide();
+            }
+        });
+
+        // Spotlight Cursor Effect
+        document.addEventListener('mousemove', (e) => {
+            spotlight.style.display = 'block';
+            spotlight.style.left = `${e.clientX}px`;
+            spotlight.style.top = `${e.clientY}px`;
+        });
+
+        document.addEventListener('mouseleave', () => {
+            spotlight.style.display = 'none';
+        });
+
+    </script>
+</body>
+</html>
