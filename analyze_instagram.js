@@ -79,7 +79,52 @@ async function runAnalysis() {
     console.log("=========================================");
     
   } catch (error) {
-    console.error("\n❌ ERROR DURANTE EL PROCESO:", error.message || error);
+    console.warn("\n⚠️ ERROR AL CONECTAR CON LA API DE META:", error.message || error);
+    console.log("🔄 Intentando regenerar reportes usando la base de datos local ('instagram_data.json')...");
+    
+    try {
+      const localDataRaw = fs.readFileSync(path.join(__dirname, 'instagram_data.json'), 'utf8');
+      const localData = JSON.parse(localDataRaw);
+      
+      console.log(`✅ Datos locales cargados. Procesando clasificación B2B/B2C para ${localData.posts.length} posts...`);
+      
+      // Clasificación B2B vs B2C
+      const b2bKeywords = ["mayorista", "distribuidor", "comerciante", "negocio", "local", "caja", "bulto", "pack", "franquicia", "revendedor", "gondola", "estanteria", "pedido", "lista de precios", "cantidad", "comercial", "compras", "stock", "abastecer", "proveedor", "distribuidora", "minorista", "comercio", "descuentos", "salón", "salones", "estilista", "estilistas", "profesional", "profesionales", "cliente", "clientes", "diagnóstico", "marca", "negocios"];
+      const b2cKeywords = ["receta", "cocina", "hogar", "familia", "casa", "almuerzo", "cena", "merienda", "comer", "disfrutar", "tip", "consejo", "sabías que", "sorteo", "participá", "etiqueta", "regalamos", "postre", "saludable", "nutrición", "sabor", "delicioso", "rico", "pelo", "cabello", "brillo", "suavidad", "hidratación", "tratamiento", "cuidadocapilar", "tips", "rutina", "peinado"];
+      
+      localData.posts.forEach(post => {
+        const caption = post.caption || "(Sin texto)";
+        const textLower = caption.toLowerCase();
+        
+        let b2bMatches = 0;
+        let b2cMatches = 0;
+        b2bKeywords.forEach(kw => { if(textLower.includes(kw)) b2bMatches++; });
+        b2cKeywords.forEach(kw => { if(textLower.includes(kw)) b2cMatches++; });
+        
+        if (b2cMatches > b2bMatches) {
+          post.classification = "B2C";
+        } else if (b2bMatches === 0 && b2cMatches === 0) {
+          if (textLower.includes("ingredientes") || textLower.includes("pasos") || textLower.includes("preparación") || textLower.includes("disfrutá") || textLower.includes("sano") || textLower.includes("suave")) {
+            post.classification = "B2C";
+          } else {
+            post.classification = "B2B";
+          }
+        } else {
+          post.classification = "B2B";
+        }
+      });
+      
+      // Guardar el JSON actualizado con la clasificación
+      fs.writeFileSync(path.join(__dirname, 'instagram_data.json'), JSON.stringify(localData, null, 2));
+      console.log("✅ Archivo 'instagram_data.json' actualizado con clasificaciones.");
+      
+      // Re-generar el reporte HTML con los datos cargados y clasificados
+      generateHTMLReport(localData);
+      console.log("✅ Reporte HTML 'reporte_instagram_dos_soles.html' regenerado desde base local con clasificaciones.");
+      
+    } catch (fallbackError) {
+      console.error("\n❌ ERROR CRÍTICO AL CARGAR FALLBACK LOCAL:", fallbackError.message || fallbackError);
+    }
   }
 }
 
@@ -138,9 +183,32 @@ function processStats(profile, onlineFollowersRaw, mediaList) {
     
     heatmap[localDay][localHour] += interactions;
 
+    const caption = post.caption || "(Sin texto)";
+    // Clasificación B2B vs B2C
+    const b2bKeywords = ["mayorista", "distribuidor", "comerciante", "negocio", "local", "caja", "bulto", "pack", "franquicia", "revendedor", "gondola", "estanteria", "pedido", "lista de precios", "cantidad", "comercial", "compras", "stock", "abastecer", "proveedor", "distribuidora", "minorista", "comercio", "descuentos", "salón", "salones", "estilista", "estilistas", "profesional", "profesionales", "cliente", "clientes", "diagnóstico", "marca", "negocios"];
+    const b2cKeywords = ["receta", "cocina", "hogar", "familia", "casa", "almuerzo", "cena", "merienda", "comer", "disfrutar", "tip", "consejo", "sabías que", "sorteo", "participá", "etiqueta", "regalamos", "postre", "saludable", "nutrición", "sabor", "delicioso", "rico", "pelo", "cabello", "brillo", "suavidad", "hidratación", "tratamiento", "cuidadocapilar", "tips", "rutina", "peinado"];
+    
+    let classification = "B2B"; // Por defecto es B2B al ser distribuidor mayorista
+    const textLower = caption.toLowerCase();
+    
+    let b2bMatches = 0;
+    let b2cMatches = 0;
+    b2bKeywords.forEach(kw => { if(textLower.includes(kw)) b2bMatches++; });
+    b2cKeywords.forEach(kw => { if(textLower.includes(kw)) b2cMatches++; });
+    
+    if (b2cMatches > b2bMatches) {
+      classification = "B2C";
+    } else if (b2bMatches === 0 && b2cMatches === 0) {
+      if (textLower.includes("ingredientes") || textLower.includes("pasos") || textLower.includes("preparación") || textLower.includes("disfrutá") || textLower.includes("sano") || textLower.includes("suave")) {
+        classification = "B2C";
+      } else {
+        classification = "B2B";
+      }
+    }
+
     return {
       id: post.id,
-      caption: post.caption || "(Sin texto)",
+      caption: caption,
       media_type: post.media_type,
       permalink: post.permalink,
       media_url: post.media_url,
@@ -150,7 +218,8 @@ function processStats(profile, onlineFollowersRaw, mediaList) {
       localHour: localHour,
       likes,
       comments,
-      interactions
+      interactions,
+      classification
     };
   });
 
@@ -692,6 +761,8 @@ function generateHTMLReport(data) {
     .tag-image { background: rgba(6, 182, 212, 0.12); color: var(--accent-cyan); }
     .tag-video { background: rgba(139, 92, 246, 0.12); color: var(--accent-violet); }
     .tag-carousel { background: rgba(236, 72, 153, 0.12); color: #ec4899; }
+    .tag-b2b { background: rgba(245, 158, 11, 0.12); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.2); }
+    .tag-b2c { background: rgba(16, 185, 129, 0.12); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); }
     
   </style>
 </head>
@@ -837,6 +908,7 @@ function generateHTMLReport(data) {
             <tr style="position: sticky; top: 0; background: #121217; z-index: 10;">
               <th>Publicación</th>
               <th>Tipo</th>
+              <th>Enfoque</th>
               <th>Fecha y Hora (ARG)</th>
               <th>Likes</th>
               <th>Comentarios</th>
@@ -859,6 +931,11 @@ function generateHTMLReport(data) {
                 <td>
                   <span class="type-tag tag-${post.media_type.toLowerCase() === 'carousel_album' ? 'carousel' : post.media_type.toLowerCase()}">
                     ${post.media_type === 'CAROUSEL_ALBUM' ? 'carrusel' : post.media_type.toLowerCase() === 'video' ? 'video' : 'imagen'}
+                  </span>
+                </td>
+                <td>
+                  <span class="type-tag tag-${post.classification.toLowerCase()}">
+                    ${post.classification}
                   </span>
                 </td>
                 <td>${post.localDateStr} a las ${post.localHour}:00 hs</td>

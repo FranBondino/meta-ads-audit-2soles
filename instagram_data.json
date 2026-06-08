@@ -564,7 +564,8 @@
       "localHour": 19,
       "likes": 38,
       "comments": 12,
-      "interactions": 50
+      "interactions": 50,
+      "classification": "B2B"
     },
     {
       "id": "18046247075786397",
@@ -578,7 +579,8 @@
       "localHour": 19,
       "likes": 18,
       "comments": 0,
-      "interactions": 18
+      "interactions": 18,
+      "classification": "B2C"
     },
     {
       "id": "18062093888478188",
@@ -592,7 +594,8 @@
       "localHour": 20,
       "likes": 24,
       "comments": 1,
-      "interactions": 25
+      "interactions": 25,
+      "classification": "B2B"
     },
     {
       "id": "17945272422192691",
@@ -606,7 +609,8 @@
       "localHour": 19,
       "likes": 34,
       "comments": 0,
-      "interactions": 34
+      "interactions": 34,
+      "classification": "B2B"
     },
     {
       "id": "17936072865251589",
@@ -620,7 +624,8 @@
       "localHour": 17,
       "likes": 6,
       "comments": 0,
-      "interactions": 6
+      "interactions": 6,
+      "classification": "B2B"
     },
     {
       "id": "18037946747795918",
@@ -634,7 +639,8 @@
       "localHour": 19,
       "likes": 6,
       "comments": 0,
-      "interactions": 6
+      "interactions": 6,
+      "classification": "B2B"
     },
     {
       "id": "18594977266006166",
@@ -648,7 +654,8 @@
       "localHour": 19,
       "likes": 14,
       "comments": 0,
-      "interactions": 14
+      "interactions": 14,
+      "classification": "B2C"
     },
     {
       "id": "18226254235314395",
@@ -662,7 +669,8 @@
       "localHour": 19,
       "likes": 13,
       "comments": 3,
-      "interactions": 16
+      "interactions": 16,
+      "classification": "B2B"
     },
     {
       "id": "18076237457355077",
@@ -676,7 +684,8 @@
       "localHour": 15,
       "likes": 8,
       "comments": 0,
-      "interactions": 8
+      "interactions": 8,
+      "classification": "B2B"
     },
     {
       "id": "18112053565842322",
@@ -690,7 +699,8 @@
       "localHour": 20,
       "likes": 39,
       "comments": 17,
-      "interactions": 56
+      "interactions": 56,
+      "classification": "B2B"
     },
     {
       "id": "18016971389683606",
@@ -704,7 +714,8 @@
       "localHour": 19,
       "likes": 10,
       "comments": 0,
-      "interactions": 10
+      "interactions": 10,
+      "classification": "B2B"
     },
     {
       "id": "18213896773325107",
@@ -718,7 +729,8 @@
       "localHour": 19,
       "likes": 12,
       "comments": 0,
-      "interactions": 12
+      "interactions": 12,
+      "classification": "B2B"
     },
     {
       "id": "18114249220695943",
@@ -732,7 +744,8 @@
       "localHour": 19,
       "likes": 50,
       "comments": 4,
-      "interactions": 54
+      "interactions": 54,
+      "classification": "B2B"
     },
     {
       "id": "17908296855220771",
@@ -746,7 +759,8 @@
       "localHour": 17,
       "likes": 12,
       "comments": 1,
-      "interactions": 13
+      "interactions": 13,
+      "classification": "B2C"
     },
     {
       "id": "18100128110021560",
@@ -760,7 +774,8 @@
       "localHour": 19,
       "likes": 28,
       "comments": 20,
-      "interactions": 48
+      "interactions": 48,
+      "classification": "B2C"
     },
     {
       "id": "17921932320306155",
@@ -774,7 +789,8 @@
       "localHour": 17,
       "likes": 7,
       "comments": 2,
-      "interactions": 9
+      "interactions": 9,
+      "classification": "B2C"
     },
     {
       "id": "18089646311265229",
@@ -788,7 +804,8 @@
       "localHour": 19,
       "likes": 14,
       "comments": 2,
-      "interactions": 16
+      "interactions": 16,
+      "classification": "B2B"
     },
     {
       "id": "18100809293485653",
@@ -802,7 +819,8 @@
       "localHour": 19,
       "likes": 33,
       "comments": 2,
-      "interactions": 35
+      "interactions": 35,
+      "classification": "B2B"
     },
     {
       "id": "18072701855232639",
@@ -816,7 +834,8 @@
       "localHour": 19,
       "likes": 10,
       "comments": 0,
-      "interactions": 10
+      "interactions": 10,
+      "classification": "B2C"
     },
     {
       "id": "18118836619714499",
@@ -830,7 +849,8 @@
       "localHour": 19,
       "likes": 41,
       "comments": 5,
-      "interactions": 46
+      "interactions": 46,
+      "classification": "B2B"
     },
     {
       "id": "18357026836226047",
@@ -844,7 +864,8 @@
       "localHour": 19,
       "likes": 32,
       "comments": 2,
-      "interactions": 34
+      "interactions": 34,
+      "classification": "B2B"
     },
     {
       "id": "18176106112354163",
@@ -858,7 +879,8 @@
       "localHour": 19,
       "likes": 4,
       "comments": 0,
-      "interactions": 4
+      "interactions": 4,
+      "classification": "B2C"
     },
     {
       "id": "18119326084618994",
@@ -872,7 +894,8 @@
       "localHour": 19,
       "likes": 0,
       "comments": 0,
-      "interactions": 0
+      "interactions": 0,
+      "classification": "B2B"
     },
     {
       "id": "18038844839782777",
@@ -886,7 +909,8 @@
       "localHour": 21,
       "likes": 35,
       "comments": 18,
-      "interactions": 53
+      "interactions": 53,
+      "classification": "B2B"
     },
     {
       "id": "17911919736345215",
@@ -900,7 +924,8 @@
       "localHour": 19,
       "likes": 37,
       "comments": 0,
-      "interactions": 37
+      "interactions": 37,
+      "classification": "B2C"
     },
     {
       "id": "17956366491102610",
@@ -914,7 +939,8 @@
       "localHour": 17,
       "likes": 21,
       "comments": 0,
-      "interactions": 21
+      "interactions": 21,
+      "classification": "B2B"
     },
     {
       "id": "17941903521150768",
@@ -928,7 +954,8 @@
       "localHour": 19,
       "likes": 7,
       "comments": 0,
-      "interactions": 7
+      "interactions": 7,
+      "classification": "B2B"
     },
     {
       "id": "18568854229052967",
@@ -942,7 +969,8 @@
       "localHour": 19,
       "likes": 37,
       "comments": 7,
-      "interactions": 44
+      "interactions": 44,
+      "classification": "B2B"
     },
     {
       "id": "17885082951351878",
@@ -956,7 +984,8 @@
       "localHour": 19,
       "likes": 44,
       "comments": 9,
-      "interactions": 53
+      "interactions": 53,
+      "classification": "B2C"
     },
     {
       "id": "18348550483230047",
@@ -970,7 +999,8 @@
       "localHour": 19,
       "likes": 43,
       "comments": 9,
-      "interactions": 52
+      "interactions": 52,
+      "classification": "B2B"
     },
     {
       "id": "18143758099484037",
@@ -984,7 +1014,8 @@
       "localHour": 19,
       "likes": 11,
       "comments": 0,
-      "interactions": 11
+      "interactions": 11,
+      "classification": "B2C"
     },
     {
       "id": "18070487750193374",
@@ -998,7 +1029,8 @@
       "localHour": 17,
       "likes": 35,
       "comments": 0,
-      "interactions": 35
+      "interactions": 35,
+      "classification": "B2B"
     },
     {
       "id": "18379606852093997",
@@ -1012,7 +1044,8 @@
       "localHour": 20,
       "likes": 18,
       "comments": 0,
-      "interactions": 18
+      "interactions": 18,
+      "classification": "B2B"
     },
     {
       "id": "18098946694909098",
@@ -1026,7 +1059,8 @@
       "localHour": 17,
       "likes": 24,
       "comments": 5,
-      "interactions": 29
+      "interactions": 29,
+      "classification": "B2C"
     },
     {
       "id": "18087439571468795",
@@ -1040,7 +1074,8 @@
       "localHour": 20,
       "likes": 6,
       "comments": 0,
-      "interactions": 6
+      "interactions": 6,
+      "classification": "B2C"
     },
     {
       "id": "18405191461134881",
@@ -1054,7 +1089,8 @@
       "localHour": 20,
       "likes": 50,
       "comments": 4,
-      "interactions": 54
+      "interactions": 54,
+      "classification": "B2B"
     },
     {
       "id": "18066011537251903",
@@ -1068,7 +1104,8 @@
       "localHour": 19,
       "likes": 6,
       "comments": 0,
-      "interactions": 6
+      "interactions": 6,
+      "classification": "B2C"
     },
     {
       "id": "17875182465408016",
@@ -1082,7 +1119,8 @@
       "localHour": 20,
       "likes": 36,
       "comments": 2,
-      "interactions": 38
+      "interactions": 38,
+      "classification": "B2B"
     },
     {
       "id": "17905257870357123",
@@ -1096,7 +1134,8 @@
       "localHour": 21,
       "likes": 10,
       "comments": 2,
-      "interactions": 12
+      "interactions": 12,
+      "classification": "B2B"
     },
     {
       "id": "17973352682994179",
@@ -1110,7 +1149,8 @@
       "localHour": 18,
       "likes": 4,
       "comments": 0,
-      "interactions": 4
+      "interactions": 4,
+      "classification": "B2C"
     },
     {
       "id": "17851767321666153",
@@ -1124,7 +1164,8 @@
       "localHour": 20,
       "likes": 9,
       "comments": 0,
-      "interactions": 9
+      "interactions": 9,
+      "classification": "B2C"
     },
     {
       "id": "17958923232022245",
@@ -1138,7 +1179,8 @@
       "localHour": 20,
       "likes": 42,
       "comments": 7,
-      "interactions": 49
+      "interactions": 49,
+      "classification": "B2C"
     },
     {
       "id": "18098547364920634",
@@ -1152,7 +1194,8 @@
       "localHour": 20,
       "likes": 31,
       "comments": 1,
-      "interactions": 32
+      "interactions": 32,
+      "classification": "B2B"
     },
     {
       "id": "18043041272707479",
@@ -1166,7 +1209,8 @@
       "localHour": 20,
       "likes": 26,
       "comments": 3,
-      "interactions": 29
+      "interactions": 29,
+      "classification": "B2B"
     },
     {
       "id": "18097423960920172",
@@ -1180,7 +1224,8 @@
       "localHour": 20,
       "likes": 14,
       "comments": 2,
-      "interactions": 16
+      "interactions": 16,
+      "classification": "B2C"
     },
     {
       "id": "18192853105340826",
@@ -1194,7 +1239,8 @@
       "localHour": 20,
       "likes": 41,
       "comments": 9,
-      "interactions": 50
+      "interactions": 50,
+      "classification": "B2B"
     },
     {
       "id": "17984573681778360",
@@ -1208,7 +1254,8 @@
       "localHour": 17,
       "likes": 7,
       "comments": 1,
-      "interactions": 8
+      "interactions": 8,
+      "classification": "B2C"
     },
     {
       "id": "18064339646244304",
@@ -1222,7 +1269,8 @@
       "localHour": 19,
       "likes": 16,
       "comments": 1,
-      "interactions": 17
+      "interactions": 17,
+      "classification": "B2B"
     },
     {
       "id": "18123053368553607",
@@ -1236,7 +1284,8 @@
       "localHour": 19,
       "likes": 13,
       "comments": 0,
-      "interactions": 13
+      "interactions": 13,
+      "classification": "B2C"
     },
     {
       "id": "18180376099367298",
@@ -1250,7 +1299,8 @@
       "localHour": 20,
       "likes": 54,
       "comments": 0,
-      "interactions": 54
+      "interactions": 54,
+      "classification": "B2B"
     },
     {
       "id": "18082588814155665",
@@ -1264,7 +1314,8 @@
       "localHour": 15,
       "likes": 29,
       "comments": 12,
-      "interactions": 41
+      "interactions": 41,
+      "classification": "B2B"
     },
     {
       "id": "17957529608902510",
@@ -1278,7 +1329,8 @@
       "localHour": 19,
       "likes": 2,
       "comments": 0,
-      "interactions": 2
+      "interactions": 2,
+      "classification": "B2C"
     },
     {
       "id": "18090633052782579",
@@ -1292,7 +1344,8 @@
       "localHour": 19,
       "likes": 7,
       "comments": 0,
-      "interactions": 7
+      "interactions": 7,
+      "classification": "B2C"
     },
     {
       "id": "17843362695659198",
@@ -1306,7 +1359,8 @@
       "localHour": 20,
       "likes": 92,
       "comments": 33,
-      "interactions": 125
+      "interactions": 125,
+      "classification": "B2B"
     },
     {
       "id": "18324289513171611",
@@ -1320,7 +1374,8 @@
       "localHour": 14,
       "likes": 50,
       "comments": 21,
-      "interactions": 71
+      "interactions": 71,
+      "classification": "B2B"
     },
     {
       "id": "17848551747607450",
@@ -1334,7 +1389,8 @@
       "localHour": 20,
       "likes": 70,
       "comments": 34,
-      "interactions": 104
+      "interactions": 104,
+      "classification": "B2C"
     },
     {
       "id": "18432680572110004",
@@ -1348,7 +1404,8 @@
       "localHour": 19,
       "likes": 2,
       "comments": 0,
-      "interactions": 2
+      "interactions": 2,
+      "classification": "B2C"
     },
     {
       "id": "17965827189002485",
@@ -1362,7 +1419,8 @@
       "localHour": 20,
       "likes": 9,
       "comments": 5,
-      "interactions": 14
+      "interactions": 14,
+      "classification": "B2C"
     },
     {
       "id": "17878329945354069",
@@ -1376,7 +1434,8 @@
       "localHour": 19,
       "likes": 16,
       "comments": 0,
-      "interactions": 16
+      "interactions": 16,
+      "classification": "B2C"
     },
     {
       "id": "18552102454052886",
@@ -1390,7 +1449,8 @@
       "localHour": 20,
       "likes": 10,
       "comments": 0,
-      "interactions": 10
+      "interactions": 10,
+      "classification": "B2C"
     },
     {
       "id": "18046093910469971",
@@ -1404,7 +1464,8 @@
       "localHour": 19,
       "likes": 24,
       "comments": 0,
-      "interactions": 24
+      "interactions": 24,
+      "classification": "B2B"
     },
     {
       "id": "18037448738708098",
@@ -1418,7 +1479,8 @@
       "localHour": 17,
       "likes": 8,
       "comments": 0,
-      "interactions": 8
+      "interactions": 8,
+      "classification": "B2C"
     },
     {
       "id": "18376769506154504",
@@ -1432,7 +1494,8 @@
       "localHour": 14,
       "likes": 17,
       "comments": 2,
-      "interactions": 19
+      "interactions": 19,
+      "classification": "B2C"
     },
     {
       "id": "18087958724302036",
@@ -1446,7 +1509,8 @@
       "localHour": 20,
       "likes": 17,
       "comments": 6,
-      "interactions": 23
+      "interactions": 23,
+      "classification": "B2B"
     },
     {
       "id": "18086703748988665",
@@ -1460,7 +1524,8 @@
       "localHour": 20,
       "likes": 9,
       "comments": 0,
-      "interactions": 9
+      "interactions": 9,
+      "classification": "B2C"
     },
     {
       "id": "18086552795315400",
@@ -1474,7 +1539,8 @@
       "localHour": 19,
       "likes": 34,
       "comments": 8,
-      "interactions": 42
+      "interactions": 42,
+      "classification": "B2B"
     },
     {
       "id": "18493840027077538",
@@ -1488,7 +1554,8 @@
       "localHour": 18,
       "likes": 124,
       "comments": 5,
-      "interactions": 129
+      "interactions": 129,
+      "classification": "B2C"
     },
     {
       "id": "18094661080861780",
@@ -1502,7 +1569,8 @@
       "localHour": 20,
       "likes": 91,
       "comments": 9,
-      "interactions": 100
+      "interactions": 100,
+      "classification": "B2B"
     },
     {
       "id": "18330641224242484",
@@ -1516,7 +1584,8 @@
       "localHour": 18,
       "likes": 36,
       "comments": 22,
-      "interactions": 58
+      "interactions": 58,
+      "classification": "B2C"
     },
     {
       "id": "18545090833002778",
@@ -1530,7 +1599,8 @@
       "localHour": 18,
       "likes": 62,
       "comments": 12,
-      "interactions": 74
+      "interactions": 74,
+      "classification": "B2B"
     },
     {
       "id": "18065233994423630",
@@ -1544,7 +1614,8 @@
       "localHour": 18,
       "likes": 33,
       "comments": 18,
-      "interactions": 51
+      "interactions": 51,
+      "classification": "B2B"
     },
     {
       "id": "18078670184174930",
@@ -1558,7 +1629,8 @@
       "localHour": 12,
       "likes": 250,
       "comments": 21,
-      "interactions": 271
+      "interactions": 271,
+      "classification": "B2C"
     },
     {
       "id": "18404164813185577",
@@ -1572,7 +1644,8 @@
       "localHour": 8,
       "likes": 73,
       "comments": 15,
-      "interactions": 88
+      "interactions": 88,
+      "classification": "B2C"
     },
     {
       "id": "18185835073336641",
@@ -1586,7 +1659,8 @@
       "localHour": 20,
       "likes": 125,
       "comments": 13,
-      "interactions": 138
+      "interactions": 138,
+      "classification": "B2B"
     },
     {
       "id": "17916866295175954",
@@ -1600,7 +1674,8 @@
       "localHour": 17,
       "likes": 5,
       "comments": 0,
-      "interactions": 5
+      "interactions": 5,
+      "classification": "B2B"
     },
     {
       "id": "17866920855375994",
@@ -1614,7 +1689,8 @@
       "localHour": 15,
       "likes": 15,
       "comments": 2,
-      "interactions": 17
+      "interactions": 17,
+      "classification": "B2B"
     },
     {
       "id": "18037995815446417",
@@ -1628,7 +1704,8 @@
       "localHour": 18,
       "likes": 24,
       "comments": 0,
-      "interactions": 24
+      "interactions": 24,
+      "classification": "B2C"
     },
     {
       "id": "18012042740788925",
@@ -1642,7 +1719,8 @@
       "localHour": 19,
       "likes": 6,
       "comments": 0,
-      "interactions": 6
+      "interactions": 6,
+      "classification": "B2C"
     },
     {
       "id": "17964162524809614",
@@ -1656,7 +1734,8 @@
       "localHour": 13,
       "likes": 76,
       "comments": 34,
-      "interactions": 110
+      "interactions": 110,
+      "classification": "B2B"
     },
     {
       "id": "17942146422021600",
@@ -1670,7 +1749,8 @@
       "localHour": 19,
       "likes": 6,
       "comments": 0,
-      "interactions": 6
+      "interactions": 6,
+      "classification": "B2C"
     },
     {
       "id": "18517700920048473",
@@ -1684,7 +1764,8 @@
       "localHour": 13,
       "likes": 21,
       "comments": 3,
-      "interactions": 24
+      "interactions": 24,
+      "classification": "B2C"
     },
     {
       "id": "18040565135367617",
@@ -1698,7 +1779,8 @@
       "localHour": 17,
       "likes": 14,
       "comments": 0,
-      "interactions": 14
+      "interactions": 14,
+      "classification": "B2C"
     },
     {
       "id": "18075770389794670",
@@ -1712,7 +1794,8 @@
       "localHour": 19,
       "likes": 55,
       "comments": 13,
-      "interactions": 68
+      "interactions": 68,
+      "classification": "B2B"
     },
     {
       "id": "17910129513193238",
@@ -1726,7 +1809,8 @@
       "localHour": 18,
       "likes": 38,
       "comments": 15,
-      "interactions": 53
+      "interactions": 53,
+      "classification": "B2B"
     },
     {
       "id": "17844723633540748",
@@ -1740,7 +1824,8 @@
       "localHour": 17,
       "likes": 14,
       "comments": 2,
-      "interactions": 16
+      "interactions": 16,
+      "classification": "B2B"
     },
     {
       "id": "18373808224183873",
@@ -1754,7 +1839,8 @@
       "localHour": 18,
       "likes": 138,
       "comments": 8,
-      "interactions": 146
+      "interactions": 146,
+      "classification": "B2B"
     },
     {
       "id": "17911240413052751",
@@ -1768,7 +1854,8 @@
       "localHour": 18,
       "likes": 15,
       "comments": 1,
-      "interactions": 16
+      "interactions": 16,
+      "classification": "B2C"
     },
     {
       "id": "18073194332477095",
@@ -1782,7 +1869,8 @@
       "localHour": 17,
       "likes": 18,
       "comments": 2,
-      "interactions": 20
+      "interactions": 20,
+      "classification": "B2C"
     },
     {
       "id": "17961695426959333",
@@ -1796,7 +1884,8 @@
       "localHour": 18,
       "likes": 50,
       "comments": 25,
-      "interactions": 75
+      "interactions": 75,
+      "classification": "B2B"
     },
     {
       "id": "18080406703861646",
@@ -1810,7 +1899,8 @@
       "localHour": 16,
       "likes": 19,
       "comments": 6,
-      "interactions": 25
+      "interactions": 25,
+      "classification": "B2C"
     },
     {
       "id": "18120688546479387",
@@ -1824,7 +1914,8 @@
       "localHour": 15,
       "likes": 40,
       "comments": 28,
-      "interactions": 68
+      "interactions": 68,
+      "classification": "B2B"
     },
     {
       "id": "18067546288895759",
@@ -1838,7 +1929,8 @@
       "localHour": 13,
       "likes": 13,
       "comments": 0,
-      "interactions": 13
+      "interactions": 13,
+      "classification": "B2C"
     },
     {
       "id": "18068293118283559",
@@ -1852,7 +1944,8 @@
       "localHour": 17,
       "likes": 22,
       "comments": 2,
-      "interactions": 24
+      "interactions": 24,
+      "classification": "B2C"
     },
     {
       "id": "17999470202794546",
@@ -1866,7 +1959,8 @@
       "localHour": 14,
       "likes": 81,
       "comments": 5,
-      "interactions": 86
+      "interactions": 86,
+      "classification": "B2B"
     },
     {
       "id": "18173567518335769",
@@ -1880,7 +1974,8 @@
       "localHour": 18,
       "likes": 88,
       "comments": 19,
-      "interactions": 107
+      "interactions": 107,
+      "classification": "B2C"
     },
     {
       "id": "18105045496523434",
@@ -1894,7 +1989,8 @@
       "localHour": 13,
       "likes": 84,
       "comments": 9,
-      "interactions": 93
+      "interactions": 93,
+      "classification": "B2C"
     },
     {
       "id": "18388465399184912",
@@ -1908,7 +2004,8 @@
       "localHour": 12,
       "likes": 135,
       "comments": 53,
-      "interactions": 188
+      "interactions": 188,
+      "classification": "B2B"
     },
     {
       "id": "18067311518080222",
@@ -1922,7 +2019,8 @@
       "localHour": 18,
       "likes": 130,
       "comments": 43,
-      "interactions": 173
+      "interactions": 173,
+      "classification": "B2B"
     },
     {
       "id": "17908961421120053",
@@ -1936,7 +2034,8 @@
       "localHour": 13,
       "likes": 66,
       "comments": 28,
-      "interactions": 94
+      "interactions": 94,
+      "classification": "B2B"
     },
     {
       "id": "17969754773884847",
@@ -1950,7 +2049,8 @@
       "localHour": 13,
       "likes": 49,
       "comments": 23,
-      "interactions": 72
+      "interactions": 72,
+      "classification": "B2C"
     },
     {
       "id": "17944897548001541",
@@ -1964,7 +2064,8 @@
       "localHour": 13,
       "likes": 160,
       "comments": 25,
-      "interactions": 185
+      "interactions": 185,
+      "classification": "B2B"
     },
     {
       "id": "18061996931078344",
@@ -1978,7 +2079,8 @@
       "localHour": 12,
       "likes": 61,
       "comments": 28,
-      "interactions": 89
+      "interactions": 89,
+      "classification": "B2C"
     },
     {
       "id": "18332629894092131",
@@ -1992,7 +2094,8 @@
       "localHour": 14,
       "likes": 70,
       "comments": 17,
-      "interactions": 87
+      "interactions": 87,
+      "classification": "B2C"
     },
     {
       "id": "17843230146448400",
@@ -2006,7 +2109,8 @@
       "localHour": 19,
       "likes": 60,
       "comments": 17,
-      "interactions": 77
+      "interactions": 77,
+      "classification": "B2C"
     },
     {
       "id": "18118340275447858",
@@ -2020,7 +2124,8 @@
       "localHour": 13,
       "likes": 95,
       "comments": 37,
-      "interactions": 132
+      "interactions": 132,
+      "classification": "B2B"
     },
     {
       "id": "17960034440902516",
@@ -2034,7 +2139,8 @@
       "localHour": 18,
       "likes": 76,
       "comments": 16,
-      "interactions": 92
+      "interactions": 92,
+      "classification": "B2B"
     },
     {
       "id": "18033000644308150",
@@ -2048,7 +2154,8 @@
       "localHour": 18,
       "likes": 50,
       "comments": 0,
-      "interactions": 50
+      "interactions": 50,
+      "classification": "B2B"
     },
     {
       "id": "18068363560843108",
@@ -2062,7 +2169,8 @@
       "localHour": 13,
       "likes": 24,
       "comments": 7,
-      "interactions": 31
+      "interactions": 31,
+      "classification": "B2B"
     },
     {
       "id": "18089263696561770",
@@ -2076,7 +2184,8 @@
       "localHour": 12,
       "likes": 21,
       "comments": 0,
-      "interactions": 21
+      "interactions": 21,
+      "classification": "B2C"
     },
     {
       "id": "18048134621222186",
@@ -2090,7 +2199,8 @@
       "localHour": 18,
       "likes": 24,
       "comments": 4,
-      "interactions": 28
+      "interactions": 28,
+      "classification": "B2C"
     },
     {
       "id": "18045274904243298",
@@ -2104,7 +2214,8 @@
       "localHour": 13,
       "likes": 25,
       "comments": 0,
-      "interactions": 25
+      "interactions": 25,
+      "classification": "B2C"
     },
     {
       "id": "18047256758274715",
@@ -2118,7 +2229,8 @@
       "localHour": 11,
       "likes": 74,
       "comments": 17,
-      "interactions": 91
+      "interactions": 91,
+      "classification": "B2B"
     },
     {
       "id": "18066692788693544",
@@ -2132,7 +2244,8 @@
       "localHour": 11,
       "likes": 80,
       "comments": 24,
-      "interactions": 104
+      "interactions": 104,
+      "classification": "B2C"
     },
     {
       "id": "18036788336073076",
@@ -2146,7 +2259,8 @@
       "localHour": 20,
       "likes": 70,
       "comments": 1,
-      "interactions": 71
+      "interactions": 71,
+      "classification": "B2B"
     },
     {
       "id": "18071025469616773",
@@ -2160,7 +2274,8 @@
       "localHour": 13,
       "likes": 122,
       "comments": 41,
-      "interactions": 163
+      "interactions": 163,
+      "classification": "B2C"
     },
     {
       "id": "17884812963132931",
@@ -2174,7 +2289,8 @@
       "localHour": 13,
       "likes": 22,
       "comments": 5,
-      "interactions": 27
+      "interactions": 27,
+      "classification": "B2C"
     },
     {
       "id": "18026106569161332",
@@ -2188,7 +2304,8 @@
       "localHour": 13,
       "likes": 94,
       "comments": 47,
-      "interactions": 141
+      "interactions": 141,
+      "classification": "B2C"
     },
     {
       "id": "18042829855869838",
@@ -2202,7 +2319,8 @@
       "localHour": 13,
       "likes": 102,
       "comments": 38,
-      "interactions": 140
+      "interactions": 140,
+      "classification": "B2C"
     },
     {
       "id": "17993252282530425",
@@ -2216,7 +2334,8 @@
       "localHour": 9,
       "likes": 22,
       "comments": 1,
-      "interactions": 23
+      "interactions": 23,
+      "classification": "B2C"
     },
     {
       "id": "18045297472784388",
@@ -2230,7 +2349,8 @@
       "localHour": 13,
       "likes": 81,
       "comments": 14,
-      "interactions": 95
+      "interactions": 95,
+      "classification": "B2B"
     },
     {
       "id": "18023609225209407",
@@ -2244,7 +2364,8 @@
       "localHour": 13,
       "likes": 59,
       "comments": 13,
-      "interactions": 72
+      "interactions": 72,
+      "classification": "B2C"
     },
     {
       "id": "18441275086042101",
@@ -2258,7 +2379,8 @@
       "localHour": 13,
       "likes": 39,
       "comments": 17,
-      "interactions": 56
+      "interactions": 56,
+      "classification": "B2B"
     },
     {
       "id": "17850075606217401",
@@ -2272,7 +2394,8 @@
       "localHour": 13,
       "likes": 120,
       "comments": 84,
-      "interactions": 204
+      "interactions": 204,
+      "classification": "B2B"
     },
     {
       "id": "18234732253259477",
@@ -2286,7 +2409,8 @@
       "localHour": 13,
       "likes": 25,
       "comments": 2,
-      "interactions": 27
+      "interactions": 27,
+      "classification": "B2C"
     },
     {
       "id": "18020116193467278",
@@ -2300,7 +2424,8 @@
       "localHour": 13,
       "likes": 58,
       "comments": 6,
-      "interactions": 64
+      "interactions": 64,
+      "classification": "B2B"
     },
     {
       "id": "18126347353344778",
@@ -2314,7 +2439,8 @@
       "localHour": 14,
       "likes": 59,
       "comments": 47,
-      "interactions": 106
+      "interactions": 106,
+      "classification": "B2B"
     },
     {
       "id": "18014346155121751",
@@ -2328,7 +2454,8 @@
       "localHour": 18,
       "likes": 41,
       "comments": 4,
-      "interactions": 45
+      "interactions": 45,
+      "classification": "B2C"
     },
     {
       "id": "18030965467841766",
@@ -2342,7 +2469,8 @@
       "localHour": 13,
       "likes": 53,
       "comments": 6,
-      "interactions": 59
+      "interactions": 59,
+      "classification": "B2B"
     },
     {
       "id": "18049122052636727",
@@ -2356,7 +2484,8 @@
       "localHour": 21,
       "likes": 83,
       "comments": 13,
-      "interactions": 96
+      "interactions": 96,
+      "classification": "B2C"
     },
     {
       "id": "17982243311674648",
@@ -2370,7 +2499,8 @@
       "localHour": 13,
       "likes": 18,
       "comments": 0,
-      "interactions": 18
+      "interactions": 18,
+      "classification": "B2C"
     },
     {
       "id": "17937307424827739",
@@ -2384,7 +2514,8 @@
       "localHour": 10,
       "likes": 87,
       "comments": 18,
-      "interactions": 105
+      "interactions": 105,
+      "classification": "B2C"
     },
     {
       "id": "17941078064708506",
@@ -2398,7 +2529,8 @@
       "localHour": 14,
       "likes": 22,
       "comments": 2,
-      "interactions": 24
+      "interactions": 24,
+      "classification": "B2C"
     },
     {
       "id": "18004969214449402",
@@ -2412,7 +2544,8 @@
       "localHour": 17,
       "likes": 144,
       "comments": 25,
-      "interactions": 169
+      "interactions": 169,
+      "classification": "B2B"
     },
     {
       "id": "17865428418103061",
@@ -2426,7 +2559,8 @@
       "localHour": 12,
       "likes": 63,
       "comments": 14,
-      "interactions": 77
+      "interactions": 77,
+      "classification": "B2B"
     },
     {
       "id": "18078339622473676",
@@ -2440,7 +2574,8 @@
       "localHour": 11,
       "likes": 14,
       "comments": 7,
-      "interactions": 21
+      "interactions": 21,
+      "classification": "B2C"
     },
     {
       "id": "18040148344810420",
@@ -2454,7 +2589,8 @@
       "localHour": 13,
       "likes": 69,
       "comments": 26,
-      "interactions": 95
+      "interactions": 95,
+      "classification": "B2B"
     },
     {
       "id": "18083094190449667",
@@ -2468,7 +2604,8 @@
       "localHour": 19,
       "likes": 25,
       "comments": 8,
-      "interactions": 33
+      "interactions": 33,
+      "classification": "B2C"
     },
     {
       "id": "18031778401939151",
@@ -2482,7 +2619,8 @@
       "localHour": 13,
       "likes": 15,
       "comments": 0,
-      "interactions": 15
+      "interactions": 15,
+      "classification": "B2C"
     },
     {
       "id": "17889972189005856",
@@ -2496,7 +2634,8 @@
       "localHour": 21,
       "likes": 55,
       "comments": 6,
-      "interactions": 61
+      "interactions": 61,
+      "classification": "B2C"
     },
     {
       "id": "18122433199346546",
@@ -2510,7 +2649,8 @@
       "localHour": 20,
       "likes": 52,
       "comments": 4,
-      "interactions": 56
+      "interactions": 56,
+      "classification": "B2B"
     },
     {
       "id": "18004721630459795",
@@ -2524,7 +2664,8 @@
       "localHour": 20,
       "likes": 113,
       "comments": 21,
-      "interactions": 134
+      "interactions": 134,
+      "classification": "B2C"
     },
     {
       "id": "18019943966037950",
@@ -2538,7 +2679,8 @@
       "localHour": 13,
       "likes": 15,
       "comments": 1,
-      "interactions": 16
+      "interactions": 16,
+      "classification": "B2C"
     },
     {
       "id": "18309024706126255",
@@ -2552,7 +2694,8 @@
       "localHour": 14,
       "likes": 65,
       "comments": 11,
-      "interactions": 76
+      "interactions": 76,
+      "classification": "B2B"
     },
     {
       "id": "18092134315397281",
@@ -2566,7 +2709,8 @@
       "localHour": 13,
       "likes": 16,
       "comments": 0,
-      "interactions": 16
+      "interactions": 16,
+      "classification": "B2C"
     },
     {
       "id": "18029938084834944",
@@ -2580,7 +2724,8 @@
       "localHour": 21,
       "likes": 68,
       "comments": 10,
-      "interactions": 78
+      "interactions": 78,
+      "classification": "B2B"
     },
     {
       "id": "18043500826609565",
@@ -2594,7 +2739,8 @@
       "localHour": 13,
       "likes": 11,
       "comments": 2,
-      "interactions": 13
+      "interactions": 13,
+      "classification": "B2C"
     },
     {
       "id": "17844384000133850",
@@ -2608,7 +2754,8 @@
       "localHour": 14,
       "likes": 39,
       "comments": 17,
-      "interactions": 56
+      "interactions": 56,
+      "classification": "B2C"
     },
     {
       "id": "17914549466852677",
@@ -2622,7 +2769,8 @@
       "localHour": 12,
       "likes": 40,
       "comments": 8,
-      "interactions": 48
+      "interactions": 48,
+      "classification": "B2C"
     },
     {
       "id": "18013835837043459",
@@ -2636,7 +2784,8 @@
       "localHour": 13,
       "likes": 69,
       "comments": 23,
-      "interactions": 92
+      "interactions": 92,
+      "classification": "B2B"
     },
     {
       "id": "17875956173961078",
@@ -2650,7 +2799,8 @@
       "localHour": 13,
       "likes": 12,
       "comments": 0,
-      "interactions": 12
+      "interactions": 12,
+      "classification": "B2C"
     },
     {
       "id": "18040014106544611",
@@ -2664,7 +2814,8 @@
       "localHour": 13,
       "likes": 16,
       "comments": 0,
-      "interactions": 16
+      "interactions": 16,
+      "classification": "B2C"
     },
     {
       "id": "18072222469399485",
@@ -2678,7 +2829,8 @@
       "localHour": 13,
       "likes": 13,
       "comments": 0,
-      "interactions": 13
+      "interactions": 13,
+      "classification": "B2C"
     },
     {
       "id": "17940888944647238",
@@ -2692,7 +2844,8 @@
       "localHour": 19,
       "likes": 45,
       "comments": 15,
-      "interactions": 60
+      "interactions": 60,
+      "classification": "B2C"
     },
     {
       "id": "17856616647036415",
@@ -2706,7 +2859,8 @@
       "localHour": 13,
       "likes": 16,
       "comments": 0,
-      "interactions": 16
+      "interactions": 16,
+      "classification": "B2C"
     },
     {
       "id": "17847902856071705",
@@ -2720,7 +2874,8 @@
       "localHour": 13,
       "likes": 9,
       "comments": 0,
-      "interactions": 9
+      "interactions": 9,
+      "classification": "B2C"
     },
     {
       "id": "18010190344943896",
@@ -2734,7 +2889,8 @@
       "localHour": 13,
       "likes": 114,
       "comments": 17,
-      "interactions": 131
+      "interactions": 131,
+      "classification": "B2B"
     },
     {
       "id": "17909366681764110",
@@ -2748,7 +2904,8 @@
       "localHour": 13,
       "likes": 10,
       "comments": 0,
-      "interactions": 10
+      "interactions": 10,
+      "classification": "B2B"
     },
     {
       "id": "18007492235004965",
@@ -2762,7 +2919,8 @@
       "localHour": 13,
       "likes": 31,
       "comments": 10,
-      "interactions": 41
+      "interactions": 41,
+      "classification": "B2C"
     },
     {
       "id": "18007267729990984",
@@ -2776,7 +2934,8 @@
       "localHour": 13,
       "likes": 9,
       "comments": 0,
-      "interactions": 9
+      "interactions": 9,
+      "classification": "B2C"
     },
     {
       "id": "18033813574583185",
@@ -2790,7 +2949,8 @@
       "localHour": 13,
       "likes": 93,
       "comments": 13,
-      "interactions": 106
+      "interactions": 106,
+      "classification": "B2B"
     },
     {
       "id": "18302310163189377",
@@ -2804,7 +2964,8 @@
       "localHour": 14,
       "likes": 33,
       "comments": 2,
-      "interactions": 35
+      "interactions": 35,
+      "classification": "B2B"
     },
     {
       "id": "17988521732357594",
@@ -2818,7 +2979,8 @@
       "localHour": 13,
       "likes": 58,
       "comments": 0,
-      "interactions": 58
+      "interactions": 58,
+      "classification": "B2B"
     },
     {
       "id": "18020060215632107",
@@ -2832,7 +2994,8 @@
       "localHour": 13,
       "likes": 45,
       "comments": 4,
-      "interactions": 49
+      "interactions": 49,
+      "classification": "B2C"
     },
     {
       "id": "17993890451224557",
@@ -2846,7 +3009,8 @@
       "localHour": 14,
       "likes": 75,
       "comments": 6,
-      "interactions": 81
+      "interactions": 81,
+      "classification": "B2B"
     },
     {
       "id": "17892604910896015",
@@ -2860,7 +3024,8 @@
       "localHour": 13,
       "likes": 158,
       "comments": 26,
-      "interactions": 184
+      "interactions": 184,
+      "classification": "B2B"
     },
     {
       "id": "17974815941583565",
@@ -2874,7 +3039,8 @@
       "localHour": 19,
       "likes": 77,
       "comments": 12,
-      "interactions": 89
+      "interactions": 89,
+      "classification": "B2C"
     },
     {
       "id": "17980038563278905",
@@ -2888,7 +3054,8 @@
       "localHour": 21,
       "likes": 102,
       "comments": 22,
-      "interactions": 124
+      "interactions": 124,
+      "classification": "B2B"
     },
     {
       "id": "18019980706671146",
@@ -2902,7 +3069,8 @@
       "localHour": 13,
       "likes": 76,
       "comments": 7,
-      "interactions": 83
+      "interactions": 83,
+      "classification": "B2B"
     },
     {
       "id": "17992538489481572",
@@ -2916,7 +3084,8 @@
       "localHour": 13,
       "likes": 89,
       "comments": 42,
-      "interactions": 131
+      "interactions": 131,
+      "classification": "B2B"
     },
     {
       "id": "17885432921911387",
@@ -2930,7 +3099,8 @@
       "localHour": 18,
       "likes": 131,
       "comments": 16,
-      "interactions": 147
+      "interactions": 147,
+      "classification": "B2C"
     },
     {
       "id": "17980709375198988",
@@ -2944,7 +3114,8 @@
       "localHour": 19,
       "likes": 57,
       "comments": 18,
-      "interactions": 75
+      "interactions": 75,
+      "classification": "B2C"
     },
     {
       "id": "17989741943492339",
@@ -2958,7 +3129,8 @@
       "localHour": 13,
       "likes": 103,
       "comments": 13,
-      "interactions": 116
+      "interactions": 116,
+      "classification": "B2C"
     },
     {
       "id": "17844849417046155",
@@ -2972,7 +3144,8 @@
       "localHour": 21,
       "likes": 136,
       "comments": 23,
-      "interactions": 159
+      "interactions": 159,
+      "classification": "B2B"
     },
     {
       "id": "18076118002384711",
@@ -2986,7 +3159,8 @@
       "localHour": 20,
       "likes": 201,
       "comments": 70,
-      "interactions": 271
+      "interactions": 271,
+      "classification": "B2C"
     },
     {
       "id": "17851810038001554",
@@ -3000,7 +3174,8 @@
       "localHour": 13,
       "likes": 8,
       "comments": 1,
-      "interactions": 9
+      "interactions": 9,
+      "classification": "B2C"
     },
     {
       "id": "17983672547196812",
@@ -3014,7 +3189,8 @@
       "localHour": 13,
       "likes": 15,
       "comments": 1,
-      "interactions": 16
+      "interactions": 16,
+      "classification": "B2C"
     },
     {
       "id": "17989418321135358",
@@ -3028,7 +3204,8 @@
       "localHour": 12,
       "likes": 15,
       "comments": 2,
-      "interactions": 17
+      "interactions": 17,
+      "classification": "B2C"
     },
     {
       "id": "18013643074727889",
@@ -3042,7 +3219,8 @@
       "localHour": 11,
       "likes": 14,
       "comments": 0,
-      "interactions": 14
+      "interactions": 14,
+      "classification": "B2C"
     },
     {
       "id": "18227576647171467",
@@ -3056,7 +3234,8 @@
       "localHour": 12,
       "likes": 17,
       "comments": 2,
-      "interactions": 19
+      "interactions": 19,
+      "classification": "B2C"
     },
     {
       "id": "17977832600141987",
@@ -3070,7 +3249,8 @@
       "localHour": 13,
       "likes": 19,
       "comments": 0,
-      "interactions": 19
+      "interactions": 19,
+      "classification": "B2C"
     },
     {
       "id": "17876730062908666",
@@ -3084,7 +3264,8 @@
       "localHour": 13,
       "likes": 12,
       "comments": 0,
-      "interactions": 12
+      "interactions": 12,
+      "classification": "B2C"
     },
     {
       "id": "17901460853796497",
@@ -3098,7 +3279,8 @@
       "localHour": 14,
       "likes": 12,
       "comments": 0,
-      "interactions": 12
+      "interactions": 12,
+      "classification": "B2C"
     },
     {
       "id": "17848940882980456",
@@ -3112,7 +3294,8 @@
       "localHour": 12,
       "likes": 20,
       "comments": 4,
-      "interactions": 24
+      "interactions": 24,
+      "classification": "B2C"
     },
     {
       "id": "17985671921297511",
@@ -3126,7 +3309,8 @@
       "localHour": 11,
       "likes": 45,
       "comments": 33,
-      "interactions": 78
+      "interactions": 78,
+      "classification": "B2B"
     },
     {
       "id": "17854932677974327",
@@ -3140,7 +3324,8 @@
       "localHour": 15,
       "likes": 31,
       "comments": 13,
-      "interactions": 44
+      "interactions": 44,
+      "classification": "B2B"
     },
     {
       "id": "18013626001627321",
@@ -3154,7 +3339,8 @@
       "localHour": 13,
       "likes": 7,
       "comments": 0,
-      "interactions": 7
+      "interactions": 7,
+      "classification": "B2C"
     },
     {
       "id": "17869343099921295",
@@ -3168,7 +3354,8 @@
       "localHour": 14,
       "likes": 9,
       "comments": 0,
-      "interactions": 9
+      "interactions": 9,
+      "classification": "B2C"
     },
     {
       "id": "17990314181000756",
@@ -3182,7 +3369,8 @@
       "localHour": 13,
       "likes": 14,
       "comments": 3,
-      "interactions": 17
+      "interactions": 17,
+      "classification": "B2B"
     },
     {
       "id": "17969099231412594",
@@ -3196,7 +3384,8 @@
       "localHour": 14,
       "likes": 14,
       "comments": 0,
-      "interactions": 14
+      "interactions": 14,
+      "classification": "B2C"
     },
     {
       "id": "18013205911620612",
@@ -3210,7 +3399,8 @@
       "localHour": 12,
       "likes": 13,
       "comments": 0,
-      "interactions": 13
+      "interactions": 13,
+      "classification": "B2C"
     },
     {
       "id": "17910160889759404",
@@ -3224,7 +3414,8 @@
       "localHour": 12,
       "likes": 14,
       "comments": 2,
-      "interactions": 16
+      "interactions": 16,
+      "classification": "B2B"
     },
     {
       "id": "17889066305822094",
@@ -3238,7 +3429,8 @@
       "localHour": 13,
       "likes": 9,
       "comments": 0,
-      "interactions": 9
+      "interactions": 9,
+      "classification": "B2C"
     },
     {
       "id": "18063789838388673",
@@ -3252,7 +3444,8 @@
       "localHour": 13,
       "likes": 10,
       "comments": 2,
-      "interactions": 12
+      "interactions": 12,
+      "classification": "B2C"
     },
     {
       "id": "18036299062471411",
@@ -3266,7 +3459,8 @@
       "localHour": 13,
       "likes": 23,
       "comments": 2,
-      "interactions": 25
+      "interactions": 25,
+      "classification": "B2B"
     },
     {
       "id": "17997640078881669",
@@ -3280,7 +3474,8 @@
       "localHour": 13,
       "likes": 6,
       "comments": 0,
-      "interactions": 6
+      "interactions": 6,
+      "classification": "B2C"
     },
     {
       "id": "18227753323205266",
@@ -3294,7 +3489,8 @@
       "localHour": 13,
       "likes": 10,
       "comments": 0,
-      "interactions": 10
+      "interactions": 10,
+      "classification": "B2C"
     },
     {
       "id": "17995719628851882",
@@ -3308,7 +3504,8 @@
       "localHour": 19,
       "likes": 6,
       "comments": 0,
-      "interactions": 6
+      "interactions": 6,
+      "classification": "B2C"
     },
     {
       "id": "17973928421078034",
@@ -3322,7 +3519,8 @@
       "localHour": 13,
       "likes": 8,
       "comments": 0,
-      "interactions": 8
+      "interactions": 8,
+      "classification": "B2C"
     },
     {
       "id": "17863739873920521",
@@ -3336,7 +3534,8 @@
       "localHour": 13,
       "likes": 24,
       "comments": 0,
-      "interactions": 24
+      "interactions": 24,
+      "classification": "B2C"
     },
     {
       "id": "17938782152522019",
@@ -3350,7 +3549,8 @@
       "localHour": 13,
       "likes": 17,
       "comments": 0,
-      "interactions": 17
+      "interactions": 17,
+      "classification": "B2C"
     }
   ]
 }
