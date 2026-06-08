@@ -199,19 +199,7 @@ Para maximizar el retorno orgánico y pago de Dos Soles, proponemos estructurar 
 
 ## 📅 Registro Histórico de Trazabilidad Completa (Anuncios desde Febrero 2026)
 
-> [!CAUTION]
-> **Grave Error Operativo Identificado (Fuga de Presupuesto Post-Evento):**
-> Al auditar la fecha exacta de pausa de los anuncios específicos de **"Hot Sale / Dos Soles Sale"** (IDs `...580593`, `...150593`, `...120593`, `...460593`, `...700593`), descubrimos que **fueron pausados en masa recién el 20 de Mayo de 2026 a las 20:00 hs**.
-> Sin embargo, el evento comercial oficial de Hot Sale finalizó el **17 de Mayo de 2026**.
-> **Consecuencias:** La agencia anterior dejó correr anuncios con ofertas del Hot Sale vencidas por **3 días adicionales**. Esto no sólo significó un desperdicio neto de presupuesto en clics fríos inútiles, sino también un perjuicio reputacional (fricción y rebote de usuarios ingresando a la web buscando precios con descuento que ya habían expirado).
 
-
-> **Pérdida Financiera y Operativa Verificada (Vía Meta API Insights):**
-> *   **Presupuesto Desperdiciado (Fuga Neta):** **`$7,435.35 ARS`** tirados directamente a la basura.
-> *   **Clics de Fricción (Usuarios Frustrados):** **136 clics** de personas interesadas que ingresaron a la web buscando descuentos vencidos.
-> *   **Impresiones Inútiles:** **1,915 veces** que se mostró la oferta vencida.
-> *   **Alcance:** **1,313 personas/estilistas únicos** impactados con comunicación desactualizada.
-> *   **El Mayor Agujero Negro:** El creativo **Jaz UGC 2** (ID `...120593`) consumió el **91%** del desperdicio, gastando **`$6,777.37`** por sí solo en esos 3 días adicionales.
 
 
 | Fecha | Nombre del Anuncio | ID Anuncio | Campaña | ID Campaña | Estado |

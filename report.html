@@ -347,6 +347,43 @@
         .finding-danger .finding-header { color: var(--danger); }
         .finding-warning .finding-header { color: var(--warning); }
         .finding-success .finding-header { color: var(--success); }
+        .finding-primary .finding-header { color: var(--primary); }
+
+        /* Responsive design for mobile screens */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px 10px;
+            }
+            .report-page {
+                padding: 25px 15px;
+            }
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            .header-right {
+                text-align: left;
+                width: 100%;
+            }
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .summary-findings {
+                grid-template-columns: 1fr;
+            }
+            .glossary-grid {
+                grid-template-columns: 1fr;
+            }
+            .ad-performance-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        @media (max-width: 480px) {
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+        }
 
         .finding-item p {
             font-size: 0.8rem;
@@ -1048,9 +1085,9 @@
                         </div>
                         <p>El feed orgánico valida que la educación técnica genera el mayor engagement (65.3 promedio). Es el gancho perfecto para captar salones.</p>
                     </div>
-                    <div class="finding-item finding-danger">
+                    <div class="finding-item finding-primary">
                         <div class="finding-header">
-                            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364.364l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 113.536 0V21h-2v-3z"></path></svg>
                             Variación Creativa
                         </div>
                         <p>El algoritmo actual beneficia la variación creativa amplia y Trial Reels. Debemos generar piezas dinámicas en lugar de segmentación manual.</p>
@@ -1353,7 +1390,7 @@
                     </div>
                 </div>
 
-                <!-- Fuga -->
+                <!-- Bajo Rendimiento -->
                 <div class="ad-performance-card" style="border-color: var(--danger); background: rgba(244, 63, 94, 0.02);">
                     <span class="ad-badge ad-badge-danger">Pausar</span>
                     <h5>Reel - somos distrib de matrix</h5>
@@ -1449,6 +1486,49 @@
                     </tbody>
                 </table>
             </div>
+
+            <h3 style="font-size: 1rem; font-weight: 700; margin-top: 20px; margin-bottom: 10px; border-left: 3px solid var(--success); padding-left: 8px;">🔗 Publicaciones Orgánicas de Respaldo B2B (Métricas Reales)</h3>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">
+                Los datos promedio de engagement (65.3 interacciones) se basan en el rendimiento real verificado de las publicaciones del feed de Instagram:
+            </p>
+            <div class="table-responsive" style="margin-bottom: 15px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Publicación Real en Instagram (@dossoles.distribuidora)</th>
+                            <th>Métricas de Tracción (Likes + Comentarios)</th>
+                            <th>Enfoque Técnico y Enlace de Respaldo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>17º Aniversario de la Distribuidora</strong></td>
+                            <td><strong>204 interacciones</strong> (120 Likes, 84 comentarios)</td>
+                            <td><a href="https://www.instagram.com/p/C74Zr7HRoEo/" target="_blank" style="color: var(--secondary); text-decoration: underline;">Ver Publicación en Instagram ↗</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>18 Años de Trayectoria y Vínculos Profesionales</strong></td>
+                            <td><strong>188 interacciones</strong> (135 Likes, 53 comentarios)</td>
+                            <td><a href="https://www.instagram.com/reel/DKxCki-xaVT/" target="_blank" style="color: var(--secondary); text-decoration: underline;">Ver Publicación en Instagram ↗</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Matrix Trend Lab (Educación y Color)</strong></td>
+                            <td><strong>185 interacciones</strong> (160 Likes, 25 comentarios)</td>
+                            <td><a href="https://www.instagram.com/p/DJ9nqBoRPPh/" target="_blank" style="color: var(--secondary); text-decoration: underline;">Ver Publicación en Instagram ↗</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Inauguración del Centro Técnico Profesional</strong></td>
+                            <td><strong>159 interacciones</strong> (136 Likes, 23 comentarios)</td>
+                            <td><a href="https://www.instagram.com/reel/Cv_COQENRVO/" target="_blank" style="color: var(--secondary); text-decoration: underline;">Ver Publicación en Instagram ↗</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Taller Bbcos en Centro Técnico Dos Soles</strong></td>
+                            <td><strong>132 interacciones</strong> (95 Likes, 37 comentarios)</td>
+                            <td><a href="https://www.instagram.com/reel/DHL5UjiRcTh/" target="_blank" style="color: var(--secondary); text-decoration: underline;">Ver Publicación en Instagram ↗</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             
             <div class="alert-box" style="margin-top: 15px; border-left-color: var(--primary); background-color: #f3f4f6; border-color: #e5e7eb;">
                 <div class="alert-content" style="color: #111827;">
@@ -1465,28 +1545,7 @@
         <div class="section" style="margin-top: 15px;">
             <h2 class="section-title">Registro Histórico de Trazabilidad Completa (Desde Febrero 2026)</h2>
 
-            <!-- Grave Error Operativo Identificado (Fuga de Presupuesto Post-Evento) -->
-            <div class="alert-card alert-card-danger" style="margin-top: 15px; margin-bottom: 20px; padding: 18px; border-radius: 8px; background: rgba(244, 63, 94, 0.05); border: 1px solid var(--danger); display: flex; gap: 15px; align-items: flex-start; backdrop-filter: blur(10px);">
-                <span style="font-size: 1.5rem; line-height: 1;">⚠️</span>
-                <div style="flex: 1;">
-                    <h4 style="margin: 0 0 6px 0; color: var(--danger); font-size: 0.95rem; font-weight: 700;">Grave Error Operativo Identificado (Fuga de Presupuesto Post-Evento)</h4>
-                    <p style="margin: 0; font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;">
-                        Al auditar la fecha exacta de pausa de los anuncios específicos del <strong>"Hot Sale / Dos Soles Sale"</strong> (IDs terminados en <em>...580593</em>, <em>...150593</em>, <em>...120593</em>, <em>...460593</em>, <em>...700593</em>), detectamos que <strong>fueron pausados en masa recién el 20 de Mayo de 2026 a las 20:00 hs</strong>.
-                    </p>
-                    <p style="margin: 8px 0 0 0; font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;">
-                        <strong>Consecuencias:</strong> Teniendo en cuenta que el evento oficial de Hot Sale finalizó a nivel nacional el <strong>17 de Mayo de 2026</strong>, la agencia anterior mantuvo activa la pauta publicitaria con promociones vencidas por <strong>3 días adicionales enteros</strong>. Esto derivó en un desperdicio de presupuesto neto en tráfico que ingresó a una web sin descuentos vigentes, generando fricción, rebote y pérdida de confianza del consumidor.
-                    <div style="margin-top: 12px; padding: 12px; background: rgba(0,0,0,0.15); border-radius: 6px; border-left: 3px solid var(--danger); font-size: 0.8rem; color: #fff;">
-                        <div style="font-weight: 700; color: var(--danger); margin-bottom: 6px; font-size: 0.85rem;">📊 Fuga Financiera Auditada (18 al 20 de Mayo):</div>
-                        <ul style="margin: 0; padding-left: 18px; line-height: 1.4;">
-                            <li><strong>Plata Tirada al Pedo (Fuga Neta):</strong> <span style="color: var(--danger); font-weight: 700;">$7,435.35 ARS</span></li>
-                            <li><strong>Clics Frustrados (Tráfico de Rebote):</strong> 136 clics en ofertas vencidas</li>
-                            <li><strong>Personas Únicas Impactadas (Alcance):</strong> 1,313 estilistas</li>
-                            <li><strong>Principal Creativo Ineficiente:</strong> <em>Jaz UGC 2</em> se quemó <span style="font-weight:700;">$6,777.37 ARS</span> (91% de la fuga) por sí solo.</li>
-                        </ul>
-                    </div>
-                    </p>
-                </div>
-            </div>
+
             
             <div class="table-responsive">
                 <table>
@@ -1777,6 +1836,41 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        <!-- Nuevas Tendencias de Meta Ads (Paso a Paso) -->
+        <div class="section" style="margin-top: 15px;">
+            <h2 class="section-title">💡 Nuevas Tendencias de Meta Ads (Paso a Paso)</h2>
+            <div class="summary-box" style="background: rgba(99, 102, 241, 0.03); border-color: rgba(99, 102, 241, 0.15);">
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 15px;">
+                    El algoritmo moderno de Meta delega la segmentación de audiencias en la propia pieza creativa. A continuación, se detalla el funcionamiento paso a paso de las dos metodologías sugeridas:
+                </p>
+                <div class="glossary-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="glossary-item" style="background: rgba(255, 255, 255, 0.02); padding: 15px; border-radius: 8px; border: 1px solid var(--card-border);">
+                        <div class="glossary-header" style="margin-bottom: 10px;">
+                            <span class="glossary-title" style="color: var(--primary); font-weight: 700; font-size: 0.9rem; display: block;">⚙️ Variación Creativa (Creative Targeting)</span>
+                            <span class="glossary-tech" style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">La pieza hace la segmentación</span>
+                        </div>
+                        <p class="glossary-desc" style="font-size: 0.78rem; line-height: 1.45; color: var(--text-muted);">
+                            <strong>Paso 1: Definir Ángulos</strong> - Crear 3-4 enfoques de comunicación basados en dolores reales del estilista (ej. rentabilidad del salón, soporte técnico de coloración, unboxing de stock).<br>
+                            <strong>Paso 2: Generar Variaciones</strong> - Producir múltiples portadas, primeros 3 segundos (ganchos) y copys para cada ángulo.<br>
+                            <strong>Paso 3: Target Amplio (Broad)</strong> - Configurar la campaña en Meta Ads sin filtros de intereses ni datos demográficos acotados (segmentación abierta).<br>
+                            <strong>Paso 4: Distribución Dinámica</strong> - El algoritmo identifica qué usuario responde a qué creativo, segmentando automáticamente según el comportamiento de la audiencia.
+                        </p>
+                    </div>
+                    <div class="glossary-item" style="background: rgba(255, 255, 255, 0.02); padding: 15px; border-radius: 8px; border: 1px solid var(--card-border);">
+                        <div class="glossary-header" style="margin-bottom: 10px;">
+                            <span class="glossary-title" style="color: var(--secondary); font-weight: 700; font-size: 0.9rem; display: block;">🎬 Trial Reels (Hook-Retain-Reward)</span>
+                            <span class="glossary-tech" style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Estructura de Video de Alto Impacto</span>
+                        </div>
+                        <p class="glossary-desc" style="font-size: 0.78rem; line-height: 1.45; color: var(--text-muted);">
+                            <strong>Paso 1: Gancho (Hook - 0-3s)</strong> - Capturar la atención visual en los primeros 3 segundos (ej. primer plano de una decoloración perfecta o frase disruptiva como: "Si sos estilista o dueño de salón, mirá esto").<br>
+                            <strong>Paso 2: Retención (Retain - 3-12s)</strong> - Mostrar la aplicación práctica y aportar valor técnico educativo (ej. fórmula exacta paso a paso usando Metal Detox de L'Oréal).<br>
+                            <strong>Paso 3: Recompensa (Reward - 12-15s)</strong> - Llamado a la acción (CTA) directo (ej. "Toca el botón abajo y escribinos para recibir la lista de precios mayorista").
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
 

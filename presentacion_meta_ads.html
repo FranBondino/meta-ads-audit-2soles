@@ -1084,6 +1084,8 @@
             .creatives-grid { grid-template-columns: repeat(2, 1fr); }
             .roadmap-container { grid-template-columns: repeat(2, 1fr); }
             .glossary-grid { grid-template-columns: 1fr; }
+            .traceability-dashboard { flex-direction: column !important; height: auto !important; }
+            .trace-preview-panel { width: 100% !important; height: 400px !important; }
         }
 
         @media (max-width: 600px) {
@@ -1671,7 +1673,7 @@
                                 <option value="high" style="color: #000;">🏆 Alto / Ganadores</option>
                                 <option value="medium" style="color: #000;">📈 Medio / Sostén</option>
                                 <option value="insufficient" style="color: #000;">📊 Datos Insuficientes</option>
-                                <option value="leakage" style="color: #000;">⚠️ Fuga / Fuera de Época</option>
+
                             </select>
                             <select id="trace-sort-by" style="padding: 8px; border-radius: 6px; border: 1px solid var(--border-light); background: rgba(255,255,255,0.05); color: #fff; font-family: inherit; font-size: 0.85rem;" onchange="sortTraceability()">
                                 <option value="date-desc" style="color: #000;">📅 Recientes primero</option>
@@ -1685,7 +1687,7 @@
                         <!-- Lista scrolleable -->
                         <div class="trace-list-scroll" id="trace-list-container" style="flex: 1; overflow-y: auto; padding: 10px;">
                             <!-- Fila 0 -->
-                            <div class="trace-item" data-name="reel - general hot" data-camp="conversion - evento compra a pagina web" data-status="PAUSED" data-date="2026-05-13" data-budget="5000" data-performance="leakage" onclick="showAdPreview('120244971916580593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="reel - general hot" data-camp="conversion - evento compra a pagina web" data-status="PAUSED" data-date="2026-05-13" data-budget="5000" data-performance="insufficient" onclick="showAdPreview('120244971916580593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Reel - General HOT</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion - evento compra a pagina web</div>
@@ -1702,7 +1704,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQLeZFIkAMNubcDh-R5fLUESXdzZqU6-f51IeOskcLmcCuOv6MEDlcwuNo4U5mI-Smm5MttM0NbZ-2jBaLdwXGWETLP94IjtsPBRofU7Tl9YgXKpTo1NIG1hkTyShKMCq22WASakqDR1PwfvTfwfYTgua5eUG-GLaiRLLtaHbVb28K0zppmWt2h64MGOtwWa9hXhC1ixoi8P5uz6RxK2Y5NKZff-9AG0eJdqDlh_Fbur4KVkWT-wE7Rcv0BUjSf508nns62eYgOIvOjwRK2ao-666uwGWgj0osujYX2QwOSicgcR4guPOqRrg8p7t-4mZxI7BFK5XTxHw0uvQ_gQL1DvmoIli-YaYjc26kqajbiY5wDmSnKCwjMbEh23sICvgZCWKagMD9PIpKJSy8__fLRb3H6JEidFoYJRMctCbjg3tm5hllx9g_oZlSZNTwhPzI0&t=AQKDLx_fHAoonpiYZWc"></div>
                             </div>
                             <!-- Fila 1 -->
-                            <div class="trace-item" data-name="ugc - joana don - hs" data-camp="conversion - evento compra a pagina web" data-status="PAUSED" data-date="2026-05-11" data-budget="5000" data-performance="leakage" onclick="showAdPreview('120244790839150593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="ugc - joana don - hs" data-camp="conversion - evento compra a pagina web" data-status="PAUSED" data-date="2026-05-11" data-budget="5000" data-performance="insufficient" onclick="showAdPreview('120244790839150593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">UGC - Joana Don - HS</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion - evento compra a pagina web</div>
@@ -1719,7 +1721,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQK-c4xCf20Blx0ofAkr9I9p5lOg8V-yoQuzv07PrUzRsNhmKKG2VO8wNX9p0GXvEFB7zdbTzUzA_xQ8L44FLu3iQ_zfAXXqRwBeiiCQWg8-_rN7B1teknMRmVvrXkROvkYoNoD6Q5ba-pbuHOr05ojO8YDUiXZ7ZC7i-il4ly7jxqKXFuJrHQMSISoYMAWktn6AFzXThernpShXw_WBFv2CmqPiSnMK-t61mhoNh7oOfk4oMekHyAqmoOiLKBwfnPqvOWi1VjJrIo9u4-cFiL2cjYP66EtQ1JpjV60QpGOqN2Ke1GqU5xcdI4khNfLHYBeMNo-PbhLhJMj0Kfmya3ywaaVZmkRPkBAQFqYGJj-tnl8Um3Hi2Hv36yZET3q4TDHfdrut2bV_5WAIXa6b3d93TvJGjAFJmfwXhe2L8ZiFY7-FDzMAxK4BheDxxvOU8_Y&t=AQLykOLNV5Ueg9Qd-dc"></div>
                             </div>
                             <!-- Fila 2 -->
-                            <div class="trace-item" data-name="jaz ugc 2" data-camp="conversion - evento compra a pagina web" data-status="PAUSED" data-date="2026-05-11" data-budget="5000" data-performance="leakage" onclick="showAdPreview('120244790485120593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="jaz ugc 2" data-camp="conversion - evento compra a pagina web" data-status="PAUSED" data-date="2026-05-11" data-budget="5000" data-performance="insufficient" onclick="showAdPreview('120244790485120593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Jaz UGC 2</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion - evento compra a pagina web</div>
@@ -1736,7 +1738,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQKHB8bQy83DyCTQntKMG-zybidkmIdnbfjFrFyEAAuJd8Sx3BYDS4MKNXB-i5JaA-Lecy3Oy5HfX0Exaqjh16SpS5qcKJ3fXlTBeYNU8yNaMoCCKf8Ztumuae1MXe1MsTDqAc2Lc5jlR0XtfOLADz4GN07rgI6ZAyM0DTmvJAhXWJSci7q_J8cJo8jQz8k1jUlqO-9CsQZALhNNdUHJy-XBgTCxXW0HDZtjERg416f6gjt6e0l6yLajQL6AnwuT075ZiOTBL6EGB-iSLZgAcICiqssg5zZCcRqrcQIKm2EY8xBnLh55IBj8RpKCk0fhrWjoc00539MnBvAzm0XQcQ_K_An5xhjXExEqiKA-_9xiD4C2tPfopdiOJUf1H_sncRdHHHtLSDt7bTTdxB3Cs-IqLKhldeii0FTDjzDX7qT-aUe3IItcsyVlvsfK0wO8W-Y&t=AQKNgXb7mKQcnSymqyg"></div>
                             </div>
                             <!-- Fila 3 -->
-                            <div class="trace-item" data-name="jaz ugc 1" data-camp="conversion - evento compra a pagina web" data-status="PAUSED" data-date="2026-05-11" data-budget="5000" data-performance="leakage" onclick="showAdPreview('120244789448460593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="jaz ugc 1" data-camp="conversion - evento compra a pagina web" data-status="PAUSED" data-date="2026-05-11" data-budget="5000" data-performance="insufficient" onclick="showAdPreview('120244789448460593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Jaz UGC 1</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion - evento compra a pagina web</div>
@@ -1753,7 +1755,7 @@
                                     data-previewurl="https://business.facebook.com/ads/api/preview_iframe.php?d=AQIZeO3nM0BO6mYTN4939NUWUoJ1Tiqm6pACPwNEclCma3d2--EM6gtHNjzxMVmsD-f7ElOvfXGKLVgoPAP93F1AvRaZmXDCiQgHq_dp6NmUabAPNvvbnYev_-TZUpyZDX21ICMzOPCwJlqTIrkGdfcPx64rnKDUCL3B5ZAK8w_HdvRmcjUt1PBIh8M5Sl6yGO_1v5OSIl5y4pIPNI1p7gOYzyd6VVPCLjcMijkaz4FycI0zDEesvv4hB_mZ8R9J8JG6iUyUcXWpezQku1w_FnnKh2HtP5qdQbBxvh1bYpPscmb4cM59sqAX07ixGWSFEGAarffmBB-UebWmzo7-5Jg-Ksh4BAn2ksu1h6mdOHq3oLxPze_WKLu7buSDH8l-6my4D_bFCDHxsyWIhEhSdjw3Lh1pTBJKMcytZPG_G9scGRrTBpRm9vJAq5nSyokS57o&t=AQKJQqfAPpoOVLppweE"></div>
                             </div>
                             <!-- Fila 4 -->
-                            <div class="trace-item" data-name="dos soles sale flyer" data-camp="conversion - evento compra a pagina web" data-status="PAUSED" data-date="2026-05-08" data-budget="5000" data-performance="leakage" onclick="showAdPreview('120244538628700593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
+                            <div class="trace-item" data-name="dos soles sale flyer" data-camp="conversion - evento compra a pagina web" data-status="PAUSED" data-date="2026-05-08" data-budget="5000" data-performance="insufficient" onclick="showAdPreview('120244538628700593')" style="padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s;">
                                 <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <div style="font-size: 0.85rem; font-weight: 700; color: #fff;">Dos Soles Sale Flyer</div>
                                     <div style="font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono);">Conversion - evento compra a pagina web</div>
@@ -2084,24 +2086,7 @@
                             <span style="font-size: 2rem; display: block; margin-bottom: 10px;">👆</span>
                             Hacé clic en un anuncio de la lista para previsualizar su contenido real.
                             
-                            <div style="margin-top: 15px; padding: 15px; border-radius: 8px; background: rgba(244,63,94,0.08); border: 1px solid var(--accent-red); text-align: left; box-sizing: border-box;">
-                                <div style="color: var(--accent-red); font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
-                                    <span>⚠️</span> ALERTA DE FUGA OPERATIVA
-                                </div>
-                                <div style="font-size: 0.72rem; color: #fff; line-height: 1.45; margin-bottom: 6px;">
-                                    Los anuncios de <strong>Hot Sale / Dos Soles Sale</strong> continuaron activos hasta el <strong>20/05/2026</strong>. 
-                                </div>
-                                <div style="font-size: 0.68rem; color: var(--text-muted); line-height: 1.4;">
-                                    Dado que el Hot Sale terminó el 17/05, se pagaron 3 días de pauta al pedo.
-                                </div>
-                                <div style="margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.2); border-radius: 4px; font-size: 0.65rem; line-height: 1.35; color: #fff;">
-                                    <strong>Fuga Auditada (18-20 Mayo):</strong><br>
-                                    • Gasto Desperdiciado: <span style="color: var(--accent-red); font-weight:700;">$7,435.35 ARS</span><br>
-                                    • Clics Frustrados (Rebote): 136 clics<br>
-                                    • Alcance: 1,313 personas (estilistas)<br>
-                                    • <em>Jaz UGC 2</em> quemó $6,777.37 por sí solo.
-                                </div>
-                            </div>
+
                             
                             <div style="margin-top: 15px; padding: 15px; border-radius: 8px; background: rgba(0, 242, 254, 0.035); border: 1px solid rgba(0, 242, 254, 0.15); text-align: left; box-sizing: border-box; font-family: var(--font-display);">
                                 <div style="color: var(--accent-green); font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; gap: 6px; margin-bottom: 8px;">
@@ -2500,16 +2485,24 @@
 
                 <div class="split-layout reveal-scale delay-1" style="gap: 1.5rem;">
                     <!-- Left: La Oportunidad -->
-                    <div class="campaign-side active-cam" style="border-color: rgba(245, 166, 23, 0.25); padding: 1.8rem; justify-content: flex-start; gap: 1rem;">
+                    <div class="campaign-side active-cam" style="border-color: rgba(245, 166, 23, 0.25); padding: 1.5rem; justify-content: flex-start; gap: 0.8rem;">
                         <div class="side-title" style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 0.2rem;">
                             <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--accent);">🎓 Capitalizar la Demanda Orgánica</h3>
                             <span class="status-pill active" style="background: rgba(245, 166, 23, 0.1); color: var(--accent); border-color: rgba(245, 166, 23, 0.25);">Imán de Leads</span>
                         </div>
-                        <p class="creative-desc" style="font-size: 0.85rem; line-height: 1.5; color: var(--text-secondary);">
-                            Nuestra auditoría del feed orgánico demostró que los posts sobre **talleres técnicos, workshops y colorimetría profesional** son los que generan mayor engagement (**65.3 interacciones promedio vs 40.6 del B2C**). Existe una demanda real de capacitación.
+                        <p class="creative-desc" style="font-size: 0.82rem; line-height: 1.45; color: var(--text-secondary);">
+                            Los posts sobre **talleres técnicos, workshops y colorimetría profesional** generan el mayor engagement (**65.3 interacciones promedio vs 40.6 B2C**).
                         </p>
-                        <div class="side-verdict" style="background: rgba(245, 166, 23, 0.03); border-left-color: var(--accent); padding: 0.8rem; font-size: 0.78rem; margin-top: auto;">
-                            <strong>Estrategia de Captación:</strong> Utilizar la pauta en Meta para promocionar la reserva de cupos a los talleres presenciales u online de Dos Soles, en lugar de vender productos directamente en frío.
+                        <div style="font-size: 0.72rem; background: rgba(0,0,0,0.25); padding: 10px; border-radius: 8px; border-left: 3px solid var(--brand-gold); margin-bottom: 5px; box-sizing: border-box; text-align: left;">
+                            <strong style="color: var(--brand-gold);">🔗 Publicaciones de Respaldo Real (Instagram):</strong><br>
+                            • <a href="https://www.instagram.com/p/C74Zr7HRoEo/" target="_blank" style="color: #fff; text-decoration: underline;">17º Aniversario (204 int.) ↗</a><br>
+                            • <a href="https://www.instagram.com/reel/DKxCki-xaVT/" target="_blank" style="color: #fff; text-decoration: underline;">18 Años de Vínculos (188 int.) ↗</a><br>
+                            • <a href="https://www.instagram.com/p/DJ9nqBoRPPh/" target="_blank" style="color: #fff; text-decoration: underline;">Matrix Trend Lab (185 int.) ↗</a><br>
+                            • <a href="https://www.instagram.com/reel/Cv_COQENRVO/" target="_blank" style="color: #fff; text-decoration: underline;">Centro Técnico (159 int.) ↗</a><br>
+                            • <a href="https://www.instagram.com/reel/DHL5UjiRcTh/" target="_blank" style="color: #fff; text-decoration: underline;">Taller Bbcos (132 int.) ↗</a>
+                        </div>
+                        <div class="side-verdict" style="background: rgba(245, 166, 23, 0.03); border-left-color: var(--accent); padding: 0.6rem 0.8rem; font-size: 0.75rem; margin-top: auto;">
+                            <strong>Estrategia de Captación:</strong> Promocionar cupos a talleres técnicos profesionales para atraer y calificar salones B2B.
                         </div>
                     </div>
 
@@ -2555,32 +2548,34 @@
 
                 <div class="kpi-grid" style="grid-template-columns: repeat(3, 1fr); gap: var(--card-gap);">
                     <!-- Pilar 1: Variación Creativa -->
-                    <div class="kpi-card highlight-gold reveal delay-1" style="padding: 1.4rem; justify-content: flex-start; gap: 0.8rem;">
+                    <div class="kpi-card highlight-gold reveal delay-1" style="padding: 1.2rem; justify-content: flex-start; gap: 0.6rem; text-align: left;">
                         <span class="kpi-label">Variación Creativa</span>
-                        <h3 style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-top: 5px;">El Anuncio es la Segmentación</h3>
-                        <p class="creative-desc" style="font-size: 0.78rem; line-height: 1.45; color: var(--text-secondary);">
-                            El algoritmo actual de Meta penaliza la segmentación hiperacotada. En su lugar, se utilizan públicos amplios (Broad) y **múltiples variaciones creativas**. Meta distribuye dinámicamente el presupuesto según qué anuncio atrae a qué sub-perfil de peluquero.
+                        <h3 style="font-size: 1.1rem; font-weight: 700; color: #ffffff; margin-top: 2px;">Paso a Paso del Algoritmo</h3>
+                        <p class="creative-desc" style="font-size: 0.72rem; line-height: 1.4; color: var(--text-secondary);">
+                            <strong>Paso 1: Ángulos:</strong> Definir 3-4 enfoques basados en dolores del estilista (rentabilidad, soporte técnico).<br>
+                            <strong>Paso 2: Variaciones:</strong> Grabar distintos ganchos, portadas y copys.<br>
+                            <strong>Paso 3: Target Amplio:</strong> Desactivar intereses; usar segmentación abierta (Broad).<br>
+                            <strong>Paso 4: Distribución Dinámica:</strong> Meta asigna inversión automáticamente al creativo que atrae mejor a cada sub-perfil de peluquero.
                         </p>
                     </div>
 
                     <!-- Pilar 2: Trial Reels -->
-                    <div class="kpi-card highlight-teal reveal delay-2" style="padding: 1.4rem; justify-content: flex-start; gap: 0.8rem;">
-                        <span class="kpi-label">Formatos Trial Reels</span>
-                        <h3 style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-top: 5px;">Reels de Retención Rápida</h3>
-                        <p class="creative-desc" style="font-size: 0.78rem; line-height: 1.45; color: var(--text-secondary);">
-                            Videos cortos verticales (9:16) estructurados en 3 fases:
-                            <br><strong>1. Hook (0-3s):</strong> Gancho visual disruptivo.
-                            <br><strong>2. Retención (3-12s):</strong> Demostración del producto o técnica.
-                            <br><strong>3. Reward (12-15s):</strong> Llamado a la acción directo.
+                    <div class="kpi-card highlight-teal reveal delay-2" style="padding: 1.2rem; justify-content: flex-start; gap: 0.6rem; text-align: left;">
+                        <span class="kpi-label">Estructura Trial Reels</span>
+                        <h3 style="font-size: 1.1rem; font-weight: 700; color: #ffffff; margin-top: 2px;">Paso a Paso del Video</h3>
+                        <p class="creative-desc" style="font-size: 0.72rem; line-height: 1.4; color: var(--text-secondary);">
+                            <strong>Paso 1: Gancho (Hook - 0 a 3s):</strong> Capturar la atención visual con un resultado impactante o gancho fuerte (ej. decoloración perfecta).<br>
+                            <strong>Paso 2: Retención (Retain - 3 a 12s):</strong> Aportar valor educativo mostrando el paso a paso o fórmula técnica de aplicación.<br>
+                            <strong>Paso 3: Recompensa (Reward - 12 a 15s):</strong> Llamado a la acción (CTA) directo para contactarse por WhatsApp y pedir cartilla mayorista.
                         </p>
                     </div>
 
                     <!-- Pilar 3: CBO & Advantage+ -->
-                    <div class="kpi-card highlight-teal reveal delay-3" style="padding: 1.4rem; justify-content: flex-start; gap: 0.8rem;">
+                    <div class="kpi-card highlight-teal reveal delay-3" style="padding: 1.2rem; justify-content: flex-start; gap: 0.6rem; text-align: left;">
                         <span class="kpi-label">Automatización</span>
-                        <h3 style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-top: 5px;">Advantage+ Campaigns</h3>
-                        <p class="creative-desc" style="font-size: 0.78rem; line-height: 1.45; color: var(--text-secondary);">
-                            Consolidación de presupuestos mediante **CBO** (Optimization a nivel campaña) y campañas **Advantage+ Shopping (ASC)** para el e-commerce. Meta decide qué anuncio rinde mejor en base a datos agregados y no segmentaciones manuales humanas.
+                        <h3 style="font-size: 1.1rem; font-weight: 700; color: #ffffff; margin-top: 2px;">Advantage+ Campaigns</h3>
+                        <p class="creative-desc" style="font-size: 0.72rem; line-height: 1.4; color: var(--text-secondary);">
+                            <strong>Consolidación total:</strong> Se eliminan los presupuestos por conjunto de anuncios y se utiliza **CBO** a nivel campaña, junto con **Advantage+ Shopping (ASC)** para WooCommerce B2C. Meta decide qué anuncio rinde mejor basándose en datos reales de conversión agregados y no segmentación manual humana.
                         </p>
                     </div>
                 </div>
