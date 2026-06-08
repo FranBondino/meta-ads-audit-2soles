@@ -275,21 +275,19 @@ function generateHTMLReport(data) {
   
   <style>
     :root {
-      --bg-dark: #07070a;
-      --bg-card: rgba(18, 18, 24, 0.65);
-      --border-card: rgba(255, 255, 255, 0.06);
-      --text-main: #f4f4f5;
-      --text-muted: #9f9fad;
+      --bg-dark: #0a080f;
+      --bg-card: rgba(22, 17, 28, 0.75);
+      --border-card: rgba(245, 158, 11, 0.08);
+      --text-main: #f8fafc;
+      --text-muted: #64748b;
       
-      --ig-pink: #d62976;
-      --ig-orange: #f77737;
-      --accent-violet: #8b5cf6;
-      --accent-cyan: #06b6d4;
+      --accent-violet: #f59e0b; /* Gold */
+      --accent-cyan: #38bdf8;
       --accent-emerald: #10b981;
       
-      --gradient-ig: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-      --gradient-neon: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
-      --gradient-cyan: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+      --gradient-ig: linear-gradient(45deg, #d97706 0%, #ea580c 35%, #be123c 70%, #881337 100%);
+      --gradient-neon: linear-gradient(135deg, #fbbf24 0%, #be123c 100%);
+      --gradient-cyan: linear-gradient(135deg, #38bdf8 0%, #0369a1 100%);
       --font-title: 'Outfit', sans-serif;
       --font-body: 'Plus Jakarta Sans', sans-serif;
     }
@@ -303,8 +301,8 @@ function generateHTMLReport(data) {
     body {
       background-color: var(--bg-dark);
       background-image: 
-        radial-gradient(circle at 10% 15%, rgba(139, 92, 246, 0.12) 0%, transparent 40%),
-        radial-gradient(circle at 90% 85%, rgba(236, 72, 153, 0.12) 0%, transparent 45%);
+        radial-gradient(circle at 10% 15%, rgba(245, 158, 11, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 85%, rgba(190, 18, 60, 0.06) 0%, transparent 45%);
       background-attachment: fixed;
       font-family: var(--font-body);
       color: var(--text-main);
@@ -398,8 +396,8 @@ function generateHTMLReport(data) {
     
     .bento-card:hover {
       transform: translateY(-4px);
-      border-color: rgba(139, 92, 246, 0.25);
-      box-shadow: 0 12px 30px rgba(139, 92, 246, 0.08);
+      border-color: rgba(245, 158, 11, 0.22);
+      box-shadow: 0 12px 30px rgba(245, 158, 11, 0.05);
     }
     
     .bento-card::before {
@@ -891,8 +889,8 @@ function generateHTMLReport(data) {
     // 1. Chart Engagement Promedio por Hora de Publicación
     const ctxHourly = document.getElementById('chartHourlyPerformance').getContext('2d');
     const gradientInteractions = ctxHourly.createLinearGradient(0, 0, 0, 400);
-    gradientInteractions.addColorStop(0, 'rgba(139, 92, 246, 0.4)');
-    gradientInteractions.addColorStop(1, 'rgba(139, 92, 246, 0)');
+    gradientInteractions.addColorStop(0, 'rgba(245, 158, 11, 0.3)');
+    gradientInteractions.addColorStop(1, 'rgba(245, 158, 11, 0)');
     
     new Chart(ctxHourly, {
       type: 'line',
@@ -902,12 +900,12 @@ function generateHTMLReport(data) {
           {
             label: 'Interacciones Promedio',
             data: avgPostInteractions,
-            borderColor: '#8b5cf6',
+            borderColor: '#f59e0b',
             backgroundColor: gradientInteractions,
             fill: true,
             tension: 0.4,
             borderWidth: 3,
-            pointBackgroundColor: '#ec4899',
+            pointBackgroundColor: '#be123c',
             pointRadius: 4
           }
         ]
@@ -941,9 +939,9 @@ function generateHTMLReport(data) {
         datasets: [{
           label: 'Engagement Promedio',
           data: dayInteractions,
-          backgroundColor: '#ec4899',
+          backgroundColor: '#be123c',
           borderRadius: 8,
-          hoverBackgroundColor: '#db2777'
+          hoverBackgroundColor: '#9f1239'
         }]
       },
       options: {
@@ -966,9 +964,9 @@ function generateHTMLReport(data) {
         datasets: [{
           label: 'Posts Publicados',
           data: postCountsByHour,
-          backgroundColor: '#06b6d4',
+          backgroundColor: '#38bdf8',
           borderRadius: 6,
-          hoverBackgroundColor: '#0891b2'
+          hoverBackgroundColor: '#0369a1'
         }]
       },
       options: {
