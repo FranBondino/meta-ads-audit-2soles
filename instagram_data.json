@@ -13,12 +13,16 @@
     "avgCommentsPerPost": 9.1
   },
   "recommendations": {
-    "bestDay": "Domingo",
-    "bestDayAvgInteractions": 82.3,
-    "bestHourReal": "21:00 hs",
-    "bestHourRealAvgInteractions": 83.3,
+    "bestDay": "Viernes",
+    "bestDayAvgInteractions": 54.5,
+    "bestDayMedian": 40,
+    "bestDayCount": 52,
+    "bestHourReal": "18:00 hs",
+    "bestHourRealAvgInteractions": 74.8,
+    "bestHourRealMedian": 58,
+    "bestHourRealCount": 17,
     "peakOnlineHour": "Basado en posts",
-    "recommendedSlot": "20:00 hs a 21:00 hs"
+    "recommendedSlot": "17:30 hs a 19:30 hs"
   },
   "statsByDay": [
     {
@@ -28,6 +32,7 @@
       "totalLikes": 473,
       "totalComments": 103,
       "totalInteractions": 576,
+      "medianInteractions": 54,
       "avgLikes": 67.6,
       "avgComments": 14.7,
       "avgInteractions": 82.3
@@ -39,6 +44,7 @@
       "totalLikes": 1218,
       "totalComments": 262,
       "totalInteractions": 1480,
+      "medianInteractions": 32,
       "avgLikes": 34.8,
       "avgComments": 7.5,
       "avgInteractions": 42.3
@@ -50,6 +56,7 @@
       "totalLikes": 1202,
       "totalComments": 245,
       "totalInteractions": 1447,
+      "medianInteractions": 25,
       "avgLikes": 41.4,
       "avgComments": 8.4,
       "avgInteractions": 49.9
@@ -61,6 +68,7 @@
       "totalLikes": 1457,
       "totalComments": 373,
       "totalInteractions": 1830,
+      "medianInteractions": 34,
       "avgLikes": 45.5,
       "avgComments": 11.7,
       "avgInteractions": 57.2
@@ -72,6 +80,7 @@
       "totalLikes": 1408,
       "totalComments": 281,
       "totalInteractions": 1689,
+      "medianInteractions": 24,
       "avgLikes": 36.1,
       "avgComments": 7.2,
       "avgInteractions": 43.3
@@ -83,6 +92,7 @@
       "totalLikes": 2347,
       "totalComments": 487,
       "totalInteractions": 2834,
+      "medianInteractions": 40,
       "avgLikes": 45.1,
       "avgComments": 9.4,
       "avgInteractions": 54.5
@@ -94,6 +104,7 @@
       "totalLikes": 408,
       "totalComments": 72,
       "totalInteractions": 480,
+      "medianInteractions": 51,
       "avgLikes": 68,
       "avgComments": 12,
       "avgInteractions": 80
@@ -106,6 +117,7 @@
       "totalLikes": 0,
       "totalComments": 0,
       "totalInteractions": 0,
+      "medianInteractions": 0,
       "avgLikes": 0,
       "avgComments": 0,
       "avgInteractions": 0
@@ -116,6 +128,7 @@
       "totalLikes": 0,
       "totalComments": 0,
       "totalInteractions": 0,
+      "medianInteractions": 0,
       "avgLikes": 0,
       "avgComments": 0,
       "avgInteractions": 0
@@ -126,6 +139,7 @@
       "totalLikes": 0,
       "totalComments": 0,
       "totalInteractions": 0,
+      "medianInteractions": 0,
       "avgLikes": 0,
       "avgComments": 0,
       "avgInteractions": 0
@@ -136,6 +150,7 @@
       "totalLikes": 0,
       "totalComments": 0,
       "totalInteractions": 0,
+      "medianInteractions": 0,
       "avgLikes": 0,
       "avgComments": 0,
       "avgInteractions": 0
@@ -146,6 +161,7 @@
       "totalLikes": 0,
       "totalComments": 0,
       "totalInteractions": 0,
+      "medianInteractions": 0,
       "avgLikes": 0,
       "avgComments": 0,
       "avgInteractions": 0
@@ -156,6 +172,7 @@
       "totalLikes": 0,
       "totalComments": 0,
       "totalInteractions": 0,
+      "medianInteractions": 0,
       "avgLikes": 0,
       "avgComments": 0,
       "avgInteractions": 0
@@ -166,6 +183,7 @@
       "totalLikes": 0,
       "totalComments": 0,
       "totalInteractions": 0,
+      "medianInteractions": 0,
       "avgLikes": 0,
       "avgComments": 0,
       "avgInteractions": 0
@@ -176,6 +194,7 @@
       "totalLikes": 0,
       "totalComments": 0,
       "totalInteractions": 0,
+      "medianInteractions": 0,
       "avgLikes": 0,
       "avgComments": 0,
       "avgInteractions": 0
@@ -186,6 +205,7 @@
       "totalLikes": 73,
       "totalComments": 15,
       "totalInteractions": 88,
+      "medianInteractions": 88,
       "avgLikes": 73,
       "avgComments": 15,
       "avgInteractions": 88
@@ -196,6 +216,7 @@
       "totalLikes": 22,
       "totalComments": 1,
       "totalInteractions": 23,
+      "medianInteractions": 23,
       "avgLikes": 22,
       "avgComments": 1,
       "avgInteractions": 23
@@ -206,6 +227,7 @@
       "totalLikes": 87,
       "totalComments": 18,
       "totalInteractions": 105,
+      "medianInteractions": 105,
       "avgLikes": 87,
       "avgComments": 18,
       "avgInteractions": 105
@@ -216,6 +238,7 @@
       "totalLikes": 227,
       "totalComments": 81,
       "totalInteractions": 308,
+      "medianInteractions": 78,
       "avgLikes": 45.4,
       "avgComments": 16.2,
       "avgInteractions": 61.6
@@ -226,6 +249,7 @@
       "totalLikes": 649,
       "totalComments": 134,
       "totalInteractions": 783,
+      "medianInteractions": 24,
       "avgLikes": 59,
       "avgComments": 12.2,
       "avgInteractions": 71.2
@@ -236,6 +260,7 @@
       "totalLikes": 2635,
       "totalComments": 632,
       "totalInteractions": 3267,
+      "medianInteractions": 26,
       "avgLikes": 45.4,
       "avgComments": 10.9,
       "avgInteractions": 56.3
@@ -246,6 +271,7 @@
       "totalLikes": 546,
       "totalComments": 130,
       "totalInteractions": 676,
+      "medianInteractions": 56,
       "avgLikes": 42,
       "avgComments": 10,
       "avgInteractions": 52
@@ -256,6 +282,7 @@
       "totalLikes": 123,
       "totalComments": 55,
       "totalInteractions": 178,
+      "medianInteractions": 41,
       "avgLikes": 24.6,
       "avgComments": 11,
       "avgInteractions": 35.6
@@ -266,6 +293,7 @@
       "totalLikes": 19,
       "totalComments": 6,
       "totalInteractions": 25,
+      "medianInteractions": 25,
       "avgLikes": 19,
       "avgComments": 6,
       "avgInteractions": 25
@@ -276,6 +304,7 @@
       "totalLikes": 337,
       "totalComments": 40,
       "totalInteractions": 377,
+      "medianInteractions": 15,
       "avgLikes": 24.1,
       "avgComments": 2.9,
       "avgInteractions": 26.9
@@ -286,6 +315,7 @@
       "totalLikes": 1064,
       "totalComments": 208,
       "totalInteractions": 1272,
+      "medianInteractions": 58,
       "avgLikes": 62.6,
       "avgComments": 12.2,
       "avgInteractions": 74.8
@@ -296,6 +326,7 @@
       "totalLikes": 993,
       "totalComments": 167,
       "totalInteractions": 1160,
+      "medianInteractions": 17,
       "avgLikes": 24.2,
       "avgComments": 4.1,
       "avgInteractions": 28.3
@@ -306,6 +337,7 @@
       "totalLikes": 1249,
       "totalComments": 242,
       "totalInteractions": 1491,
+      "medianInteractions": 49,
       "avgLikes": 50,
       "avgComments": 9.7,
       "avgInteractions": 59.6
@@ -316,6 +348,7 @@
       "totalLikes": 489,
       "totalComments": 94,
       "totalInteractions": 583,
+      "medianInteractions": 78,
       "avgLikes": 69.9,
       "avgComments": 13.4,
       "avgInteractions": 83.3
@@ -326,6 +359,7 @@
       "totalLikes": 0,
       "totalComments": 0,
       "totalInteractions": 0,
+      "medianInteractions": 0,
       "avgLikes": 0,
       "avgComments": 0,
       "avgInteractions": 0
@@ -336,6 +370,7 @@
       "totalLikes": 0,
       "totalComments": 0,
       "totalInteractions": 0,
+      "medianInteractions": 0,
       "avgLikes": 0,
       "avgComments": 0,
       "avgInteractions": 0

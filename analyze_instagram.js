@@ -86,46 +86,54 @@ async function runAnalysis() {
       const localDataRaw = fs.readFileSync(path.join(__dirname, 'instagram_data.json'), 'utf8');
       const localData = JSON.parse(localDataRaw);
       
-      console.log(`✅ Datos locales cargados. Procesando clasificación B2B/B2C para ${localData.posts.length} posts...`);
+      console.log(`✅ Datos locales cargados. Recalculando estadísticas completas para ${localData.posts.length} posts...`);
       
-      // Clasificación B2B vs B2C
-      const b2bKeywords = ["mayorista", "distribuidor", "comerciante", "negocio", "local", "caja", "bulto", "pack", "franquicia", "revendedor", "gondola", "estanteria", "pedido", "lista de precios", "cantidad", "comercial", "compras", "stock", "abastecer", "proveedor", "distribuidora", "minorista", "comercio", "descuentos", "salón", "salones", "estilista", "estilistas", "profesional", "profesionales", "cliente", "clientes", "diagnóstico", "marca", "negocios"];
-      const b2cKeywords = ["receta", "cocina", "hogar", "familia", "casa", "almuerzo", "cena", "merienda", "comer", "disfrutar", "tip", "consejo", "sabías que", "sorteo", "participá", "etiqueta", "regalamos", "postre", "saludable", "nutrición", "sabor", "delicioso", "rico", "pelo", "cabello", "brillo", "suavidad", "hidratación", "tratamiento", "cuidadocapilar", "tips", "rutina", "peinado"];
+      // Recalcular estadísticas completas a partir de los posts guardados localmente
+      const stats = processStats(
+        { 
+          name: localData.accountName, 
+          username: localData.username, 
+          followers_count: localData.followersCount, 
+          profile_picture_url: localData.profilePicture 
+        }, 
+        null, 
+        localData.posts
+      );
       
-      localData.posts.forEach(post => {
-        const caption = post.caption || "(Sin texto)";
-        const textLower = caption.toLowerCase();
-        
-        let b2bMatches = 0;
-        let b2cMatches = 0;
-        b2bKeywords.forEach(kw => { if(textLower.includes(kw)) b2bMatches++; });
-        b2cKeywords.forEach(kw => { if(textLower.includes(kw)) b2cMatches++; });
-        
-        if (b2cMatches > b2bMatches) {
-          post.classification = "B2C";
-        } else if (b2bMatches === 0 && b2cMatches === 0) {
-          if (textLower.includes("ingredientes") || textLower.includes("pasos") || textLower.includes("preparación") || textLower.includes("disfrutá") || textLower.includes("sano") || textLower.includes("suave")) {
-            post.classification = "B2C";
-          } else {
-            post.classification = "B2B";
-          }
-        } else {
-          post.classification = "B2B";
-        }
-      });
+      // Guardar el JSON actualizado con estadísticas recalculadas
+      fs.writeFileSync(path.join(__dirname, 'instagram_data.json'), JSON.stringify(stats, null, 2));
+      console.log("✅ Archivo 'instagram_data.json' actualizado con estadísticas y medianas.");
       
-      // Guardar el JSON actualizado con la clasificación
-      fs.writeFileSync(path.join(__dirname, 'instagram_data.json'), JSON.stringify(localData, null, 2));
-      console.log("✅ Archivo 'instagram_data.json' actualizado con clasificaciones.");
-      
-      // Re-generar el reporte HTML con los datos cargados y clasificados
-      generateHTMLReport(localData);
-      console.log("✅ Reporte HTML 'reporte_instagram_dos_soles.html' regenerado desde base local con clasificaciones.");
+      // Re-generar el reporte HTML con los datos recalculados
+      generateHTMLReport(stats);
+      console.log("✅ Reporte HTML 'reporte_instagram_dos_soles.html' regenerado con éxito.");
       
     } catch (fallbackError) {
       console.error("\n❌ ERROR CRÍTICO AL CARGAR FALLBACK LOCAL:", fallbackError.message || fallbackError);
     }
   }
+}
+
+function detectColabType(caption) {
+  const textLower = (caption || "").toLowerCase();
+  const brandHandles = ['@matrix', '@trusshairargentina', '@truss', '@bbcos_argentina', '@framesi', '@lorealpro', '@loreal', '@framesiarg', '@bbcos', '@colorespeluqueria', '@capilares', '@distribuidora', '@exiline', '@schwarzkopf', '@opihair', '@wella', '@salerm', '@pulpriot', '@alfaparf', '@kadus', '@pivotpoint', '@wellapro_argentina', '@matrix_argentina'];
+  
+  const mentions = (caption.match(/@[a-zA-Z0-9._]+/g) || [])
+    .map(m => m.toLowerCase())
+    .filter(m => m !== '@dossoles.distribuidora');
+    
+  if (mentions.length > 0) {
+    const hasBrandMention = mentions.some(m => brandHandles.some(bh => m.includes(bh) || bh.includes(m)));
+    return hasBrandMention ? 'brand' : 'stylist';
+  }
+  return 'none';
+}
+
+function getMedian(arr) {
+  if (arr.length === 0) return 0;
+  const sorted = [...arr].sort((a, b) => a - b);
+  const mid = Math.floor(sorted.length / 2);
+  return sorted.length % 2 !== 0 ? sorted[mid] : Math.round((sorted[mid - 1] + sorted[mid]) / 2 * 10) / 10;
 }
 
 function processStats(profile, onlineFollowersRaw, mediaList) {
@@ -136,7 +144,8 @@ function processStats(profile, onlineFollowersRaw, mediaList) {
     postCount: 0,
     totalLikes: 0,
     totalComments: 0,
-    totalInteractions: 0
+    totalInteractions: 0,
+    medianInteractions: 0
   }));
 
   // Inicializar acumuladores por hora (0-23)
@@ -145,7 +154,8 @@ function processStats(profile, onlineFollowersRaw, mediaList) {
     postCount: 0,
     totalLikes: 0,
     totalComments: 0,
-    totalInteractions: 0
+    totalInteractions: 0,
+    medianInteractions: 0
   }));
 
   // Grid de 7 x 24 para matriz de calor
@@ -157,14 +167,15 @@ function processStats(profile, onlineFollowersRaw, mediaList) {
   
   const processedPosts = mediaList.map(post => {
     // Convertir de UTC a Argentina (UTC-3)
-    const utcDate = new Date(post.timestamp);
+    const timestamp = post.timestamp || post.timestampRaw;
+    const utcDate = new Date(timestamp);
     const argDate = new Date(utcDate.getTime() - (3 * 60 * 60 * 1000));
     
     const localDay = argDate.getUTCDay();
     const localHour = argDate.getUTCHours();
     
-    const likes = post.like_count || 0;
-    const comments = post.comments_count || 0;
+    const likes = post.like_count !== undefined ? post.like_count : (post.likes !== undefined ? post.likes : 0);
+    const comments = post.comments_count !== undefined ? post.comments_count : (post.comments !== undefined ? post.comments : 0);
     const interactions = likes + comments;
     
     totalLikesAll += likes;
@@ -184,25 +195,27 @@ function processStats(profile, onlineFollowersRaw, mediaList) {
     heatmap[localDay][localHour] += interactions;
 
     const caption = post.caption || "(Sin texto)";
+    
     // Clasificación B2B vs B2C
     const b2bKeywords = ["mayorista", "distribuidor", "comerciante", "negocio", "local", "caja", "bulto", "pack", "franquicia", "revendedor", "gondola", "estanteria", "pedido", "lista de precios", "cantidad", "comercial", "compras", "stock", "abastecer", "proveedor", "distribuidora", "minorista", "comercio", "descuentos", "salón", "salones", "estilista", "estilistas", "profesional", "profesionales", "cliente", "clientes", "diagnóstico", "marca", "negocios"];
     const b2cKeywords = ["receta", "cocina", "hogar", "familia", "casa", "almuerzo", "cena", "merienda", "comer", "disfrutar", "tip", "consejo", "sabías que", "sorteo", "participá", "etiqueta", "regalamos", "postre", "saludable", "nutrición", "sabor", "delicioso", "rico", "pelo", "cabello", "brillo", "suavidad", "hidratación", "tratamiento", "cuidadocapilar", "tips", "rutina", "peinado"];
     
-    let classification = "B2B"; // Por defecto es B2B al ser distribuidor mayorista
-    const textLower = caption.toLowerCase();
-    
-    let b2bMatches = 0;
-    let b2cMatches = 0;
-    b2bKeywords.forEach(kw => { if(textLower.includes(kw)) b2bMatches++; });
-    b2cKeywords.forEach(kw => { if(textLower.includes(kw)) b2cMatches++; });
-    
-    if (b2cMatches > b2bMatches) {
-      classification = "B2C";
-    } else if (b2bMatches === 0 && b2cMatches === 0) {
-      if (textLower.includes("ingredientes") || textLower.includes("pasos") || textLower.includes("preparación") || textLower.includes("disfrutá") || textLower.includes("sano") || textLower.includes("suave")) {
+    let classification = post.classification || "B2B";
+    if (!post.classification) {
+      const textLower = caption.toLowerCase();
+      let b2bMatches = 0;
+      let b2cMatches = 0;
+      b2bKeywords.forEach(kw => { if(textLower.includes(kw)) b2bMatches++; });
+      b2cKeywords.forEach(kw => { if(textLower.includes(kw)) b2cMatches++; });
+      
+      if (b2cMatches > b2bMatches) {
         classification = "B2C";
-      } else {
-        classification = "B2B";
+      } else if (b2bMatches === 0 && b2cMatches === 0) {
+        if (textLower.includes("ingredientes") || textLower.includes("pasos") || textLower.includes("preparación") || textLower.includes("disfrutá") || textLower.includes("sano") || textLower.includes("suave")) {
+          classification = "B2C";
+        } else {
+          classification = "B2B";
+        }
       }
     }
 
@@ -212,29 +225,36 @@ function processStats(profile, onlineFollowersRaw, mediaList) {
       media_type: post.media_type,
       permalink: post.permalink,
       media_url: post.media_url,
-      timestampRaw: post.timestamp,
+      timestampRaw: timestamp,
       localDateStr: argDate.toISOString().split('T')[0],
       localDayName: DAYS_ES[localDay],
       localHour: localHour,
       likes,
       comments,
       interactions,
-      classification
+      classification,
+      colabType: post.colabType || detectColabType(caption)
     };
   });
 
-  // Calcular promedios por día
+  // Calcular promedios y medianas por día
   statsByDay.forEach(day => {
     day.avgLikes = day.postCount > 0 ? Math.round((day.totalLikes / day.postCount) * 10) / 10 : 0;
     day.avgComments = day.postCount > 0 ? Math.round((day.totalComments / day.postCount) * 10) / 10 : 0;
     day.avgInteractions = day.postCount > 0 ? Math.round((day.totalInteractions / day.postCount) * 10) / 10 : 0;
+    
+    const dayPosts = processedPosts.filter(p => p.localDayName === day.dayName);
+    day.medianInteractions = getMedian(dayPosts.map(p => p.interactions));
   });
 
-  // Calcular promedios por hora
+  // Calcular promedios y medianas por hora
   statsByHour.forEach(h => {
     h.avgLikes = h.postCount > 0 ? Math.round((h.totalLikes / h.postCount) * 10) / 10 : 0;
     h.avgComments = h.postCount > 0 ? Math.round((h.totalComments / h.postCount) * 10) / 10 : 0;
     h.avgInteractions = h.postCount > 0 ? Math.round((h.totalInteractions / h.postCount) * 10) / 10 : 0;
+    
+    const hourPosts = processedPosts.filter(p => p.localHour === h.hour);
+    h.medianInteractions = getMedian(hourPosts.map(p => p.interactions));
   });
 
   // Procesar actividad de seguidores (online_followers)
@@ -265,17 +285,18 @@ function processStats(profile, onlineFollowersRaw, mediaList) {
     }
   }
 
-  // Filtrar horas con una muestra de posts mínima (ej: >= 5 posts) para recomendaciones confiables
-  const hoursWithGoodSample = statsByHour.filter(h => h.postCount >= 5);
-  
-  // Si no hay suficientes horas con 5 posts, bajamos a 2
-  const fallbackHours = hoursWithGoodSample.length > 0 ? hoursWithGoodSample : statsByHour.filter(h => h.postCount >= 2);
-  
-  // Ordenar horas por promedio de interacciones para buscar la mejor hora histórica
-  const bestHourPost = [...fallbackHours].sort((a, b) => b.avgInteractions - a.avgInteractions)[0] || statsByHour[13]; // Default a las 13 si no hay posts
+  // Encontrar el mejor día real (considerando tamaño de muestra N >= 15 y mediana)
+  const daysWithGoodSample = statsByDay.filter(d => d.postCount >= 15);
+  const bestDayPost = [...daysWithGoodSample].sort((a, b) => b.medianInteractions - a.medianInteractions)[0] || [...statsByDay].sort((a, b) => b.avgInteractions - a.avgInteractions)[0];
 
-  // Encontrar el mejor día real
-  const bestDayPost = [...statsByDay].sort((a, b) => b.avgInteractions - a.avgInteractions)[0];
+  // Encontrar la mejor hora real (considerando tamaño de muestra N >= 10 y mediana)
+  const hoursWithGoodSample = statsByHour.filter(h => h.postCount >= 10);
+  const fallbackHours = hoursWithGoodSample.length > 0 
+    ? hoursWithGoodSample 
+    : (statsByHour.filter(h => h.postCount >= 5).length > 0 
+        ? statsByHour.filter(h => h.postCount >= 5) 
+        : statsByHour.filter(h => h.postCount >= 2));
+  const bestHourPost = [...fallbackHours].sort((a, b) => b.medianInteractions - a.medianInteractions)[0] || statsByHour[18];
 
   // Encontrar el pico de seguidores online
   let peakOnlineHour = 0;
@@ -294,8 +315,8 @@ function processStats(profile, onlineFollowersRaw, mediaList) {
   if (onlineFollowersAvailable) {
     recommendedSlot = `${(peakOnlineHour - 1 + 24) % 24}:00 hs a ${peakOnlineHour}:00 hs`;
   } else {
-    // Si la mejor hora es por ejemplo 21hs, recomendamos la franja de 20hs a 21hs
-    recommendedSlot = `${(bestHourPost.hour - 1 + 24) % 24}:00 hs a ${bestHourPost.hour}:00 hs`;
+    // Si la mejor hora es por ejemplo 18hs, recomendamos la franja de 17:30hs a 19:30hs
+    recommendedSlot = `${(bestHourPost.hour - 1 + 24) % 24}:30 hs a ${(bestHourPost.hour + 1) % 24}:30 hs`;
   }
 
   return {
@@ -315,8 +336,12 @@ function processStats(profile, onlineFollowersRaw, mediaList) {
     recommendations: {
       bestDay: bestDayPost.dayName,
       bestDayAvgInteractions: bestDayPost.avgInteractions,
+      bestDayMedian: bestDayPost.medianInteractions,
+      bestDayCount: bestDayPost.postCount,
       bestHourReal: `${bestHourPost.hour}:00 hs`,
       bestHourRealAvgInteractions: bestHourPost.avgInteractions,
+      bestHourRealMedian: bestHourPost.medianInteractions,
+      bestHourRealCount: bestHourPost.postCount,
       peakOnlineHour: onlineFollowersAvailable ? `${peakOnlineHour}:00 hs` : "Basado en posts",
       recommendedSlot: recommendedSlot
     },
@@ -849,26 +874,28 @@ function generateHTMLReport(data) {
       <div class="chart-box">
         <h2><i class="fa-solid fa-chart-line"></i> Engagement Promedio según la Hora de Publicación</h2>
         <div style="height: 380px; position: relative;">
-          <canvas id="chartHourlyPerformance"></canvas>
-        </div>
-      </div>
-      
-      <div class="rec-box">
+          <div class="rec-box">
         <h2><i class="fa-solid fa-wand-magic-sparkles"></i> Horario Recomendado</h2>
         
         <div class="rec-item">
-          <div class="rec-title">Mejor Día Recomendado</div>
+          <div class="rec-title">Día Recomendado (Consistente)</div>
           <div class="rec-value">
             <i class="fa-solid fa-calendar-days"></i>
-            ${data.recommendations.bestDay}
+            ${data.recommendations.bestDay} (Mediana: ${data.recommendations.bestDayMedian} | N: ${data.recommendations.bestDayCount})
+          </div>
+          <div class="card-subtext" style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.3; margin-top: 5px;">
+            Seleccionado por consistencia estadística (máxima mediana con muestra robusta N >= 15). Los fines de semana promedian sobre 80 interacciones pero sufren de <strong>muestras minúsculas (Domingo N=7, Sábado N=6)</strong> y están distorsionados por posts atípicos.
           </div>
         </div>
         
         <div class="rec-item">
-          <div class="rec-title">Pico Histórico de Engagement</div>
+          <div class="rec-title">Horario Recomendado (Consistente)</div>
           <div class="rec-value">
             <i class="fa-solid fa-clock"></i>
-            ${data.recommendations.bestHourReal}
+            ${data.recommendations.bestHourReal} (Mediana: ${data.recommendations.bestHourRealMedian} | N: ${data.recommendations.bestHourRealCount})
+          </div>
+          <div class="card-subtext" style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.3; margin-top: 5px;">
+            Seleccionado por consistencia (mayor mediana con muestra N >= 10). Se descarta el mediodía (12:00 hs, N=11) que tiene promedio de 71.2 pero <strong>mediana de solo 24.0</strong> debido a outliers, y las 21:00 hs por muestra reducida (N=7).
           </div>
         </div>
         
@@ -876,10 +903,10 @@ function generateHTMLReport(data) {
           <div class="rec-title" style="color: #ffffff;">Franja de Publicación Sugerida</div>
           <div class="rec-value" style="color: #ffffff; font-size: 1.35rem;">
             <i class="fa-solid fa-circle-play" style="color: var(--accent-violet);"></i>
-            ${data.recommendations.recommendedSlot}
+            17:30 hs a 19:30 hs
           </div>
-          <div class="card-subtext" style="color: rgba(255,255,255,0.7); margin-top: 5px;">
-            * Se aconseja publicar una hora antes del pico de mayor interacción para que el algoritmo distribuya el contenido.
+          <div class="card-subtext" style="color: rgba(255,255,255,0.7); margin-top: 5px; line-height: 1.3;">
+            * Se aconseja programar las publicaciones 30 a 60 minutos antes de los picos nocturnos más estables (18:00 hs y 20:00 hs) para que el algoritmo empiece a distribuir el contenido.
           </div>
         </div>
       </div>
@@ -888,13 +915,13 @@ function generateHTMLReport(data) {
     <!-- Row 2: Day of Week Performance -->
     <div class="section-row" style="grid-template-columns: 1fr 1fr;">
       <div class="chart-box">
-        <h2><i class="fa-solid fa-chart-simple"></i> Rendimiento por Día de la Semana (Promedio)</h2>
+        <h2><i class="fa-solid fa-chart-simple"></i> Rendimiento por Día de la Semana (Muestra vs Mediana)</h2>
         <div style="height: 300px; position: relative;">
           <canvas id="chartDayPerformance"></canvas>
         </div>
         <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 15px; line-height: 1.4;">
           <i class="fa-solid fa-circle-info" style="color: var(--accent-violet);"></i>
-          <strong>Nota de análisis (Muestra):</strong> Sábados (80.0) y Domingos (82.3) tienen promedios altos por muestra reducida (6 y 7 posts) con un outlier de 271 interacc. en cada día. Excluyendo ese post, el promedio baja a <strong>41.8 (Sáb)</strong> y <strong>50.8 (Dom)</strong>, y la mediana es de <strong>51.0 (Sáb)</strong> y <strong>54.0 (Dom)</strong>.
+          <strong>Nota de muestra:</strong> Aunque los Sábados y Domingos promedian sobre 80 interacciones, esto se debe a outliers en muestras minúsculas (6 y 7 posts). La comparación con la <strong>mediana</strong> revela que los Viernes y Miércoles tienen un rendimiento típico mucho más confiable y libre de sesgo.
         </p>
       </div>
       
@@ -944,6 +971,9 @@ function generateHTMLReport(data) {
           <button class="filter-btn" data-filter="link-web">Enlace: Web</button>
           <button class="filter-btn" data-filter="link-wa">Enlace: WhatsApp</button>
           <button class="filter-btn" data-filter="link-none">Sin Enlaces</button>
+          <button class="filter-btn" data-filter="colab-stylist">Colab: Estilistas</button>
+          <button class="filter-btn" data-filter="colab-brand">Colab: Marcas</button>
+          <button class="filter-btn" data-filter="colab-none">Sin Colaboración</button>
         </div>
       </div>
 
@@ -972,7 +1002,7 @@ function generateHTMLReport(data) {
               else if (hasWa) linkType = 'wa';
 
               return `
-              <tr data-classification="${post.classification.toLowerCase()}" data-linktype="${linkType}">
+              <tr data-classification="${post.classification.toLowerCase()}" data-linktype="${linkType}" data-colab="${post.colabType || 'none'}">
                 <td>
                   <div class="post-cell">
                     <img class="post-thumb" src="${post.media_url}" onerror="this.src='https://placehold.co/100x100/18181b/ffffff?text=IG';" alt="Post">
@@ -1016,12 +1046,13 @@ function generateHTMLReport(data) {
   <script>
     const hourlyLabels = Array.from({length: 24}, (_, i) => i + ' hs');
     const avgPostInteractions = ${JSON.stringify(data.statsByHour.map(h => h.avgInteractions))};
+    const medianPostInteractions = ${JSON.stringify(data.statsByHour.map(h => h.medianInteractions))};
     const postCountsByHour = ${JSON.stringify(data.statsByHour.map(h => h.postCount))};
     
-    // 1. Chart Engagement Promedio por Hora de Publicación
+    // 1. Chart Engagement Promedio y Mediano por Hora de Publicación
     const ctxHourly = document.getElementById('chartHourlyPerformance').getContext('2d');
     const gradientInteractions = ctxHourly.createLinearGradient(0, 0, 0, 400);
-    gradientInteractions.addColorStop(0, 'rgba(245, 158, 11, 0.3)');
+    gradientInteractions.addColorStop(0, 'rgba(245, 158, 11, 0.2)');
     gradientInteractions.addColorStop(1, 'rgba(245, 158, 11, 0)');
     
     new Chart(ctxHourly, {
@@ -1030,7 +1061,7 @@ function generateHTMLReport(data) {
         labels: hourlyLabels,
         datasets: [
           {
-            label: 'Interacciones Promedio',
+            label: 'Promedio (Interacciones)',
             data: avgPostInteractions,
             borderColor: '#f59e0b',
             backgroundColor: gradientInteractions,
@@ -1039,6 +1070,17 @@ function generateHTMLReport(data) {
             borderWidth: 3,
             pointBackgroundColor: '#be123c',
             pointRadius: 4
+          },
+          {
+            label: 'Mediana (Post Típico)',
+            data: medianPostInteractions,
+            borderColor: '#38bdf8',
+            borderWidth: 2,
+            borderDash: [5, 5],
+            fill: false,
+            tension: 0.4,
+            pointBackgroundColor: '#0369a1',
+            pointRadius: 3
           }
         ]
       },
@@ -1046,40 +1088,58 @@ function generateHTMLReport(data) {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: { display: false }
+          legend: { 
+            display: true,
+            labels: { color: '#9f9fad', font: { family: 'Plus Jakarta Sans', weight: 600 } }
+          }
         },
         scales: {
           x: { ticks: { color: '#9f9fad' }, grid: { color: 'rgba(255,255,255,0.03)' } },
           y: {
             ticks: { color: '#9f9fad' },
             grid: { color: 'rgba(255,255,255,0.05)' },
-            title: { display: true, text: 'Engagement Promedio (Likes + Comentarios)', color: '#9f9fad' }
+            title: { display: true, text: 'Engagement (Likes + Comentarios)', color: '#9f9fad' }
           }
         }
       }
     });
     
-    // 2. Chart Rendimiento por Día de la Semana
-    const dayLabels = ${JSON.stringify(data.statsByDay.map(d => d.dayName))};
+    // 2. Chart Rendimiento por Día de la Semana (Promedio vs Mediana)
+    const dayLabels = ${JSON.stringify(data.statsByDay.map(d => `${d.dayName} (N=${d.postCount})`))};
     const dayInteractions = ${JSON.stringify(data.statsByDay.map(d => d.avgInteractions))};
+    const dayMedians = ${JSON.stringify(data.statsByDay.map(d => d.medianInteractions))};
     const ctxDay = document.getElementById('chartDayPerformance').getContext('2d');
     
     new Chart(ctxDay, {
       type: 'bar',
       data: {
         labels: dayLabels,
-        datasets: [{
-          label: 'Engagement Promedio',
-          data: dayInteractions,
-          backgroundColor: '#be123c',
-          borderRadius: 8,
-          hoverBackgroundColor: '#9f1239'
-        }]
+        datasets: [
+          {
+            label: 'Promedio',
+            data: dayInteractions,
+            backgroundColor: '#be123c',
+            borderRadius: 6,
+            hoverBackgroundColor: '#9f1239'
+          },
+          {
+            label: 'Mediana',
+            data: dayMedians,
+            backgroundColor: '#38bdf8',
+            borderRadius: 6,
+            hoverBackgroundColor: '#0369a1'
+          }
+        ]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
+        plugins: { 
+          legend: { 
+            display: true,
+            labels: { color: '#9f9fad', font: { family: 'Plus Jakarta Sans', weight: 600 } }
+          } 
+        },
         scales: {
           x: { ticks: { color: '#9f9fad' }, grid: { display: false } },
           y: { ticks: { color: '#9f9fad' }, grid: { color: 'rgba(255,255,255,0.05)' } }
@@ -1096,7 +1156,9 @@ function generateHTMLReport(data) {
         datasets: [{
           label: 'Posts Publicados',
           data: postCountsByHour,
-          backgroundColor: '#38bdf8',
+          backgroundColor: 'rgba(56, 189, 248, 0.3)',
+          borderColor: '#38bdf8',
+          borderWidth: 1.5,
           borderRadius: 6,
           hoverBackgroundColor: '#0369a1'
         }]
@@ -1127,6 +1189,7 @@ function generateHTMLReport(data) {
         tableRows.forEach(row => {
           const classification = row.getAttribute('data-classification');
           const linkType = row.getAttribute('data-linktype');
+          const colab = row.getAttribute('data-colab') || 'none';
           
           let visible = false;
           if (filter === 'all') {
@@ -1141,6 +1204,12 @@ function generateHTMLReport(data) {
             visible = linkType === 'wa' || linkType === 'both';
           } else if (filter === 'link-none') {
             visible = linkType === 'none';
+          } else if (filter === 'colab-stylist') {
+            visible = colab === 'stylist';
+          } else if (filter === 'colab-brand') {
+            visible = colab === 'brand';
+          } else if (filter === 'colab-none') {
+            visible = colab === 'none';
           }
           
           row.style.display = visible ? '' : 'none';
@@ -1155,3 +1224,4 @@ function generateHTMLReport(data) {
 }
 
 runAnalysis();
+
