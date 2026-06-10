@@ -819,7 +819,7 @@
             </div>
         </section>
 
-        <!-- SLIDE 3: EL DIA DE ORO -->
+        <!-- SLIDE 3: EL ALGORTIMO RECIENTE Y EL SESGO DE FORMATOS -->
         <section class="slide">
             <div class="header-meta">
                 <span class="logo">Dos Soles</span>
@@ -827,71 +827,70 @@
             </div>
             
             <div class="slide-content">
-                <h2 class="slide-title"><i class="fa-solid fa-calendar-week"></i> El "Día de Oro": Océano Azul de Fin de Semana</h2>
+                <h2 class="slide-title"><i class="fa-solid fa-calculator"></i> El Algoritmo Reciente y el "Sesgo de Formatos"</h2>
                 
                 <div class="weekly-grid">
                     <div class="ocean-card">
                         <div class="ocean-title">
                             <i class="fa-solid fa-compass"></i>
-                            Oportunidad Estratégica Detectada
+                            Análisis de Sesgos (Últimos 100 Posts)
                         </div>
                         <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 20px;">
-                            Tu cuenta publica de forma masiva los **Viernes (52 posts)** y días de semana. Sin embargo, al contrastar el **Promedio** con la **Mediana (Post Típico)** y el **Tamaño de Muestra (N)**, surgen grandes contrastes:
+                            Para adaptarnos a los cambios recientes del algoritmo, auditamos las últimas 100 publicaciones. Descubrimos que el formato y las colaboraciones distorsionan los resultados generales de cada día:
                         </p>
                         <ul style="list-style: none; display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px;">
                             <li style="display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: var(--text-secondary);">
                                 <i class="fa-solid fa-arrow-trend-up" style="color: var(--accent-emerald); font-size: 1.1rem; margin-top: 2px;"></i>
-                                <span><strong>Fines de Semana (Muestra Crítica):</strong> Domingo promedia <strong>82.3</strong> (N=7, mediana 54) y Sábado <strong>80.0</strong> (N=6, mediana 51). Son muy inestables y se ven inflados por outliers de 271 interacciones.</span>
+                                <span><strong>El Sesgo de Miércoles (Formatos):</strong> Su mediana general es baja (<strong>16.5</strong>) porque se concentraron 8 Carruseles (median 11.0). Sin embargo, <strong>los Reels de los Miércoles rinden al máximo con una mediana de 71.0 interacciones</strong> (N=9).</span>
                             </li>
                             <li style="display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: var(--text-secondary);">
                                 <i class="fa-solid fa-square-poll-vertical" style="color: var(--accent-cyan); font-size: 1.1rem; margin-top: 2px;"></i>
-                                <span><strong>Días de Semana (Consistencia Real):</strong> Los <strong>Viernes (N=52)</strong> y <strong>Miércoles (N=32)</strong> tienen medianas sólidas y estables de <strong>40.0</strong> y <strong>34.0</strong> interacciones, representando las opciones de publicación más seguras y libres de sesgo.</span>
+                                <span><strong>Consistencia en Lunes y Viernes:</strong> Lunes (median <strong>33.0</strong>, N=22) y Viernes (median <strong>32.0</strong>, N=26) son los días más estables para publicar contenido general, con un 60%+ de enfoque en Reels de alto rendimiento.</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: var(--text-secondary);">
+                                <i class="fa-solid fa-triangle-exclamation" style="color: var(--ds-orange); font-size: 1.1rem; margin-top: 2px;"></i>
+                                <span><strong>La Trampa del Sábado (Colab):</strong> Su promedio es 97.3 por una sola colaboración con educador (outlier), pero su mediana es de solo <strong>13.0</strong>. Todos los posts fueron carruseles sin Reels propios.</span>
                             </li>
                         </ul>
-                        <!-- Nota aclaratoria sobre el sesgo por muestra pequeña / outliers -->
-                        <div style="padding: 12px 16px; background: rgba(245, 158, 11, 0.1); border-left: 3px solid var(--accent); border-radius: 8px; font-size: 0.78rem; line-height: 1.4; color: var(--text-secondary);">
-                            <i class="fa-solid fa-calculator" style="color: var(--accent); margin-right: 6px;"></i>
-                            <strong>Nota estadística:</strong> Domingo y Sábado tienen muestras minúsculas, por lo que un solo post exitoso dispara el promedio. La <strong>mediana</strong> es la métrica recomendada para evaluar el rendimiento real de las publicaciones típicas de cada día.
-                        </div>
                     </div>
 
                     <div class="glass-card">
-                        <div class="kpi-title" style="margin-bottom: 20px;">Engagement de la Semana (Promedio | Mediana)</div>
+                        <div class="kpi-title" style="margin-bottom: 20px;">Engagement de la Semana (Últimos 100 Posts: Promedio | Mediana)</div>
                         <div class="day-bars">
                             <div class="day-bar-row">
-                                <span class="day-name">Domingo (N=7)</span>
-                                <div class="bar-outer"><div class="bar-inner" style="width: 100%; background: var(--gradient-neon);"></div></div>
-                                <span class="day-val">82.3a | 54.0m</span>
+                                <span class="day-name">Lunes (N=22)</span>
+                                <div class="bar-outer"><div class="bar-inner" style="width: 43%; background: var(--gradient-cyan);"></div></div>
+                                <span class="day-val">41.9a | 33.0m</span>
                             </div>
                             <div class="day-bar-row">
-                                <span class="day-name">Sábado (N=6)</span>
-                                <div class="bar-outer"><div class="bar-inner" style="width: 97%;"></div></div>
-                                <span class="day-val">80.0a | 51.0m</span>
+                                <span class="day-name">Viernes (N=26)</span>
+                                <div class="bar-outer"><div class="bar-inner" style="width: 53%; background: var(--gradient-cyan);"></div></div>
+                                <span class="day-val">51.8a | 32.0m</span>
                             </div>
                             <div class="day-bar-row">
-                                <span class="day-name">Miércoles (N=32)</span>
-                                <div class="bar-outer"><div class="bar-inner" style="width: 69%; background: var(--gradient-cyan);"></div></div>
-                                <span class="day-val">57.2a | 34.0m</span>
+                                <span class="day-name">Jueves (N=18)</span>
+                                <div class="bar-outer"><div class="bar-inner" style="width: 27%; background: rgba(255,255,255,0.15);"></div></div>
+                                <span class="day-val">26.8a | 24.0m</span>
                             </div>
                             <div class="day-bar-row">
-                                <span class="day-name">Viernes (N=52)</span>
-                                <div class="bar-outer"><div class="bar-inner" style="width: 66%; background: var(--gradient-cyan);"></div></div>
-                                <span class="day-val">54.5a | 40.0m</span>
+                                <span class="day-name">Martes (N=11)</span>
+                                <div class="bar-outer"><div class="bar-inner" style="width: 24%; background: rgba(255,255,255,0.15);"></div></div>
+                                <span class="day-val">23.3a | 18.0m</span>
                             </div>
                             <div class="day-bar-row">
-                                <span class="day-name">Martes (N=29)</span>
-                                <div class="bar-outer"><div class="bar-inner" style="width: 60%; background: var(--gradient-cyan);"></div></div>
-                                <span class="day-val">49.9a | 25.0m</span>
+                                <span class="day-name">Miércoles (N=18)</span>
+                                <div class="bar-outer"><div class="bar-inner" style="width: 47%; background: var(--ds-crimson);"></div></div>
+                                <span class="day-val">45.7a | 16.5m *</span>
                             </div>
                             <div class="day-bar-row">
-                                <span class="day-name">Jueves (N=39)</span>
-                                <div class="bar-outer"><div class="bar-inner" style="width: 52%; background: rgba(255,255,255,0.15);"></div></div>
-                                <span class="day-val">43.3a | 24.0m</span>
+                                <span class="day-name">Sábado (N=3)</span>
+                                <div class="bar-outer"><div class="bar-inner" style="width: 100%; background: var(--ds-orange);"></div></div>
+                                <span class="day-val">97.3a | 13.0m *</span>
                             </div>
-                            <div class="day-bar-row">
-                                <span class="day-name">Lunes (N=35)</span>
-                                <div class="bar-outer"><div class="bar-inner" style="width: 51%; background: rgba(255,255,255,0.15);"></div></div>
-                                <span class="day-val">42.3a | 32.0m</span>
+                            <div class="day-bar-row" style="opacity: 0.5;">
+                                <span class="day-name">Domingo (N=2)</span>
+                                <div class="bar-outer"><div class="bar-inner" style="width: 65%; background: rgba(255,255,255,0.05);"></div></div>
+                                <span class="day-val">64.0a | 64.0m</span>
                             </div>
                         </div>
                     </div>
@@ -962,7 +961,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 15px; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;">
+                            <div style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 15px; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;">
                             <span style="font-weight: 700; color: #ffffff;"><i class="fa-solid fa-heart" style="color: var(--ig-pink);"></i> 201 Likes &nbsp;|&nbsp; <i class="fa-solid fa-comment" style="color: var(--accent-violet);"></i> 70 Comentarios</span>
                             <a href="https://www.instagram.com/reel/Cv5xmg7Nk0H/" target="_blank" class="btn-link" style="font-size: 0.8rem;">Ver Reel <i class="fa-solid fa-up-right-from-square"></i></a>
                         </div>
@@ -979,7 +978,7 @@
             </div>
             
             <div class="slide-content">
-                <h2 class="slide-title"><i class="fa-solid fa-clock"></i> Horarios Pico: Muestra vs. Consistencia Real</h2>
+                <h2 class="slide-title"><i class="fa-solid fa-clock"></i> Horarios Pico: Muestra vs. Consistencia Real (Últimos 100 Posts)</h2>
                 
                 <div class="format-columns" style="margin-bottom: 20px;">
                     <!-- Consistencia Real -->
@@ -991,18 +990,18 @@
                             </div>
                             <div style="display: flex; gap: 15px; margin: 12px 0;">
                                 <div>
-                                    <div style="font-size: 0.75rem; color: var(--text-muted);">18:00 hs (N=17)</div>
-                                    <div style="font-size: 1.4rem; font-weight: 800; color: #fff;">74.8 <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">avg</span></div>
-                                    <div style="font-size: 1.05rem; font-weight: 700; color: var(--accent-emerald);">58.0 <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">med</span></div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted);">18:00 hs (N=12)</div>
+                                    <div style="font-size: 1.4rem; font-weight: 800; color: #fff;">75.8 <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">avg</span></div>
+                                    <div style="font-size: 1.05rem; font-weight: 700; color: var(--accent-emerald);">66.0 <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">med</span></div>
                                 </div>
                                 <div style="border-left: 1px solid rgba(255,255,255,0.08); padding-left: 15px;">
-                                    <div style="font-size: 0.75rem; color: var(--text-muted);">20:00 hs (N=25)</div>
-                                    <div style="font-size: 1.4rem; font-weight: 800; color: #fff;">59.6 <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">avg</span></div>
-                                    <div style="font-size: 1.05rem; font-weight: 700; color: var(--accent-emerald);">49.0 <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">med</span></div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted);">20:00 hs (N=21)</div>
+                                    <div style="font-size: 1.4rem; font-weight: 800; color: #fff;">45.7 <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">avg</span></div>
+                                    <div style="font-size: 1.05rem; font-weight: 700; color: var(--accent-emerald);">32.0 <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">med</span></div>
                                 </div>
                             </div>
                             <p class="format-desc" style="font-size: 0.75rem; line-height: 1.45;">
-                                Franjas de alta consistencia real. Ambos horarios presentan medianas de interacción elevadas, indicando que el posteo típico tiene un rendimiento sumamente alto y estable.
+                                Franjas de alta consistencia actual. Las **18:00 hs** es el horario con mejor rendimiento típico (mediana 66) con muestra robusta, seguido por las **20:00 hs** (mediana 32).
                             </p>
                         </div>
                     </div>
@@ -1011,23 +1010,23 @@
                     <div class="glass-card format-card" style="border-color: var(--ds-orange); padding: 20px;">
                         <div>
                             <div class="format-header" style="margin-bottom: 12px;">
-                                <h3 class="format-title" style="font-size: 1.1rem;">Sesgo y Outliers</h3>
-                                <span class="format-badge carousels" style="color: var(--ds-gold); background: rgba(245,158,11,0.1); border-color: var(--ds-gold);">Margen de Error</span>
+                                <h3 class="format-title" style="font-size: 1.1rem;">Sesgo por Falta de Muestra</h3>
+                                <span class="format-badge carousels" style="color: var(--ds-gold); background: rgba(245,158,11,0.1); border-color: var(--ds-gold);">Muestra Insuficiente</span>
                             </div>
                             <div style="display: flex; gap: 15px; margin: 12px 0;">
                                 <div>
-                                    <div style="font-size: 0.75rem; color: var(--text-muted);">21:00 hs (N=7)</div>
-                                    <div style="font-size: 1.4rem; font-weight: 800; color: #fff;">83.3 <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">avg</span></div>
-                                    <div style="font-size: 1.05rem; font-weight: 700; color: var(--ds-gold);">78.0 <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">med</span></div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted);">12:00 hs (N=2)</div>
+                                    <div style="font-size: 1.4rem; font-weight: 800; color: #fff;">229.5 <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">avg</span></div>
+                                    <div style="font-size: 1.05rem; font-weight: 700; color: var(--ds-gold);">229.5 <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">med</span></div>
                                 </div>
                                 <div style="border-left: 1px solid rgba(255,255,255,0.08); padding-left: 15px;">
-                                    <div style="font-size: 0.75rem; color: var(--text-muted);">12:00 hs (N=11)</div>
-                                    <div style="font-size: 1.4rem; font-weight: 800; color: #fff;">71.2 <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">avg</span></div>
-                                    <div style="font-size: 1.05rem; font-weight: 700; color: var(--ds-crimson);">24.0 <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">med</span></div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted);">21:00 hs (N=2)</div>
+                                    <div style="font-size: 1.4rem; font-weight: 800; color: #fff;">32.5 <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">avg</span></div>
+                                    <div style="font-size: 1.05rem; font-weight: 700; color: var(--ds-crimson);">32.5 <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">med</span></div>
                                 </div>
                             </div>
                             <p class="format-desc" style="font-size: 0.75rem; line-height: 1.45;">
-                                A las **12:00 hs** el promedio alto es una **ilusión estadística**: la mediana de **24** revela que el post típico rinde mal, inflado por un outlier de 271. Las **21:00 hs** es alto pero con muestra minúscula.
+                                Horarios abandonados recientemente. Con solo **2 posts** de muestra en cada uno, cualquier pico en el promedio o mediana carece de validez estadística y no debe usarse para planificar.
                             </p>
                         </div>
                     </div>
@@ -1036,23 +1035,23 @@
                     <div class="glass-card format-card" style="border-color: var(--text-muted); padding: 20px;">
                         <div>
                             <div class="format-header" style="margin-bottom: 12px;">
-                                <h3 class="format-title" style="font-size: 1.1rem;">Zonas de Saturación</h3>
-                                <span class="format-badge images" style="background: rgba(255,255,255,0.05); color: var(--text-muted); border-color: rgba(255,255,255,0.05);">Alto Volumen</span>
+                                <h3 class="format-title" style="font-size: 1.1rem;">La Trampa de Saturación</h3>
+                                <span class="format-badge images" style="background: rgba(255,255,255,0.05); color: var(--text-muted); border-color: rgba(255,255,255,0.05);">Saturación Reciente</span>
                             </div>
                             <div style="display: flex; gap: 15px; margin: 12px 0;">
                                 <div>
-                                    <div style="font-size: 0.75rem; color: var(--text-muted);">13:00 hs (N=58)</div>
-                                    <div style="font-size: 1.4rem; font-weight: 800; color: #fff;">56.3 <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">avg</span></div>
-                                    <div style="font-size: 1.05rem; font-weight: 700; color: var(--text-muted);">26.0 <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">med</span></div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted);">19:00 hs (N=35)</div>
+                                    <div style="font-size: 1.4rem; font-weight: 800; color: #fff;">23.4 <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">avg</span></div>
+                                    <div style="font-size: 1.05rem; font-weight: 700; color: var(--text-muted);">16.0 <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">med</span></div>
                                 </div>
                                 <div style="border-left: 1px solid rgba(255,255,255,0.08); padding-left: 15px;">
-                                    <div style="font-size: 0.75rem; color: var(--text-muted);">19:00 hs (N=41)</div>
-                                    <div style="font-size: 1.4rem; font-weight: 800; color: #fff;">28.3 <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">avg</span></div>
-                                    <div style="font-size: 1.05rem; font-weight: 700; color: var(--text-muted);">17.0 <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">med</span></div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted);">13:00 hs (N=6)</div>
+                                    <div style="font-size: 1.4rem; font-weight: 800; color: #fff;">67.7 <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">avg</span></div>
+                                    <div style="font-size: 1.05rem; font-weight: 700; color: var(--text-muted);">82.5 <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">med</span></div>
                                 </div>
                             </div>
                             <p class="format-desc" style="font-size: 0.75rem; line-height: 1.45;">
-                                Horarios donde la cuenta publica de forma masiva, pero el rendimiento típico (mediana) decae fuertemente. Representa saturación de la audiencia o momentos de bajo engagement.
+                                La cuenta publica de forma masiva a las **19:00 hs** (35% de los posts recientes), pero el engagement decae fuertemente por saturación. Conviene desplazar estos posteos 1 hora antes (18:00 hs).
                             </p>
                         </div>
                     </div>
@@ -1061,9 +1060,9 @@
                 <div class="advice-box" style="padding: 15px 20px;">
                     <i class="fa-solid fa-lightbulb"></i>
                     <div>
-                        <h4 style="font-size: 0.95rem;">Estrategia de Programación Horaria</h4>
+                        <h4 style="font-size: 0.95rem;">Estrategia Horaria Moderna</h4>
                         <p style="font-size: 0.8rem; line-height: 1.45;">
-                            Se recomienda programar el contenido nocturno entre las <strong>17:30 hs y las 19:30 hs</strong>. Esto permite que el algoritmo procese e indexe la publicación 30 a 60 minutos antes de los picos nocturnos más estables y consistentes de la audiencia (18:00 hs y 20:00 hs).
+                            Se recomienda programar el contenido nocturno entre las <strong>17:30 hs y las 19:30 hs</strong>. Esto permite que el algoritmo procese e indexe la publicación 30 a 60 minutos antes de los picos nocturnos más estables y consistentes de la audiencia (18:00 hs y 20:00 hs), evitando la saturación del horario de las 19:00 hs.
                         </p>
                     </div>
                 </div>

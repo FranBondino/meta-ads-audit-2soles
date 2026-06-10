@@ -161,10 +161,7 @@ function processStats(profile, onlineFollowersRaw, mediaList) {
   // Grid de 7 x 24 para matriz de calor
   const heatmap = Array.from({ length: 7 }, () => Array(24).fill(0));
 
-  // Procesar posts
-  let totalLikesAll = 0;
-  let totalCommentsAll = 0;
-  
+  // Procesar todos los posts
   const processedPosts = mediaList.map(post => {
     // Convertir de UTC a Argentina (UTC-3)
     const timestamp = post.timestamp || post.timestampRaw;
@@ -177,23 +174,6 @@ function processStats(profile, onlineFollowersRaw, mediaList) {
     const likes = post.like_count !== undefined ? post.like_count : (post.likes !== undefined ? post.likes : 0);
     const comments = post.comments_count !== undefined ? post.comments_count : (post.comments !== undefined ? post.comments : 0);
     const interactions = likes + comments;
-    
-    totalLikesAll += likes;
-    totalCommentsAll += comments;
-    
-    // Sumar a estadísticas
-    statsByDay[localDay].postCount++;
-    statsByDay[localDay].totalLikes += likes;
-    statsByDay[localDay].totalComments += comments;
-    statsByDay[localDay].totalInteractions += interactions;
-    
-    statsByHour[localHour].postCount++;
-    statsByHour[localHour].totalLikes += likes;
-    statsByHour[localHour].totalComments += comments;
-    statsByHour[localHour].totalInteractions += interactions;
-    
-    heatmap[localDay][localHour] += interactions;
-
     const caption = post.caption || "(Sin texto)";
     
     // Clasificación B2B vs B2C
@@ -228,6 +208,7 @@ function processStats(profile, onlineFollowersRaw, mediaList) {
       timestampRaw: timestamp,
       localDateStr: argDate.toISOString().split('T')[0],
       localDayName: DAYS_ES[localDay],
+      localDayIndex: localDay,
       localHour: localHour,
       likes,
       comments,
@@ -237,29 +218,57 @@ function processStats(profile, onlineFollowersRaw, mediaList) {
     };
   });
 
-  // Calcular promedios y medianas por día
+  // Tomar los últimos 100 posts (los más recientes) para las estadísticas
+  const recentPosts = processedPosts.slice(0, 100);
+  
+  let totalLikesAll = 0;
+  let totalCommentsAll = 0;
+
+  // Acumular estadísticas sobre los últimos 100 posts
+  recentPosts.forEach(post => {
+    const localDay = post.localDayIndex;
+    const localHour = post.localHour;
+    const likes = post.likes;
+    const comments = post.comments;
+    const interactions = post.interactions;
+    
+    totalLikesAll += likes;
+    totalCommentsAll += comments;
+    
+    statsByDay[localDay].postCount++;
+    statsByDay[localDay].totalLikes += likes;
+    statsByDay[localDay].totalComments += comments;
+    statsByDay[localDay].totalInteractions += interactions;
+    
+    statsByHour[localHour].postCount++;
+    statsByHour[localHour].totalLikes += likes;
+    statsByHour[localHour].totalComments += comments;
+    statsByHour[localHour].totalInteractions += interactions;
+    
+    heatmap[localDay][localHour] += interactions;
+  });
+
+  // Calcular promedios y medianas por día sobre los últimos 100 posts
   statsByDay.forEach(day => {
     day.avgLikes = day.postCount > 0 ? Math.round((day.totalLikes / day.postCount) * 10) / 10 : 0;
     day.avgComments = day.postCount > 0 ? Math.round((day.totalComments / day.postCount) * 10) / 10 : 0;
     day.avgInteractions = day.postCount > 0 ? Math.round((day.totalInteractions / day.postCount) * 10) / 10 : 0;
     
-    const dayPosts = processedPosts.filter(p => p.localDayName === day.dayName);
+    const dayPosts = recentPosts.filter(p => p.localDayName === day.dayName);
     day.medianInteractions = getMedian(dayPosts.map(p => p.interactions));
   });
 
-  // Calcular promedios y medianas por hora
+  // Calcular promedios y medianas por hora sobre los últimos 100 posts
   statsByHour.forEach(h => {
     h.avgLikes = h.postCount > 0 ? Math.round((h.totalLikes / h.postCount) * 10) / 10 : 0;
     h.avgComments = h.postCount > 0 ? Math.round((h.totalComments / h.postCount) * 10) / 10 : 0;
     h.avgInteractions = h.postCount > 0 ? Math.round((h.totalInteractions / h.postCount) * 10) / 10 : 0;
     
-    const hourPosts = processedPosts.filter(p => p.localHour === h.hour);
+    const hourPosts = recentPosts.filter(p => p.localHour === h.hour);
     h.medianInteractions = getMedian(hourPosts.map(p => p.interactions));
   });
 
   // Procesar actividad de seguidores (online_followers)
-  // El API devuelve la hora en horario del Pacífico (California, UTC-7).
-  // Para pasarlo a Argentina (UTC-3), le sumamos 4 horas (con mod 24).
   const followerActivityByHour = Array(24).fill(0);
   let daysCounted = 0;
   let onlineFollowersAvailable = false;
@@ -841,6 +850,13 @@ function generateHTMLReport(data) {
       </div>
     </header>
     
+    <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 16px; padding: 15px 20px; margin-bottom: 30px; font-size: 0.88rem; line-height: 1.5; color: var(--accent-cyan); display: flex; align-items: center; gap: 15px;">
+      <i class="fa-solid fa-circle-info" style="font-size: 1.5rem; flex-shrink: 0;"></i>
+      <div>
+        <strong>Análisis del Algoritmo Reciente:</strong> Para adaptarnos a las últimas actualizaciones de Instagram, los KPIs, gráficos y recomendaciones horarias/diarias se calculan en base a los <strong>últimos 100 posts</strong> (Mayo 2025 - Junio 2026). El historial completo (200 posts) se puede consultar en la tabla de abajo.
+      </div>
+    </div>
+    
     <!-- Bento Stats -->
     <div class="bento-grid">
       <div class="bento-card highlight">
@@ -851,9 +867,9 @@ function generateHTMLReport(data) {
       </div>
       <div class="bento-card">
         <div class="card-icon"><i class="fa-solid fa-photo-film"></i></div>
-        <div class="card-label">Publicaciones Analizadas</div>
+        <div class="card-label">Muestra Estadística</div>
         <div class="card-value">${data.totalPostsAnalyzed}</div>
-        <div class="card-subtext">Muestra total descargada</div>
+        <div class="card-subtext">Últimos 100 posts (algoritmo actual)</div>
       </div>
       <div class="bento-card">
         <div class="card-icon"><i class="fa-solid fa-heart"></i></div>
