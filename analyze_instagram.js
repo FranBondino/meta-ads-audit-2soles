@@ -910,8 +910,8 @@ function generateHTMLReport(data) {
             <i class="fa-solid fa-clock"></i>
             ${data.recommendations.bestHourReal} (Mediana: ${data.recommendations.bestHourRealMedian} | N: ${data.recommendations.bestHourRealCount})
           </div>
-          <div class="card-subtext" style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.3; margin-top: 5px;">
-            Seleccionado por consistencia (mayor mediana con muestra N >= 10). Se descarta el mediodía (12:00 hs, N=11) que tiene promedio de 71.2 pero <strong>mediana de solo 24.0</strong> debido a outliers, y las 21:00 hs por muestra reducida (N=7).
+          <div class="card-subtext" style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.35; margin-top: 5px;">
+            <strong>¡Sesgo de Colaboración Detectado!</strong> Aunque las 18:00 hs tiene la mayor mediana general (${data.recommendations.bestHourRealMedian}), sufre un sesgo crítico: el <strong>41.6% de sus posts (5 de 12) son colaboraciones</strong> de marca/estilistas con alto engagement. Si filtramos el contenido directo (sin colab), el volumen cae a N=7 y los Reels directos a solo N=3. El horario nocturno más limpio y estadísticamente confiable para contenido propio son las <strong>20:00 hs (N=21, Reels directos N=12 con mediana de 49.5 interacciones)</strong>.
           </div>
         </div>
         
@@ -919,10 +919,10 @@ function generateHTMLReport(data) {
           <div class="rec-title" style="color: #ffffff;">Franja de Publicación Sugerida</div>
           <div class="rec-value" style="color: #ffffff; font-size: 1.35rem;">
             <i class="fa-solid fa-circle-play" style="color: var(--accent-violet);"></i>
-            17:30 hs a 19:30 hs
+            19:00 hs a 20:30 hs
           </div>
-          <div class="card-subtext" style="color: rgba(255,255,255,0.7); margin-top: 5px; line-height: 1.3;">
-            * Se aconseja programar las publicaciones 30 a 60 minutos antes de los picos nocturnos más estables (18:00 hs y 20:00 hs) para que el algoritmo empiece a distribuir el contenido.
+          <div class="card-subtext" style="color: rgba(255,255,255,0.7); margin-top: 5px; line-height: 1.35;">
+            * Para posteos de la marca sin colaboración (directos), programar a las <strong>19:30 hs / 20:00 hs</strong> para maximizar el engagement orgánico real. Las 18:00 hs deben reservarse de forma táctica para co-autorías/colaboraciones que impulsan su propio alcance.
           </div>
         </div>
       </div>

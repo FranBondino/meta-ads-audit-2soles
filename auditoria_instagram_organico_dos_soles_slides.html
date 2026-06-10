@@ -981,77 +981,77 @@
                 <h2 class="slide-title"><i class="fa-solid fa-clock"></i> Horarios Pico: Muestra vs. Consistencia Real (Últimos 100 Posts)</h2>
                 
                 <div class="format-columns" style="margin-bottom: 20px;">
-                    <!-- Consistencia Real -->
-                    <div class="glass-card format-card" style="border-color: var(--accent-emerald); padding: 20px;">
+                    <!-- Sesgo en 18:00 hs -->
+                    <div class="glass-card format-card" style="border-color: var(--ds-orange); padding: 20px;">
                         <div>
                             <div class="format-header" style="margin-bottom: 12px;">
-                                <h3 class="format-title" style="font-size: 1.1rem;">Consistencia Nocturna</h3>
-                                <span class="format-badge reels" style="background: var(--accent-emerald); color: white;">Recomendado</span>
+                                <h3 class="format-title" style="font-size: 1.1rem;">Sesgo en 18:00 hs</h3>
+                                <span class="format-badge carousels" style="color: var(--ds-orange); background: rgba(249,115,22,0.1); border-color: var(--ds-orange);">Sesgo Colab (41.6%)</span>
                             </div>
                             <div style="display: flex; gap: 15px; margin: 12px 0;">
                                 <div>
                                     <div style="font-size: 0.75rem; color: var(--text-muted);">18:00 hs (N=12)</div>
                                     <div style="font-size: 1.4rem; font-weight: 800; color: #fff;">75.8 <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">avg</span></div>
-                                    <div style="font-size: 1.05rem; font-weight: 700; color: var(--accent-emerald);">66.0 <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">med</span></div>
+                                    <div style="font-size: 1.05rem; font-weight: 700; color: var(--ds-orange);">66.0 <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">med</span></div>
                                 </div>
                                 <div style="border-left: 1px solid rgba(255,255,255,0.08); padding-left: 15px;">
+                                    <div style="font-size: 0.75rem; color: var(--text-muted);">Sin Colab (N=7)</div>
+                                    <div style="font-size: 1.4rem; font-weight: 800; color: #fff;">58.0 <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">med</span></div>
+                                    <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">Reels Directos: N=3</div>
+                                </div>
+                            </div>
+                            <p class="format-desc" style="font-size: 0.75rem; line-height: 1.45;">
+                                El pico de las **18:00 hs** es una ilusión: 5 de sus 12 posts son colaboraciones altamente exitosas de marca/estilistas. El engagement orgánico propio de la marca aquí está inflado y carece de muestra robusta.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Recomendado 20:00 hs -->
+                    <div class="glass-card format-card" style="border-color: var(--accent-emerald); padding: 20px;">
+                        <div>
+                            <div class="format-header" style="margin-bottom: 12px;">
+                                <h3 class="format-title" style="font-size: 1.1rem;">Pico Limpio (20:00 hs)</h3>
+                                <span class="format-badge reels" style="background: var(--accent-emerald); color: white;">Recomendado Directo</span>
+                            </div>
+                            <div style="display: flex; gap: 15px; margin: 12px 0;">
+                                <div>
                                     <div style="font-size: 0.75rem; color: var(--text-muted);">20:00 hs (N=21)</div>
                                     <div style="font-size: 1.4rem; font-weight: 800; color: #fff;">45.7 <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">avg</span></div>
                                     <div style="font-size: 1.05rem; font-weight: 700; color: var(--accent-emerald);">32.0 <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">med</span></div>
                                 </div>
-                            </div>
-                            <p class="format-desc" style="font-size: 0.75rem; line-height: 1.45;">
-                                Franjas de alta consistencia actual. Las **18:00 hs** es el horario con mejor rendimiento típico (mediana 66) con muestra robusta, seguido por las **20:00 hs** (mediana 32).
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Sesgo / Ilusión Estadística -->
-                    <div class="glass-card format-card" style="border-color: var(--ds-orange); padding: 20px;">
-                        <div>
-                            <div class="format-header" style="margin-bottom: 12px;">
-                                <h3 class="format-title" style="font-size: 1.1rem;">Sesgo por Falta de Muestra</h3>
-                                <span class="format-badge carousels" style="color: var(--ds-gold); background: rgba(245,158,11,0.1); border-color: var(--ds-gold);">Muestra Insuficiente</span>
-                            </div>
-                            <div style="display: flex; gap: 15px; margin: 12px 0;">
-                                <div>
-                                    <div style="font-size: 0.75rem; color: var(--text-muted);">12:00 hs (N=2)</div>
-                                    <div style="font-size: 1.4rem; font-weight: 800; color: #fff;">229.5 <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">avg</span></div>
-                                    <div style="font-size: 1.05rem; font-weight: 700; color: var(--ds-gold);">229.5 <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">med</span></div>
-                                </div>
                                 <div style="border-left: 1px solid rgba(255,255,255,0.08); padding-left: 15px;">
-                                    <div style="font-size: 0.75rem; color: var(--text-muted);">21:00 hs (N=2)</div>
-                                    <div style="font-size: 1.4rem; font-weight: 800; color: #fff;">32.5 <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">avg</span></div>
-                                    <div style="font-size: 1.05rem; font-weight: 700; color: var(--ds-crimson);">32.5 <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">med</span></div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted);">Sin Colab (N=19)</div>
+                                    <div style="font-size: 1.4rem; font-weight: 800; color: #fff;">29.0 <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">med</span></div>
+                                    <div style="font-size: 0.85rem; font-weight: 600; color: var(--accent-emerald);">Reels Directos: N=12 (Med: 49.5)</div>
                                 </div>
                             </div>
                             <p class="format-desc" style="font-size: 0.75rem; line-height: 1.45;">
-                                Horarios abandonados recientemente. Con solo **2 posts** de muestra en cada uno, cualquier pico en el promedio o mediana carece de validez estadística y no debe usarse para planificar.
+                                El horario más sólido para contenido propio de Dos Soles. Al remover colabs (solo 2 de 21), mantiene un rendimiento excelente con Reels directos logrando una mediana de **49.5 interacciones**.
                             </p>
                         </div>
                     </div>
 
-                    <!-- Saturación -->
-                    <div class="glass-card format-card" style="border-color: var(--text-muted); padding: 20px;">
+                    <!-- Saturación 19:00 hs -->
+                    <div class="glass-card format-card" style="border-color: var(--ds-crimson); padding: 20px;">
                         <div>
                             <div class="format-header" style="margin-bottom: 12px;">
-                                <h3 class="format-title" style="font-size: 1.1rem;">La Trampa de Saturación</h3>
-                                <span class="format-badge images" style="background: rgba(255,255,255,0.05); color: var(--text-muted); border-color: rgba(255,255,255,0.05);">Saturación Reciente</span>
+                                <h3 class="format-title" style="font-size: 1.1rem;">La Saturación de 19:00 hs</h3>
+                                <span class="format-badge images" style="background: rgba(225,29,72,0.1); color: var(--ds-crimson); border-color: var(--ds-crimson);">Saturación Reciente</span>
                             </div>
                             <div style="display: flex; gap: 15px; margin: 12px 0;">
                                 <div>
                                     <div style="font-size: 0.75rem; color: var(--text-muted);">19:00 hs (N=35)</div>
                                     <div style="font-size: 1.4rem; font-weight: 800; color: #fff;">23.4 <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">avg</span></div>
-                                    <div style="font-size: 1.05rem; font-weight: 700; color: var(--text-muted);">16.0 <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">med</span></div>
+                                    <div style="font-size: 1.05rem; font-weight: 700; color: var(--ds-crimson);">16.0 <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">med</span></div>
                                 </div>
                                 <div style="border-left: 1px solid rgba(255,255,255,0.08); padding-left: 15px;">
-                                    <div style="font-size: 0.75rem; color: var(--text-muted);">13:00 hs (N=6)</div>
-                                    <div style="font-size: 1.4rem; font-weight: 800; color: #fff;">67.7 <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">avg</span></div>
-                                    <div style="font-size: 1.05rem; font-weight: 700; color: var(--text-muted);">82.5 <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">med</span></div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted);">Sin Colab (N=31)</div>
+                                    <div style="font-size: 1.4rem; font-weight: 800; color: #fff;">16.0 <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">med</span></div>
+                                    <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">Reels Directos: N=15 (Med: 35.0)</div>
                                 </div>
                             </div>
                             <p class="format-desc" style="font-size: 0.75rem; line-height: 1.45;">
-                                La cuenta publica de forma masiva a las **19:00 hs** (35% de los posts recientes), pero el engagement decae fuertemente por saturación. Conviene desplazar estos posteos 1 hora antes (18:00 hs).
+                                Se publica de forma masiva aquí (35% del total), pero el rendimiento decae. Los Reels propios directos aquí rinden **30% menos** (mediana 35.0) que publicándolos a las 20:00 hs (mediana 49.5).
                             </p>
                         </div>
                     </div>
@@ -1060,9 +1060,9 @@
                 <div class="advice-box" style="padding: 15px 20px;">
                     <i class="fa-solid fa-lightbulb"></i>
                     <div>
-                        <h4 style="font-size: 0.95rem;">Estrategia Horaria Moderna</h4>
+                        <h4 style="font-size: 0.95rem;">Estrategia Horaria y Control de Sesgo</h4>
                         <p style="font-size: 0.8rem; line-height: 1.45;">
-                            Se recomienda programar el contenido nocturno entre las <strong>17:30 hs y las 19:30 hs</strong>. Esto permite que el algoritmo procese e indexe la publicación 30 a 60 minutos antes de los picos nocturnos más estables y consistentes de la audiencia (18:00 hs y 20:00 hs), evitando la saturación del horario de las 19:00 hs.
+                            Se recomienda programar el contenido propio a las <strong>19:30 hs / 20:00 hs</strong> para maximizar el engagement orgánico real y limpio. Dejar la franja de las <strong>18:00 hs</strong> exclusivamente para lanzamientos tácticos en colaboración con marcas o estilistas.
                         </p>
                     </div>
                 </div>
