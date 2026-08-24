@@ -1,11 +1,59 @@
-const ACCESS_TOKEN = "EAAOCXeSxZAZCcBR9I89wsEifNZBtkLe52hYzgIteWJIJJ2zI4bJkzZCfba3kBsSWKN3Y5lAZBvAVkMZALtYv1b59GMPqadcttPl8pdJe57zZBCvxGLKRGVWGCRqFGnBBT71NVOCLgXegbmhIfHrnqUnof8IrBPUl973LJZBlOhvZCIcDJeVrKFYKgfGRbg6fuFZARXFbBjq14XcJu1LQnOtMkZANoTsQeAZCbdoLB5luNlHXqoEm85l6OtOIYOkpFVAyJpk4pOi7zZCHEUJef0MuHLNHxtAZDZD";
-const INSTAGRAM_ACCOUNT_ID = "17841403287688257";
 const fs = require('fs');
 const path = require('path');
+
+// Resolver configuración
+let accountArg = process.argv[2] || 'dos_soles';
+let configPath = accountArg;
+if (!accountArg.endsWith('.json')) {
+  configPath = path.join(__dirname, 'configs', `${accountArg}.json`);
+}
+
+if (!fs.existsSync(configPath)) {
+  console.error(`❌ Archivo de configuración no encontrado en: ${configPath}`);
+  process.exit(1);
+}
+
+const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+const ACCESS_TOKEN = config.ACCESS_TOKEN;
+const INSTAGRAM_ACCOUNT_ID = config.INSTAGRAM_ACCOUNT_ID;
+
+// Resolver nombres de archivos de forma dinámica
+let dataFilename = `instagram_data_${accountArg}.json`;
+let reportFilename = `reporte_instagram_${accountArg}.html`;
+
+// Fallbacks de compatibilidad para dos_soles
+if (accountArg === 'dos_soles') {
+  if (!fs.existsSync(path.join(__dirname, `instagram_data_dos_soles.json`)) && fs.existsSync(path.join(__dirname, 'instagram_data.json'))) {
+    dataFilename = 'instagram_data.json';
+  }
+  if (!fs.existsSync(path.join(__dirname, `reporte_instagram_dos_soles.html`)) && fs.existsSync(path.join(__dirname, 'reporte_instagram_dos_soles.html'))) {
+    reportFilename = 'reporte_instagram_dos_soles.html';
+  }
+}
 
 const DAYS_ES = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
 
 async function runAnalysis() {
+  const cacheMap = new Map();
+  let cachedStats = null;
+  
+  // 0. Cargar la base de datos local al inicio (Cache local)
+  try {
+    const cachePath = path.join(__dirname, dataFilename);
+    if (fs.existsSync(cachePath)) {
+      const cacheRaw = fs.readFileSync(cachePath, 'utf8');
+      cachedStats = JSON.parse(cacheRaw);
+      if (cachedStats && cachedStats.posts) {
+        cachedStats.posts.forEach(p => {
+          cacheMap.set(p.id, p);
+        });
+        console.log(`✅ Base de datos local cargada: ${cachedStats.posts.length} posts.`);
+      }
+    }
+  } catch (cacheError) {
+    console.warn("⚠️ No se pudo cargar el caché local:", cacheError.message);
+  }
+
   try {
     console.log("=========================================");
     console.log("INICIANDO ANÁLISIS DE INSTAGRAM: DOS SOLES");
@@ -44,7 +92,7 @@ async function runAnalysis() {
     // 3. Obtener el feed orgánico (últimos 200 posts)
     console.log("\n[3/4] Descargando publicaciones del feed...");
     let mediaList = [];
-    let nextUrl = `https://graph.facebook.com/v19.0/${INSTAGRAM_ACCOUNT_ID}/media?fields=id,caption,media_type,timestamp,like_count,comments_count,permalink,media_url&limit=100&access_token=${ACCESS_TOKEN}`;
+    let nextUrl = `https://graph.facebook.com/v19.0/${INSTAGRAM_ACCOUNT_ID}/media?fields=id,caption,media_type,media_product_type,timestamp,like_count,comments_count,permalink,media_url&limit=100&access_token=${ACCESS_TOKEN}`;
     
     for (let i = 0; i < 2; i++) {
       if (!nextUrl) break;
@@ -62,17 +110,132 @@ async function runAnalysis() {
     }
     console.log(`✅ Se obtuvieron ${mediaList.length} publicaciones del feed.`);
 
+    // 3.5. Obtener insights usando batching e incremental fetching
+    console.log("\n[3.5] Obteniendo insights detallados para las publicaciones...");
+    const postsToFetch = [];
+    const now = new Date();
+
+    mediaList.forEach(post => {
+      const cached = cacheMap.get(post.id);
+      const postDate = new Date(post.timestamp);
+      const ageDays = (now - postDate) / (1000 * 60 * 60 * 24);
+      
+      const needsFetch = !cached || ageDays < 7;
+      if (needsFetch) {
+        postsToFetch.push(post);
+      } else {
+        post.insights = {
+          reach: cached.insights && cached.insights.reach !== undefined ? cached.insights.reach : null,
+          impressions: cached.insights && cached.insights.impressions !== undefined ? cached.insights.impressions : null,
+          saved: cached.insights && cached.insights.saved !== undefined ? cached.insights.saved : null,
+          video_views: cached.insights && cached.insights.video_views !== undefined ? cached.insights.video_views : null,
+          plays: cached.insights && cached.insights.plays !== undefined ? cached.insights.plays : null,
+          ig_reels_video_view_total_time: cached.insights && cached.insights.ig_reels_video_view_total_time !== undefined ? cached.insights.ig_reels_video_view_total_time : null,
+          ig_reels_avg_watch_time: cached.insights && cached.insights.ig_reels_avg_watch_time !== undefined ? cached.insights.ig_reels_avg_watch_time : null
+        };
+      }
+    });
+
+    console.log(`   Total de posts para actualizar insights: ${postsToFetch.length} de ${mediaList.length}`);
+
+    const setDefaultInsights = (post) => {
+      post.insights = {
+        reach: null,
+        impressions: null,
+        saved: null,
+        video_views: null,
+        plays: null,
+        ig_reels_video_view_total_time: null,
+        ig_reels_avg_watch_time: null
+      };
+    };
+
+    const chunkSize = 50;
+    for (let i = 0; i < postsToFetch.length; i += chunkSize) {
+      const chunk = postsToFetch.slice(i, i + chunkSize);
+      console.log(`   Procesando lote de insights ${Math.floor(i / chunkSize) + 1} (${chunk.length} posts)...`);
+      
+      const batchRequests = chunk.map(post => {
+        let metrics = [];
+        if (post.media_product_type === 'REELS') {
+          metrics = ['reach', 'views', 'saved', 'ig_reels_video_view_total_time', 'ig_reels_avg_watch_time'];
+        } else if (post.media_type === 'VIDEO') {
+          metrics = ['reach', 'saved', 'views'];
+        } else {
+          metrics = ['reach', 'saved'];
+        }
+        return {
+          method: 'GET',
+          relative_url: `v19.0/${post.id}/insights?metric=${metrics.join(',')}`
+        };
+      });
+
+      try {
+        const batchRes = await fetch(`https://graph.facebook.com`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            access_token: ACCESS_TOKEN,
+            batch: batchRequests
+          })
+        });
+        const batchJson = await batchRes.json();
+
+        if (Array.isArray(batchJson)) {
+          batchJson.forEach((responseItem, idx) => {
+            const post = chunk[idx];
+            if (responseItem.code === 200) {
+              try {
+                const body = JSON.parse(responseItem.body);
+                if (body.data) {
+                  const insights = {};
+                  body.data.forEach(item => {
+                    insights[item.name] = (item.values && item.values[0]) ? item.values[0].value : 0;
+                  });
+                  post.insights = {
+                    reach: insights.reach !== undefined ? insights.reach : 0,
+                    impressions: insights.impressions !== undefined ? insights.impressions : 0,
+                    saved: insights.saved !== undefined ? insights.saved : 0,
+                    video_views: insights.views !== undefined ? insights.views : (insights.video_views !== undefined ? insights.video_views : 0),
+                    plays: insights.views !== undefined ? insights.views : (insights.plays !== undefined ? insights.plays : 0),
+                    ig_reels_video_view_total_time: insights.ig_reels_video_view_total_time !== undefined ? insights.ig_reels_video_view_total_time : 0,
+                    ig_reels_avg_watch_time: insights.ig_reels_avg_watch_time !== undefined ? insights.ig_reels_avg_watch_time : 0
+                  };
+                } else {
+                  setDefaultInsights(post);
+                }
+              } catch (e) {
+                console.warn(`   ⚠️ Error al parsear insights para post ${post.id}:`, e.message);
+                setDefaultInsights(post);
+              }
+            } else {
+              console.warn(`   ⚠️ Error de API (código ${responseItem.code}) en insights para post ${post.id}: ${responseItem.body}`);
+              setDefaultInsights(post);
+            }
+          });
+        } else {
+          console.error("   ⚠️ Respuesta de lote inválida:", batchJson);
+          chunk.forEach(post => setDefaultInsights(post));
+        }
+      } catch (batchError) {
+        console.error("   ⚠️ Error de conexión al obtener lote de insights:", batchError.message);
+        chunk.forEach(post => setDefaultInsights(post));
+      }
+    }
+
     // 4. Procesar estadísticas
     console.log("\n[4/4] Procesando estadísticas y cruzando datos...");
     const stats = processStats(profile, onlineFollowersRaw, mediaList);
 
     // Guardar JSON para respaldo
-    fs.writeFileSync(path.join(__dirname, 'instagram_data.json'), JSON.stringify(stats, null, 2));
-    console.log("✅ Archivo 'instagram_data.json' guardado.");
+    fs.writeFileSync(path.join(__dirname, dataFilename), JSON.stringify(stats, null, 2));
+    console.log(`✅ Archivo '${dataFilename}' guardado.`);
 
     // Generar el reporte HTML
     generateHTMLReport(stats);
-    console.log("✅ Reporte HTML 'reporte_instagram_dos_soles.html' generado con éxito.");
+    console.log(`✅ Reporte HTML '${reportFilename}' generado con éxito.`);
     
     console.log("\n=========================================");
     console.log("ANÁLISIS COMPLETADO");
@@ -80,10 +243,10 @@ async function runAnalysis() {
     
   } catch (error) {
     console.warn("\n⚠️ ERROR AL CONECTAR CON LA API DE META:", error.message || error);
-    console.log("🔄 Intentando regenerar reportes usando la base de datos local ('instagram_data.json')...");
+    console.log(`🔄 Intentando regenerar reportes usando la base de datos local ('${dataFilename}')...`);
     
     try {
-      const localDataRaw = fs.readFileSync(path.join(__dirname, 'instagram_data.json'), 'utf8');
+      const localDataRaw = fs.readFileSync(path.join(__dirname, dataFilename), 'utf8');
       const localData = JSON.parse(localDataRaw);
       
       console.log(`✅ Datos locales cargados. Recalculando estadísticas completas para ${localData.posts.length} posts...`);
@@ -101,12 +264,12 @@ async function runAnalysis() {
       );
       
       // Guardar el JSON actualizado con estadísticas recalculadas
-      fs.writeFileSync(path.join(__dirname, 'instagram_data.json'), JSON.stringify(stats, null, 2));
-      console.log("✅ Archivo 'instagram_data.json' actualizado con estadísticas y medianas.");
+      fs.writeFileSync(path.join(__dirname, dataFilename), JSON.stringify(stats, null, 2));
+      console.log(`✅ Archivo '${dataFilename}' actualizado con estadísticas y medianas.`);
       
       // Re-generar el reporte HTML con los datos recalculados
       generateHTMLReport(stats);
-      console.log("✅ Reporte HTML 'reporte_instagram_dos_soles.html' regenerado con éxito.");
+      console.log(`✅ Reporte HTML '${reportFilename}' regenerado con éxito.`);
       
     } catch (fallbackError) {
       console.error("\n❌ ERROR CRÍTICO AL CARGAR FALLBACK LOCAL:", fallbackError.message || fallbackError);
@@ -158,8 +321,16 @@ function processStats(profile, onlineFollowersRaw, mediaList) {
     medianInteractions: 0
   }));
 
-  // Grid de 7 x 24 para matriz de calor
-  const heatmap = Array.from({ length: 7 }, () => Array(24).fill(0));
+  // Grid de 7 x 24 para matriz de calor con objetos detallados
+  const heatmap = Array.from({ length: 7 }, () =>
+    Array.from({ length: 24 }, () => ({
+      totalInteractions: 0,
+      reelsCount: 0,
+      carouselsCount: 0,
+      b2bCount: 0,
+      b2cCount: 0
+    }))
+  );
 
   // Procesar todos los posts
   const processedPosts = mediaList.map(post => {
@@ -203,6 +374,7 @@ function processStats(profile, onlineFollowersRaw, mediaList) {
       id: post.id,
       caption: caption,
       media_type: post.media_type,
+      media_product_type: post.media_product_type || null,
       permalink: post.permalink,
       media_url: post.media_url,
       timestampRaw: timestamp,
@@ -214,7 +386,24 @@ function processStats(profile, onlineFollowersRaw, mediaList) {
       comments,
       interactions,
       classification,
-      colabType: post.colabType || detectColabType(caption)
+      colabType: post.colabType || detectColabType(caption),
+      insights: post.insights ? {
+        reach: post.insights.reach !== undefined ? post.insights.reach : null,
+        impressions: post.insights.impressions !== undefined ? post.insights.impressions : null,
+        saved: post.insights.saved !== undefined ? post.insights.saved : null,
+        video_views: post.insights.video_views !== undefined ? post.insights.video_views : null,
+        plays: post.insights.plays !== undefined ? post.insights.plays : null,
+        ig_reels_video_view_total_time: post.insights.ig_reels_video_view_total_time !== undefined ? post.insights.ig_reels_video_view_total_time : null,
+        ig_reels_avg_watch_time: post.insights.ig_reels_avg_watch_time !== undefined ? post.insights.ig_reels_avg_watch_time : null
+      } : {
+        reach: null,
+        impressions: null,
+        saved: null,
+        video_views: null,
+        plays: null,
+        ig_reels_video_view_total_time: null,
+        ig_reels_avg_watch_time: null
+      }
     };
   });
 
@@ -245,7 +434,24 @@ function processStats(profile, onlineFollowersRaw, mediaList) {
     statsByHour[localHour].totalComments += comments;
     statsByHour[localHour].totalInteractions += interactions;
     
-    heatmap[localDay][localHour] += interactions;
+    // Actualizar celda del mapa de calor
+    const cell = heatmap[localDay][localHour];
+    cell.totalInteractions += interactions;
+    
+    const isReel = post.media_product_type === 'REELS';
+    if (isReel) {
+      cell.reelsCount++;
+    }
+    const isCarousel = post.media_type === 'CAROUSEL_ALBUM';
+    if (isCarousel) {
+      cell.carouselsCount++;
+    }
+    const classificationUpper = post.classification ? post.classification.toUpperCase() : '';
+    if (classificationUpper === 'B2B') {
+      cell.b2bCount++;
+    } else if (classificationUpper === 'B2C') {
+      cell.b2cCount++;
+    }
   });
 
   // Calcular promedios y medianas por día sobre los últimos 100 posts
@@ -334,6 +540,7 @@ function processStats(profile, onlineFollowersRaw, mediaList) {
     followersCount: profile.followers_count,
     profilePicture: profile.profile_picture_url || 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png',
     totalPostsAnalyzed: processedPosts.length,
+    medianInteractions: getMedian(recentPosts.map(p => p.interactions)),
     onlineFollowersAvailable,
     totals: {
       likes: totalLikesAll,
@@ -363,36 +570,302 @@ function processStats(profile, onlineFollowersRaw, mediaList) {
 }
 
 function generateHTMLReport(data) {
+  let chartJsScriptTag = '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>';
+  try {
+    const chartPath = path.join(__dirname, 'chart.min.js');
+    if (fs.existsSync(chartPath)) {
+      const chartJsCode = fs.readFileSync(chartPath, 'utf8');
+      chartJsScriptTag = `<script>${chartJsCode}</script>`;
+      console.log("✅ Librería Chart.js cargada localmente y embebida en el reporte.");
+    }
+  } catch (err) {
+    console.warn("⚠️ No se pudo cargar chart.min.js localmente, usando fallback de CDN:", err.message);
+  }
+
+  let metaAdsSection = '';
+  if (accountArg.includes('vernuccio')) {
+    metaAdsSection = `
+    <!-- SECCIÓN DE META ADS - ESTRATEGIA Y BORRADOR -->
+    <div class="chart-box" style="margin-top: 30px; border-color: rgba(245, 158, 11, 0.35);">
+      <h2><i class="fa-solid fa-rectangle-ad" style="color: var(--color-gold);"></i> Auditoría & Estrategia de Meta Ads - Julio 2026</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">
+        Planificación estratégica y estado de automatización de campañas publicitarias en Meta Ads.
+      </p>
+
+      <!-- Alerta Crítica de Conexión de WhatsApp -->
+      <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 16px; padding: 20px; margin-bottom: 25px;">
+        <div style="display: flex; align-items: flex-start; gap: 15px;">
+          <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.8rem; color: #ef4444; flex-shrink: 0; margin-top: 2px;"></i>
+          <div>
+            <h3 style="color: #ef4444; margin-bottom: 8px; font-size: 1.05rem; font-family: var(--font-title); font-weight: 800;">
+              ⚠️ Blocker Requerido: Vincular WhatsApp Business a tu Página de Facebook
+            </h3>
+            <p style="color: var(--text-main); font-size: 0.88rem; line-height: 1.5; margin-bottom: 12px;">
+              La campaña principal ha sido creada en borrador en Meta Ads Manager. Sin embargo, para crear los anuncios que redirigen a WhatsApp, la API de Meta requiere que vincules tu cuenta de <strong>WhatsApp Business</strong> a tu página de Facebook.
+            </p>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <a href="https://www.facebook.com/980777565129504/settings/?tab=whatsapp" target="_blank" style="background: #25d366; color: #000000; padding: 8px 16px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 6px;">
+                <i class="fa-brands fa-whatsapp" style="font-size: 1rem;"></i> Vincular en Facebook
+              </a>
+              <a href="https://business.facebook.com/settings/whatsapp-business-accounts/?business_id=2316847981824079" target="_blank" style="background: rgba(255,255,255,0.08); color: #ffffff; padding: 8px 16px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.82rem; border: 1px solid rgba(255,255,255,0.15);">
+                Configuración Comercial (Meta Manager)
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bento Grid de Campaña -->
+      <div class="bento-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 25px; gap: 15px;">
+        <div class="bento-card" style="padding: 15px; border-color: rgba(255,255,255,0.03);">
+          <div class="card-label">Presupuesto Mensual</div>
+          <div class="card-value" style="font-size: 1.6rem; color: var(--color-gold);">$80,000 ARS</div>
+          <div class="card-subtext">Para el mes de Julio 2026</div>
+        </div>
+        <div class="bento-card" style="padding: 15px; border-color: rgba(255,255,255,0.03);">
+          <div class="card-label">Presupuesto Diario CBO</div>
+          <div class="card-value" style="font-size: 1.6rem; color: var(--accent-cyan);">$3,800 ARS</div>
+          <div class="card-subtext">Durante 21 días de campaña</div>
+        </div>
+        <div class="bento-card" style="padding: 15px; border-color: rgba(255,255,255,0.03);">
+          <div class="card-label">Objetivo de Campaña</div>
+          <div class="card-value" style="font-size: 1.3rem; color: #ffffff;">Clientes Potenciales</div>
+          <div class="card-subtext">Tráfico y conversiones directas</div>
+        </div>
+        <div class="bento-card" style="padding: 15px; border-color: rgba(255,255,255,0.03);">
+          <div class="card-label">ID de Campaña (Borrador)</div>
+          <div class="card-value" style="font-size: 1.1rem; color: var(--text-muted); word-break: break-all;">120250890960140560</div>
+          <div class="card-subtext">Creada en Meta Ads Manager</div>
+        </div>
+      </div>
+
+      <!-- Segmentación y Públicos -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 30px;">
+        <div style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.03); padding: 20px; border-radius: 16px;">
+          <h3 style="color: #ffffff; font-family: var(--font-title); margin-bottom: 12px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-location-dot" style="color: var(--color-gold);"></i> Segmentación Geográfica
+          </h3>
+          <ul style="color: var(--text-muted); padding-left: 20px; line-height: 1.6; font-size: 0.88rem;">
+            <li><strong>Rosario (Ciudad y región metropolitana)</strong>: Concentración principal.</li>
+            <li><strong>Provincia de Santa Fe</strong>: Eje productivo agroindustrial.</li>
+            <li><strong>Provincia de Buenos Aires & CABA</strong>: Principal centro corporativo del país.</li>
+          </ul>
+        </div>
+        <div style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.03); padding: 20px; border-radius: 16px;">
+          <h3 style="color: #ffffff; font-family: var(--font-title); margin-bottom: 12px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-users-gear" style="color: var(--accent-cyan);"></i> Target B2B & Demografía
+          </h3>
+          <ul style="color: var(--text-muted); padding-left: 20px; line-height: 1.6; font-size: 0.88rem;">
+            <li><strong>Rango de Edad</strong>: 30 a 55 años (Dueños de Pymes, Directores de RRHH, Gerentes).</li>
+            <li><strong>Comportamiento</strong>: Administradores de páginas comerciales de Facebook.</li>
+            <li><strong>Intereses Acotados</strong>: Propietario de pequeña empresa, Recursos humanos, Desarrollo organizacional, Consultoría de gestión.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tabla de Creativos Elegidos y Descartados -->
+      <h3 style="color: #ffffff; font-family: var(--font-title); margin-bottom: 15px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-photo-film" style="color: var(--color-gold);"></i> Justificación de Selección de Anuncios
+      </h3>
+      <div class="table-wrapper">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem;">
+          <thead>
+            <tr style="background: rgba(255,255,255,0.02); text-align: left;">
+              <th style="padding: 12px;">Publicación</th>
+              <th style="padding: 12px;">Estado</th>
+              <th style="padding: 12px;">Razones y Justificativo de Conversión</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.02);">
+              <td style="padding: 12px; font-weight: 600;">
+                <a href="https://www.instagram.com/reel/DXfnfnKEbbj/" target="_blank" style="color: var(--color-gold); text-decoration: none;">
+                  Reel de Presentación Profesional <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
+                </a>
+              </td>
+              <td style="padding: 12px;"><span style="background: rgba(16,185,129,0.1); color: #10b981; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700;">APROBADO</span></td>
+              <td style="padding: 12px; color: var(--text-muted); line-height: 1.4;">
+                Video Reels de alta calidad donde te presentas directamente a la cámara. Explica tus dos líneas principales de servicio (consultoría psicosocial empresarial e inglés corporativo). Genera confianza inicial indispensable para vender servicios premium a empresas.
+              </td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.02);">
+              <td style="padding: 12px; font-weight: 600;">
+                <a href="https://www.instagram.com/p/DYisTJMEdSY/" target="_blank" style="color: var(--color-gold); text-decoration: none;">
+                  Carrusel de IA y Tecnología <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
+                </a>
+              </td>
+              <td style="padding: 12px;"><span style="background: rgba(16,185,129,0.1); color: #10b981; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700;">APROBADO</span></td>
+              <td style="padding: 12px; color: var(--text-muted); line-height: 1.4;">
+                Contenido con enfoque de cambio tecnológico. Habla directamente del dilema de las Pymes sobre liderar o sufrir la llegada de la Inteligencia Artificial y la tecnología, invitando a mandar un mensaje directo para diagnóstico.
+              </td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.02);">
+              <td style="padding: 12px; font-weight: 600;">
+                <a href="https://www.instagram.com/reel/DZ55dTQvx65/" target="_blank" style="color: var(--color-gold); text-decoration: none;">
+                  Reel de Feedback vs Castigo ante Errores <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
+                </a>
+              </td>
+              <td style="padding: 12px;"><span style="background: rgba(16,185,129,0.1); color: #10b981; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700;">APROBADO</span></td>
+              <td style="padding: 12px; color: var(--text-muted); line-height: 1.4;">
+                Toca un dolor crítico en la operación de mandos medios: cómo reaccionar ante errores de colaboradores. Explica el impacto en tiempo y dinero, ofreciendo directamente capacitaciones a mandos medios.
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; font-weight: 600; color: #a1a1aa;">
+                Post de Graduación / Festejos Personales
+              </td>
+              <td style="padding: 12px;"><span style="background: rgba(239,68,68,0.1); color: #ef4444; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700;">DESCARTADO</span></td>
+              <td style="padding: 12px; color: var(--text-muted); line-height: 1.4;">
+                Aunque es la publicación con más likes y comentarios orgánicos de tu feed, su tracción se debe a relaciones sociales (felicitaciones de amigos y conocidos). Al pautarlo en frío, no generará valor comercial ni conversiones comerciales para tu consultora.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    `;
+  } else {
+    metaAdsSection = `
+    <!-- SECCIÓN DE META ADS - DOS SOLES -->
+    <div class="chart-box" style="margin-top: 30px; border-color: rgba(245, 158, 11, 0.35);">
+      <h2><i class="fa-solid fa-rectangle-ad" style="color: var(--color-gold);"></i> Auditoría & Estrategia de Meta Ads - Dos Soles</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">
+        Historial de rendimiento de pauta publicitaria e insights de campañas de tráfico para Dos Soles Distribuidora.
+      </p>
+      <div class="bento-grid" style="grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+        <div class="bento-card" style="padding: 15px;">
+          <div class="card-label">Presupuesto Auditado</div>
+          <div class="card-value" style="font-size: 1.6rem; color: var(--color-gold);">$529,289 ARS</div>
+          <div class="card-subtext">Histórico de inversión auditada</div>
+        </div>
+        <div class="bento-card" style="padding: 15px;">
+          <div class="card-label">CPC Promedio</div>
+          <div class="card-value" style="font-size: 1.6rem; color: var(--accent-cyan);">$88.70 ARS</div>
+          <div class="card-subtext">Costo por Clic Promedio en pauta</div>
+        </div>
+      </div>
+      <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5;">
+        Para consultar la presentación completa de slides ejecutivos de Meta Ads, puedes abrir el archivo <a href="presentacion_meta_ads.html" style="color: var(--color-gold); text-decoration: none; font-weight: bold;">presentacion_meta_ads.html</a> o leer el informe técnico <a href="report.html" style="color: var(--color-gold); text-decoration: none; font-weight: bold;">report.html</a>.
+      </p>
+    </div>
+    `;
+  }
+
   const htmlContent = `<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dos Soles - Auditoría de Instagram</title>
+  <title>${data.accountName} - Auditoría & Estrategia</title>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Chart.js Placeholder -->
+  <!-- CHART_JS_PLACEHOLDER -->
   
   <style>
     :root {
-      --bg-dark: #0a080f;
-      --bg-card: rgba(22, 17, 28, 0.75);
-      --border-card: rgba(245, 158, 11, 0.08);
-      --text-main: #f8fafc;
-      --text-muted: #64748b;
+      /* Charcoal base themes */
+      --bg-dark: #09090b; /* Charcoal (#09090B) */
+      --bg-card: rgba(18, 18, 22, 0.75);
+      --border-card: rgba(245, 158, 11, 0.15); /* Sunset Gold tint */
+      --text-main: #fafafa;
+      --text-muted: #a1a1aa; /* Zinc 400 */
       
-      --accent-violet: #f59e0b; /* Gold */
+      /* Base palette themes */
+      --color-gold: #f59e0b; /* Sunset Gold */
+      --color-crimson: #e11d48; /* Crimson */
+      --color-charcoal: #09090b; /* Charcoal */
+
+      /* Accent Mappings */
+      --accent-violet: var(--color-gold); /* Sunset Gold mapped to --accent-violet */
       --accent-cyan: #38bdf8;
       --accent-emerald: #10b981;
       
-      --gradient-ig: linear-gradient(45deg, #d97706 0%, #ea580c 35%, #be123c 70%, #881337 100%);
-      --gradient-neon: linear-gradient(135deg, #fbbf24 0%, #be123c 100%);
-      --gradient-cyan: linear-gradient(135deg, #38bdf8 0%, #0369a1 100%);
+      --gradient-ig: linear-gradient(45deg, #d97706 0%, #ea580c 35%, #e11d48 70%, #be123c 100%);
+      --gradient-neon: linear-gradient(135deg, var(--color-gold) 0%, var(--color-crimson) 100%); /* Gold to Crimson */
+      --gradient-cyan: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
       --font-title: 'Outfit', sans-serif;
       --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Collapsible layout cards styling */
+    details.warning-details {
+      margin-top: 10px;
+      background: rgba(245, 158, 11, 0.04);
+      border: 1px solid rgba(245, 158, 11, 0.15);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    details.warning-details[open] {
+      background: rgba(245, 158, 11, 0.08);
+    }
+    details.warning-details summary {
+      padding: 10px 14px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent-violet);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      outline: none;
+      user-select: none;
+    }
+    details.warning-details summary::-webkit-details-marker {
+      display: none;
+    }
+    details.warning-details summary:hover {
+      background: rgba(245, 158, 11, 0.12);
+    }
+    details.warning-details summary::after {
+      content: '\f107';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      margin-left: auto;
+      transition: transform 0.2s;
+    }
+    details.warning-details[open] summary::after {
+      transform: rotate(180deg);
+    }
+    details.warning-details .warning-content {
+      padding: 12px 14px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      border-top: 1px solid rgba(245, 158, 11, 0.1);
+    }
+    details.warning-details.danger-alert {
+      background: rgba(225, 29, 72, 0.04);
+      border-color: rgba(225, 29, 72, 0.15);
+    }
+    details.warning-details.danger-alert[open] {
+      background: rgba(225, 29, 72, 0.08);
+    }
+    details.warning-details.danger-alert summary {
+      color: var(--color-crimson);
+    }
+    details.warning-details.danger-alert summary:hover {
+      background: rgba(225, 29, 72, 0.12);
+    }
+    details.warning-details.danger-alert .warning-content {
+      border-top: 1px solid rgba(225, 29, 72, 0.15);
+      color: #fafafa;
+    }
+
+    /* Floating Tooltip styling */
+    .custom-tooltip {
+      background: rgba(9, 9, 11, 0.95); /* Charcoal base with high opacity */
+      border: 1px solid var(--border-card);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      color: #fafafa;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      font-family: var(--font-body);
+      pointer-events: none;
     }
     
     * {
@@ -405,7 +878,7 @@ function generateHTMLReport(data) {
       background-color: var(--bg-dark);
       background-image: 
         radial-gradient(circle at 10% 15%, rgba(245, 158, 11, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 90% 85%, rgba(190, 18, 60, 0.06) 0%, transparent 45%);
+        radial-gradient(circle at 90% 85%, rgba(225, 29, 72, 0.06) 0%, transparent 45%);
       background-attachment: fixed;
       font-family: var(--font-body);
       color: var(--text-main);
@@ -661,26 +1134,103 @@ function generateHTMLReport(data) {
     
     .heatmap-cell:hover {
       transform: scale(1.1);
-      box-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
       z-index: 5;
     }
     
-    .heatmap-cell:hover::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      bottom: 115%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #0d0d12;
+    /* Collapsible layout cards styling */
+    details.warning-details {
+      margin-top: 10px;
+      background: rgba(245, 158, 11, 0.04);
+      border: 1px solid rgba(245, 158, 11, 0.15);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    details.warning-details[open] {
+      background: rgba(245, 158, 11, 0.08);
+    }
+    details.warning-details summary {
+      padding: 10px 14px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent-violet);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      outline: none;
+      user-select: none;
+    }
+    details.warning-details summary::-webkit-details-marker {
+      display: none;
+    }
+    details.warning-details summary:hover {
+      background: rgba(245, 158, 11, 0.12);
+    }
+    details.warning-details summary::after {
+      content: '\f107';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      margin-left: auto;
+      transition: transform 0.2s;
+    }
+    details.warning-details[open] summary::after {
+      transform: rotate(180deg);
+    }
+    details.warning-details .warning-content {
+      padding: 12px 14px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      border-top: 1px solid rgba(245, 158, 11, 0.1);
+    }
+    details.warning-details.danger-alert {
+      background: rgba(225, 29, 72, 0.04);
+      border-color: rgba(225, 29, 72, 0.15);
+    }
+    details.warning-details.danger-alert[open] {
+      background: rgba(225, 29, 72, 0.08);
+    }
+    details.warning-details.danger-alert summary {
+      color: var(--color-crimson);
+    }
+    details.warning-details.danger-alert summary:hover {
+      background: rgba(225, 29, 72, 0.12);
+    }
+    details.warning-details.danger-alert .warning-content {
+      border-top: 1px solid rgba(225, 29, 72, 0.15);
+      color: #fafafa;
+    }
+
+    /* Floating Tooltip styling */
+    .custom-tooltip {
+      background: rgba(9, 9, 11, 0.95); /* Charcoal base with high opacity */
       border: 1px solid var(--border-card);
-      padding: 6px 12px;
+      padding: 8px 12px;
       border-radius: 8px;
       font-size: 0.75rem;
-      white-space: nowrap;
-      z-index: 10;
-      color: #fff;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+      color: #fafafa;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      font-family: var(--font-body);
+      pointer-events: none;
     }
+    
+    /* Colaboración tags */
+    .tag-colab-none { background: rgba(148, 163, 184, 0.12); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.2); }
+    .tag-colab-brand { background: rgba(236, 72, 153, 0.12); color: #ec4899; border: 1px solid rgba(236, 72, 153, 0.2); }
+    .tag-colab-stylist { background: rgba(139, 92, 246, 0.12); color: var(--accent-violet); border: 1px solid rgba(139, 92, 246, 0.2); }
+    
+    /* Destino / CTA tags */
+    .tag-link-none { background: rgba(148, 163, 184, 0.12); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.2); }
+    .tag-link-wa { background: rgba(34, 197, 94, 0.12); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.2); }
+    .tag-link-web { background: rgba(56, 189, 248, 0.12); color: var(--accent-cyan); border: 1px solid rgba(56, 189, 248, 0.2); }
+    .tag-link-both { background: rgba(234, 179, 8, 0.12); color: #eab308; border: 1px solid rgba(234, 179, 8, 0.2); }
+    
+    /* Rendimiento tags */
+    .tag-rend-alto { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); box-shadow: 0 0 4px rgba(16, 185, 129, 0.2); }
+    .tag-rend-promedio { background: rgba(245, 158, 11, 0.12); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.2); }
+    .tag-rend-bajo { background: rgba(239, 68, 68, 0.12); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2); }
     
     /* Table styling */
     .table-section {
@@ -904,9 +1454,14 @@ function generateHTMLReport(data) {
             <i class="fa-solid fa-calendar-days"></i>
             ${data.recommendations.bestDay} (Mediana: ${data.recommendations.bestDayMedian} | N: ${data.recommendations.bestDayCount})
           </div>
-          <div class="card-subtext" style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.3; margin-top: 5px;">
-            Seleccionado por consistencia estadística (máxima mediana con muestra robusta N >= 15). Los fines de semana promedian sobre 80 interacciones pero sufren de <strong>muestras minúsculas (Domingo N=7, Sábado N=6)</strong> y están distorsionados por posts atípicos.
-          </div>
+          <details class="warning-details">
+            <summary class="warning-summary">
+              <i class="fa-solid fa-chart-pie"></i> Ver detalle de tamaño de muestra
+            </summary>
+            <div class="warning-content">
+              Seleccionado por consistencia estadística (máxima mediana con muestra robusta N >= 15). Los fines de semana promedian sobre 80 interacciones pero sufren de <strong>muestras minúsculas (Domingo N=7, Sábado N=6)</strong> y están distorsionados por posts atípicos.
+            </div>
+          </details>
         </div>
         
         <div class="rec-item">
@@ -915,9 +1470,14 @@ function generateHTMLReport(data) {
             <i class="fa-solid fa-clock"></i>
             ${data.recommendations.bestHourReal} (Mediana: ${data.recommendations.bestHourRealMedian} | N: ${data.recommendations.bestHourRealCount})
           </div>
-          <div class="card-subtext" style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.35; margin-top: 5px;">
-            <strong>¡Sesgo de Colaboración Detectado!</strong> Aunque las 18:00 hs tiene la mayor mediana general (${data.recommendations.bestHourRealMedian}), sufre un sesgo crítico: el <strong>41.6% de sus posts (5 de 12) son colaboraciones</strong> de marca/estilistas con alto engagement. Si filtramos el contenido directo (sin colab), el volumen cae a N=7 y los Reels directos a solo N=3. El horario nocturno más limpio y estadísticamente confiable para contenido propio son las <strong>20:00 hs (N=21, Reels directos N=12 con mediana de 49.5 interacciones)</strong>.
-          </div>
+          <details class="warning-details danger-alert" open>
+            <summary class="warning-summary warning-highlight">
+              <i class="fa-solid fa-triangle-exclamation"></i> ¡Sesgo de Colaboración Detectado!
+            </summary>
+            <div class="warning-content">
+              Aunque las 18:00 hs tiene la mayor mediana general (${data.recommendations.bestHourRealMedian}), sufre un sesgo crítico: el <strong>41.6% de sus posts (5 de 12) son colaboraciones</strong> de marca/estilistas con alto engagement. Si filtramos el contenido directo (sin colab), el volumen cae a N=7 y los Reels directos a solo N=3. El horario nocturno más limpio y estadísticamente confiable para contenido propio son las <strong>20:00 hs (N=21, Reels directos N=12 con mediana de 49.5 interacciones)</strong>.
+            </div>
+          </details>
         </div>
         
         <div class="rec-item" style="background: rgba(139, 92, 246, 0.12); border-color: rgba(139, 92, 246, 0.35);">
@@ -940,10 +1500,14 @@ function generateHTMLReport(data) {
         <div style="height: 300px; position: relative;">
           <canvas id="chartDayPerformance"></canvas>
         </div>
-        <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 15px; line-height: 1.4;">
-          <i class="fa-solid fa-circle-info" style="color: var(--accent-violet);"></i>
-          <strong>Nota de muestra:</strong> Aunque los Sábados y Domingos promedian sobre 80 interacciones, esto se debe a outliers en muestras minúsculas (6 y 7 posts). La comparación con la <strong>mediana</strong> revela que los Viernes y Miércoles tienen un rendimiento típico mucho más confiable y libre de sesgo.
-        </p>
+        <details class="warning-details">
+          <summary>
+            <i class="fa-solid fa-circle-info"></i> Nota sobre el sesgo de outliers
+          </summary>
+          <div class="warning-content">
+            Aunque los Sábados y Domingos promedian sobre 80 interacciones, esto se debe a outliers en muestras minúsculas (6 y 7 posts). La comparación con la <strong>mediana</strong> revela que los Viernes y Miércoles tienen un rendimiento típico mucho más confiable y libre de sesgo.
+          </div>
+        </details>
       </div>
       
       <div class="chart-box">
@@ -968,16 +1532,19 @@ function generateHTMLReport(data) {
           
           ${data.heatmap.map((hoursArr, dayIdx) => `
             <div class="heatmap-label">${DAYS_ES[dayIdx]}</div>
-            ${hoursArr.map((val, hourIdx) => {
-              const maxVal = Math.max(...data.heatmap.flatMap(x => x)) || 1;
+            ${hoursArr.map((cell, hourIdx) => {
+              const maxVal = Math.max(...data.heatmap.flatMap(row => row.map(c => c.totalInteractions))) || 1;
+              const val = cell.totalInteractions;
               const opacity = val > 0 ? 0.1 + (val / maxVal) * 0.9 : 0.04;
-              const bgStyle = val > 0 ? `background: rgba(139, 92, 246, ${opacity});` : `background: rgba(255,255,255,0.015);`;
-              return `<div class="heatmap-cell" style="${bgStyle}" data-tooltip="${DAYS_ES[dayIdx]} a las ${hourIdx}h: ${val} interacciones en total"></div>`;
+              const bgStyle = val > 0 ? `background: rgba(245, 158, 11, ${opacity});` : `background: rgba(255,255,255,0.015);`;
+              return `<div class="heatmap-cell" style="${bgStyle}" data-total="${val}" data-reels="${cell.reelsCount}" data-carousels="${cell.carouselsCount}" data-b2b="${cell.b2bCount}" data-b2c="${cell.b2cCount}" data-day="${DAYS_ES[dayIdx]}" data-hour="${hourIdx}"></div>`;
             }).join('')}
           `).join('')}
         </div>
       </div>
     </div>
+    
+    <!-- META_ADS_PLACEHOLDER -->
     
     <!-- Table: Recent Posts -->
     <div class="table-section">
@@ -1005,10 +1572,14 @@ function generateHTMLReport(data) {
               <th>Publicación</th>
               <th>Tipo</th>
               <th>Enfoque</th>
+              <th>Colaboración</th>
+              <th>Destino / CTA</th>
               <th>Fecha y Hora (ARG)</th>
               <th>Likes</th>
               <th>Comentarios</th>
               <th>Total</th>
+              <th>ER%</th>
+              <th>Rendimiento</th>
               <th>Enlace</th>
             </tr>
           </thead>
@@ -1023,7 +1594,7 @@ function generateHTMLReport(data) {
               else if (hasWa) linkType = 'wa';
 
               return `
-              <tr data-classification="${post.classification.toLowerCase()}" data-linktype="${linkType}" data-colab="${post.colabType || 'none'}">
+              <tr data-classification="${post.classification.toLowerCase()}" data-linktype="${linkType}" data-colab="${post.colabType || 'none'}" data-interactions="${post.interactions}">
                 <td>
                   <div class="post-cell">
                     <img class="post-thumb" src="${post.media_url}" onerror="this.src='https://placehold.co/100x100/18181b/ffffff?text=IG';" alt="Post">
@@ -1043,6 +1614,8 @@ function generateHTMLReport(data) {
                     ${post.classification}
                   </span>
                 </td>
+                <td class="col-colab"></td>
+                <td class="col-cta"></td>
                 <td>${post.localDateStr} a las ${post.localHour}:00 hs</td>
                 <td>
                   <div class="metric-badge"><i class="fa-solid fa-heart"></i> ${post.likes}</div>
@@ -1051,6 +1624,8 @@ function generateHTMLReport(data) {
                   <div class="metric-badge"><i class="fa-solid fa-comment"></i> ${post.comments}</div>
                 </td>
                 <td><strong>${post.interactions}</strong></td>
+                <td class="col-er"></td>
+                <td class="col-rendimiento"></td>
                 <td>
                   <a href="${post.permalink}" target="_blank" class="btn-link">Ver <i class="fa-solid fa-up-right-from-square"></i></a>
                 </td>
@@ -1064,7 +1639,72 @@ function generateHTMLReport(data) {
     
   </div>
   
+  <!-- Heatmap Dynamic Tooltip -->
+  <div id="heatmapTooltip" class="custom-tooltip" style="opacity: 0; position: absolute; pointer-events: none; transition: opacity 0.15s ease; z-index: 9999;"></div>
+  
   <script>
+    // Shared Chart.js External Tooltip Handler
+    const externalTooltipHandler = (context) => {
+      let tooltipEl = document.getElementById('chartjs-tooltip');
+      if (!tooltipEl) {
+        tooltipEl = document.createElement('div');
+        tooltipEl.id = 'chartjs-tooltip';
+        tooltipEl.className = 'custom-tooltip';
+        tooltipEl.style.opacity = 0;
+        tooltipEl.style.position = 'absolute';
+        tooltipEl.style.pointerEvents = 'none';
+        tooltipEl.style.transition = 'all .1s ease';
+        tooltipEl.style.border = '1px solid rgba(245, 158, 11, 0.35)'; // Sunset Gold border
+        tooltipEl.style.zIndex = '10000';
+        document.body.appendChild(tooltipEl);
+      }
+
+      const tooltipModel = context.tooltip;
+      if (tooltipModel.opacity === 0) {
+        tooltipEl.style.opacity = 0;
+        return;
+      }
+
+      if (tooltipModel.body) {
+        const titleLines = tooltipModel.title || [];
+        const bodyLines = tooltipModel.body.map(bodyItem => bodyItem.lines);
+
+        let innerHtml = '<thead>';
+        titleLines.forEach(title => {
+          innerHtml += '<tr><th style="font-family: \'Outfit\', sans-serif; font-weight: 700; color: #f59e0b; font-size: 0.8rem; padding-bottom: 6px; text-align: left; border-bottom: 1px solid rgba(245, 158, 11, 0.15);">' + title + '</th></tr>';
+        });
+        innerHtml += '</thead><tbody>';
+
+        bodyLines.forEach((body, i) => {
+          const colors = tooltipModel.labelColors[i];
+          const bg = colors.backgroundColor;
+          const border = colors.borderColor;
+          const indicator = '<span style="display:inline-block; margin-right: 8px; width: 8px; height: 8px; border-radius: 50%; background: ' + bg + '; border: 1px solid ' + border + ';"></span>';
+          innerHtml += '<tr><td style="padding: 4px 0 0 0; display: flex; align-items: center; font-size: 0.75rem; color: #e4e4e7;">' + indicator + body + '</td></tr>';
+        });
+        innerHtml += '</tbody>';
+
+        const tableRoot = document.createElement('table');
+        tableRoot.style.width = '100%';
+        tableRoot.style.borderCollapse = 'collapse';
+        tableRoot.innerHTML = innerHtml;
+
+        while (tooltipEl.firstChild) {
+          tooltipEl.firstChild.remove();
+        }
+        tooltipEl.appendChild(tableRoot);
+      }
+
+      const position = context.chart.canvas.getBoundingClientRect();
+      tooltipEl.style.opacity = 1;
+      const leftPos = position.left + window.scrollX + tooltipModel.caretX;
+      const topPos = position.top + window.scrollY + tooltipModel.caretY;
+      
+      tooltipEl.style.left = leftPos + 'px';
+      tooltipEl.style.top = (topPos - tooltipEl.offsetHeight - 12) + 'px';
+      tooltipEl.style.transform = 'translateX(-50%)';
+    };
+
     const hourlyLabels = Array.from({length: 24}, (_, i) => i + ' hs');
     const avgPostInteractions = ${JSON.stringify(data.statsByHour.map(h => h.avgInteractions))};
     const medianPostInteractions = ${JSON.stringify(data.statsByHour.map(h => h.medianInteractions))};
@@ -1112,6 +1752,10 @@ function generateHTMLReport(data) {
           legend: { 
             display: true,
             labels: { color: '#9f9fad', font: { family: 'Plus Jakarta Sans', weight: 600 } }
+          },
+          tooltip: {
+            enabled: false,
+            external: externalTooltipHandler
           }
         },
         scales: {
@@ -1159,7 +1803,11 @@ function generateHTMLReport(data) {
           legend: { 
             display: true,
             labels: { color: '#9f9fad', font: { family: 'Plus Jakarta Sans', weight: 600 } }
-          } 
+          },
+          tooltip: {
+            enabled: false,
+            external: externalTooltipHandler
+          }
         },
         scales: {
           x: { ticks: { color: '#9f9fad' }, grid: { display: false } },
@@ -1187,7 +1835,13 @@ function generateHTMLReport(data) {
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
+        plugins: { 
+          legend: { display: false },
+          tooltip: {
+            enabled: false,
+            external: externalTooltipHandler
+          }
+        },
         scales: {
           x: { ticks: { color: '#9f9fad' }, grid: { display: false } },
           y: { ticks: { color: '#9f9fad' }, grid: { color: 'rgba(255,255,255,0.05)' } }
@@ -1237,11 +1891,130 @@ function generateHTMLReport(data) {
         });
       });
     });
+
+    // 5. Enriquecimiento de Columnas en Tabla (DOM Load)
+    document.addEventListener("DOMContentLoaded", () => {
+      const followersCount = ${data.followersCount};
+      const medianInteractions = ${data.medianInteractions || 16};
+      
+      const rows = document.querySelectorAll("tbody tr");
+      rows.forEach(row => {
+        const colabAttr = row.getAttribute("data-colab") || "none";
+        const linktypeAttr = row.getAttribute("data-linktype") || "none";
+        const interactions = parseInt(row.getAttribute("data-interactions") || "0", 10);
+        
+        // Colaboración
+        let colabText = "Propio";
+        let colabClass = "tag-colab-none";
+        if (colabAttr === "brand") {
+          colabText = "Marca";
+          colabClass = "tag-colab-brand";
+        } else if (colabAttr === "stylist") {
+          colabText = "Estilista";
+          colabClass = "tag-colab-stylist";
+        }
+        const colabCell = row.querySelector(".col-colab");
+        if (colabCell) {
+          colabCell.innerHTML = \`<span class="type-tag \${colabClass}">\${colabText}</span>\`;
+        }
+        
+        // Destino / CTA
+        let linkText = "Sin Enlace";
+        let linkClass = "tag-link-none";
+        if (linktypeAttr === "wa") {
+          linkText = "WhatsApp";
+          linkClass = "tag-link-wa";
+        } else if (linktypeAttr === "web") {
+          linkText = "Sitio Web";
+          linkClass = "tag-link-web";
+        } else if (linktypeAttr === "both") {
+          linkText = "Ambos";
+          linkClass = "tag-link-both";
+        }
+        const ctaCell = row.querySelector(".col-cta");
+        if (ctaCell) {
+          ctaCell.innerHTML = \`<span class="type-tag \${linkClass}">\${linkText}</span>\`;
+        }
+        
+        // ER%
+        const er = ((interactions / 7461) * 100).toFixed(2);
+        const erCell = row.querySelector(".col-er");
+        if (erCell) {
+          erCell.innerHTML = \`<strong>\${er}%</strong>\`;
+        }
+        
+        // Rendimiento
+        let rendText = "Promedio";
+        let rendClass = "tag-rend-promedio";
+        if (interactions > 24) {
+          rendText = "★ Alto";
+          rendClass = "tag-rend-alto";
+        } else if (interactions < 11.2) {
+          rendText = "Bajo";
+          rendClass = "tag-rend-bajo";
+        }
+        const rendCell = row.querySelector(".col-rendimiento");
+        if (rendCell) {
+          rendCell.innerHTML = \`<span class="type-tag \${rendClass}">\${rendText}</span>\`;
+        }
+      });
+    });
+
+    // 6. Lógica de Tooltip flotante para el Heatmap
+    const heatmapCells = document.querySelectorAll('.heatmap-cell');
+    const heatmapTooltip = document.getElementById('heatmapTooltip');
+
+    heatmapCells.forEach(cell => {
+      cell.addEventListener('mouseenter', () => {
+        const day = cell.getAttribute('data-day');
+        const hour = cell.getAttribute('data-hour');
+        const interactions = cell.getAttribute('data-total');
+        const reels = cell.getAttribute('data-reels');
+        const carousels = cell.getAttribute('data-carousels');
+        const b2b = cell.getAttribute('data-b2b');
+        const b2c = cell.getAttribute('data-b2c');
+        
+        heatmapTooltip.innerHTML = \`
+          <div style="font-weight: 700; color: var(--color-gold); margin-bottom: 6px; font-size: 0.8rem; border-bottom: 1px solid rgba(245, 158, 11, 0.15); padding-bottom: 4px;">
+            \${day} a las \${hour} hs
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 3px;">
+            <div><strong>Interacciones:</strong> \${interactions}</div>
+            <div><strong>Reels:</strong> \${reels}</div>
+            <div><strong>Carruseles:</strong> \${carousels}</div>
+            <div><strong>B2B:</strong> \${b2b}</div>
+            <div><strong>B2C:</strong> \${b2c}</div>
+          </div>
+        \`;
+        heatmapTooltip.style.opacity = '1';
+      });
+      cell.addEventListener('mousemove', (e) => {
+        const tooltipWidth = heatmapTooltip.offsetWidth;
+        const tooltipHeight = heatmapTooltip.offsetHeight;
+        let x = e.pageX + 12;
+        let y = e.pageY - tooltipHeight - 12;
+        if (x + tooltipWidth > window.innerWidth + window.scrollX - 10) {
+          x = e.pageX - tooltipWidth - 12;
+        }
+        if (y < window.scrollY + 10) {
+          y = e.pageY + 20;
+        }
+        heatmapTooltip.style.left = x + 'px';
+        heatmapTooltip.style.top = y + 'px';
+      });
+      cell.addEventListener('mouseleave', () => {
+        heatmapTooltip.style.opacity = '0';
+      });
+    });
   </script>
 </body>
 </html>`;
 
-  fs.writeFileSync(path.join(__dirname, 'reporte_instagram_dos_soles.html'), htmlContent);
+  let finalHtml = htmlContent
+    .replace('<!-- CHART_JS_PLACEHOLDER -->', chartJsScriptTag)
+    .replace('<!-- META_ADS_PLACEHOLDER -->', metaAdsSection);
+
+  fs.writeFileSync(path.join(__dirname, reportFilename), finalHtml);
 }
 
 runAnalysis();

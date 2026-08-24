@@ -1,0 +1,5 @@
+configs/
+.agents/
+.env
+.env.*
+node_modules/

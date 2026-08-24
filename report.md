@@ -68,13 +68,13 @@ Para maximizar el retorno orgánico y pago de Dos Soles, proponemos estructurar 
 ---
 
 ## 📈 Resumen General del Rendimiento (KPIs)
-*   **Inversión Total:** `$497,527` (La cuenta publicitaria inició actividad real en febrero de 2026)
-*   **Alcance Promedio:** `25,966` personas únicas
-*   **Impresiones:** `192,934` veces en pantalla
-*   **Frecuencia Promedio:** **`2.10`** (Nivel óptimo de recordación sin saturar a la audiencia)
-*   **Clics Totales:** `5,582` clics de alta intención
-*   **CTR Promedio:** **`2.89%`** (Excelente. Supera ampliamente las medias de mercado B2B del 1.50% y B2C del 2.00%, impulsado por el alto rendimiento de las campañas de e-commerce B2C)
-*   **CPC Promedio:** **`$89.13`** (Costo por clic promedio general)
+*   **Inversión Total:** `$529,289` (La cuenta publicitaria inició actividad real en febrero de 2026, pausando a finales de mayo de 2026)
+*   **Alcance Único:** `68,989` personas únicas
+*   **Impresiones:** `211,864` veces en pantalla
+*   **Frecuencia Promedio:** **`3.07`** (Nivel de recordación óptimo en embudo híbrido sin saturación de la audiencia)
+*   **Clics Totales:** `5,967` clics de alta intención
+*   **CTR Promedio:** **`2.82%`** (Excelente. Supera ampliamente las medias de mercado B2B del 1.50% e impulsado por el canal B2C)
+*   **CPC Promedio:** **`$88.70`** (Costo por clic promedio general)
 
 ---
 
@@ -101,7 +101,7 @@ Para maximizar el retorno orgánico y pago de Dos Soles, proponemos estructurar 
 | **Febrero 2026** | `$12,155.93` | 4,161 | 145 | **3.48%** | `$83.83` |
 | **Marzo 2026** | `$172,988.48` | 77,441 | 2,104 | 2.72% | `$82.22` |
 | **Abril 2026** | `$169,313.82` | 62,076 | 1,633 | 2.63% | `$103.68` |
-| **Mayo 2026 (Al 22)** | `$143,067.38` | 49,256 | 1,700 | **3.45%** | `$84.16` |
+| **Mayo 2026** | `$174,830.36` | 68,186 | 2,085 | 3.06% | `$83.85` |
 
 ---
 
@@ -127,7 +127,7 @@ Actualmente la cuenta concentra el **100%** de su presupuesto activo en una sola
 
 | Campaña | ID de Campaña (Trazabilidad Meta) | Estado | Inversión Histórica | Clics | CTR Promedio | CPC Promedio |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Conversion a WhatsApp (Canal B2B - Salones)** | [`120240934489910593`](https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=AR&view_all_page_id=406051269418159&q=estilista) | 🟢 **Activa** | `$335,142.61` | 3,613 | 2.47% | **`$92.76`** (El costo más alto) |
+| **Conversion a WhatsApp (Canal B2B - Salones)** | [`120240934489910593`](https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=AR&view_all_page_id=406051269418159&q=estilista) | 🔴 **Pausada** | `$366,905.59` | 3,998 | 2.42% | **`$91.77`** (El costo más alto) |
 | **Conversion - Compra Web (Canal B2C - E-commerce)** | [`120242751389540593`](https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=AR&view_all_page_id=406051269418159&q=sale) | 🔴 **Pausada** | `$92,141.54` | 1,073 | **`4.75%`** (El mejor CTR) | **`$85.87`** |
 | **Conversion a pagina web - Tráfico Frío (Canal B2C)** | [`120240887374240593`](https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=AR&view_all_page_id=406051269418159&q=cabello) | 🔴 **Pausada** | `$70,241.46` | 896 | **`3.69%`** | **`$78.39`** (El clic más barato) |
 
@@ -156,27 +156,35 @@ Para maximizar el retorno orgánico y pago de Dos Soles, proponemos estructurar 
 ---
 
 ## 🎥 Hallazgo Crítico 2: Auditoría Interna de Creativos (WhatsApp B2B)
-Analizamos el comportamiento de los anuncios **activos con inversión estadísticamente significativa** dentro de la campaña de WhatsApp B2B (`120240934489910593`). Solo consideramos como dato concluyente anuncios con gasto relevante — ads con inversión mínima (~$1,000-2,000 ARS) no tienen volumen suficiente para diagnosticar rendimiento real.
+Analizamos el comportamiento de los anuncios dentro de la campaña de WhatsApp B2B (`120240934489910593`) al completarse el período activo.
 
 ### 1. El Gran Sostén (Ganador Absoluto) 🏆
 *   **Anuncio:** *`Reel - Herramientas que podes encontrar`*
 *   **ID de Anuncio (Meta):** `120240973680070593`
-*   **Gasto:** `$171,255.54` (Se llevó más del 50% de todo el presupuesto)
-*   **CPC:** **`$79.84`** (El costo por clic más bajo de toda la campaña activa)
-*   **CTR:** `2.53%` | **Clics:** 2,145
-*   *Diagnóstico:* El algoritmo de Meta actuó correctamente acá. Detectó la excelente respuesta de la gente y le asignó presupuesto de forma masiva porque rinde muy bien. Es el pilar de la cuenta.
+*   **Gasto:** `$198,928.76` (Se llevó más del 54% de todo el presupuesto de la campaña)
+*   **CPC:** **`$80.08`** (El costo por clic más bajo y eficiente de toda la campaña)
+*   **CTR:** `2.44%` | **Clics:** 2,484
+*   *Diagnóstico:* El algoritmo de Meta actuó correctamente acá. Detectó la excelente respuesta y le asignó presupuesto de forma masiva porque rinde muy bien. Es el pilar de la cuenta.
 
 ### 2. La Mina de Oro Desaprovechada 🚀
 *   **Anuncio:** *`Reel - si tenes un salon`*
 *   **ID de Anuncio (Meta):** `120240934489890593`
-*   **Gasto:** `$22,462.65` (Apenas el 6% de la inversión)
-*   **CTR:** **`3.51%`** (¡El CTR más alto entre todos los Reels activos con inversión relevante!)
-*   **CPC:** `$92.44` | **Clics:** 243
-*   *Diagnóstico:* Esta pieza es un misil. Llama muchísimo la atención de los dueños de salones. Como Meta le dio poco presupuesto (está infrapautada), nos estamos perdiendo de escalar un creativo estrella. La oportunidad es clara: darle más nafta.
+*   **Gasto:** `$22,913.05` (Apenas el 6% de la inversión)
+*   **CTR:** **`3.52%`** (¡El CTR más alto entre todos los Reels de la campaña!)
+*   **CPC:** `$92.02` | **Clics:** 249
+*   *Diagnóstico:* Esta pieza es un misil. Llama muchísimo la atención de los dueños de salones. Como Meta le dio poco presupuesto (está infrapautada), nos perdimos de escalar un creativo estrella. La oportunidad en una reactivación es darle más presupuesto.
 
-### 3. Ads Activos con Datos Insuficientes (Sin Diagnóstico Definitivo) 📊
-*   **Anuncios:** *`Reel - somos distrib de matrix`* (ID `120240973659820593`) y *`Reel - Si sos estilista o tenes..`* (ID `120243024605250593`)
-*   *Diagnóstico:* Ambos anuncios están **activos** pero con inversión muy baja hasta la fecha — por debajo del umbral estadístico necesario para sacar conclusiones sólidas sobre su rendimiento real. Muestran métricas de CPC elevado, pero con tan poco volumen de datos, esas cifras no son representativas. **La recomendación es monitorearlos** con un presupuesto controlado durante las próximas 2-3 semanas antes de tomar cualquier decisión de pausa.
+### 3. Fuga de Presupuesto Confirmada 🛑
+*   **Anuncio:** *`Reel - Si sos estilista o tenes..`*
+*   **ID de Anuncio (Meta):** `120243024605250593`
+*   **Gasto:** `$30,331.17` (El segundo anuncio con más presupuesto)
+*   **CTR:** `2.09%` | **Clics:** 194
+*   **CPC:** **`$156.35`** (El CPC más alto y costoso de la campaña)
+*   *Diagnóstico:* Al completarse el mes, este creativo acumuló un gasto de más de 30 mil pesos pero con un rendimiento bajísimo. El costo por clic de `$156.35` duplica al del ganador absoluto. En una futura reactivación, este anuncio debe permanecer pausado.
+
+### 4. Anuncio con Datos Insuficientes 📊
+*   **Anuncio:** *`Reel - somos distrib de matrix`* (ID `120240973659820593`)
+*   *Diagnóstico:* Registró un gasto final de `$2,004.75`, lo cual sigue estando por debajo del umbral estadístico necesario para sacar conclusiones definitivas. Se mantiene como indeterminado.
 
 ---
 

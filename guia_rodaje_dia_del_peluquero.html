@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Rodaje & Estrategia de Contenidos - Día del Peluquero | Dos Soles</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===========================================
+           VARIABLES & DESIGN SYSTEM (Theme: Dos Soles Solar Dark)
+           =========================================== */
+        :root {
+            --bg-base: #09080e;
+            --bg-surface: #120f1d;
+            --bg-card: rgba(23, 19, 36, 0.75);
+            --bg-card-hover: rgba(32, 27, 50, 0.9);
+            
+            --text-main: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            
+            /* Solar Dos Soles Accents */
+            --solar-gold: #f5a623;
+            --solar-gold-light: #ffd27d;
+            --solar-crimson: #e03e3e;
+            --solar-purple: #8b5cf6;
+            --solar-emerald: #10b981;
+            
+            --solar-gold-glow: rgba(245, 166, 35, 0.15);
+            --solar-crimson-glow: rgba(224, 62, 62, 0.15);
+            --solar-purple-glow: rgba(139, 92, 246, 0.15);
+            
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-focus: rgba(245, 166, 35, 0.35);
+            
+            --font-display: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'Fira Code', monospace;
+            
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+            
+            --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 35px var(--solar-gold-glow);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding: 2rem 1rem;
+            position: relative;
+        }
+
+        /* Ambient Glow Background */
+        .ambient-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .ambient-glow-1 {
+            position: absolute;
+            top: -15%;
+            right: 5%;
+            width: 55vw;
+            height: 55vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--solar-gold-glow) 0%, transparent 65%);
+            filter: blur(100px);
+        }
+
+        .ambient-glow-2 {
+            position: absolute;
+            bottom: -15%;
+            left: 5%;
+            width: 60vw;
+            height: 60vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--solar-crimson-glow) 0%, transparent 65%);
+            filter: blur(120px);
+        }
+
+        /* Container Document (PDF-like card wrapper) */
+        .doc-container {
+            max-width: 1060px;
+            margin: 0 auto;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-xl);
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), var(--shadow-glow);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Sticky Action Header / Print Bar */
+        .action-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 2.5rem;
+            background: rgba(14, 11, 24, 0.95);
+            border-bottom: 1px solid var(--border-subtle);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+        }
+
+        .action-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.15rem;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+        }
+
+        .sun-badge {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--solar-gold), var(--solar-crimson));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(245, 166, 35, 0.4);
+        }
+
+        .sun-badge svg {
+            width: 16px;
+            height: 16px;
+            stroke: #ffffff;
+        }
+
+        .btn-print {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--solar-gold), #e69516);
+            color: #09080e;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(245, 166, 35, 0.3);
+        }
+
+        .btn-print:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 166, 35, 0.45);
+            background: linear-gradient(135deg, #ffb43b, var(--solar-gold));
+        }
+
+        /* Document Body Content */
+        .doc-content {
+            padding: 3rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 3.5rem;
+        }
+
+        /* Header Title Hero */
+        .doc-hero {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 2rem;
+        }
+
+        .doc-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 50px;
+            background: rgba(245, 166, 35, 0.1);
+            border: 1px solid rgba(245, 166, 35, 0.25);
+            color: var(--solar-gold);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            width: fit-content;
+        }
+
+        .doc-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.8vw, 2.75rem);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            background: linear-gradient(135deg, #ffffff 40%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .doc-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            line-height: 1.5;
+        }
+
+        /* Metadata Grid Box */
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .meta-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .meta-val {
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .meta-val.gold { color: var(--solar-gold); }
+        .meta-val.purple { color: var(--solar-purple); }
+
+        /* Section Headings */
+        .section-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: var(--radius-sm);
+            background: rgba(245, 166, 35, 0.1);
+            border: 1px solid rgba(245, 166, 35, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--solar-gold);
+            font-size: 1.15rem;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+        }
+
+        /* Cards & Bento Containers */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--solar-gold), transparent 80%);
+        }
+
+        .card-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .card-badge {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.25rem 0.65rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-gold {
+            background: rgba(245, 166, 35, 0.12);
+            color: var(--solar-gold);
+            border: 1px solid rgba(245, 166, 35, 0.25);
+        }
+
+        .badge-purple {
+            background: rgba(139, 92, 246, 0.12);
+            color: var(--solar-purple);
+            border: 1px solid rgba(139, 92, 246, 0.25);
+        }
+
+        .badge-emerald {
+            background: rgba(16, 185, 129, 0.12);
+            color: var(--solar-emerald);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+        }
+
+        .badge-crimson {
+            background: rgba(224, 62, 62, 0.12);
+            color: var(--solar-crimson);
+            border: 1px solid rgba(224, 62, 62, 0.25);
+        }
+
+        /* Hook Box */
+        .hook-box {
+            background: rgba(245, 166, 35, 0.04);
+            border-left: 3px solid var(--solar-gold);
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            padding: 1rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .hook-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--solar-gold);
+        }
+
+        .hook-text {
+            font-size: 0.95rem;
+            color: #ffffff;
+            font-style: italic;
+            line-height: 1.45;
+        }
+
+        /* Script Dialogue / Voiceover box */
+        .script-box {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .script-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .script-text {
+            font-size: 0.92rem;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+
+        .dialogue-item {
+            margin-bottom: 0.6rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+
+        .dialogue-speaker {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.82rem;
+            color: var(--solar-gold);
+        }
+
+        .dialogue-content {
+            font-size: 0.9rem;
+            color: #f1f5f9;
+        }
+
+        /* Tables */
+        .table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.88rem;
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-secondary);
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        td {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            color: #e2e8f0;
+            vertical-align: middle;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.015);
+        }
+
+        /* Checklist Items */
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 0.85rem;
+        }
+
+        .check-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 0.85rem 1.1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            font-size: 0.88rem;
+            color: #cbd5e1;
+        }
+
+        .check-box {
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--solar-gold);
+            border-radius: 4px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        /* Footer */
+        .doc-footer {
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-family: var(--font-mono);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        /* ===========================================
+           PRINT SPECIFIC STYLES (PDF Engine Format)
+           =========================================== */
+        @media print {
+            body {
+                background: #ffffff !important;
+                color: #0f172a !important;
+                padding: 0 !important;
+            }
+
+            .ambient-mesh, .action-bar {
+                display: none !important;
+            }
+
+            .doc-container {
+                border: none !important;
+                box-shadow: none !important;
+                max-width: 100% !important;
+                background: #ffffff !important;
+                backdrop-filter: none !important;
+            }
+
+            .doc-content {
+                padding: 1.5cm !important;
+                gap: 2rem !important;
+            }
+
+            .doc-title {
+                background: none !important;
+                -webkit-text-fill-color: #0f172a !important;
+                color: #0f172a !important;
+                font-size: 24pt !important;
+            }
+
+            .card {
+                background: #f8fafc !important;
+                border: 1px solid #cbd5e1 !important;
+                color: #0f172a !important;
+                page-break-inside: avoid;
+                margin-bottom: 1.5rem;
+            }
+
+            .card::before {
+                background: #f5a623 !important;
+            }
+
+            .hook-box {
+                background: #fffbeb !important;
+                border-left: 4px solid #f5a623 !important;
+            }
+
+            .hook-text, .dialogue-content, .script-text {
+                color: #1e293b !important;
+            }
+
+            .script-box {
+                background: #f1f5f9 !important;
+                border: 1px solid #cbd5e1 !important;
+            }
+
+            table {
+                font-size: 8.5pt !important;
+            }
+
+            th {
+                background: #e2e8f0 !important;
+                color: #0f172a !important;
+            }
+
+            td {
+                color: #1e293b !important;
+                border-bottom: 1px solid #cbd5e1 !important;
+            }
+
+            .page-break {
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient Lighting (Screen only) -->
+    <div class="ambient-mesh">
+        <div class="ambient-glow-1"></div>
+        <div class="ambient-glow-2"></div>
+    </div>
+
+    <!-- Main PDF / Document Container -->
+    <main class="doc-container">
+        
+        <!-- Sticky Action Bar -->
+        <header class="action-bar">
+            <div class="action-logo">
+                <div class="sun-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4"/>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+                    </svg>
+                </div>
+                <span>DOS SOLES DISTRIBUIDORA</span>
+            </div>
+
+            <button class="btn-print" onclick="window.print()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                    <rect x="6" y="14" width="12" height="8"></rect>
+                </svg>
+                <span>Imprimir / Guardar PDF</span>
+            </button>
+        </header>
+
+        <!-- Document Body -->
+        <div class="doc-content">
+            
+            <!-- Hero Title Block -->
+            <section class="doc-hero">
+                <div class="doc-tag">Plan Operativo de Contenidos & Rodaje</div>
+                <h1 class="doc-title">Masterclass L'Oréal & Festejo: Día del Peluquero</h1>
+                <p class="doc-subtitle">Estrategia integral de captura audiovisual, guiones técnicos, dinámicas participativas y cobertura en tiempo real para posicionar a Dos Soles como la casa referente de la comunidad estilista.</p>
+                
+                <!-- Metadata Grid -->
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Fecha de Rodaje</span>
+                        <span class="meta-val gold">Martes 25 de Agosto</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Horario de Cobertura</span>
+                        <span class="meta-val">10:00 a 12:00 hs</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Tratamiento Estrella</span>
+                        <span class="meta-val purple">Keratin Alpha Sleek (L'Oréal)</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Equipo en Piso</span>
+                        <span class="meta-val">Fran (Cámara) + Anto (Piso)</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 1: Configuración de Cámara & Audio -->
+            <section>
+                <div class="section-title-wrap">
+                    <div class="section-icon">⚙️</div>
+                    <h2 class="section-title">1. Configuración de Cámara & Audio (Mobile 9:16)</h2>
+                </div>
+
+                <div class="card">
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Tipo de Toma</th>
+                                    <th>Resolución / FPS</th>
+                                    <th>Lente / Encuadre</th>
+                                    <th>Objetivo Técnico</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Tratamiento & Planchado</strong></td>
+                                    <td><span class="card-badge badge-gold">4K @ 60 FPS</span></td>
+                                    <td>1x y 3x Macro (Cerca)</td>
+                                    <td>Permite cámara lenta ultrasuave (0.5x) para capturar el brillo espejo y vapor.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Micrófono & Ping-Pong</strong></td>
+                                    <td><span class="card-badge badge-purple">1080p @ 30 FPS</span></td>
+                                    <td>1x Plano Medio</td>
+                                    <td>Sincronización de labios nítida con micrófono corbatero y menor peso de archivo.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Transición con Emi</strong></td>
+                                    <td><span class="card-badge badge-gold">4K @ 60 FPS</span></td>
+                                    <td>1x Frontal (Luz directa)</td>
+                                    <td>Fluidez absoluta en el movimiento de destape de cámara y caída de cabello.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Cobertura App / Trivia</strong></td>
+                                    <td><span class="card-badge badge-emerald">1080p @ 60 FPS</span></td>
+                                    <td>0.5x Gran Angular + 1x</td>
+                                    <td>Movimientos de paneo ágiles capturando pantallas y reacciones de euforia.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Cronograma de Stories en Tiempo Real -->
+            <section>
+                <div class="section-title-wrap">
+                    <div class="section-icon">📱</div>
+                    <h2 class="section-title">2. Estrategia de Publicación: Stories en Tiempo Real</h2>
+                </div>
+
+                <div class="card">
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Hora</th>
+                                    <th>Formato</th>
+                                    <th>Contenido Visual</th>
+                                    <th>Texto / Copy de la Historia</th>
+                                    <th>Interacción / Sticker</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>08:30 hs</strong></td>
+                                    <td>Placa Fija</td>
+                                    <td>Diseño institucional Dos Soles con tonos dorados.</td>
+                                    <td><em>«¡Feliz Día del Peluquero a quienes hacen del cabello un arte todos los días! Gracias por elegirnos.»</em></td>
+                                    <td>Caja de preguntas: <em>«¿Cuántos años llevás con la tijera? 👇»</em></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>10:15 hs</strong></td>
+                                    <td>Video Vivo</td>
+                                    <td>Paneo de auditorio lleno, café de bienvenida y carpetas.</td>
+                                    <td><em>«¡Casa llena! Arrancamos el festejo del Día del Peluquero con la Masterclass oficial de L'Oréal Pro ☕✂️»</em></td>
+                                    <td>Sticker de Ubicación: <em>Dos Soles Distribuidora</em></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>11:00 hs</strong></td>
+                                    <td>Video Corto</td>
+                                    <td>Clip de 6s de la técnica de Bs. As. aplicando el producto en bacha.</td>
+                                    <td><em>«Keratin Alpha Sleek en acción con la técnica oficial de L'Oréal directamente desde Buenos Aires 🧪✨»</em></td>
+                                    <td>Sticker de Mención: <code>@lorealpro</code></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>11:45 hs</strong></td>
+                                    <td>Video Euforia</td>
+                                    <td>La ganadora de la app festejando en el podio con el kit.</td>
+                                    <td><em>«¡Tenemos ganadora de la trivia L'Oréal! Felicitaciones por ese primer puesto 🎉🎁»</em></td>
+                                    <td>Sticker de Encuesta: <em>«¿Te animabas a la trivia?»</em></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Tarde</strong></td>
+                                    <td>Reposteos</td>
+                                    <td>Historias compartidas por los estilistas que asistieron.</td>
+                                    <td><em>«Gracias por compartir esta jornada con nosotros 💛✂️»</em></td>
+                                    <td>Repostear menciones a <code>@dossoles</code></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>19:30 hs</strong></td>
+                                    <td>Story Link</td>
+                                    <td>Captura teaser del Reel comunitario recién publicado.</td>
+                                    <td><em>«Miren cómo festejamos hoy... ¡Vayan a verse en el último Reel! 🎬👇»</em></td>
+                                    <td>Sticker de enlace directo al Reel del Feed</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <div class="page-break"></div>
+
+            <!-- Section 3: Reel 1 - Masterclass L'Oreal (Paso a Paso) -->
+            <section>
+                <div class="section-title-wrap">
+                    <div class="section-icon">🧪</div>
+                    <h2 class="section-title">3. REEL 1: "Así se vive una Capacitación en Dos Soles"</h2>
+                </div>
+
+                <div class="card">
+                    <div class="card-header-row">
+                        <div>
+                            <h3 style="font-family: var(--font-display); font-size: 1.2rem; color: #fff;">Paso a Paso Técnico: Keratin Alpha Sleek (Anti-Frizz)</h3>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary);">Enfoque: Autoridad técnica, venta de futuras capacitaciones y presentación de producto.</p>
+                        </div>
+                        <span class="card-badge badge-purple">Formato Voz en Off + Clips</span>
+                    </div>
+
+                    <!-- Hooks Options -->
+                    <div class="hook-box">
+                        <span class="hook-label">🎯 Opciones de Hook (Primeros 3 segundos)</span>
+                        <p class="hook-text"><strong>Opción A (Recomendada):</strong> «¿Alguna vez te preguntaste cómo es capacitarse en Dos Soles? Mirá lo que fue la Masterclass de L'Oréal.»</p>
+                        <p class="hook-text"><strong>Opción B (Dolor de Salón):</strong> «El tratamiento anti-frizz que tus clientas van a pedirte esta temporada: paso a paso con la técnica oficial de L'Oréal.»</p>
+                    </div>
+
+                    <!-- Voiceover Script -->
+                    <div class="script-box">
+                        <div class="script-label">🎙️ Guion Completo de Voz en Off (Para grabar en edición)</div>
+                        <p class="script-text">
+                            <em>«Hoy recibimos a la técnica oficial de L'Oréal Professionnel directamente desde Buenos Aires para una masterclass exclusiva de Keratin Alpha Sleek.</em><br><br>
+                            <em>Vimos desde el diagnóstico de la fibra y el lavado preparador en bacha, hasta la técnica exacta de aplicación mecha por mecha con queratina termo-activa.</em><br><br>
+                            <em>El momento clave: el sellado térmico a temperatura controlada para activar el blindaje anti-humedad y lograr este brillo espejo impecable.</em><br><br>
+                            <em>Porque en Dos Soles no solo te traemos los mejores productos: te formamos para que domines cada técnica y hagas crecer tu salón. ¿Querés sumarte a la próxima fecha? Comentá <strong>CAPACITACIÓN</strong> y te enviamos el cronograma.»</em>
+                        </p>
+                    </div>
+
+                    <!-- Step by Step Table -->
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Paso Técnico</th>
+                                    <th>Acción de la Profesional</th>
+                                    <th>Toma Exacta a Filmar (4K 60fps)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>0. Antes de Emi</strong></td>
+                                    <td>Diagnóstico en seco: volumen y frizz.</td>
+                                    <td>Plano medio a contraluz. Pasar un peine fino mostrando la resistencia en las puntas.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>1. Lavado Preparador</strong></td>
+                                    <td>Shampoo purificante en bacha.</td>
+                                    <td>Plano cenital (desde arriba): espuma blanca densa y agua corriendo por el cuero cabelludo.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2. Pincelado Mecha a Mecha</strong></td>
+                                    <td>Aplicación a 0.5 cm de raíz con pincel.</td>
+                                    <td>Plano macro (muy cerca): textura cremosa entrando en la mecha y peine fino retirando excesos.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3. Brushing de Alineación</strong></td>
+                                    <td>Secado direccionado con cepillo térmico.</td>
+                                    <td>Plano lateral: cepillo redondo estirando la fibra con boquilla direccional y vapor suave.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>4. Planchado Brillo Espejo</strong></td>
+                                    <td>Sellado a 200°C-230°C (7-10 pasadas).</td>
+                                    <td><strong>TOMA ESTRELLA:</strong> Cámara a 10 cm. La plancha desliza y deja una estela de brillo espejo al instante.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>5. Revelación / Liquid Hair</strong></td>
+                                    <td>Movimiento final sin frizz y sedoso.</td>
+                                    <td>Emi moviendo la cabeza en cámara lenta + peine fino soltado desde la raíz que cae solo por gravedad.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Reel 2 - Dia del Peluquero Comunitario -->
+            <section>
+                <div class="section-title-wrap">
+                    <div class="section-icon">🎤</div>
+                    <h2 class="section-title">4. REEL 2: "Día del Peluquero" (Ping-Pong + Clímax «¡DOS SOLES!»)</h2>
+                </div>
+
+                <div class="card">
+                    <div class="card-header-row">
+                        <div>
+                            <h3 style="font-family: var(--font-display); font-size: 1.2rem; color: #fff;">El Reel Comunitario y Viral del Evento</h3>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary);">Enfoque: Sentido de pertenencia, risas, orgullo por la profesión y posicionamiento de marca.</p>
+                        </div>
+                        <span class="card-badge badge-gold">Formato Entrevista Dinámica</span>
+                    </div>
+
+                    <div class="hook-box">
+                        <span class="hook-label">🎯 Hook Visual & Apertura (0 a 4 segundos)</span>
+                        <p class="hook-text">Fran con micrófono en mano en medio del salón lleno: «Vinimos a festejar el Día del Peluquero con la comunidad de Dos Soles y les hicimos un par de preguntas...»</p>
+                    </div>
+
+                    <!-- Detailed Script -->
+                    <div class="script-box">
+                        <div class="script-label">🎙️ Guion & Estructura de Preguntas para el Rodaje</div>
+                        
+                        <div class="dialogue-item">
+                            <span class="dialogue-speaker">BLOQUE 1: PING-PONG RÁPIDO (Cortes de 1 segundo a 4 o 5 personas)</span>
+                            <span class="dialogue-content">
+                                • Fran: <em>«¿Hace cuánto que te dedicás a la peluquería?»</em> ➔ Peluqueros: <em>«¡12 años!»</em> / <em>«¡20 años!»</em> / <em>«Arranqué hace 2!»</em><br>
+                                • Fran: <em>«¿Qué es lo más lindo de la profesión?»</em> ➔ Peluqueros: <em>«La cara de la clienta al final»</em> / <em>«Crear rubios»</em> / <em>«El mate con colegas»</em>
+                            </span>
+                        </div>
+
+                        <div class="dialogue-item" style="margin-top: 0.75rem;">
+                            <span class="dialogue-speaker">BLOQUE 2: LAS PREGUNTAS DONDE TODOS RESPONDEN «DOS SOLES»</span>
+                            <span class="dialogue-content">
+                                • Fran: <em>«¿Quién está siempre del otro lado cuando necesitás stock urgente?»</em> ➔ Peluquera 1: <strong>«¡Dos Soles!»</strong><br>
+                                • Fran: <em>«¿Quién te acompaña en cada capacitación y etapa de tu salón?»</em> ➔ Peluquero 2: <strong>«¡Dos Soles!»</strong><br>
+                                • Fran: <em>«¿Dónde te encontrás con colegas a aprender de las mejores marcas?»</em> ➔ Peluquera 3: <strong>«¡En Dos Soles!»</strong><br>
+                                • Fran: <em>«¿El lugar donde la peluquería se vive en comunidad?»</em> ➔ Peluquero 4: <strong>«¡Dos Soles, obvio!»</strong>
+                            </span>
+                        </div>
+
+                        <div class="dialogue-item" style="margin-top: 0.75rem;">
+                            <span class="dialogue-speaker">BLOQUE 3: EL CLÍMAX GRUPAL (Todo el salón al unísono)</span>
+                            <span class="dialogue-content">
+                                Fran y Anto parados adelante de todo el salón:<br>
+                                • Conductor: <em>«¿Quién es el partner oficial de tu salón?»</em><br>
+                                🔊 <strong>TODO EL SALÓN A CORO LEVANTANDO LOS BRAZOS:</strong> <span style="color: var(--solar-gold); font-size: 1.1rem; font-weight: 900;">«¡¡¡DOS SOLES!!!»</span> <em>(Seguido de aplausos, risas y brindis).</em>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="page-break"></div>
+
+            <!-- Section 5: Reel 3 & Dinamica Trivia App -->
+            <section>
+                <div class="section-title-wrap">
+                    <div class="section-icon">🏆</div>
+                    <h2 class="section-title">5. Dinámica de App en Vivo (Trivia & Podio) & Transición Emi</h2>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+                    
+                    <!-- App Trivia Card -->
+                    <div class="card">
+                        <div class="card-header-row">
+                            <h3 style="font-family: var(--font-display); font-size: 1.15rem; color: #fff;">Competencia Interactiva por App</h3>
+                            <span class="card-badge badge-emerald">Clips Stories / Reel</span>
+                        </div>
+
+                        <p style="font-size: 0.88rem; color: var(--text-secondary);">En lugar de un sorteo tradicional, los peluqueros compiten respondiendo preguntas de la masterclass en tiempo real desde el celular.</p>
+
+                        <div class="hook-box" style="border-left-color: var(--solar-emerald);">
+                            <span class="hook-label" style="color: var(--solar-emerald);">🎥 Tomas Clave a Capturar</span>
+                            <p class="hook-text" style="font-size: 0.85rem;">
+                                1. <strong>Tensión:</strong> Planos cercanos de dedos tocando opciones en el celular.<br>
+                                2. <strong>El Podio:</strong> Pantalla grande mostrando los cambios de posiciones.<br>
+                                3. <strong>Festejo:</strong> La cara de la ganadora saltando al ver su 1° puesto.<br>
+                                4. <strong>Premiación:</strong> Anto y la técnica entregando el kit L'Oréal con abrazo.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Emi Transition Card -->
+                    <div class="card">
+                        <div class="card-header-row">
+                            <h3 style="font-family: var(--font-display); font-size: 1.15rem; color: #fff;">Transición Viral con Emi</h3>
+                            <span class="card-badge badge-crimson">Impacto Visual TikTok/Reels</span>
+                        </div>
+
+                        <p style="font-size: 0.88rem; color: var(--text-secondary);">Corte de transformación de alto impacto antes y después del tratamiento anti-frizz.</p>
+
+                        <div class="hook-box" style="border-left-color: var(--solar-crimson);">
+                            <span class="hook-label" style="color: var(--solar-crimson);">🎬 Dirección de Escena</span>
+                            <p class="hook-text" style="font-size: 0.85rem;">
+                                • <strong>Toma A (10:00 hs - Antes):</strong> Emi con pelo natural con frizz, agarra un mechón y lo tira directo a la lente tapándola por completo.<br>
+                                • <strong>Toma B (11:40 hs - Después):</strong> Destape de lente en reversa: Emi con pelo ultra lacio brillante (liquid hair) girando la cabeza en cámara lenta con sonrisa.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Section 6: Mini-Entrevistas Tecnica Loreal -->
+            <section>
+                <div class="section-title-wrap">
+                    <div class="section-icon">👩‍🏫</div>
+                    <h2 class="section-title">6. Cápsulas con la Técnica Oficial de L'Oréal (Bs. As.)</h2>
+                </div>
+
+                <div class="card">
+                    <div class="card-header-row">
+                        <h3 style="font-family: var(--font-display); font-size: 1.15rem; color: #fff;">2 Preguntas Directas a Cámara (30 segundos c/u)</h3>
+                        <span class="card-badge badge-purple">Cápsulas de Autoridad</span>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+                        
+                        <div class="script-box">
+                            <span class="dialogue-speaker">CÁPSULA 1: Para Salones (Enfoque B2B Negocio)</span>
+                            <p class="dialogue-content" style="font-size: 0.85rem; margin-top: 0.35rem;">
+                                • <strong>Pregunta:</strong> <em>«¿Por qué un salón debería sumar Keratin Alpha Sleek a su carta de servicios hoy?»</em><br>
+                                • <strong>Respuesta clave:</strong> Alta rentabilidad, servicio rápido en bacha, responde al dolor #1 de las clientas (humedad y frizz) y genera clientas fieles por 3 meses.<br>
+                                • <strong>Cierre:</strong> <em>«Llevá la línea oficial a tu salón con Dos Soles.»</em>
+                            </p>
+                        </div>
+
+                        <div class="script-box">
+                            <span class="dialogue-speaker">CÁPSULA 2: Para el Cuidado en Casa (Enfoque B2C)</span>
+                            <p class="dialogue-content" style="font-size: 0.85rem; margin-top: 0.35rem;">
+                                • <strong>Pregunta:</strong> <em>«¿Cuál es el secreto para que el tratamiento dure impecable en casa?»</em><br>
+                                • <strong>Respuesta clave:</strong> No frotar con toallas de algodón, usar protector térmico siempre y mantenerlo con el shampoo y máscara de la línea oficial Sleek.<br>
+                                • <strong>Cierre:</strong> <em>«Encontrá tu rutina en Dos Soles.»</em>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 7: Cronograma & Checklist Final -->
+            <section>
+                <div class="section-title-wrap">
+                    <div class="section-icon">📋</div>
+                    <h2 class="section-title">7. Cronograma Minuto a Minuto & Checklist de Rodaje</h2>
+                </div>
+
+                <div class="card">
+                    <div class="checklist-grid">
+                        <div class="check-item">
+                            <div class="check-box"></div>
+                            <div><strong>10:00 hs — Llegada & Antes:</strong> Grabar el pelo natural de Emi (Toma A de transición) + 1ra Story de bienvenida.</div>
+                        </div>
+                        <div class="check-item">
+                            <div class="check-box"></div>
+                            <div><strong>10:15 hs — Paso a Paso L'Oréal:</strong> Bacha (lavado purificante) y tocador (aplicación con pincel en mechas finas).</div>
+                        </div>
+                        <div class="check-item">
+                            <div class="check-box"></div>
+                            <div><strong>10:35 hs — Planchado Brillo Espejo:</strong> Plano macro a 60fps con la plancha sellando la mecha.</div>
+                        </div>
+                        <div class="check-item">
+                            <div class="check-box"></div>
+                            <div><strong>10:50 hs (Break) — Reel Día del Peluquero:</strong> Micrófono con peluqueros (Ping-Pong) + Grito grupal «¡DOS SOLES!».</div>
+                        </div>
+                        <div class="check-item">
+                            <div class="check-box"></div>
+                            <div><strong>11:15 hs — Trivia App & Podio:</strong> Grabación de celulares, podio en vivo y entrega del premio.</div>
+                        </div>
+                        <div class="check-item">
+                            <div class="check-box"></div>
+                            <div><strong>11:35 hs — Después de Emi:</strong> Toma B de transición (liquid hair en 60fps) + Cápsulas con la técnica de Bs. As.</div>
+                        </div>
+                        <div class="check-item">
+                            <div class="check-box"></div>
+                            <div><strong>11:55 hs — Foto de Cierre:</strong> Foto grupal de todo el salón aplaudiendo para portada del Reel.</div>
+                        </div>
+                        <div class="check-item">
+                            <div class="check-box"></div>
+                            <div><strong>14:00 a 18:00 hs — Historias:</strong> Reposteos masivos de todos los peluqueros que etiqueten a <code>@dossoles</code>.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Document Footer -->
+            <footer class="doc-footer">
+                <div>Documento de Producción Audiovisual — <strong>Dos Soles Distribuidora</strong></div>
+                <div>Fecha de Emisión: 25 de Agosto | Versión 2.0 Final</div>
+            </footer>
+
+        </div>
+    </main>
+
+</body>
+</html>

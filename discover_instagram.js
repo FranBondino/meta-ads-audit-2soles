@@ -1,4 +1,20 @@
-const ACCESS_TOKEN = "EAAOCXeSxZAZCcBRiBBsymh4Y5gECxCtYVSZCZAbAC9V3Q3r93HDHET1dLngFW6bx0cztLttxI75KBH8yZC3sV7opXo7dbv6bqgFEsqM7YpDKZBMYiGchbzBLLFroi6N1DjeOkasWIP354XDdCMug8NW4wtWSTdmRptWsQ3iAawWqU7zTOnvA7eOPNiNHYRB6xtOHTtzfZCqT7LLyTTMtDpiZCV2wApmrrVLyuGCX3rqS6FC6cFLe2TScPW7Cj81XBeDcVdFDsUcHdyX4rKdVdoTuX5wZD";
+const fs = require('fs');
+const path = require('path');
+
+// Resolver configuración
+let accountArg = process.argv[2] || 'dos_soles';
+let configPath = accountArg;
+if (!accountArg.endsWith('.json')) {
+  configPath = path.join(__dirname, 'configs', `${accountArg}.json`);
+}
+
+if (!fs.existsSync(configPath)) {
+  console.error(`❌ Archivo de configuración no encontrado en: ${configPath}`);
+  process.exit(1);
+}
+
+const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+const ACCESS_TOKEN = config.ACCESS_TOKEN;
 
 async function runAll() {
   try {

@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta Estratégica: Meta Ads - Dos Soles</title>
+    
+    <!-- Google Fonts Pairing: Outfit (Titles) & Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===========================================
+           DESIGN SYSTEM & DEEP GLOW TOKENS
+           =========================================== */
+        :root {
+            --bg-primary: #07050a;
+            --bg-secondary: #0d0a14;
+            --bg-card: rgba(18, 14, 28, 0.7);
+            
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #475569;
+            
+            /* Warm Solar Accents */
+            --solar-gold: #f5a623;
+            --solar-crimson: #e03e3e;
+            --solar-purple: #8b5cf6;
+            
+            --solar-gold-glow: rgba(245, 166, 35, 0.15);
+            --solar-crimson-glow: rgba(224, 62, 62, 0.15);
+            --solar-purple-glow: rgba(139, 92, 246, 0.15);
+            
+            --border-color: rgba(255, 255, 255, 0.04);
+            --border-hover: rgba(255, 255, 255, 0.12);
+            
+            --font-display: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'Fira Code', monospace;
+            
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient Glow System */
+        .ambient-mesh {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .glow-1 {
+            position: absolute;
+            top: -10%;
+            right: 10%;
+            width: 70vw;
+            height: 70vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--solar-gold-glow) 0%, transparent 65%);
+            filter: blur(120px);
+        }
+
+        .glow-2 {
+            position: absolute;
+            top: 40%;
+            left: -10%;
+            width: 60vw;
+            height: 60vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--solar-crimson-glow) 0%, transparent 65%);
+            filter: blur(140px);
+        }
+
+        .glow-3 {
+            position: absolute;
+            bottom: -10%;
+            right: 20%;
+            width: 50vw;
+            height: 50vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--solar-purple-glow) 0%, transparent 65%);
+            filter: blur(100px);
+        }
+
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.003) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.003) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        /* Layout Container */
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+
+        /* Header Styling */
+        header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .header-title-area {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .brand-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, rgba(245, 166, 35, 0.1), rgba(224, 62, 62, 0.1));
+            border: 1px solid rgba(245, 166, 35, 0.2);
+            color: var(--solar-gold);
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            width: fit-content;
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 30%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-desc {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 650px;
+            font-weight: 300;
+        }
+
+        .meta-stamp {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-color);
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .meta-stamp strong {
+            color: var(--text-primary);
+        }
+
+        /* Bento Summary Grid */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 640px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .bento-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.8rem;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: all 0.4s var(--ease-out-expo);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-hover);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+        }
+
+        .bento-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 600;
+        }
+
+        .bento-value {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .color-gold { color: var(--solar-gold); }
+        .color-crimson { color: var(--solar-crimson); }
+        .color-purple { color: var(--solar-purple); }
+
+        .bento-footer {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: auto;
+            padding-top: 0.5rem;
+            border-top: 1px solid rgba(255,255,255,0.03);
+        }
+
+        /* Section Container */
+        .section-box {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: #fff;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Comparative Table */
+        .comparison-table-wrapper {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.5rem;
+            overflow-x: auto;
+        }
+
+        table.comp-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        table.comp-table th, table.comp-table td {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        table.comp-table th {
+            font-family: var(--font-display);
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        table.comp-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* 3-Campaign Grid */
+        .campaign-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .campaign-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .campaign-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 2.2rem;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            transition: all 0.4s var(--ease-out-expo);
+        }
+
+        .campaign-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+        }
+
+        .campaign-card.theme-purple::before { background: var(--solar-purple); }
+        .campaign-card.theme-crimson::before { background: var(--solar-crimson); }
+        .campaign-card.theme-gold::before { background: var(--solar-gold); }
+
+        .campaign-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--border-hover);
+        }
+
+        .campaign-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .campaign-num {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+        }
+
+        .campaign-title {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #fff;
+            margin-top: 0.5rem;
+        }
+
+        .campaign-budget-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 14px;
+            padding: 1rem 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .budget-lbl {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .budget-val {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .campaign-details-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        .campaign-details-list li {
+            position: relative;
+            padding-left: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .campaign-details-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--solar-gold);
+            font-weight: bold;
+        }
+        .campaign-card.theme-crimson .campaign-details-list li::before { color: var(--solar-crimson); }
+        .campaign-card.theme-purple .campaign-details-list li::before { color: var(--solar-purple); }
+
+        /* Interactive Tabs for Creative Matrix */
+        .matrix-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 2.2rem;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.5rem 1.2rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tab-btn:hover {
+            color: #fff;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .tab-btn.active {
+            color: #fff;
+            background: linear-gradient(135deg, rgba(245, 166, 35, 0.15), rgba(224, 62, 62, 0.15));
+            border: 1px solid rgba(245, 166, 35, 0.3);
+            box-shadow: 0 4px 15px rgba(245, 166, 35, 0.05);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .tab-content.active {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .creative-card {
+            background: rgba(255,255,255,0.01);
+            border: 1px solid rgba(255,255,255,0.03);
+            border-radius: 18px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .creative-card:hover {
+            background: rgba(255,255,255,0.03);
+            border-color: rgba(255,255,255,0.08);
+        }
+
+        .creative-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .icon-holder {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .creative-card-header h4 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .creative-format-badge {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border-color);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            color: var(--text-secondary);
+            margin-left: auto;
+        }
+
+        .creative-copy-box {
+            background: rgba(0,0,0,0.2);
+            border: 1px dashed rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 1rem;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .creative-copy-box strong {
+            color: #fff;
+        }
+
+        /* Calendar Grid */
+        .calendar-table-wrapper {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 2.2rem;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .calendar-week-row {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            padding: 1.8rem 0;
+        }
+
+        .calendar-week-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .calendar-week-row:first-child {
+            padding-top: 0;
+        }
+
+        .week-badge {
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--solar-gold);
+            background: rgba(245, 166, 35, 0.05);
+            border: 1px solid rgba(245, 166, 35, 0.2);
+            height: fit-content;
+            padding: 0.5rem;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .week-tasks-area {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .week-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .week-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .task-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 640px) {
+            .task-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .task-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--solar-purple);
+        }
+
+        /* Rules callout system */
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .rules-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .rules-card {
+            background: rgba(224, 62, 62, 0.02);
+            border: 1px solid rgba(224, 62, 62, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            gap: 1.2rem;
+        }
+
+        .rules-card.rules-positive {
+            background: rgba(139, 92, 246, 0.02);
+            border-color: rgba(139, 92, 246, 0.1);
+        }
+
+        .rules-icon {
+            font-size: 1.8rem;
+            line-height: 1;
+        }
+
+        .rules-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .rules-content h3 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .rules-content p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Footer styling */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 2rem 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-family: var(--font-display);
+            font-weight: 500;
+        }
+
+        footer strong {
+            color: var(--text-secondary);
+        }
+
+        /* Glossary Grid */
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .glossary-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 640px) {
+            .glossary-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .glossary-card {
+            background: rgba(255,255,255,0.01);
+            border: 1px solid rgba(255,255,255,0.03);
+            border-radius: 18px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .glossary-card:hover {
+            background: rgba(255,255,255,0.02);
+            border-color: rgba(255,255,255,0.08);
+        }
+
+        .glossary-card-header {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .glossary-card-header h4 {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .glossary-card-header span {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--solar-gold);
+        }
+
+        .glossary-criollo-box {
+            background: rgba(245, 166, 35, 0.02);
+            border-left: 3px solid var(--solar-gold);
+            padding: 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .glossary-criollo-box strong {
+            color: #fff;
+        }
+
+        /* Diagram Flowchart Styling */
+        .flow-diagram-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .flow-node {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.2rem 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .flow-node:hover {
+            border-color: var(--border-hover);
+            transform: scale(1.02);
+        }
+
+        .flow-root {
+            background: linear-gradient(135deg, rgba(245, 166, 35, 0.2), rgba(224, 62, 62, 0.2));
+            border-color: rgba(245,166,35,0.4);
+            box-shadow: 0 4px 20px var(--solar-gold-glow);
+        }
+
+        .flow-root h3 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .flow-connector-vertical {
+            width: 2px;
+            height: 30px;
+            background: linear-gradient(to bottom, var(--solar-gold), rgba(255,255,255,0.1));
+        }
+
+        .flow-level-2 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .flow-level-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .flow-sub-node {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .flow-leaf-container {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .flow-leaf {
+            background: rgba(255,255,255,0.01);
+            border: 1px dashed rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 0.8rem 1.2rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-align: center;
+            width: 100%;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient Lighting Effects -->
+    <div class="ambient-mesh">
+        <div class="glow-1"></div>
+        <div class="glow-2"></div>
+        <div class="glow-3"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <!-- Main Workspace Container -->
+    <main class="container">
+        
+        <!-- Header Section -->
+        <header>
+            <div class="header-title-area">
+                <span class="brand-badge">Estrategia Meta Ads Pro</span>
+                <h1>Plan de Reactivación & Escala</h1>
+                <p class="header-desc">Planificación de pauta digital B2B y B2C optimizada mediante Sandbox de Testing y Escala Broad (Metodología Nathan Perdriau).</p>
+            </div>
+            
+            <div class="meta-stamp">
+                <div>CLIENTE: <strong>Dos Soles Distribuidora</strong></div>
+                <div>PRESUPUESTO: <strong>$150.000 ARS/mes</strong></div>
+                <div>FECHA: <strong>Julio 2026</strong></div>
+            </div>
+        </header>
+
+        <!-- Bento Grid Overview -->
+        <section class="bento-grid">
+            
+            <!-- Card 1: Presupuesto Total -->
+            <div class="bento-card">
+                <span class="bento-label">Presupuesto Mensual</span>
+                <span class="bento-value color-gold">$150.000</span>
+                <span class="bento-label" style="font-size:0.85rem;">ARS / MES</span>
+                <span class="bento-footer">Equivale a un gasto diario de $5.000 ARS.</span>
+            </div>
+
+            <!-- Card 2: Sandbox Testing -->
+            <div class="bento-card">
+                <span class="bento-label">Testing Sandbox (ABO)</span>
+                <span class="bento-value color-purple">20%</span>
+                <span class="bento-label" style="font-size:0.85rem;">$30.000 ARS / MES</span>
+                <span class="bento-footer">Destinado a la validación de nuevas piezas.</span>
+            </div>
+
+            <!-- Card 3: Escala B2C -->
+            <div class="bento-card">
+                <span class="bento-label">Escala B2C (CBO/ASC)</span>
+                <span class="bento-value color-crimson">35%</span>
+                <span class="bento-label" style="font-size:0.85rem;">$52.500 ARS / MES</span>
+                <span class="bento-footer">Compras directas y autogestionadas en Web.</span>
+            </div>
+
+            <!-- Card 4: Escala B2B -->
+            <div class="bento-card">
+                <span class="bento-label">Escala B2B (CBO)</span>
+                <span class="bento-value color-gold">45%</span>
+                <span class="bento-label" style="font-size:0.85rem;">$67.500 ARS / MES</span>
+                <span class="bento-footer">Prospección calificada para WhatsApp Bot.</span>
+            </div>
+
+        </section>
+
+        <!-- Section: Flow Diagram -->
+        <section class="section-box">
+            <div class="section-header">
+                <h2>🗺️ Mapa de la Estrategia (En Criollo)</h2>
+                <p>Cómo se distribuye cada peso de la inversión diaria de forma automática y visual.</p>
+            </div>
+
+            <div class="flow-diagram-container">
+                
+                <!-- Root Node -->
+                <div class="flow-node flow-root">
+                    <h3>Inversión Diaria Dos Soles</h3>
+                    <p style="font-size: 0.9rem; color: #ffe3a3; font-weight: 600; margin-top: 0.25rem;">$5.000 ARS / día</p>
+                </div>
+
+                <!-- Connector -->
+                <div class="flow-connector-vertical"></div>
+
+                <!-- Level 2 Grid -->
+                <div class="flow-level-2">
+                    
+                    <!-- Sub-node 1: Sandbox -->
+                    <div class="flow-sub-node">
+                        <div class="flow-node" style="border-color: var(--solar-purple);">
+                            <h4 style="color: #fff; font-family: var(--font-display); font-size: 1.1rem; font-weight: 700;">1. Sandbox de Pruebas</h4>
+                            <p style="font-size: 0.8rem; color: var(--solar-purple); font-weight:600;">$1.000 ARS/día (ABO)</p>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.3;">El "laboratorio" donde probamos y validamos videos cortos de rulos, planchas o alisados sin arriesgar capital.</p>
+                        </div>
+                    </div>
+
+                    <!-- Sub-node 2: Escala B2C Híbrida -->
+                    <div class="flow-sub-node">
+                        <div class="flow-node" style="border-color: var(--solar-crimson);">
+                            <h4 style="color: #fff; font-family: var(--font-display); font-size: 1.1rem; font-weight: 700;">2. Escala B2C Híbrida</h4>
+                            <p style="font-size: 0.8rem; color: var(--solar-crimson); font-weight:600;">$1.750 ARS/día (CBO)</p>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.3;">Muestra los anuncios ganadores al consumidor final, balanceando el presupuesto solo según rendimiento.</p>
+                        </div>
+                        <div class="flow-connector-vertical" style="background: var(--solar-crimson); height: 15px;"></div>
+                        <div class="flow-leaf-container">
+                            <div class="flow-leaf">
+                                <strong>50% Web WooCommerce</strong><br>Compran solos o hacen el test interactivo de rutina capilar.
+                            </div>
+                            <div class="flow-leaf">
+                                <strong>50% WhatsApp Bot</strong><br>El bot de IA los asesora y les pasa el link directo a la web.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sub-node 3: Escala B2B Mayorista -->
+                    <div class="flow-sub-node">
+                        <div class="flow-node" style="border-color: var(--solar-gold);">
+                            <h4 style="color: #fff; font-family: var(--font-display); font-size: 1.1rem; font-weight: 700;">3. Escala B2B Mayorista</h4>
+                            <p style="font-size: 0.8rem; color: var(--solar-gold); font-weight:600;">$2.250 ARS/día (CBO)</p>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.3;">Apunta a profesionales y salones usando palabras clave en los botones para saltar la fricción comercial.</p>
+                        </div>
+                        <div class="flow-connector-vertical" style="background: var(--solar-gold); height: 15px;"></div>
+                        <div class="flow-leaf-container">
+                            <div class="flow-leaf">
+                                <strong>WhatsApp Bot B2B</strong><br>Filtra mayoristas por zona y los deriva al asesor comercial.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Section: Methodological Comparison -->
+        <section class="section-box">
+            <div class="section-header">
+                <h2>Análisis Metodológico Comparativo</h2>
+                <p>Evaluamos a los tres referentes principales de Paid Media para elegir la estructura ideal para Dos Soles.</p>
+            </div>
+
+            <div class="comparison-table-wrapper">
+                <table class="comp-table">
+                    <thead>
+                        <tr>
+                            <th>Dimensión</th>
+                            <th>Nathan Perdriau (Broad Scale)</th>
+                            <th>Caro Dubi (DTC & CRO)</th>
+                            <th>Federico Feres (Conversational IA)</th>
+                            <th>Híbrido Elegido (Dos Soles)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Enfoque</strong></td>
+                            <td>Broad y automatización de Meta.</td>
+                            <td>Rentabilidad y optimización web.</td>
+                            <td>IA + Integración de CRM/Bots.</td>
+                            <td><strong>Estructura simplificada + IA Bot.</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Segmentación</strong></td>
+                            <td>100% Abierto (Broad).</td>
+                            <td>Retargeting inteligente y exclusiones.</td>
+                            <td>Tráfico a Bot y segmentación zonal.</td>
+                            <td><strong>Broad en B2C, Segmentado en B2B.</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Métrica Clave</strong></td>
+                            <td>CPA por volumen algorítmico.</td>
+                            <td>ROAS, Margen y AOV (Ticket).</td>
+                            <td>Leads calificados por el bot.</td>
+                            <td><strong>ROAS > 5.0x / Costo por Lead WA.</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Idoneidad ($150k)</strong></td>
+                            <td>Baja (pocas ventas para el algoritmo).</td>
+                            <td>Alta (cuida el margen en WooCommerce).</td>
+                            <td>Muy Alta (optimiza el tiempo del bot).</td>
+                            <td><strong>Estrategia ideal para pauta inicial.</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section: The 3-Campaign Architecture -->
+        <section class="section-box">
+            
+            <div class="section-header">
+                <h2>La Arquitectura de 3 Campañas</h2>
+                <p>Estructura simplificada para evitar la superposición de audiencias y maximizar el presupuesto en fase de escala.</p>
+            </div>
+
+            <div class="campaign-grid">
+                
+                <!-- Campaign 1: Sandbox -->
+                <div class="campaign-card theme-purple">
+                    <div class="campaign-header-row">
+                        <span class="campaign-num">Camp. 1</span>
+                        <span class="badge" style="background: rgba(139, 92, 246, 0.1); border: 1px solid var(--solar-purple); color: var(--solar-purple); font-size: 0.65rem; padding: 2px 8px; border-radius: 4px; font-weight:700;">TESTING ABO</span>
+                    </div>
+                    
+                    <h3 class="campaign-title">Sandbox de Validación</h3>
+                    
+                    <div class="campaign-budget-box">
+                        <span class="budget-lbl">Presupuesto</span>
+                        <span class="budget-val" style="color: var(--solar-purple);">$1.000/día</span>
+                    </div>
+
+                    <ul class="campaign-details-list">
+                        <li><strong>Público 100% Abierto (Broad):</strong> No se usan intereses. Meta encuentra al público según el mensaje del anuncio.</li>
+                        <li><strong>Fórmula DCT (Dynamic Creative):</strong> 3 hooks + 2 copys + 1 body por conjunto.</li>
+                        <li><strong>Graduación por Post ID:</strong> Las piezas ganadoras con mejor Hook Rate y CPA se copian a las campañas de escala.</li>
+                    </ul>
+                </div>
+
+                <!-- Campaign 2: Escala B2C -->
+                <div class="campaign-card theme-crimson">
+                    <div class="campaign-header-row">
+                        <span class="campaign-num">Camp. 2</span>
+                        <span class="badge" style="background: rgba(224, 62, 62, 0.1); border: 1px solid var(--solar-crimson); color: var(--solar-crimson); font-size: 0.65rem; padding: 2px 8px; border-radius: 4px; font-weight:700;">ESCALA B2C</span>
+                    </div>
+                    
+                    <h3 class="campaign-title">Escala B2C Híbrida</h3>
+                    
+                    <div class="campaign-budget-box">
+                        <span class="budget-lbl">Presupuesto</span>
+                        <span class="budget-val" style="color: var(--solar-crimson);">$1.750/día</span>
+                    </div>
+
+                    <ul class="campaign-details-list">
+                        <li><strong>Campaña CBO Inteligente:</strong> Integra el embudo de compras directas en web y el embudo de chat asesoramiento.</li>
+                        <li><strong>Distribución 50/50 Inicial:</strong> 50% a conversiones en WooCommerce y 50% a conversaciones del WhatsApp Bot minorista.</li>
+                        <li><strong>Auto-optimización:</strong> Meta mueve automáticamente la pauta al embudo que consiga las ventas más baratas.</li>
+                    </ul>
+                </div>
+
+
+                <!-- Campaign 3: Escala B2B -->
+                <div class="campaign-card theme-gold">
+                    <div class="campaign-header-row">
+                        <span class="campaign-num">Camp. 3</span>
+                        <span class="badge" style="background: rgba(245, 166, 35, 0.1); border: 1px solid var(--solar-gold); color: var(--solar-gold); font-size: 0.65rem; padding: 2px 8px; border-radius: 4px; font-weight:700;">ESCALA B2B</span>
+                    </div>
+                    
+                    <h3 class="campaign-title">Leads WhatsApp Comercial</h3>
+                    
+                    <div class="campaign-budget-box">
+                        <span class="budget-lbl">Presupuesto</span>
+                        <span class="budget-val" style="color: var(--solar-gold);">$2.250/día</span>
+                    </div>
+
+                    <ul class="campaign-details-list">
+                        <li><strong>Filtro Profesional:</strong> Segmentación por intereses en peluquería, salones y colorimetría + Advantage+.</li>
+                        <li><strong>Integración con el Bot (bot-woo):</strong> Disparador de mensajes que divide a estilistas de minoristas mediante IA.</li>
+                        <li><strong>Ángulo Exclusivo:</strong> Promoción de capacitaciones presenciales y herramientas con cupos limitados.</li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Section: Catalog Integration -->
+        <section class="section-box">
+            <div class="section-header">
+                <h2>🔌 Integración de Catálogo Dinámico (Venta en Piloto Automático)</h2>
+                <p>Estrategia para vender herramientas específicas (como las máquinas Wahl) y productos individuales sin dividir tu presupuesto diario.</p>
+            </div>
+
+            <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 24px; padding: 2.2rem; display: flex; flex-direction: column; gap: 1.5rem; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);">
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
+                    
+                    <div style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.03); border-radius: 18px; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <h4 style="font-family: var(--font-display); color: #fff; font-size: 1.1rem; font-weight: 700;">1. ¿Cómo funciona "En Criollo"?</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">Meta se conecta a tu WooCommerce y lee los productos que tenés en stock con fotos y precios. Si un barbero buscó "máquinas de cortar pelo" en Google o Instagram, Meta le muestra automáticamente tus máquinas Wahl de Dos Soles en su feed.</p>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.03); border-radius: 18px; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <h4 style="font-family: var(--font-display); color: #fff; font-size: 1.1rem; font-weight: 700;">2. Sincronización Automática</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">El plugin de píxel oficial que instalarás en WordPress genera un canal de datos (feed XML). El stock y los precios de tu web se actualizan solos una vez al día dentro de Meta, evitando vender productos sin stock.</p>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.03); border-radius: 18px; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <h4 style="font-family: var(--font-display); color: #fff; font-size: 1.1rem; font-weight: 700;">3. Segmentación de Productos</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">Dividimos el catálogo en dos sets de productos: uno minorista (excluyendo químicos pesados de salón y mostrando kits y secadores de hogar) y uno mayorista B2B (mostrando máquinas Wahl pro, Matrix y tijeras).</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Interactive Creative Matrix -->
+        <section class="section-box">
+            
+            <div class="section-header">
+                <h2>Matriz Creativa de Anuncios (Ángulos Psicológicos)</h2>
+                <p>Estructura de comunicación diseñada para activar diferentes motivadores de compra en las audiencias.</p>
+            </div>
+
+            <div class="matrix-container">
+                
+                <!-- Tab Buttons -->
+                <div class="tab-buttons">
+                    <button class="tab-btn active" onclick="switchTab('tab-b2b')">
+                        <span>💼</span> B2B Profesional (Salones)
+                    </button>
+                    <button class="tab-btn" onclick="switchTab('tab-b2c')">
+                        <span>🛍️</span> B2C Minorista (Consumidor)
+                    </button>
+                </div>
+
+                <!-- Tab 1: B2B -->
+                <div id="tab-b2b" class="tab-content active">
+                    
+                    <!-- Card B2B 1 -->
+                    <div class="creative-card">
+                        <div class="creative-card-header">
+                            <div class="icon-holder" style="background: rgba(245,166,35,0.1); color: var(--solar-gold);">📈</div>
+                            <h4>Ángulo ROI / Ganancia</h4>
+                            <span class="creative-format-badge">REEL / VIDEO</span>
+                        </div>
+                        <div class="creative-copy-box">
+                            <span><strong>Hook 1:</strong> "¿Cuánto te cuesta cada servicio de alisado en tu salón? Mirá esto."</span>
+                            <span><strong>Hook 2:</strong> "Dejá de perder clientas por alisados que no duran."</span>
+                            <span><strong>Desarrollo:</strong> Mostrar aplicación de Liss Expert y resultado brillante.</span>
+                            <span><strong>Copy:</strong> "Optimizá tus márgenes. Rinde hasta 15 aplicaciones por botella con un sellado perfecto de cutícula. Chateá con un asesor."</span>
+                            <span><strong>Disparador WhatsApp:</strong> <code>QUIERO_CATALOGO_B2B</code></span>
+                        </div>
+                    </div>
+
+                    <!-- Card B2B 2 -->
+                    <div class="creative-card">
+                        <div class="creative-card-header">
+                            <div class="icon-holder" style="background: rgba(139,92,246,0.1); color: var(--solar-purple);">🎓</div>
+                            <h4>Ángulo Exclusividad (Capacitación)</h4>
+                            <span class="creative-format-badge">REEL / VIDEO</span>
+                        </div>
+                        <div class="creative-copy-box">
+                            <span><strong>Hook 1:</strong> "Cupos limitados para el próximo workshop técnico de color presencial."</span>
+                            <span><strong>Hook 2:</strong> "Llevá las técnicas de tu equipo al siguiente nivel con Matrix."</span>
+                            <span><strong>Desarrollo:</strong> Mostrar workshop anterior y entrega de certificados.</span>
+                            <span><strong>Copy:</strong> "Perfeccionamiento técnico presencial de colorimetría avanzada. Cupos estrictamente limitados para salones registrados. Postulate haciendo clic."</span>
+                            <span><strong>Disparador WhatsApp:</strong> <code>CAPACITACION_MATRIX</code></span>
+                        </div>
+                    </div>
+
+                    <!-- Card B2B 3 -->
+                    <div class="creative-card">
+                        <div class="creative-card-header">
+                            <div class="icon-holder" style="background: rgba(224,62,62,0.1); color: var(--solar-crimson);">⚙️</div>
+                            <h4>Ángulo Estatus (Herramientas)</h4>
+                            <span class="creative-format-badge">CAROUSEL / IMAGEN</span>
+                        </div>
+                        <div class="creative-copy-box">
+                            <span><strong>Diseño Visual:</strong> Fotos de planchas y secadores profesionales en primer plano.</span>
+                            <span><strong>Beneficio:</strong> 3 cuotas sin interés o 10% extra por transferencia.</span>
+                            <span><strong>Copy:</strong> "La herramienta correcta no es un gasto, es la inversión que define tu calidad y velocidad. Equipá tu salón con secadores y planchas profesionales."</span>
+                            <span><strong>Disparador WhatsApp:</strong> <code>HERRAMIENTAS_B2B</code></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Tab 2: B2C -->
+                <div id="tab-b2c" class="tab-content">
+                    
+                    <!-- Card B2C 1 -->
+                    <div class="creative-card">
+                        <div class="creative-card-header">
+                            <div class="icon-holder" style="background: rgba(224,62,62,0.1); color: var(--solar-crimson);">👩</div>
+                            <h4>Ángulo Dolor / Síntoma</h4>
+                            <span class="creative-format-badge">REEL UGC</span>
+                        </div>
+                        <div class="creative-copy-box">
+                            <span><strong>Hook 1:</strong> "¿Sentís el pelo áspero o pajizo después de lavarlo? Probá esto."</span>
+                            <span><strong>Hook 2:</strong> "El secreto para recuperar tu rubio en casa sin gastar una fortuna."</span>
+                            <span><strong>Desarrollo:</strong> Creadora real aplicando el Óleo Absolut Repair Molecular.</span>
+                            <span><strong>Copy:</strong> "Recuperá la estructura de tu cabello en un solo lavado. Kit de mantenimiento diario L'Oréal con descuento exclusivo."</span>
+                            <span><strong>Destino:</strong> WooCommerce (Venta automatizada)</span>
+                        </div>
+                    </div>
+
+                    <!-- Card B2C 2 -->
+                    <div class="creative-card">
+                        <div class="creative-card-header">
+                            <div class="icon-holder" style="background: rgba(245,166,35,0.1); color: var(--solar-gold);">💸</div>
+                            <h4>Ángulo Financiero (Kits)</h4>
+                            <span class="creative-format-badge">CARRUSEL CATÁLOGO</span>
+                        </div>
+                        <div class="creative-copy-box">
+                            <span><strong>Diseño Visual:</strong> Desplazable de kits de mantenimiento diario L'Oréal/Matrix.</span>
+                            <span><strong>Beneficio:</strong> 35% OFF en kits seleccionados + cuotas sin interés.</span>
+                            <span><strong>Copy:</strong> "El tratamiento del salón en tu ducha. 35% OFF en Kits seleccionados + 3 cuotas sin interés. El stock vuela, asegurá el tuyo hoy."</span>
+                            <span><strong>Destino:</strong> WooCommerce (Categoría Kits Reventa)</span>
+                        </div>
+                    </div>
+
+                    <!-- Card B2C 3 -->
+                    <div class="creative-card">
+                        <div class="creative-card-header">
+                            <div class="icon-holder" style="background: rgba(139,92,246,0.1); color: var(--solar-purple);">🧩</div>
+                            <h4>Ángulo Interactivo (Test de Rutina)</h4>
+                            <span class="creative-format-badge">REEL / VIDEO SCREENCAST</span>
+                        </div>
+                        <div class="creative-copy-box">
+                            <span><strong>Hook 1:</strong> "¿No sabés qué productos usar para tu tipo de pelo? Dejá de adivinar."</span>
+                            <span><strong>Hook 2:</strong> "El test gratuito que te arma la rutina capilar perfecta en 30 segundos."</span>
+                            <span><strong>Desarrollo:</strong> Grabación de pantalla del celular interactuando con el armador de rutinas de la web y recomendando el kit.</span>
+                            <span><strong>Copy:</strong> "Encontrá la combinación exacta que tu cabello necesita. Hacé nuestro test de rutina en la web en segundos y llevate tu recomendación con descuento especial."</span>
+                            <span><strong>Destino:</strong> URL del Armador de Rutinas en la Web</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Section: Calendar -->
+        <section class="section-box">
+            <div class="section-header">
+                <h2>Calendario Mensual de Ejecución (Fórmula MAGIA)</h2>
+                <p>Cronograma semanal estructurado para guiar al Media Buyer en la optimización y control del presupuesto.</p>
+            </div>
+
+            <div class="calendar-table-wrapper">
+                
+                <!-- Week 1 -->
+                <div class="calendar-week-row">
+                    <div class="week-badge">SEM<br>01</div>
+                    <div class="week-tasks-area">
+                        <h3 class="week-title">Infraestructura & Conexiones (Fase Medir)</h3>
+                        <p class="week-description">Auditoría del píxel de WooCommerce y configuración del bot de ventas personalizado.</p>
+                        <div class="task-list">
+                            <div class="task-item"><div class="task-dot"></div>Configurar Píxel & CAPI en WooCommerce.</div>
+                            <div class="task-item"><div class="task-dot"></div>Simular 3 compras de prueba para validar eventos.</div>
+                            <div class="task-item"><div class="task-dot"></div>Agregar disparadores (payloads) en el Bot Node.js.</div>
+                            <div class="task-item"><div class="task-dot"></div>Crear estructura de campañas en borrador en Meta.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Week 2 -->
+                <div class="calendar-week-row">
+                    <div class="week-badge">SEM<br>02</div>
+                    <div class="week-tasks-area">
+                        <h3 class="week-title">Lanzamiento del Sandbox Creativo (Fase Analizar)</h3>
+                        <p class="week-description">Encendido de la pauta de prueba en broad para detectar anuncios estrella.</p>
+                        <div class="task-list">
+                            <div class="task-item"><div class="task-dot"></div>Encender Campaña 1 (Sandbox ABO) a $1.000 ARS/día.</div>
+                            <div class="task-item"><div class="task-dot"></div>No tocar las campañas por 4 días para juntar data.</div>
+                            <div class="task-item"><div class="task-dot"></div>Medir el Hook Rate (objetivo > 35%) de cada video.</div>
+                            <div class="task-item"><div class="task-dot"></div>Filtrar ads con CPC mayor a $120 ARS.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Week 3 -->
+                <div class="calendar-week-row">
+                    <div class="week-badge">SEM<br>03</div>
+                    <div class="week-tasks-area">
+                        <h3 class="week-title">Graduación y Escala (Fase Generar & Implementar)</h3>
+                        <p class="week-description">Paso de anuncios ganadores del Sandbox a las campañas de escala Broad.</p>
+                        <div class="task-list">
+                            <div class="task-item"><div class="task-dot"></div>Identificar creativos ganadores y extraer su Post ID.</div>
+                            <div class="task-item"><div class="task-dot"></div>Encender Campaña 2 (ASC B2C) y Campaña 3 (B2B WhatsApp).</div>
+                            <div class="task-item"><div class="task-dot"></div>Monitorear el Costo por Compra (CPA) objetivo en la web.</div>
+                            <div class="task-item"><div class="task-dot"></div>Verificar derivaciones automáticas del bot al CRM.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Week 4 -->
+                <div class="calendar-week-row">
+                    <div class="week-badge">SEM<br>04</div>
+                    <div class="week-tasks-area">
+                        <h3 class="week-title">Ajustes & Control de ROAS (Fase Ajustar)</h3>
+                        <p class="week-description">Monitoreo de retorno de inversión real y reemplazo de fatiga creativa.</p>
+                        <div class="task-list">
+                            <div class="task-item"><div class="task-dot"></div>Calcular ROAS (Retorno objetivo > 5.0x).</div>
+                            <div class="task-item"><div class="task-dot"></div>Pausar ads en escala que sufran fatiga (baja de CTR).</div>
+                            <div class="task-item"><div class="task-dot"></div>Rebalancear presupuestos (ej. pasar 5% de B2C a B2B si rinde más).</div>
+                            <div class="task-item"><div class="task-dot"></div>Hacer limpieza de comentarios en los anuncios activos.</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Section: Rules of the Game -->
+        <section class="section-box">
+            
+            <div class="section-header">
+                <h2>Reglas de Oro del Media Buying</h2>
+                <p>Políticas estrictas de optimización y comunicación para asegurar un ROI saludable.</p>
+            </div>
+
+            <div class="rules-grid">
+                
+                <!-- Rule 1: Lo que NO se debe hacer -->
+                <div class="rules-card">
+                    <div class="rules-icon">🛑</div>
+                    <div class="rules-content">
+                        <h3>Lo que NO debemos hacer</h3>
+                        <p><strong>No usar la palabra "Gratis" en B2B:</strong> Atraerá peluqueros sin intenciones de compra real y saturará al bot y a los comerciales inútilmente.</p>
+                        <p style="margin-top: 0.5rem;"><strong>No tocar las campañas de Escala:</strong> La edición de anuncios activos en escala reinicia el aprendizaje de Meta y daña el rendimiento. Todo cambio se valida en el Sandbox.</p>
+                    </div>
+                </div>
+
+                <!-- Rule 2: Lo que SÍ debemos hacer -->
+                <div class="rules-card rules-positive">
+                    <div class="rules-icon">🛡️</div>
+                    <div class="rules-content">
+                        <h3>Lo que SÍ debemos hacer</h3>
+                        <p><strong>Exclusiones estrictas:</strong> Excluir a clientes mayoristas y salones de las campañas minoristas B2C para no canibalizar la pauta.</p>
+                        <p style="margin-top: 0.5rem;"><strong>Pre-calificación en WhatsApp:</strong> Configurar el bot de ventas Node.js con palabras clave específicas que automaticen el filtrado e identifiquen estilistas en segundos.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Section: Glossary -->
+        <section class="section-box">
+            <div class="section-header">
+                <h2>📖 Diccionario de Métricas y Conceptos "En Criollo"</h2>
+                <p>Explicaciones sencillas de los términos técnicos de la estrategia para que todo el equipo esté alineado.</p>
+            </div>
+
+            <div class="glossary-grid">
+                
+                <!-- CBO -->
+                <div class="glossary-card">
+                    <div class="glossary-card-header">
+                        <h4>CBO / ABO</h4>
+                        <span>Presupuestos</span>
+                    </div>
+                    <p class="glossary-criollo-box">
+                        <strong>CBO (Campaña):</strong> Meta maneja la billetera y reparte la plata entre los anuncios según rinden.<br>
+                        <strong>ABO (Conjunto):</strong> Control manual total, vos definís el presupuesto exacto por anuncio.
+                    </p>
+                </div>
+
+                <!-- Broad -->
+                <div class="glossary-card">
+                    <div class="glossary-card-header">
+                        <h4>Broad</h4>
+                        <span>Público Abierto</span>
+                    </div>
+                    <p class="glossary-criollo-box">
+                        <strong>Tirar la red al mar sin mirar.</strong> No usás segmentaciones de interés. Dejás que el video filtre al público ideal por sí solo.
+                    </p>
+                </div>
+
+                <!-- Sandbox -->
+                <div class="glossary-card">
+                    <div class="glossary-card-header">
+                        <h4>Sandbox</h4>
+                        <span>Campaña de Pruebas</span>
+                    </div>
+                    <p class="glossary-criollo-box">
+                        <strong>El laboratorio.</strong> Una campaña barata separada para validar qué videos gustan más, sin arriesgar el presupuesto principal.
+                    </p>
+                </div>
+
+                <!-- ASC -->
+                <div class="glossary-card">
+                    <div class="glossary-card-header">
+                        <h4>Advantage+ Shopping (ASC)</h4>
+                        <span>Piloto Automático B2C</span>
+                    </div>
+                    <p class="glossary-criollo-box">
+                        <strong>Inteligencia Artificial</strong> de Meta optimizada para buscar compradores en tu e-commerce sin que tengas que configurar audiencias.
+                    </p>
+                </div>
+
+                <!-- CAPI -->
+                <div class="glossary-card">
+                    <div class="glossary-card-header">
+                        <h4>Conversions API (CAPI)</h4>
+                        <span>Chismoso del Servidor</span>
+                    </div>
+                    <p class="glossary-criollo-box">
+                        Avisa a Meta sobre las ventas directamente desde WordPress, saltándose bloqueadores de anuncios y bloqueos de iOS 14+.
+                    </p>
+                </div>
+
+                <!-- UGC -->
+                <div class="glossary-card">
+                    <div class="glossary-card-header">
+                        <h4>UGC</h4>
+                        <span>Contenido Casero</span>
+                    </div>
+                    <p class="glossary-criollo-box">
+                        Un video grabado con el celular que <strong>parece de un cliente real</strong> recomendando tu producto, generando más confianza.
+                    </p>
+                </div>
+
+                <!-- Hook Rate -->
+                <div class="glossary-card">
+                    <div class="glossary-card-header">
+                        <h4>Hook & Hook Rate</h4>
+                        <span>El "Frena-dedos"</span>
+                    </div>
+                    <p class="glossary-criollo-box">
+                        <strong>Hook:</strong> Los primeros 3 segundos del video.<br>
+                        <strong>Hook Rate:</strong> Porcentaje de personas que vieron el anuncio y decidieron quedarse a verlo.
+                    </p>
+                </div>
+
+                <!-- Hold Rate -->
+                <div class="glossary-card">
+                    <div class="glossary-card-header">
+                        <h4>Hold Rate</h4>
+                        <span>Retención</span>
+                    </div>
+                    <p class="glossary-criollo-box">
+                        Mide qué tan entretenido es el video calculando cuánta gente se quedó a mirarlo hasta el segundo 15.
+                    </p>
+                </div>
+
+                <!-- ROAS -->
+                <div class="glossary-card">
+                    <div class="glossary-card-header">
+                        <h4>ROAS</h4>
+                        <span>Retorno de Inversión</span>
+                    </div>
+                    <p class="glossary-criollo-box">
+                        <strong>El multiplicador.</strong> Si ponés $1 en pauta y vendés $5 en la web, tu ROAS es de 5.0.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 Planificación de Pauta Publicitaria para <strong>Dos Soles Distribuidora</strong>. Desarrollado por Antigravity AI.</p>
+        </footer>
+
+    </main>
+
+    <!-- JavaScript to handle tabs -->
+    <script>
+        function switchTab(tabId) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show target content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Add active class to clicked button
+            const activeBtn = Array.from(buttons).find(btn => btn.getAttribute('onclick').includes(tabId));
+            if (activeBtn) activeBtn.classList.add('active');
+        }
+    </script>
+</body>
+</html>

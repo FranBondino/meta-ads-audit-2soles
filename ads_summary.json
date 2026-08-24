@@ -1,0 +1,207 @@
+{
+  "accountInsights": [
+    {
+      "spend": "529288.59",
+      "impressions": "211864",
+      "reach": "68989",
+      "clicks": "5967",
+      "cpc": "88.702629",
+      "ctr": "2.816429",
+      "date_start": "2026-02-01",
+      "date_stop": "2026-07-02"
+    }
+  ],
+  "monthlyBreakdown": [
+    {
+      "spend": "12155.93",
+      "impressions": "4161",
+      "clicks": "145",
+      "ctr": "3.484739",
+      "cpc": "83.834",
+      "date_start": "2026-02-01",
+      "date_stop": "2026-02-28"
+    },
+    {
+      "spend": "172988.48",
+      "impressions": "77441",
+      "clicks": "2104",
+      "ctr": "2.716907",
+      "cpc": "82.218859",
+      "date_start": "2026-03-01",
+      "date_stop": "2026-03-31"
+    },
+    {
+      "spend": "169313.82",
+      "impressions": "62076",
+      "clicks": "1633",
+      "ctr": "2.630646",
+      "cpc": "103.682682",
+      "date_start": "2026-04-01",
+      "date_stop": "2026-04-30"
+    },
+    {
+      "spend": "174830.36",
+      "impressions": "68186",
+      "clicks": "2085",
+      "ctr": "3.057812",
+      "cpc": "83.851492",
+      "date_start": "2026-05-01",
+      "date_stop": "2026-05-31"
+    }
+  ],
+  "campaignsList": [
+    {
+      "id": "120242751389540593",
+      "name": "Conversion - evento compra a pagina web",
+      "status": "PAUSED"
+    },
+    {
+      "id": "120240934489910593",
+      "name": "Conversion a WhatsApp - trafico frio B2B",
+      "status": "PAUSED"
+    },
+    {
+      "id": "120240887374240593",
+      "name": "Conversion a pagina web - trafico frio",
+      "status": "PAUSED"
+    },
+    {
+      "id": "120227314939100593",
+      "name": "Ventas - Packs Matrix",
+      "status": "PAUSED"
+    },
+    {
+      "id": "120227305202320593",
+      "name": "Ventas - Vitamino Spectrum",
+      "status": "PAUSED"
+    },
+    {
+      "id": "120224405060460593",
+      "name": "Tráfico - Hot Sale",
+      "status": "PAUSED"
+    },
+    {
+      "id": "120224398718080593",
+      "name": "Ventas - ¡Hot Sale!",
+      "status": "PAUSED"
+    },
+    {
+      "id": "120222505065790593",
+      "name": "Tráfico - Página Web",
+      "status": "PAUSED"
+    },
+    {
+      "id": "120222360702710593",
+      "name": "Venta - Promo Truss",
+      "status": "PAUSED"
+    },
+    {
+      "id": "120208769549300593",
+      "name": "Publicación de Instagram: Tratamiento TRUSS...",
+      "status": "PAUSED"
+    },
+    {
+      "id": "120208017189730593",
+      "name": "Instagram Post",
+      "status": "PAUSED"
+    },
+    {
+      "id": "120207450875780593",
+      "name": "Publicación de Instagram: ¿Conocías esta técnica...",
+      "status": "PAUSED"
+    },
+    {
+      "id": "23857510488180592",
+      "name": "Publicación de Instagram: 🤍 Servicio Metal Detox...",
+      "status": "PAUSED"
+    },
+    {
+      "id": "23852532252550592",
+      "name": "Balayage (colaboración ME y DOS SOLES)",
+      "status": "PAUSED"
+    },
+    {
+      "id": "23848139338790592",
+      "name": "Publicación de Instagram: 📍SORTEO DÍA DEL...",
+      "status": "PAUSED"
+    },
+    {
+      "id": "23847646335590592",
+      "name": "Publicación de Instagram: GRAN SORTEO MES...",
+      "status": "PAUSED"
+    },
+    {
+      "id": "23847582433130592",
+      "name": "Publicación de Instagram: 📍 Ya abrimos nuestra...",
+      "status": "PAUSED"
+    },
+    {
+      "id": "23846324390270592",
+      "name": "Publicación de Instagram: GRAN SORTEO DE FIN DE...",
+      "status": "PAUSED"
+    },
+    {
+      "id": "23845811857910592",
+      "name": "Publicación de Instagram: 📍GRAN SORTEO DÍA DE LA...",
+      "status": "PAUSED"
+    },
+    {
+      "id": "23843775431380592",
+      "name": "Publicación APLICAx2 (3)",
+      "status": "PAUSED"
+    },
+    {
+      "id": "23843775360950592",
+      "name": "Publicación APLICAx2 (2)",
+      "status": "PAUSED"
+    },
+    {
+      "id": "23843775351950592",
+      "name": "Publicación APLICAx2 (1)",
+      "status": "PAUSED"
+    },
+    {
+      "id": "23843523567690592",
+      "name": "Agosto.VideoDeposito.19",
+      "status": "PAUSED"
+    }
+  ],
+  "campaignInsights": [
+    {
+      "campaign_id": "120240887374240593",
+      "campaign_name": "Conversion a pagina web - trafico frio",
+      "spend": "70241.46",
+      "impressions": "24276",
+      "reach": "9773",
+      "clicks": "896",
+      "cpc": "78.394487",
+      "ctr": "3.690888",
+      "date_start": "2026-02-01",
+      "date_stop": "2026-07-02"
+    },
+    {
+      "campaign_id": "120240934489910593",
+      "campaign_name": "Conversion a WhatsApp - trafico frio B2B",
+      "spend": "366905.59",
+      "impressions": "165022",
+      "reach": "51753",
+      "clicks": "3998",
+      "cpc": "91.772284",
+      "ctr": "2.422707",
+      "date_start": "2026-02-01",
+      "date_stop": "2026-07-02"
+    },
+    {
+      "campaign_id": "120242751389540593",
+      "campaign_name": "Conversion - evento compra a pagina web",
+      "spend": "92141.54",
+      "impressions": "22566",
+      "reach": "8701",
+      "clicks": "1073",
+      "cpc": "85.872824",
+      "ctr": "4.754941",
+      "date_start": "2026-02-01",
+      "date_stop": "2026-07-02"
+    }
+  ]
+}

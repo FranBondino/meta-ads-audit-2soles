@@ -1,5 +1,21 @@
-const ACCESS_TOKEN = "EAAOCXeSxZAZCcBRqY7tmGyc0jFWxedW6aFP3yXV8kilO33aBny9YfWMYhxiVcWWW92WSiDl7PlEWrEMdZCCkcZAYevYwhK5oUfiyOMJ7mrF9x5yRdFcqx0PbiOiLltFWURK4xaL8FfKKMghQ87frRikI9nj9TomeZABAc67abMn6BVuoFExJJ19R1CBUE3WkdCqmXVwFLZBk2ZA1xc9TV9jfSiHYx8VwI8znMWYjgZDZD";
-const PAGE_ID = "406051269418159";
+const fs = require('fs');
+const path = require('path');
+
+// Resolver configuración
+let accountArg = process.argv[2] || 'dos_soles';
+let configPath = accountArg;
+if (!accountArg.endsWith('.json')) {
+  configPath = path.join(__dirname, 'configs', `${accountArg}.json`);
+}
+
+if (!fs.existsSync(configPath)) {
+  console.error(`❌ Archivo de configuración no encontrado en: ${configPath}`);
+  process.exit(1);
+}
+
+const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+const ACCESS_TOKEN = config.ACCESS_TOKEN;
+const PAGE_ID = config.PAGE_ID;
 
 async function runFB() {
   try {
