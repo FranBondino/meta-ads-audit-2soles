@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plan de Rodaje & Estrategia de Contenidos - Día del Peluquero | Dos Soles</title>
+    <title>Master Guide: Rodaje, Contenidos & Estrategia Collab - Día del Peluquero | Dos Soles</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,24 +15,25 @@
            VARIABLES & DESIGN SYSTEM (Theme: Dos Soles Solar Dark)
            =========================================== */
         :root {
-            --bg-base: #09080e;
-            --bg-surface: #120f1d;
-            --bg-card: rgba(23, 19, 36, 0.75);
-            --bg-card-hover: rgba(32, 27, 50, 0.9);
+            --bg-base: #08070d;
+            --bg-surface: #100d1a;
+            --bg-card: rgba(20, 16, 32, 0.8);
+            --bg-card-hover: rgba(28, 23, 44, 0.95);
             
             --text-main: #f8fafc;
             --text-secondary: #94a3b8;
             --text-muted: #64748b;
             
-            /* Solar Dos Soles Accents */
+            /* Solar Dos Soles Brand Accents */
             --solar-gold: #f5a623;
             --solar-gold-light: #ffd27d;
             --solar-crimson: #e03e3e;
             --solar-purple: #8b5cf6;
             --solar-emerald: #10b981;
             --solar-cyan: #06b6d4;
+            --solar-pink: #ec4899;
             
-            --solar-gold-glow: rgba(245, 166, 35, 0.15);
+            --solar-gold-glow: rgba(245, 166, 35, 0.18);
             --solar-crimson-glow: rgba(224, 62, 62, 0.15);
             --solar-purple-glow: rgba(139, 92, 246, 0.15);
             
@@ -48,8 +49,8 @@
             --radius-lg: 20px;
             --radius-xl: 28px;
             
-            --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-            --shadow-glow: 0 0 35px var(--solar-gold-glow);
+            --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+            --shadow-glow: 0 0 40px var(--solar-gold-glow);
         }
 
         * {
@@ -104,12 +105,12 @@
 
         /* Container Document (PDF-like card wrapper) */
         .doc-container {
-            max-width: 1080px;
+            max-width: 1100px;
             margin: 0 auto;
             background: var(--bg-surface);
             border: 1px solid var(--border-subtle);
             border-radius: var(--radius-xl);
-            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), var(--shadow-glow);
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.85), var(--shadow-glow);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
             overflow: hidden;
@@ -122,12 +123,12 @@
             justify-content: space-between;
             align-items: center;
             padding: 1.25rem 2.5rem;
-            background: rgba(14, 11, 24, 0.95);
+            background: rgba(12, 10, 20, 0.95);
             border-bottom: 1px solid var(--border-subtle);
             position: sticky;
             top: 0;
             z-index: 100;
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(15px);
         }
 
         .action-logo {
@@ -142,14 +143,14 @@
         }
 
         .sun-badge {
-            width: 28px;
-            height: 28px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--solar-gold), var(--solar-crimson));
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 15px rgba(245, 166, 35, 0.4);
+            box-shadow: 0 0 15px rgba(245, 166, 35, 0.5);
         }
 
         .sun-badge svg {
@@ -163,23 +164,23 @@
             align-items: center;
             gap: 0.5rem;
             background: linear-gradient(135deg, var(--solar-gold), #e69516);
-            color: #09080e;
+            color: #08070d;
             font-family: var(--font-display);
             font-weight: 700;
             font-size: 0.85rem;
-            padding: 0.6rem 1.2rem;
+            padding: 0.65rem 1.3rem;
             border-radius: 50px;
             border: none;
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             transition: all 0.25s ease;
-            box-shadow: 0 4px 15px rgba(245, 166, 35, 0.3);
+            box-shadow: 0 4px 15px rgba(245, 166, 35, 0.35);
         }
 
         .btn-print:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(245, 166, 35, 0.45);
+            box-shadow: 0 6px 22px rgba(245, 166, 35, 0.5);
             background: linear-gradient(135deg, #ffb43b, var(--solar-gold));
         }
 
@@ -197,14 +198,14 @@
             flex-direction: column;
             gap: 1.2rem;
             border-bottom: 1px solid var(--border-subtle);
-            padding-bottom: 2rem;
+            padding-bottom: 2.25rem;
         }
 
         .doc-tag {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.35rem 0.85rem;
+            padding: 0.4rem 0.95rem;
             border-radius: 50px;
             background: rgba(245, 166, 35, 0.1);
             border: 1px solid rgba(245, 166, 35, 0.25);
@@ -219,11 +220,11 @@
 
         .doc-title {
             font-family: var(--font-display);
-            font-size: clamp(2rem, 3.8vw, 2.75rem);
+            font-size: clamp(2.1rem, 4vw, 2.9rem);
             font-weight: 900;
             letter-spacing: -0.03em;
             line-height: 1.15;
-            background: linear-gradient(135deg, #ffffff 40%, #cbd5e1 100%);
+            background: linear-gradient(135deg, #ffffff 30%, #cbd5e1 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -231,8 +232,8 @@
         .doc-subtitle {
             font-size: 1.05rem;
             color: var(--text-secondary);
-            max-width: 850px;
-            line-height: 1.5;
+            max-width: 900px;
+            line-height: 1.55;
         }
 
         /* Metadata Grid Box */
@@ -270,6 +271,7 @@
         .meta-val.gold { color: var(--solar-gold); }
         .meta-val.purple { color: var(--solar-purple); }
         .meta-val.cyan { color: var(--solar-cyan); }
+        .meta-val.pink { color: var(--solar-pink); }
 
         /* Section Headings */
         .section-title-wrap {
@@ -280,8 +282,8 @@
         }
 
         .section-icon {
-            width: 38px;
-            height: 38px;
+            width: 40px;
+            height: 40px;
             border-radius: var(--radius-sm);
             background: rgba(245, 166, 35, 0.1);
             border: 1px solid rgba(245, 166, 35, 0.2);
@@ -289,12 +291,12 @@
             align-items: center;
             justify-content: center;
             color: var(--solar-gold);
-            font-size: 1.15rem;
+            font-size: 1.2rem;
         }
 
         .section-title {
             font-family: var(--font-display);
-            font-size: 1.5rem;
+            font-size: 1.55rem;
             font-weight: 800;
             letter-spacing: -0.02em;
             color: #ffffff;
@@ -305,10 +307,10 @@
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
             border-radius: var(--radius-lg);
-            padding: 1.75rem;
+            padding: 1.85rem;
             display: flex;
             flex-direction: column;
-            gap: 1.25rem;
+            gap: 1.35rem;
             position: relative;
             overflow: hidden;
         }
@@ -335,8 +337,8 @@
             font-family: var(--font-mono);
             font-size: 0.7rem;
             font-weight: 600;
-            padding: 0.25rem 0.65rem;
-            border-radius: 4px;
+            padding: 0.3rem 0.75rem;
+            border-radius: 6px;
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
@@ -371,6 +373,12 @@
             border: 1px solid rgba(6, 182, 212, 0.25);
         }
 
+        .badge-pink {
+            background: rgba(236, 72, 153, 0.12);
+            color: var(--solar-pink);
+            border: 1px solid rgba(236, 72, 153, 0.25);
+        }
+
         /* Hook Box */
         .hook-box {
             background: rgba(245, 166, 35, 0.04);
@@ -383,7 +391,7 @@
         }
 
         .hook-label {
-            font-size: 0.7rem;
+            font-size: 0.72rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.08em;
@@ -399,13 +407,13 @@
 
         /* Script Dialogue / Voiceover box */
         .script-box {
-            background: rgba(0, 0, 0, 0.35);
+            background: rgba(0, 0, 0, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.04);
             border-radius: var(--radius-md);
-            padding: 1.25rem;
+            padding: 1.35rem;
             display: flex;
             flex-direction: column;
-            gap: 0.75rem;
+            gap: 0.85rem;
         }
 
         .script-label {
@@ -422,20 +430,20 @@
         .script-text {
             font-size: 0.92rem;
             color: #e2e8f0;
-            line-height: 1.6;
+            line-height: 1.65;
         }
 
         .dialogue-item {
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.65rem;
             display: flex;
             flex-direction: column;
-            gap: 0.15rem;
+            gap: 0.2rem;
         }
 
         .dialogue-speaker {
             font-family: var(--font-display);
             font-weight: 700;
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             color: var(--solar-gold);
         }
 
@@ -449,7 +457,7 @@
             overflow-x: auto;
             border: 1px solid var(--border-subtle);
             border-radius: var(--radius-md);
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.25);
         }
 
         table {
@@ -460,7 +468,7 @@
         }
 
         th {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.035);
             color: var(--text-secondary);
             font-family: var(--font-display);
             font-weight: 700;
@@ -497,7 +505,7 @@
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--border-subtle);
             border-radius: var(--radius-md);
-            padding: 0.85rem 1.1rem;
+            padding: 0.9rem 1.15rem;
             display: flex;
             align-items: flex-start;
             gap: 0.75rem;
@@ -646,9 +654,9 @@
             
             <!-- Hero Title Block -->
             <section class="doc-hero">
-                <div class="doc-tag">Plan Operativo de Contenidos & Rodaje (Actualizado)</div>
+                <div class="doc-tag">Master Plan de Rodaje & Estrategia Integral</div>
                 <h1 class="doc-title">Masterclass L'Oréal & Festejo: Día del Peluquero</h1>
-                <p class="doc-subtitle">Estrategia integral de captura audiovisual: cobertura reportaje en recepción, masterclass técnica Keratin Alpha Sleek, dinámicas interactivas B2B y puente de venta minorista en e-commerce B2C.</p>
+                <p class="doc-subtitle">Estrategia audiovisual 360°: cobertura reportaje en alfombra roja, masterclass técnica Keratin Alpha Sleek, dinámicas comunitarias B2B, puente de venta e-commerce B2C y protocolo de Collab con la Técnica Oficial de Bs. As.</p>
                 
                 <!-- Metadata Grid -->
                 <div class="meta-grid">
@@ -657,12 +665,16 @@
                         <span class="meta-val gold">Martes 25 de Agosto</span>
                     </div>
                     <div class="meta-item">
-                        <span class="meta-label">Horario de Cobertura</span>
-                        <span class="meta-val cyan">09:00 a 12:00 hs (3 horas)</span>
+                        <span class="meta-label">Horario Completo</span>
+                        <span class="meta-val cyan">09:00 a 12:00 hs (3 Horas)</span>
                     </div>
                     <div class="meta-item">
-                        <span class="meta-label">Tratamiento Estrella</span>
+                        <span class="meta-label">Tratamiento Oficial</span>
                         <span class="meta-val purple">Keratin Alpha Sleek (L'Oréal)</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Estrategia Especial</span>
+                        <span class="meta-val pink">Instagram Collab Oficial</span>
                     </div>
                     <div class="meta-item">
                         <span class="meta-label">Equipo en Piso</span>
@@ -671,11 +683,74 @@
                 </div>
             </section>
 
-            <!-- Section 0: NUEVO FORMATO REPORTAJE EN ENTRADA -->
+            <!-- Section 0: PAQUETE DE ENTREGABLES POST-EVENTO -->
+            <section>
+                <div class="section-title-wrap">
+                    <div class="section-icon">📦</div>
+                    <h2 class="section-title">0. El Paquete de Contenidos a Editar (6 Piezas Clave)</h2>
+                </div>
+
+                <div class="card">
+                    <p style="font-size: 0.92rem; color: var(--text-secondary);">De esta jornada de 3 horas se extrae material para alimentar el calendario de publicaciones de las próximas semanas:</p>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Pieza / Reel</th>
+                                    <th>Fecha Sugerida</th>
+                                    <th>Enfoque / Público</th>
+                                    <th>Objetivo Comercial</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1. Reel Comunitario («¡DOS SOLES!»)</strong></td>
+                                    <td>Martes 25 (Noche)</td>
+                                    <td>Comunidad Estilistas B2B</td>
+                                    <td>Viralidad inmediata y reposteos masivos de todos los asistentes.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2. Reel Reportaje de Llegada</strong></td>
+                                    <td>Miércoles 26</td>
+                                    <td>B2B Salones / Institucional</td>
+                                    <td>Humanizar la marca, mostrar la procedencia y la calidez de Dos Soles.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3. Reel Masterclass Técnica (COLLAB)</strong></td>
+                                    <td>Jueves 27 / Viernes 28</td>
+                                    <td>B2B Salones + Collab Técnica</td>
+                                    <td>Autoridad técnica oficial y venta de cupos para futuras capacitaciones.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>4. Reel Viral / Transición con Emi</strong></td>
+                                    <td>Domingo 30</td>
+                                    <td>Alcance Masivo / TikTok</td>
+                                    <td>Impacto visual de transformación (frizz rebelde vs. liquid hair).</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>5. Reel E-commerce B2C ("Salón en Casa")</strong></td>
+                                    <td>Semana siguiente</td>
+                                    <td>Consumidor Final B2C</td>
+                                    <td>Venta directa de kits de mantenimiento en WooCommerce.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>6. Reel Trivia App & Podio</strong></td>
+                                    <td>Semana siguiente</td>
+                                    <td>B2B Comunidad</td>
+                                    <td>Mostrar lo moderno y divertido que es capacitarse en Dos Soles.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 1: NUEVO FORMATO REPORTAJE EN ENTRADA -->
             <section>
                 <div class="section-title-wrap">
                     <div class="section-icon">🎙️</div>
-                    <h2 class="section-title">0. Formato Reportaje: Llegada & Expectativas (09:00 a 09:30 hs)</h2>
+                    <h2 class="section-title">1. Formato Reportaje: Llegada & Expectativas (09:00 a 09:30 hs)</h2>
                 </div>
 
                 <div class="card">
@@ -752,11 +827,11 @@
                 </div>
             </section>
 
-            <!-- Section 1: Configuración de Cámara & Audio -->
+            <!-- Section 2: Configuración de Cámara & Audio -->
             <section>
                 <div class="section-title-wrap">
                     <div class="section-icon">⚙️</div>
-                    <h2 class="section-title">1. Configuración de Cámara & Audio (Mobile 9:16)</h2>
+                    <h2 class="section-title">2. Configuración de Cámara & Audio (Mobile 9:16)</h2>
                 </div>
 
                 <div class="card">
@@ -801,11 +876,11 @@
                 </div>
             </section>
 
-            <!-- Section 2: Cronograma de Stories en Tiempo Real -->
+            <!-- Section 3: Cronograma de Stories en Tiempo Real -->
             <section>
                 <div class="section-title-wrap">
                     <div class="section-icon">📱</div>
-                    <h2 class="section-title">2. Estrategia de Publicación: Stories en Tiempo Real</h2>
+                    <h2 class="section-title">3. Estrategia de Publicación: Stories en Tiempo Real</h2>
                 </div>
 
                 <div class="card">
@@ -871,11 +946,11 @@
 
             <div class="page-break"></div>
 
-            <!-- Section 3: Reel 1 - Masterclass L'Oreal (Paso a Paso) -->
+            <!-- Section 4: Reel 1 - Masterclass L'Oreal (Paso a Paso) -->
             <section>
                 <div class="section-title-wrap">
                     <div class="section-icon">🧪</div>
-                    <h2 class="section-title">3. REEL 1: "Así se vive una Capacitación en Dos Soles"</h2>
+                    <h2 class="section-title">4. REEL TÉCNICO: "Paso a Paso Keratin Alpha Sleek" (Candidato a Collab)</h2>
                 </div>
 
                 <div class="card">
@@ -952,11 +1027,62 @@
                 </div>
             </section>
 
-            <!-- Section 4: NUEVA SECCIÓN PUENTE E-COMMERCE B2C -->
+            <!-- Section 5: ESTRATEGIA INSTAGRAM COLLAB CON LA TÉCNICA -->
+            <section>
+                <div class="section-title-wrap">
+                    <div class="section-icon">🤝</div>
+                    <h2 class="section-title">5. Estrategia de Collab (Publicación Compartida en Instagram)</h2>
+                </div>
+
+                <div class="card">
+                    <div class="card-header-row">
+                        <div>
+                            <h3 style="font-family: var(--font-display); font-size: 1.2rem; color: #fff;">Cómo y Por Qué Co-Publicar con la Técnica de L'Oréal</h3>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary);">Una "Instagram Collab" comparte el Reel en el feed de Dos Soles Y en el perfil de la Técnica a la vez, multiplicando el alcance.</p>
+                        </div>
+                        <span class="card-badge badge-pink">Estrategia de Alianza Oficial</span>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 1.2rem;">
+                        
+                        <!-- Collab Option 1 -->
+                        <div class="script-box">
+                            <span class="dialogue-speaker" style="color: var(--solar-pink);">OPCIÓN 1: Reel Técnico Keratin Alpha Sleek (Recomendada)</span>
+                            <p class="dialogue-content" style="font-size: 0.88rem; margin-top: 0.35rem;">
+                                • <strong>Por qué le encanta a ella:</strong> Muestra su trabajo como educadora con calidad cinematográfica (4K, cámara lenta, macro de planchado) para su propio portfolio.<br>
+                                • <strong>Copy conjunto sugerido:</strong><br>
+                                <em>«Junto a [@UsuarioDeLaTecnica] y @lorealpro vivimos una jornada técnica increíble en @dossoles aplicando el protocolo oficial de Keratin Alpha Sleek. Mirá el paso a paso para lograr este brillo espejo y control total del frizz ✨✂️»</em>
+                            </p>
+                        </div>
+
+                        <!-- Collab Option 2 -->
+                        <div class="script-box">
+                            <span class="dialogue-speaker" style="color: var(--solar-pink);">OPCIÓN 2: Cápsula "Tip Pro de la Técnica Oficial"</span>
+                            <p class="dialogue-content" style="font-size: 0.88rem; margin-top: 0.35rem;">
+                                • <strong>Por qué funciona:</strong> La técnica habla a cámara dando un consejo exclusivo para salones (*"El error más común al hacer queratinas y cómo evitarlo"*).<br>
+                                • <strong>Impacto:</strong> Valida a Dos Soles como el distribuidor de referencia oficial en la región.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <!-- Protocol in salon -->
+                    <div style="background: rgba(236, 72, 153, 0.05); border: 1px solid rgba(236, 72, 153, 0.25); border-radius: var(--radius-md); padding: 1.25rem;">
+                        <h4 style="font-family: var(--font-display); color: #fff; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem;">📋 Protocolo en Piso para Coordinar la Collab (Qué hacer mañana):</h4>
+                        <ol style="margin-left: 1.2rem; font-size: 0.88rem; color: #cbd5e1; display: flex; flex-direction: column; gap: 0.4rem;">
+                            <li><strong>Pedirle su Instagram:</strong> Anotate su usuario exacto de Instagram profesional (ej. <code>@nombre.educadora</code>).</li>
+                            <li><strong>Hacerle la propuesta en el break:</strong> <em>«Te vamos a editar un Reel súper cuidado con las tomas macro de tu trabajo y el resultado en Emi para invitarte como colaboradora y que salga en tu perfil también, ¿te parece?»</em></li>
+                            <li><strong>Grabarla 15 segundos despidiéndose:</strong> <em>«Hola comunidad, un placer haber venido a capacitar a los estilistas de Dos Soles en su día. Nos vemos en la próxima masterclass.»</em></li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: PUENTE E-COMMERCE B2C -->
             <section>
                 <div class="section-title-wrap">
                     <div class="section-icon">🛍️</div>
-                    <h2 class="section-title">4. Puente de Venta E-commerce B2C: "El Secreto de Salón en tu Casa"</h2>
+                    <h2 class="section-title">6. Puente de Venta E-commerce B2C: "El Secreto de Salón en tu Casa"</h2>
                 </div>
 
                 <div class="card">
@@ -988,11 +1114,11 @@
                 </div>
             </section>
 
-            <!-- Section 5: Reel 2 - Dia del Peluquero Comunitario -->
+            <!-- Section 7: Reel 2 - Dia del Peluquero Comunitario -->
             <section>
                 <div class="section-title-wrap">
                     <div class="section-icon">🎤</div>
-                    <h2 class="section-title">5. REEL 2: "Día del Peluquero" (Ping-Pong + Clímax «¡DOS SOLES!»)</h2>
+                    <h2 class="section-title">7. REEL 2: "Día del Peluquero" (Ping-Pong + Clímax «¡DOS SOLES!»)</h2>
                 </div>
 
                 <div class="card">
@@ -1045,11 +1171,11 @@
 
             <div class="page-break"></div>
 
-            <!-- Section 6: Reel 3 & Dinamica Trivia App -->
+            <!-- Section 8: Trivia App & Transición Emi -->
             <section>
                 <div class="section-title-wrap">
                     <div class="section-icon">🏆</div>
-                    <h2 class="section-title">6. Dinámica de App en Vivo (Trivia & Podio) & Transición Emi</h2>
+                    <h2 class="section-title">8. Dinámica de App en Vivo (Trivia & Podio) & Transición Emi</h2>
                 </div>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
@@ -1086,7 +1212,7 @@
                         <div class="hook-box" style="border-left-color: var(--solar-crimson);">
                             <span class="hook-label" style="color: var(--solar-crimson);">🎬 Dirección de Escena</span>
                             <p class="hook-text" style="font-size: 0.85rem;">
-                                • <strong>Toma A (09:45 hs - Antes):</strong> Emi con pelo natural con frizz, agarra un mechón y lo tira directo a la lente tapándola por completo.<br>
+                                • <strong>Toma A (09:30 hs - Antes):</strong> Emi con pelo natural con frizz, agarra un mechón y lo tira directo a la lente tapándola por completo.<br>
                                 • <strong>Toma B (11:40 hs - Después):</strong> Destape de lente en reversa: Emi con pelo ultra lacio brillante (liquid hair) girando la cabeza en cámara lenta con sonrisa.
                             </p>
                         </div>
@@ -1095,11 +1221,11 @@
                 </div>
             </section>
 
-            <!-- Section 7: Mini-Entrevistas Tecnica Loreal -->
+            <!-- Section 9: Mini-Entrevistas Tecnica Loreal -->
             <section>
                 <div class="section-title-wrap">
                     <div class="section-icon">👩‍🏫</div>
-                    <h2 class="section-title">7. Cápsulas con la Técnica Oficial de L'Oréal (Bs. As.)</h2>
+                    <h2 class="section-title">9. Cápsulas con la Técnica Oficial de L'Oréal (Bs. As.)</h2>
                 </div>
 
                 <div class="card">
@@ -1132,11 +1258,11 @@
                 </div>
             </section>
 
-            <!-- Section 8: Cronograma & Checklist Final Actualizado -->
+            <!-- Section 10: Cronograma & Checklist Final Actualizado -->
             <section>
                 <div class="section-title-wrap">
                     <div class="section-icon">📋</div>
-                    <h2 class="section-title">8. Cronograma Minuto a Minuto & Checklist de Rodaje (09:00 a 12:00 hs)</h2>
+                    <h2 class="section-title">10. Cronograma Minuto a Minuto & Checklist de Rodaje (09:00 a 12:00 hs)</h2>
                 </div>
 
                 <div class="card">
@@ -1167,11 +1293,15 @@
                         </div>
                         <div class="check-item">
                             <div class="check-box"></div>
-                            <div><strong>11:35 a 11:55 hs — Después de Emi & Web B2C:</strong> Toma B transición (liquid hair) + Emi con producto para web + Cápsulas con la técnica.</div>
+                            <div><strong>11:35 a 11:50 hs — Después de Emi & Web B2C:</strong> Toma B transición (liquid hair) + Emi con producto para web + Cápsulas con la técnica.</div>
                         </div>
                         <div class="check-item">
                             <div class="check-box"></div>
-                            <div><strong>11:55 a 12:00 hs — Cierre:</strong> Foto grupal de todo el salón aplaudiendo para portada.</div>
+                            <div><strong>11:50 a 11:55 hs — Coordinación Collab:</strong> Pedir el Instagram oficial a la técnica y grabar su saludo final de 15s.</div>
+                        </div>
+                        <div class="check-item">
+                            <div class="check-box"></div>
+                            <div><strong>11:55 a 12:00 hs — Cierre:</strong> Foto grupal de todo el salón aplaudiendo para portada del posteo.</div>
                         </div>
                     </div>
                 </div>
@@ -1180,7 +1310,7 @@
             <!-- Document Footer -->
             <footer class="doc-footer">
                 <div>Documento de Producción Audiovisual — <strong>Dos Soles Distribuidora</strong></div>
-                <div>Fecha de Emisión: 25 de Agosto | Versión 3.0 Definitiva</div>
+                <div>Fecha de Emisión: 25 de Agosto | Versión 4.0 Definitiva Master</div>
             </footer>
 
         </div>
