@@ -30,6 +30,7 @@
             --solar-crimson: #e03e3e;
             --solar-purple: #8b5cf6;
             --solar-emerald: #10b981;
+            --solar-cyan: #06b6d4;
             
             --solar-gold-glow: rgba(245, 166, 35, 0.15);
             --solar-crimson-glow: rgba(224, 62, 62, 0.15);
@@ -103,7 +104,7 @@
 
         /* Container Document (PDF-like card wrapper) */
         .doc-container {
-            max-width: 1060px;
+            max-width: 1080px;
             margin: 0 auto;
             background: var(--bg-surface);
             border: 1px solid var(--border-subtle);
@@ -230,14 +231,14 @@
         .doc-subtitle {
             font-size: 1.05rem;
             color: var(--text-secondary);
-            max-width: 800px;
+            max-width: 850px;
             line-height: 1.5;
         }
 
         /* Metadata Grid Box */
         .meta-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--border-subtle);
@@ -268,6 +269,7 @@
 
         .meta-val.gold { color: var(--solar-gold); }
         .meta-val.purple { color: var(--solar-purple); }
+        .meta-val.cyan { color: var(--solar-cyan); }
 
         /* Section Headings */
         .section-title-wrap {
@@ -361,6 +363,12 @@
             background: rgba(224, 62, 62, 0.12);
             color: var(--solar-crimson);
             border: 1px solid rgba(224, 62, 62, 0.25);
+        }
+
+        .badge-cyan {
+            background: rgba(6, 182, 212, 0.12);
+            color: var(--solar-cyan);
+            border: 1px solid rgba(6, 182, 212, 0.25);
         }
 
         /* Hook Box */
@@ -638,9 +646,9 @@
             
             <!-- Hero Title Block -->
             <section class="doc-hero">
-                <div class="doc-tag">Plan Operativo de Contenidos & Rodaje</div>
+                <div class="doc-tag">Plan Operativo de Contenidos & Rodaje (Actualizado)</div>
                 <h1 class="doc-title">Masterclass L'Oréal & Festejo: Día del Peluquero</h1>
-                <p class="doc-subtitle">Estrategia integral de captura audiovisual, guiones técnicos, dinámicas participativas y cobertura en tiempo real para posicionar a Dos Soles como la casa referente de la comunidad estilista.</p>
+                <p class="doc-subtitle">Estrategia integral de captura audiovisual: cobertura reportaje en recepción, masterclass técnica Keratin Alpha Sleek, dinámicas interactivas B2B y puente de venta minorista en e-commerce B2C.</p>
                 
                 <!-- Metadata Grid -->
                 <div class="meta-grid">
@@ -650,7 +658,7 @@
                     </div>
                     <div class="meta-item">
                         <span class="meta-label">Horario de Cobertura</span>
-                        <span class="meta-val">10:00 a 12:00 hs</span>
+                        <span class="meta-val cyan">09:00 a 12:00 hs (3 horas)</span>
                     </div>
                     <div class="meta-item">
                         <span class="meta-label">Tratamiento Estrella</span>
@@ -659,6 +667,87 @@
                     <div class="meta-item">
                         <span class="meta-label">Equipo en Piso</span>
                         <span class="meta-val">Fran (Cámara) + Anto (Piso)</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 0: NUEVO FORMATO REPORTAJE EN ENTRADA -->
+            <section>
+                <div class="section-title-wrap">
+                    <div class="section-icon">🎙️</div>
+                    <h2 class="section-title">0. Formato Reportaje: Llegada & Expectativas (09:00 a 09:30 hs)</h2>
+                </div>
+
+                <div class="card">
+                    <div class="card-header-row">
+                        <div>
+                            <h3 style="font-family: var(--font-display); font-size: 1.2rem; color: #fff;">Estilo Periodístico / Alfombra Roja de Peluqueros</h3>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary);">Objetivo: Captar la frescura de la llegada, mostrar la procedencia de los salones y generar contenido dinámico tipo móvil.</p>
+                        </div>
+                        <span class="card-badge badge-cyan">Nuevo Formato Video General</span>
+                    </div>
+
+                    <div class="hook-box" style="border-left-color: var(--solar-cyan);">
+                        <span class="hook-label" style="color: var(--solar-cyan);">🎯 Hook de Apertura a Cámara (Fran o Anto en la entrada)</span>
+                        <p class="hook-text">«Son las 9 de la mañana, es el Día del Peluquero y así van llegando los estilistas a la Masterclass oficial de L'Oréal en Dos Soles... ¡Vamos a ver con qué expectativas vienen!»</p>
+                    </div>
+
+                    <!-- Script Dialogues -->
+                    <div class="script-box">
+                        <div class="script-label">🎤 Preguntas Clave para hacer con el Micrófono en Puerta / Recepción</div>
+                        
+                        <div class="dialogue-item">
+                            <span class="dialogue-speaker">PREGUNTA 1: Procedencia y Salón</span>
+                            <span class="dialogue-content">
+                                • Fran: <em>«¡Hola! ¿Cómo estás? ¿De qué salón y de qué zona venís hoy?»</em><br>
+                                ➔ Peluquero/a: <em>«Vengo de [Nombre del Salón], de [Barrio/Localidad]...»</em>
+                            </span>
+                        </div>
+
+                        <div class="dialogue-item" style="margin-top: 0.6rem;">
+                            <span class="dialogue-speaker">PREGUNTA 2: Expectativas con el Keratin Alpha Sleek</span>
+                            <span class="dialogue-content">
+                                • Fran: <em>«¿Qué es lo que más te interesa aprender o ver del nuevo tratamiento de L'Oréal hoy?»</em><br>
+                                ➔ Peluquero/a: <em>«Vengo a ver cómo se aplica bien para bajar el frizz», «Quiero ver el sellado y cuánto dura», «Aprender técnicas nuevas con la técnica de Bs. As.»</em>
+                            </span>
+                        </div>
+
+                        <div class="dialogue-item" style="margin-top: 0.6rem;">
+                            <span class="dialogue-speaker">PREGUNTA 3: El Festejo del Día del Peluquero</span>
+                            <span class="dialogue-content">
+                                • Fran: <em>«¿Cómo se festeja el Día del Peluquero?»</em><br>
+                                ➔ Peluquero/a: <em>«¡Capacitándonos y compartiendo con colegas en Dos Soles!»</em>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Momento Visual</th>
+                                    <th>Plano / Encuadre</th>
+                                    <th>Consejo de Grabación</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Abrazo y Bienvenida</strong></td>
+                                    <td>Plano Medio (1x)</td>
+                                    <td>Anto recibiendo a los peluqueros con una sonrisa, entregando carpetas/acreditación.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Mesa de Café & Facturas</strong></td>
+                                    <td>Plano Detalle (3x) + Paneo</td>
+                                    <td>Peluqueros charlando con una taza de café en la mano, risas y reencuentro de colegas.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Ubicación en Auditorio</strong></td>
+                                    <td>Plano General (0.5x)</td>
+                                    <td>La gente eligiendo sus sillas, acomodando cuadernos y mirando el escenario con productos L'Oréal.</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </section>
@@ -683,16 +772,16 @@
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td><strong>Reportajes en Puerta & Micrófono</strong></td>
+                                    <td><span class="card-badge badge-cyan">1080p @ 30 FPS</span></td>
+                                    <td>1x Plano Medio</td>
+                                    <td>Audio sincronizado y nítido con el micrófono corbatero / inalámbrico.</td>
+                                </tr>
+                                <tr>
                                     <td><strong>Tratamiento & Planchado</strong></td>
                                     <td><span class="card-badge badge-gold">4K @ 60 FPS</span></td>
                                     <td>1x y 3x Macro (Cerca)</td>
                                     <td>Permite cámara lenta ultrasuave (0.5x) para capturar el brillo espejo y vapor.</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Micrófono & Ping-Pong</strong></td>
-                                    <td><span class="card-badge badge-purple">1080p @ 30 FPS</span></td>
-                                    <td>1x Plano Medio</td>
-                                    <td>Sincronización de labios nítida con micrófono corbatero y menor peso de archivo.</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Transición con Emi</strong></td>
@@ -740,21 +829,21 @@
                                     <td>Caja de preguntas: <em>«¿Cuántos años llevás con la tijera? 👇»</em></td>
                                 </tr>
                                 <tr>
-                                    <td><strong>10:15 hs</strong></td>
+                                    <td><strong>09:15 hs</strong></td>
                                     <td>Video Vivo</td>
-                                    <td>Paneo de auditorio lleno, café de bienvenida y carpetas.</td>
-                                    <td><em>«¡Casa llena! Arrancamos el festejo del Día del Peluquero con la Masterclass oficial de L'Oréal Pro ☕✂️»</em></td>
+                                    <td>Llegada de peluqueros en recepción, café y saludos.</td>
+                                    <td><em>«¡Arrancamos! Recibiendo a los colegas para festejar su día con la Masterclass oficial de L'Oréal Pro ☕✂️»</em></td>
                                     <td>Sticker de Ubicación: <em>Dos Soles Distribuidora</em></td>
                                 </tr>
                                 <tr>
-                                    <td><strong>11:00 hs</strong></td>
+                                    <td><strong>10:30 hs</strong></td>
                                     <td>Video Corto</td>
                                     <td>Clip de 6s de la técnica de Bs. As. aplicando el producto en bacha.</td>
                                     <td><em>«Keratin Alpha Sleek en acción con la técnica oficial de L'Oréal directamente desde Buenos Aires 🧪✨»</em></td>
                                     <td>Sticker de Mención: <code>@lorealpro</code></td>
                                 </tr>
                                 <tr>
-                                    <td><strong>11:45 hs</strong></td>
+                                    <td><strong>11:30 hs</strong></td>
                                     <td>Video Euforia</td>
                                     <td>La ganadora de la app festejando en el podio con el kit.</td>
                                     <td><em>«¡Tenemos ganadora de la trivia L'Oréal! Felicitaciones por ese primer puesto 🎉🎁»</em></td>
@@ -764,7 +853,7 @@
                                     <td><strong>Tarde</strong></td>
                                     <td>Reposteos</td>
                                     <td>Historias compartidas por los estilistas que asistieron.</td>
-                                    <td><em>«Gracias por compartir esta jornada con nosotros 💛✂️»</em></td>
+                                    <td><em>«Gracias por compartir esta hermosa jornada con nosotros 💛✂️»</em></td>
                                     <td>Repostear menciones a <code>@dossoles</code></td>
                                 </tr>
                                 <tr>
@@ -863,11 +952,47 @@
                 </div>
             </section>
 
-            <!-- Section 4: Reel 2 - Dia del Peluquero Comunitario -->
+            <!-- Section 4: NUEVA SECCIÓN PUENTE E-COMMERCE B2C -->
+            <section>
+                <div class="section-title-wrap">
+                    <div class="section-icon">🛍️</div>
+                    <h2 class="section-title">4. Puente de Venta E-commerce B2C: "El Secreto de Salón en tu Casa"</h2>
+                </div>
+
+                <div class="card">
+                    <div class="card-header-row">
+                        <div>
+                            <h3 style="font-family: var(--font-display); font-size: 1.2rem; color: #fff;">Aprovechar el Contenido B2B para Generar Compras en la Web</h3>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary);">Enfoque: Consumidor final que ve el resultado de Emi y quiere comprar la rutina de cuidado en WooCommerce.</p>
+                        </div>
+                        <span class="card-badge badge-emerald">Venta Minorista Web</span>
+                    </div>
+
+                    <div class="hook-box" style="border-left-color: var(--solar-emerald);">
+                        <span class="hook-label" style="color: var(--solar-emerald);">🎯 Hook para Anuncio o Reel B2C</span>
+                        <p class="hook-text">«¿Ves este brillo y control de frizz que logramos en la masterclass? No necesitás ir a la peluquería todas las semanas para tenerlo en tu casa...»</p>
+                    </div>
+
+                    <div class="script-box">
+                        <div class="script-label">🎙️ Guion Adaptado para Venta Web Minorista (B2C)</div>
+                        <p class="script-text">
+                            <em>«Este es el tratamiento anti-frizz que eligen los mejores estilistas del país. Pero la clave para que dure hasta 3 meses está en el cuidado diario en casa.</em><br><br>
+                            <em>En la web de Dos Soles podés conseguir la línea oficial de mantenimiento de L'Oréal Professionnel con envío directo a tu puerta y cuotas sin interés.</em><br><br>
+                            <em>Entrá a <strong>dossoles.com.ar</strong>, hacé el test de rutina y llevate los productos indicados para tu tipo de cabello.»</em>
+                        </p>
+                    </div>
+
+                    <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: var(--radius-md); padding: 1.1rem; font-size: 0.88rem; color: #cbd5e1;">
+                        💡 <strong>Cómo filmarlo mañana:</strong> Aprovechá cuando Emi tenga el pelo terminado y hacé una toma sosteniendo el shampoo y la máscara de mantenimiento de L'Oréal en la mano con una sonrisa mirando a cámara. Ese plano de 3 segundos es el que remata la venta web.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Reel 2 - Dia del Peluquero Comunitario -->
             <section>
                 <div class="section-title-wrap">
                     <div class="section-icon">🎤</div>
-                    <h2 class="section-title">4. REEL 2: "Día del Peluquero" (Ping-Pong + Clímax «¡DOS SOLES!»)</h2>
+                    <h2 class="section-title">5. REEL 2: "Día del Peluquero" (Ping-Pong + Clímax «¡DOS SOLES!»)</h2>
                 </div>
 
                 <div class="card">
@@ -886,7 +1011,7 @@
 
                     <!-- Detailed Script -->
                     <div class="script-box">
-                        <div class="script-label">🎙️ Guion & Estructura de Preguntas para el Rodaje</div>
+                        <div class="script-label">🎙️ Guion & Estructura de Preguntas para el Rodaje (En el Break)</div>
                         
                         <div class="dialogue-item">
                             <span class="dialogue-speaker">BLOQUE 1: PING-PONG RÁPIDO (Cortes de 1 segundo a 4 o 5 personas)</span>
@@ -920,11 +1045,11 @@
 
             <div class="page-break"></div>
 
-            <!-- Section 5: Reel 3 & Dinamica Trivia App -->
+            <!-- Section 6: Reel 3 & Dinamica Trivia App -->
             <section>
                 <div class="section-title-wrap">
                     <div class="section-icon">🏆</div>
-                    <h2 class="section-title">5. Dinámica de App en Vivo (Trivia & Podio) & Transición Emi</h2>
+                    <h2 class="section-title">6. Dinámica de App en Vivo (Trivia & Podio) & Transición Emi</h2>
                 </div>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
@@ -961,7 +1086,7 @@
                         <div class="hook-box" style="border-left-color: var(--solar-crimson);">
                             <span class="hook-label" style="color: var(--solar-crimson);">🎬 Dirección de Escena</span>
                             <p class="hook-text" style="font-size: 0.85rem;">
-                                • <strong>Toma A (10:00 hs - Antes):</strong> Emi con pelo natural con frizz, agarra un mechón y lo tira directo a la lente tapándola por completo.<br>
+                                • <strong>Toma A (09:45 hs - Antes):</strong> Emi con pelo natural con frizz, agarra un mechón y lo tira directo a la lente tapándola por completo.<br>
                                 • <strong>Toma B (11:40 hs - Después):</strong> Destape de lente en reversa: Emi con pelo ultra lacio brillante (liquid hair) girando la cabeza en cámara lenta con sonrisa.
                             </p>
                         </div>
@@ -970,11 +1095,11 @@
                 </div>
             </section>
 
-            <!-- Section 6: Mini-Entrevistas Tecnica Loreal -->
+            <!-- Section 7: Mini-Entrevistas Tecnica Loreal -->
             <section>
                 <div class="section-title-wrap">
                     <div class="section-icon">👩‍🏫</div>
-                    <h2 class="section-title">6. Cápsulas con la Técnica Oficial de L'Oréal (Bs. As.)</h2>
+                    <h2 class="section-title">7. Cápsulas con la Técnica Oficial de L'Oréal (Bs. As.)</h2>
                 </div>
 
                 <div class="card">
@@ -1007,46 +1132,46 @@
                 </div>
             </section>
 
-            <!-- Section 7: Cronograma & Checklist Final -->
+            <!-- Section 8: Cronograma & Checklist Final Actualizado -->
             <section>
                 <div class="section-title-wrap">
                     <div class="section-icon">📋</div>
-                    <h2 class="section-title">7. Cronograma Minuto a Minuto & Checklist de Rodaje</h2>
+                    <h2 class="section-title">8. Cronograma Minuto a Minuto & Checklist de Rodaje (09:00 a 12:00 hs)</h2>
                 </div>
 
                 <div class="card">
                     <div class="checklist-grid">
                         <div class="check-item">
                             <div class="check-box"></div>
-                            <div><strong>10:00 hs — Llegada & Antes:</strong> Grabar el pelo natural de Emi (Toma A de transición) + 1ra Story de bienvenida.</div>
+                            <div><strong>09:00 a 09:30 hs — Recepción & Reportajes:</strong> Llegada de peluqueros, café y preguntas de expectativas con micrófono en puerta.</div>
                         </div>
                         <div class="check-item">
                             <div class="check-box"></div>
-                            <div><strong>10:15 hs — Paso a Paso L'Oréal:</strong> Bacha (lavado purificante) y tocador (aplicación con pincel en mechas finas).</div>
+                            <div><strong>09:30 a 09:45 hs — Antes de Emi:</strong> Diagnóstico en seco y Toma A de la transición antes de mojar el pelo.</div>
                         </div>
                         <div class="check-item">
                             <div class="check-box"></div>
-                            <div><strong>10:35 hs — Planchado Brillo Espejo:</strong> Plano macro a 60fps con la plancha sellando la mecha.</div>
+                            <div><strong>09:45 a 10:30 hs — Tratamiento L'Oréal:</strong> Bacha (lavado purificante) y tocador (aplicación con pincel en mechas finas).</div>
                         </div>
                         <div class="check-item">
                             <div class="check-box"></div>
-                            <div><strong>10:50 hs (Break) — Reel Día del Peluquero:</strong> Micrófono con peluqueros (Ping-Pong) + Grito grupal «¡DOS SOLES!».</div>
+                            <div><strong>10:30 a 10:50 hs — Planchado Brillo Espejo:</strong> Plano macro a 60fps con la plancha sellando la cutícula.</div>
                         </div>
                         <div class="check-item">
                             <div class="check-box"></div>
-                            <div><strong>11:15 hs — Trivia App & Podio:</strong> Grabación de celulares, podio en vivo y entrega del premio.</div>
+                            <div><strong>10:50 a 11:15 hs (Break) — Reel Día del Peluquero:</strong> Micrófono con peluqueros (Ping-Pong) + Grito grupal «¡DOS SOLES!».</div>
                         </div>
                         <div class="check-item">
                             <div class="check-box"></div>
-                            <div><strong>11:35 hs — Después de Emi:</strong> Toma B de transición (liquid hair en 60fps) + Cápsulas con la técnica de Bs. As.</div>
+                            <div><strong>11:15 a 11:35 hs — Trivia App & Podio:</strong> Grabación de celulares, podio en vivo y entrega del kit ganador.</div>
                         </div>
                         <div class="check-item">
                             <div class="check-box"></div>
-                            <div><strong>11:55 hs — Foto de Cierre:</strong> Foto grupal de todo el salón aplaudiendo para portada del Reel.</div>
+                            <div><strong>11:35 a 11:55 hs — Después de Emi & Web B2C:</strong> Toma B transición (liquid hair) + Emi con producto para web + Cápsulas con la técnica.</div>
                         </div>
                         <div class="check-item">
                             <div class="check-box"></div>
-                            <div><strong>14:00 a 18:00 hs — Historias:</strong> Reposteos masivos de todos los peluqueros que etiqueten a <code>@dossoles</code>.</div>
+                            <div><strong>11:55 a 12:00 hs — Cierre:</strong> Foto grupal de todo el salón aplaudiendo para portada.</div>
                         </div>
                     </div>
                 </div>
@@ -1055,7 +1180,7 @@
             <!-- Document Footer -->
             <footer class="doc-footer">
                 <div>Documento de Producción Audiovisual — <strong>Dos Soles Distribuidora</strong></div>
-                <div>Fecha de Emisión: 25 de Agosto | Versión 2.0 Final</div>
+                <div>Fecha de Emisión: 25 de Agosto | Versión 3.0 Definitiva</div>
             </footer>
 
         </div>
